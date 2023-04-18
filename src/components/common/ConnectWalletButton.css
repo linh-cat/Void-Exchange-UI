@@ -1,0 +1,32 @@
+.connect-wallet-btn {
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+.connect-wallet-btn:hover {
+    background: var(--main-border-color);
+}
+
+.connect-wallet-btn:active {
+    background: var(--dark-blue-active);
+}
+
+.connect-wallet-btn .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.connect-wallet-btn .btn-label {
+    font-weight: 400;
+    font-size: 15px;
+    margin-left: 0.8rem;
+    letter-spacing: 0;
+}

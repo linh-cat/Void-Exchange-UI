@@ -1,11 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header/Header';
 
 function App() {
   return (
-    <h1 className="text-3xl bg-red-500">
-      zkperp-app
-    </h1>
+    <div>
+      <Header />
+    </div>
   );
 }
 
