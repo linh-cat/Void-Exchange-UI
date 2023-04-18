@@ -5,7 +5,7 @@ import ConnectWalletButton from "../common/ConnectWalletButton";
 
 const Header = () => {
   return (
-    <header className="header border-b border-gray-600">
+    <header className="header border-b border-gray-700">
       <div className="header-left flex justify-center">
         <a href="https://flowbite.com/" className="flex items-center">
           <img
