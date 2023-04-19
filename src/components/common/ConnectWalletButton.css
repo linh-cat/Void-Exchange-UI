@@ -1,6 +1,6 @@
 .connect-wallet-btn {
     background: transparent;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     border: none;
     color: #fff;

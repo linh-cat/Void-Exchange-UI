@@ -1,8 +1,7 @@
 import React from "react";
 import "./Header.css";
-import connectWalletImg from "../../img/ic_wallet_24.svg";
 import ConnectWalletButton from "../common/ConnectWalletButton";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import connectWalletImg from "../../img/ic_wallet_24.svg";
 
 const Header = () => {
   return (
@@ -20,19 +19,18 @@ const Header = () => {
         </a>
         <ul className="menu-item flex justify-center ml-20 gap-x-10 items-center">
           <li className="item">
-            <a href="#">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
           </li>
           <li className="item">
-            <a href="#">Docs</a>
+            <a href="/document">Docs</a>
           </li>
         </ul>
       </div>
       <div className="header-right flex gap-x-5">
         <button className="default-btn">Trade</button>
-        <ConnectButton />
-        {/* <ConnectWalletButton imgSrc={connectWalletImg}>
+        <ConnectWalletButton imgSrc={connectWalletImg}>
           <div>Connect Wallet</div>
-        </ConnectWalletButton> */}
+        </ConnectWalletButton>
       </div>
     </header>
   );

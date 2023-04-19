@@ -1,13 +1,6 @@
 import Header from "./components/Header/Header";
 import SEO from "./components/common/SEO";
-import {
-  Switch,
-  Route,
-  HashRouter as Router,
-  Redirect,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import {
   darkTheme,
@@ -27,7 +20,6 @@ const { chains, provider } = configureChains(
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
   chains,
-  projectId: "d09d60e40e1cb9712966ffa8781485ec",
 });
 
 const wagmiClient = createClient({
@@ -47,16 +39,7 @@ const FullApp = () => {
 function App() {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={darkTheme({
-          accentColor: "#7b3fe4",
-          accentColorForeground: "white",
-          borderRadius: "small",
-          fontStack: "system",
-          overlayBlur: "small",
-        })}
-      >
+      <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
         <SEO>
           <Header />
           <FullApp />
