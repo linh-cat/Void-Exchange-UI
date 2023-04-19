@@ -3,13 +3,15 @@ import SEO from './components/common/SEO';
 import { Switch, Route, HashRouter as Router, Redirect, useLocation, useHistory } from "react-router-dom";
 import Exchange from './pages/Exchange/Exchange';
 import Footer from './components/Footer/Footer';
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { darkTheme, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { mainnet, optimism, polygon } from '@wagmi/core/chains'
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+  [mainnet, polygon, optimism],
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
 );
 
@@ -29,7 +31,6 @@ const FullApp = () => {
   return (
     <Switch>
       <Route exact path="/trade">
-        <Exchange />
       </Route>
     </Switch>
   )
@@ -38,14 +39,20 @@ const FullApp = () => {
 function App() {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} theme={darkTheme({
+        accentColor: '#7b3fe4',
+        accentColorForeground: 'white',
+        borderRadius: 'small',
+        fontStack: 'system',
+        overlayBlur: 'small',
+      })}>
         <SEO>
           <Header />
           <FullApp />
           <Footer />
         </SEO>
       </RainbowKitProvider>
-    </WagmiConfig>
+    </WagmiConfig >
 
   );
 }

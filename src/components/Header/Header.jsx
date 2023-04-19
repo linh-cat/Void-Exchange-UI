@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.css";
 import connectWalletImg from "../../img/ic_wallet_24.svg";
 import ConnectWalletButton from "../common/ConnectWalletButton";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Header = () => {
   return (
@@ -28,9 +29,10 @@ const Header = () => {
       </div>
       <div className="header-right flex gap-x-5">
         <button className="default-btn">Trade</button>
-        <ConnectWalletButton imgSrc={connectWalletImg}>
+        <ConnectButton />
+        {/* <ConnectWalletButton imgSrc={connectWalletImg}>
           <div>Connect Wallet</div>
-        </ConnectWalletButton>
+        </ConnectWalletButton> */}
       </div>
     </header>
   );
