@@ -1,9 +1,7 @@
 import React from "react";
 import "./Footer.css";
-import logoImg from "../../img/ic_gmx_footer.svg";
 import { NavLink } from "react-router-dom";
 import { getFooterLinks, SOCIAL_LINKS } from "./constants";
-import { i18n } from "@lingui/core";
 import ExternalLink from "../ExternalLink/ExternalLink";
 
 export default function Footer({ showRedirectModal, redirectPopupTimestamp }) {
@@ -37,12 +35,8 @@ export default function Footer({ showRedirectModal, redirectPopupTimestamp }) {
           {getFooterLinks(true).map(({ external, text, link, isAppLink }) => {
             if (external) {
               return (
-                <ExternalLink
-                  key={i18n._(text)}
-                  href={link}
-                  className="Footer-link"
-                >
-                  {i18n._(text)}
+                <ExternalLink key={text} href={link} className="Footer-link">
+                  {text}
                 </ExternalLink>
               );
             }
@@ -54,7 +48,7 @@ export default function Footer({ showRedirectModal, redirectPopupTimestamp }) {
                 className="Footer-link"
                 activeClassName="active"
               >
-                {i18n._(text)}
+                {text}
               </NavLink>
             );
           })}
