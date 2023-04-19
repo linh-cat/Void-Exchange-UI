@@ -2,7 +2,7 @@ import "./ConnectWalletButton.css";
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-const ConnectWalletButton = ({ imgSrc, children, onClick }) => {
+const ConnectWalletButton = ({ imgSrc, children }) => {
   return (
     <ConnectButton.Custom>
       {({
@@ -64,10 +64,10 @@ const ConnectWalletButton = ({ imgSrc, children, onClick }) => {
               }
 
               return (
-                <div style={{ display: "flex", gap: 12 }}>
+                <div className="flex gap-12">
                   <button
                     onClick={openChainModal}
-                    style={{ display: "flex", alignItems: "center" }}
+                    className="flex items-center"
                     type="button"
                   >
                     {chain.hasIcon && (
