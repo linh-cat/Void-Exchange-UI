@@ -1,13 +1,18 @@
 import React from "react";
 import "./Exchange.css";
+import Tab from "../../components/Tab/Tab";
 
 const Exchange = () => {
   return (
     <div>
-      <div className="exchange bg-orange-300 w-full h-full">
+      <div className="exchange w-full h-full py-5 px-5">
         <div className="lg:grid lg:grid-cols-3">
-          <div className="lg:col-span-2 bg-slate-400">01</div>
-          <div className="bg-zinc-600">02</div>
+          <div className="lg:col-span-2 left-side">01</div>
+          <div className="right-side">
+            <div className="w-full overflow-hidden">
+              <Tab />
+            </div>
+          </div>
         </div>
       </div>
     </div>
