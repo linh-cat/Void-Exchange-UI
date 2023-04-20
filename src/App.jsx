@@ -1,5 +1,4 @@
 import Header from "./components/Header/Header";
-import SEO from "./components/common/SEO";
 import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import {
@@ -43,11 +42,9 @@ function App() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
-        <SEO>
-          <Header />
-          <FullApp />
-          <Footer />
-        </SEO>
+        <Header />
+        <FullApp />
+        <Footer />
       </RainbowKitProvider>
     </WagmiConfig>
   );

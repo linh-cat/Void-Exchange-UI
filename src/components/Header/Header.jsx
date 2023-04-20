@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import "./Header.css";
 import ConnectWalletButton from "../common/ConnectWalletButton";
 import connectWalletImg from "../../img/ic_wallet_24.svg";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [show, setShow] = useState("notShow");
+  const location = useLocation();
+
   const showMenu = () => {
     setShow(show === "show" ? "notShow" : "show");
   };
+
   return (
     <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full">
       <div className="flex items-center">
@@ -37,9 +41,16 @@ const Header = () => {
       </div>
       <div className="flex gap-x-3">
         <div className="flex gap-x-3">
-          <button className="default-btn">
-            <a href="/trade">Trade</a>
-          </button>
+          <a
+            className={
+              location.pathname === "/trade"
+                ? "default-btn pointer-events-none"
+                : "default-btn"
+            }
+            href="/trade"
+          >
+            Trade
+          </a>
           <ConnectWalletButton imgSrc={connectWalletImg}>
             <div>Connect Wallet</div>
           </ConnectWalletButton>
@@ -58,9 +69,9 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
