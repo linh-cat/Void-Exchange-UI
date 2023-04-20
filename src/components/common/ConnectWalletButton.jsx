@@ -1,7 +1,7 @@
-import "./ConnectWalletButton.css";
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useUserWindow from "../../hooks/useUserWindow";
+import "./ConnectWalletButton.css";
 
 const ConnectWalletButton = ({ imgSrc }) => {
   const { width } = useUserWindow();
@@ -35,7 +35,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 userSelect: "none",
               },
             })}
-            className="flex items-center md:border rounded px-4 border-gray-700"
+            className="flex items-center md:border rounded px-4 border-gray-700 wallet-btn"
           >
             {(() => {
               if (!connected) {
@@ -43,7 +43,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="flex md:gap-3"
+                    className="flex md:gap-3 connect-wallet-btn"
                   >
                     {imgSrc && (
                       <img
