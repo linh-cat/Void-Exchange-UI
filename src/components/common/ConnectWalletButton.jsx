@@ -64,7 +64,7 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
               }
 
               return (
-                <div className="flex gap-12">
+                <div className="flex gap-7">
                   <button
                     onClick={openChainModal}
                     className="flex items-center"
@@ -74,12 +74,8 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
                       <div
                         style={{
                           background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
                         }}
+                        className="w-3 overflow-hidden mr-4 rounded"
                       >
                         {chain.iconUrl && (
                           <img
@@ -93,11 +89,17 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
                     {chain.name}
                   </button>
 
-                  <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
+                  <button
+                    onClick={openAccountModal}
+                    type="button"
+                    className="flex items-center"
+                  >
+                    <div className="text-xs">{account.displayName}</div>
+                    <div className="text-xs">
+                      {account.displayBalance
+                        ? ` (${account.displayBalance})`
+                        : ""}
+                    </div>
                   </button>
                 </div>
               );

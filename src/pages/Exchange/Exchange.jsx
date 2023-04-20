@@ -4,7 +4,7 @@ import "./Exchange.css";
 const Exchange = () => {
   return (
     <div>
-      <div className="card">test</div>
+      <div className="container grid grid-cols-4">test</div>
     </div>
   );
 };

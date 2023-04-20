@@ -11,6 +11,7 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { mainnet, optimism, polygon } from "@wagmi/core/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import Exchange from "./pages/Exchange/Exchange";
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -31,7 +32,9 @@ const wagmiClient = createClient({
 const FullApp = () => {
   return (
     <Switch>
-      <Route exact path="/trade"></Route>
+      <Route exact path="/trade">
+        <Exchange />
+      </Route>
     </Switch>
   );
 };
