@@ -1,13 +1,7 @@
 .connect-wallet-btn {
     background: transparent;
-    display: flex;
-    align-items: center;
-    border: none;
-    color: #fff;
     cursor: pointer;
-    border: 1px solid var(--main-border-color);
-    border-radius: 5px;
-    padding: 0px 10px;
+    font-size: 10px;
 }
 
 .connect-wallet-btn:hover {
@@ -26,7 +20,6 @@
 
 .connect-wallet-btn .btn-label {
     font-weight: 600;
-    font-size: 15px;
     margin-left: 0.8rem;
     letter-spacing: 0;
 }

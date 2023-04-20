@@ -1,8 +1,10 @@
 import "./ConnectWalletButton.css";
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import UseUserWindow from "../../Hook/UseUserWindow";
 
-const ConnectWalletButton = ({ imgSrc, children }) => {
+const ConnectWalletButton = ({ imgSrc }) => {
+  const { width } = UseUserWindow();
   return (
     <ConnectButton.Custom>
       {({
@@ -33,7 +35,7 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
                 userSelect: "none",
               },
             })}
-            className="connect-wallet-btn"
+            className="flex items-center md:border rounded px-4"
           >
             {(() => {
               if (!connected) {
@@ -50,7 +52,9 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
                         alt="Connect Wallet"
                       />
                     )}
-                    <span className="btn-label">{children}</span>
+                    <span className="btn-label">
+                      {width < 432 ? "Wallet" : "Connect Wallet"}
+                    </span>
                   </button>
                 );
               }
@@ -64,43 +68,48 @@ const ConnectWalletButton = ({ imgSrc, children }) => {
               }
 
               return (
-                <div className="flex gap-7">
-                  <button
-                    onClick={openChainModal}
-                    className="flex items-center"
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                        }}
-                        className="w-3 overflow-hidden mr-4 rounded"
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
+                <div className="flex gap-3">
+                  <>
+                    <button
+                      onClick={openChainModal}
+                      className="flex items-center"
+                      type="button"
+                    >
+                      {chain.hasIcon && (
+                        <div
+                          style={{
+                            background: chain.iconBackground,
+                          }}
+                          className="w-3 overflow-hidden mr-4 rounded"
+                        >
+                          {chain.iconUrl && width > 432 && (
+                            <img
+                              alt={chain.name ?? "Chain icon"}
+                              src={chain.iconUrl}
+                              style={{ width: 12, height: 12 }}
+                            />
+                          )}
+                        </div>
+                      )}
 
-                  <button
-                    onClick={openAccountModal}
-                    type="button"
-                    className="flex items-center"
-                  >
-                    <div className="text-xs">{account.displayName}</div>
-                    <div className="text-xs">
-                      {account.displayBalance
-                        ? ` (${account.displayBalance})`
-                        : ""}
-                    </div>
-                  </button>
+                      {width > 432 && <div>{chain.name}</div>}
+                    </button>
+
+                    <button
+                      onClick={openAccountModal}
+                      type="button"
+                      className="flex items-center"
+                    >
+                      {width > 432 && (
+                        <div className="text-xs">{account.displayName}</div>
+                      )}
+                      <div className="text-xs">
+                        {account.displayBalance
+                          ? ` (${account.displayBalance})`
+                          : ""}
+                      </div>
+                    </button>
+                  </>
                 </div>
               );
             })()}

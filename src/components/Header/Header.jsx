@@ -3,14 +3,19 @@ import "./Header.css";
 import ConnectWalletButton from "../common/ConnectWalletButton";
 import connectWalletImg from "../../img/ic_wallet_24.svg";
 import { useLocation } from "react-router-dom";
+import UseUserWindow from "../../Hook/UseUserWindow";
+import { useDisconnect } from "wagmi";
 
 const Header = () => {
+  const { disconnect } = useDisconnect();
   const [show, setShow] = useState("notShow");
   const location = useLocation();
 
   const showMenu = () => {
     setShow(show === "show" ? "notShow" : "show");
   };
+
+  const { width } = UseUserWindow();
 
   return (
     <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full">
@@ -39,22 +44,23 @@ const Header = () => {
           </ul>
         </div>
       </div>
-      <div className="flex gap-x-3">
+      <div className="flex">
         <div className="flex gap-x-3">
           <a
             className={
-              location.pathname === "/trade"
-                ? "default-btn pointer-events-none"
+              width < 432
+                ? "hidden"
+                : location.pathname === "/trade"
+                ? "hidden default-btn pointer-events-none"
                 : "default-btn"
             }
             href="/trade"
           >
             Trade
           </a>
-          <ConnectWalletButton imgSrc={connectWalletImg}>
-            <div>Connect Wallet</div>
-          </ConnectWalletButton>
+          <ConnectWalletButton imgSrc={connectWalletImg} />
         </div>
+
         <button
           type="button"
           className="inline-flex items-center p-2 ml-10 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -76,6 +82,7 @@ const Header = () => {
           </svg>
         </button>
       </div>
+      {/* responsive hambuger */}
       <div className={`rounded absolute right-5 top-20 bg-slate-700 ${show}`}>
         <ul className="py-2 text-sm text-gray-700 dark:text-gray-400">
           <li>
@@ -93,6 +100,20 @@ const Header = () => {
             >
               Docs
             </a>
+          </li>
+          <li>
+            <a
+              href="/Trade"
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Trade
+            </a>
+          </li>
+          <li
+            onClick={() => disconnect()}
+            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            Disconnect
           </li>
         </ul>
       </div>
