@@ -7,6 +7,7 @@
     --main-bg-color: #121B2D;
     --main-card-color: linear-gradient(70deg, #161c33, #2e3e52);
     --main-gray-color: #C9D1D3;
+    --main-tab-card: #263348;
     --main-border-color: #ffffff29;
     --avax-red: #e84143;
     --arbitrum-blue: #28a0f0;
@@ -29,6 +30,10 @@ body,
     padding: 0;
     color: white;
     background-color: var(--main-bg-color);
+}
+
+.active {
+    background-color: var(--arbitrum-blue);
 }
 
 body {

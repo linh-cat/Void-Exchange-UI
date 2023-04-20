@@ -1,6 +1,6 @@
 import React from "react";
 import "./Exchange.css";
-import Tab from "../../components/Tab/Tab";
+import TabExchange from "../../components/TabExchange/TabExchange";
 
 const Exchange = () => {
   return (
@@ -9,8 +9,8 @@ const Exchange = () => {
         <div className="lg:grid lg:grid-cols-3">
           <div className="lg:col-span-2 left-side">01</div>
           <div className="right-side">
-            <div className="w-full overflow-hidden">
-              <Tab />
+            <div className="w-full overflow-hidden bg-gray-700 p-3">
+              <TabExchange defaultValue="long" />
             </div>
           </div>
         </div>
