@@ -1,7 +1,7 @@
 import React from "react";
 
 const OrderBox = ({ type }) => {
-  return <div>OrderBox</div>;
+  return <div className="order-box">OrderBox</div>;
 };
 
 export default OrderBox;

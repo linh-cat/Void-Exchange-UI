@@ -8,17 +8,18 @@
     --main-card-color: linear-gradient(70deg, #161c33, #2e3e52);
     --main-long: #16BE76;
     --main-short: #E43E53;
-    --main-gray-color: #C9D1D3;
-    --main-tab-card: #263348;
-    --main-border-color: #ffffff29;
+    --main-card-color-secondary: #32435e;
     --arbitrum-blue: #28a0f0;
     --border-radius-sm: 0.4rem;
-    --error-red: #fa3c58;
     --font-sm: 1.4rem;
     --font-base: 1.5rem;
     --font-md: 1.6rem;
     --font-lg: 2.4rem;
     --font-xl: 3.4rem;
+}
+
+.bg-card {
+    background-color: linear-gradient(to right, #202538, #2e3e52);
 }
 
 html,

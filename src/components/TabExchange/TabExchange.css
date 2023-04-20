@@ -1,5 +1,5 @@
 .main-tab {
-    background: var(--main-tab-card);
+    background: var(--main-card-color-secondary);
     align-items: center;
     color: #fff;
     overflow: hidden;
