@@ -35,7 +35,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 userSelect: "none",
               },
             })}
-            className="flex items-center md:border rounded px-4"
+            className="flex items-center md:border rounded px-4 border-gray-700"
           >
             {(() => {
               if (!connected) {
@@ -43,7 +43,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="flex"
+                    className="flex md:gap-3"
                   >
                     {imgSrc && (
                       <img

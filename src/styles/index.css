@@ -6,10 +6,11 @@
 :root {
     --main-bg-color: #121B2D;
     --main-card-color: linear-gradient(70deg, #161c33, #2e3e52);
+    --main-long: #16BE76;
+    --main-short: #E43E53;
     --main-gray-color: #C9D1D3;
     --main-tab-card: #263348;
     --main-border-color: #ffffff29;
-    --avax-red: #e84143;
     --arbitrum-blue: #28a0f0;
     --border-radius-sm: 0.4rem;
     --error-red: #fa3c58;
@@ -18,7 +19,6 @@
     --font-md: 1.6rem;
     --font-lg: 2.4rem;
     --font-xl: 3.4rem;
-    --box-shadow: inset 0 0 3rem 0.5rem hsla(0, 0%, 100%, .01);
 }
 
 html,

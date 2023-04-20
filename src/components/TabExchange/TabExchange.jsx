@@ -7,6 +7,8 @@ import React, { useMemo, useState } from "react";
 import OrderBox from "../../pages/OrderBox/OrderBox";
 import Swap from "../../pages/Swap/Swap";
 import "./TabExchange.css";
+import { type_order } from "../../constant/tab";
+
 const tabData = [
   {
     label: "Long",
@@ -21,7 +23,7 @@ const tabData = [
         }}
       />
     ),
-    component: <OrderBox />,
+    component: <OrderBox type={type_order.LONG} />,
   },
   {
     label: "Short",
@@ -36,7 +38,7 @@ const tabData = [
         }}
       />
     ),
-    component: <OrderBox />,
+    component: <OrderBox type={type_order.SHORT} />,
   },
   {
     label: "Swap",
@@ -54,6 +56,7 @@ const tabData = [
     component: <Swap />,
   },
 ];
+
 const TabExchange = ({ defaultValue }) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
   const changeTab = (tab) => {
@@ -75,7 +78,7 @@ const TabExchange = ({ defaultValue }) => {
               className={
                 activeTab === item.value
                   ? "flex items-center justify-center cursor-pointer tab-item text-center h-full overflow-hidden active"
-                  : "flex items-center justify-center cursor-pointer tab-item text-center h-full overflow-hidden "
+                  : "flex items-center justify-center cursor-pointer tab-item text-center h-full overflow-hidden"
               }
               key={idx}
             >

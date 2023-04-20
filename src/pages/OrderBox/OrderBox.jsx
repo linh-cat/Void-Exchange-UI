@@ -1,6 +1,6 @@
 import React from "react";
 
-const OrderBox = () => {
+const OrderBox = ({ type }) => {
   return <div>OrderBox</div>;
 };
 
