@@ -3,7 +3,7 @@ import "./Header.css";
 import ConnectWalletButton from "../common/ConnectWalletButton";
 import connectWalletImg from "../../img/ic_wallet_24.svg";
 import { useLocation } from "react-router-dom";
-import UseUserWindow from "../../Hook/UseUserWindow";
+import useUserWindow from "../../hooks/useUserWindow";
 import { useDisconnect } from "wagmi";
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
     setShow(show === "show" ? "notShow" : "show");
   };
 
-  const { width } = UseUserWindow();
+  const { width } = useUserWindow();
 
   return (
     <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full">

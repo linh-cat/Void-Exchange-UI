@@ -1,10 +1,10 @@
 import "./ConnectWalletButton.css";
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import UseUserWindow from "../../Hook/UseUserWindow";
+import useUserWindow from "../../hooks/useUserWindow";
 
 const ConnectWalletButton = ({ imgSrc }) => {
-  const { width } = UseUserWindow();
+  const { width } = useUserWindow();
   return (
     <ConnectButton.Custom>
       {({
