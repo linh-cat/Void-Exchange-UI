@@ -1,10 +1,10 @@
 import React from "react";
-import SelectInputComponent from "../../components/common/SelectInputComponent";
+import SelectCustom from "../../components/common/SelectCustom";
 
 const OrderBox = ({ type }) => {
   return (
     <div className="order-box">
-      <SelectInputComponent label="Type order" />
+      <SelectCustom />
     </div>
   );
 };
