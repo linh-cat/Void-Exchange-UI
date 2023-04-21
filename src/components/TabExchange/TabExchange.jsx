@@ -70,7 +70,7 @@ const TabExchange = ({ defaultValue }) => {
 
   return (
     <div key={activeTab}>
-      <ul className="grid grid-flow-col text-center main-tab">
+      <ul className="grid grid-flow-col text-center main-tab mb-3">
         {tabData.map((item, idx) => {
           return (
             <li
