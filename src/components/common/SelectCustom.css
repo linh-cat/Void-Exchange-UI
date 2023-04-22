@@ -8,10 +8,14 @@
 
 .dd-wrapper .close {
     opacity: 0;
+    transform: scaleY(0);
+    animation: growUp 300ms ease-in-out forwards;
+    transform-origin: top;
 }
 
 .dd-wrapper .open {
     opacity: 1;
+    transform: scale(1);
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center
 }
@@ -26,6 +30,20 @@
     overflow: hidden;
     border-radius: 3px;
     transition: all .3s ease-in-out;
+}
+
+@keyframes growUp {
+    0% {
+        transform: scaleY(1)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(0)
+    }
 }
 
 

@@ -14,8 +14,7 @@
     right: 0;
     width: 200px;
     background: var(--main-card-color-secondary);
-
-    /* transform-origin: top center */
+    transition: all .3s ease-in-out;
 }
 
 .dd-token-item {
@@ -37,11 +36,16 @@
 
 .dd-token .close {
     opacity: 0;
+    transform: scaleY(0);
+    animation: growUp 300ms ease-in-out forwards;
+    transform-style: flat;
+    transform-origin: top;
 }
 
 .dd-token .open {
     opacity: 1;
     animation: growDown 300ms ease-in-out forwards;
+    transform-style: flat;
     transform-origin: top center
 }
 
@@ -56,5 +60,19 @@
 
     100% {
         transform: scaleY(1)
+    }
+}
+
+@keyframes growUp {
+    0% {
+        transform: scaleY(1)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(0)
     }
 }
