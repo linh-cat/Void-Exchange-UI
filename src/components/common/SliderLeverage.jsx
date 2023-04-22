@@ -1,6 +1,7 @@
 import React from "react";
 import Slider, { SliderTooltip } from "rc-slider";
 import "rc-slider/assets/index.css";
+import "./SliderLeverage.css";
 
 const { Handle } = Slider;
 
@@ -9,7 +10,7 @@ const handle = (props) => {
   return (
     <SliderTooltip
       prefixCls="rc-slider-tooltip"
-      overlay={`${value} %`}
+      overlay={`${value} x`}
       visible={dragging}
       placement="top"
       key={index}

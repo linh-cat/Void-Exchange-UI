@@ -1,0 +1,39 @@
+.slider-custom .rc-slider-rail {
+    background: linear-gradient(90deg, rgba(30, 34, 61, 1) 0%, rgba(40, 45, 74, 1) 100%);
+}
+
+.slider-custom .rc-slider-track {
+    background: linear-gradient(90deg, rgba(46, 61, 205, 1) 0%, rgba(45, 66, 252, 1) 100%);
+}
+
+.slider-custom .rc-slider-dot {
+    border: none;
+    border-radius: 1px;
+    width: 2px;
+    margin-left: -1px;
+    background: rgba(40, 45, 74, 1);
+}
+
+.slider-custom .rc-slider-dot-active {
+    background: #3d51ff;
+}
+
+.slider-custom .rc-slider-handle {
+    background: #303652;
+    border: solid 2px rgba(45, 66, 252, 1);
+}
+
+.slider-custom .rc-slider-handle:active {
+    box-shadow: 0 0 0.4rem 0.6rem rgba(45, 66, 252, 0.2);
+}
+
+.slider-custom .rc-slider-mark-text,
+.slider-custom .rc-slider-mark-text-active {
+    color: white;
+    opacity: 0.5;
+}
+
+.slider-custom .rc-slider-mark-text:hover,
+.slider-custom .rc-slider-mark-text-active:hover {
+    opacity: 1;
+}
