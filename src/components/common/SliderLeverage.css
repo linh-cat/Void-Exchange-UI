@@ -37,3 +37,15 @@
 .slider-custom .rc-slider-mark-text-active:hover {
     opacity: 1;
 }
+
+.slider-custom .group-tooltip .tooltip {
+    display: none;
+}
+
+.slider-custom .group-tooltip:hover .tooltip {
+    display: block;
+    position: absolute;
+    top: -2rem;
+    left: 0.5rem;
+    font-size: small;
+}

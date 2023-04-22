@@ -1,7 +1,7 @@
 import React from "react";
-import "./InputComponent.css";
+import "./InputCustom.css";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-const InputComponent = ({ label, tooltip, rightAction, placeHolder }) => {
+const InputCustom = ({ label, tooltip, rightAction, placeHolder }) => {
   return (
     <div className="input-custom flex flex-col gap-y-1 w-full h-full">
       <div className="title flex items-center gap-x-1">
@@ -21,4 +21,4 @@ const InputComponent = ({ label, tooltip, rightAction, placeHolder }) => {
   );
 };
 
-export default InputComponent;
+export default InputCustom;

@@ -15,7 +15,11 @@ const OrderBox = ({ type }) => {
           label="Order Type"
           defaultValue={"limit"}
         /> */}
-      <SliderLeverage />
+      <SliderLeverage
+        label="Leverage"
+        tooltip="This is leverage"
+        defaultValue={1.1}
+      />
       {/* </div> */}
     </div>
   );
