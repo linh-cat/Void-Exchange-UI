@@ -32,6 +32,25 @@
     transition: all .3s ease-in-out;
 }
 
+.select-custom .group-tooltip .tooltip {
+    display: none;
+}
+
+.select-custom .group-tooltip:hover .tooltip {
+    display: block;
+    position: absolute;
+    top: -2rem;
+    left: 0.5rem;
+    font-size: small;
+}
+
+.select-custom .right-action {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateX(-50%, -50%);
+}
+
 @keyframes growUp {
     0% {
         transform: scaleY(1)

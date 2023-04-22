@@ -8,11 +8,11 @@ const OrderBox = ({ type }) => {
       <div className="test">
         <SelectCustom
           options={[
-            { label: "BTC", value: "BTC" },
-            { label: "BNB", value: "BNB" },
-            { label: "ETH", value: "ETH" },
+            { label: "Limit", value: "limit" },
+            { label: "Market", value: "market" },
           ]}
-          defaultValue={"BTC"}
+          label="Order Type"
+          defaultValue={"limit"}
         />
       </div>
     </div>
