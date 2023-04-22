@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import "./SelectToken.css";
-import BTC from "../../img/btc.png";
 import {
   PlusCircleIcon,
   ChevronDownIcon,
@@ -20,7 +19,7 @@ const SelectToken = ({ options, defaultValue }) => {
 
   const renderLabel = useMemo(() => {
     const index = options.findIndex((item) => item.value === value);
-    return options[index]?.label;
+    return { label: options[index]?.label, icon: options[index]?.icon };
   }, [value, options]);
 
   return (
@@ -29,8 +28,12 @@ const SelectToken = ({ options, defaultValue }) => {
         className="dd-token-label border border-gray-600 rounded-full cursor-pointer gap-1 flex items-center justify-around"
         onClick={toggleOpen}
       >
-        <img className="rounded-full w-7 h-7  " src={BTC} alt="btc" />
-        <label className="cursor-pointer">{renderLabel}</label>
+        <img
+          className="rounded-full w-7 h-7  "
+          src={renderLabel?.icon}
+          alt="btc"
+        />
+        <label className="cursor-pointer">{renderLabel?.label}</label>
         {open ? (
           <ChevronUpIcon className="w-5 h-5" />
         ) : (
@@ -44,7 +47,11 @@ const SelectToken = ({ options, defaultValue }) => {
             onClick={() => onChangeValue(item.value)}
           >
             <div className="flex items-center gap-2">
-              <img className="rounded-full w-7 h-7" src={BTC} alt="btc" />
+              <img
+                className="rounded-full w-7 h-7"
+                src={item?.icon}
+                alt="btc"
+              />
               <div className="text-sm">
                 <label>{item.label}</label>
                 <div className="balance">0</div>
