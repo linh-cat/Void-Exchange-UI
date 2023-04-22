@@ -7,11 +7,13 @@
 }
 
 .dd-wrapper .close {
-    transform: scale(0);
+    opacity: 0;
 }
 
 .dd-wrapper .open {
-    transform: scale(1);
+    opacity: 1;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center
 }
 
 .dd-wrapper .dd-list {
@@ -26,4 +28,17 @@
     transition: all .3s ease-in-out;
 }
 
-.dd-wrapper .dd-list-item {}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(1)
+    }
+}

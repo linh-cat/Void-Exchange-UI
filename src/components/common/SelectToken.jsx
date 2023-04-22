@@ -18,7 +18,7 @@ const SelectToken = ({ options, defaultValue }) => {
   };
 
   const renderLabel = useMemo(() => {
-    const index = options.findIndex((item) => item.value === value);
+    const index = options?.findIndex((item) => item.value === value);
     return { label: options[index]?.label, icon: options[index]?.icon };
   }, [value, options]);
 
@@ -41,10 +41,11 @@ const SelectToken = ({ options, defaultValue }) => {
         )}
       </div>
       <div className={`${open ? "open" : "close"} dd-token-list p-2 rounded`}>
-        {options?.map((item) => (
+        {options?.map((item, idx) => (
           <div
             className="dd-token-item flex items-center justify-between w-full p-1"
             onClick={() => onChangeValue(item.value)}
+            key={idx}
           >
             <div className="flex items-center gap-2">
               <img

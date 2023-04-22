@@ -11,11 +11,11 @@
 .dd-token-list {
     position: absolute;
     top: 2.5rem;
-    left: -50%;
-    transform: translateX(-50%);
+    right: 0;
     width: 200px;
     background: var(--main-card-color-secondary);
-    transition: all .3s ease-in-out;
+
+    /* transform-origin: top center */
 }
 
 .dd-token-item {
@@ -36,9 +36,25 @@
 }
 
 .dd-token .close {
-    transform: scale(0);
+    opacity: 0;
 }
 
 .dd-token .open {
-    transform: scale(1);
+    opacity: 1;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center
+}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(1)
+    }
 }

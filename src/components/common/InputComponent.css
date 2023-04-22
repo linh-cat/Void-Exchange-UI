@@ -13,3 +13,10 @@
     left: 0.5rem;
     font-size: small;
 }
+
+.input-custom .right-action {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateX(-50%, -50%);
+}

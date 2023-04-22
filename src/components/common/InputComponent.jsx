@@ -1,7 +1,7 @@
 import React from "react";
 import "./InputComponent.css";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-const InputComponent = ({ label, tooltip, rightAction }) => {
+const InputComponent = ({ label, tooltip, rightAction, placeHolder }) => {
   return (
     <div className="input-custom flex flex-col gap-y-1 w-full h-full">
       <div className="title flex items-center gap-x-1">
@@ -14,8 +14,9 @@ const InputComponent = ({ label, tooltip, rightAction }) => {
       <input
         type="text"
         className="border border-gray-700 bg-slate-900 rounded w-full h-full"
+        placeholder={placeHolder}
       />
-      {rightAction && <div></div>}
+      {rightAction && <div className="right-action">{rightAction}</div>}
     </div>
   );
 };
