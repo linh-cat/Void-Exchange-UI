@@ -77,8 +77,8 @@ const TabExchange = ({ defaultValue }) => {
               onClick={() => changeTab(item.value)}
               className={
                 activeTab === item.value
-                  ? "flex items-center justify-center cursor-pointer tab-item text-center h-full overflow-hidden active"
-                  : "flex items-center justify-center cursor-pointer tab-item text-center h-full overflow-hidden"
+                  ? "flex items-center justify-center cursor-pointer tab-item text-center h-full active"
+                  : "flex items-center justify-center cursor-pointer tab-item text-center h-full"
               }
               key={idx}
             >
