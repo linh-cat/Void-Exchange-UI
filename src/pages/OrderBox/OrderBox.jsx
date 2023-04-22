@@ -1,16 +1,20 @@
 import React from "react";
-import SelectCustom from "../../components/common/SelectCustom";
+import SelectToken from "../../components/common/SelectToken";
+import "./OrderBox.css";
 
 const OrderBox = ({ type }) => {
   return (
     <div className="order-box">
-      <SelectCustom
-        options={[
-          { label: "1", value: "1" },
-          { label: "2", value: "2" },
-        ]}
-        defaultValue={"1"}
-      />
+      <div className="test">
+        <SelectToken
+          options={[
+            { label: "BTC", value: "BTC" },
+            { label: "BNB", value: "BNB" },
+            { label: "ETH", value: "ETH" },
+          ]}
+          defaultValue={"BTC"}
+        />
+      </div>
     </div>
   );
 };

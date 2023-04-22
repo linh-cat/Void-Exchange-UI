@@ -1,0 +1,44 @@
+.dd-token {
+    width: 100px;
+    position: relative;
+}
+
+.dd-token-label {
+    font-size: 14px;
+    padding: 1px 3px;
+}
+
+.dd-token-list {
+    position: absolute;
+    top: 2.5rem;
+    left: -50%;
+    transform: translateX(-50%);
+    width: 200px;
+    background: var(--main-card-color-secondary);
+    transition: all .3s ease-in-out;
+}
+
+.dd-token-item {
+    border-bottom: 1px solid #c4bfbf;
+    cursor: pointer;
+}
+
+.dd-token-item:hover label {
+    color: var(--arbitrum-blue);
+}
+
+.dd-token-item:hover .plus {
+    color: var(--arbitrum-blue);
+}
+
+.dd-token-item:hover .balance {
+    color: var(--arbitrum-blue);
+}
+
+.dd-token .close {
+    transform: scale(0);
+}
+
+.dd-token .open {
+    transform: scale(1);
+}
