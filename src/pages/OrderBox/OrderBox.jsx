@@ -75,32 +75,32 @@ const OrderBox = ({ type }) => {
         />
       </div>
       <div className="mt-3">
-        <div className="collateral-asset flex justify-between text-sm">
+        <div className="collateral-asset flex justify-between text-base lg:text-sm">
           <label>Collateral Asset</label>
           <div className="flex items-center gap-1">
             <img src={BNB} className="rounded-full w-5 h-5" alt="icon" />
             <span>Cake</span>
           </div>
         </div>
-        <div className="collateral-value flex justify-between mt-2 text-sm">
+        <div className="collateral-value flex justify-between mt-2 text-base lg:text-sm">
           <label>Collateral Value</label>
           <div className="">
             <span>-</span>
           </div>
         </div>
-        <div className="collateral-leverage flex justify-between mt-2 text-sm">
+        <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
           <label>Leverage</label>
           <div className="">
             <span>-</span>
           </div>
         </div>
-        <div className="entry-price flex justify-between mt-2 text-sm">
+        <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">
           <label>Entry Price</label>
           <div className="">
             <span>-</span>
           </div>
         </div>
-        <div className="liquidation flex justify-between mt-2 text-sm">
+        <div className="liquidation flex justify-between mt-2 text-base lg:text-sm">
           <label>Liquidation</label>
           <div className="">
             <span>-</span>
@@ -109,11 +109,11 @@ const OrderBox = ({ type }) => {
         <div className="w-full h-1 bg-slate-400 mt-3"></div>
         <div className="mt-3">
           <title>Market Infor</title>
-          <div className="borrow-fee mt-2 flex justify-between items-center text-sm">
+          <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
             <label>Borrow Fee</label>
             <span>0.00086% per hour</span>
           </div>
-          <div className="available-liquidity mt-2 flex justify-between items-center text-sm">
+          <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
             <label className="">Available Liquidity</label>
             <span className="text-zinc-500">17,050 Cake ~ $57</span>
           </div>
