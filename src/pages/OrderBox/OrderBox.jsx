@@ -74,6 +74,7 @@ const OrderBox = ({ type }) => {
           defaultValue={0.1}
         />
       </div>
+      <div className="mt-3"></div>
     </div>
   );
 };
