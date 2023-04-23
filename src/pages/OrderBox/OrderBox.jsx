@@ -7,6 +7,7 @@ import SelectToken from "../../components/common/SelectToken";
 import BTC from "../../img/btc.png";
 import BNB from "../../img/CAKE.png";
 import ETH from "../../img/WETH.png";
+import SlippageCustom from "../../components/common/SlippageCustom";
 
 const OrderBox = ({ type }) => {
   return (
@@ -61,6 +62,17 @@ const OrderBox = ({ type }) => {
       </div>
       <div className="mt-10 w-full">
         <button className="default-btn w-full ">Approve</button>
+      </div>
+      <div className="mt-3">
+        <SlippageCustom
+          label="Slippage"
+          options={[
+            { label: "0.1", value: 0.1 },
+            { label: "0.2", value: 0.2 },
+            { label: "0.3", value: 0.3 },
+          ]}
+          defaultValue={0.1}
+        />
       </div>
     </div>
   );

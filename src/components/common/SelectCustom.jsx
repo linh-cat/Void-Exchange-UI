@@ -5,6 +5,7 @@ import {
   ChevronUpIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
+import useOutsideDetect from "../../hooks/useOutsideDetect";
 
 const SelectCustom = ({ options, defaultValue, label, tooltip, className }) => {
   const [openList, setOpenList] = useState(false);
@@ -17,6 +18,10 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className }) => {
     setValues(value);
     setOpenList(false);
   };
+  const handleClickOutside = () => {
+    setOpenList(false);
+  };
+  const refOutside = useOutsideDetect(handleClickOutside);
 
   const renderValue = useMemo(() => {
     const index = options.findIndex((item) => item.value === values);
@@ -37,6 +42,7 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className }) => {
         <div
           className="dd-header border rounded w-full p-2 cursor-pointer flex items-center justify-between"
           onClick={toggleOpen}
+          ref={refOutside}
         >
           <label className="dd-header-title">{renderValue}</label>
           {openList ? (

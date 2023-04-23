@@ -5,6 +5,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/solid";
+import useOutsideDetect from "../../hooks/useOutsideDetect";
 
 const SelectToken = ({ options, defaultValue }) => {
   const [open, setOpen] = useState(false);
@@ -17,6 +18,11 @@ const SelectToken = ({ options, defaultValue }) => {
     setOpen(!open);
   };
 
+  const handleClickOutside = () => {
+    setOpen(false);
+  };
+  const refOutside = useOutsideDetect(handleClickOutside);
+
   const renderLabel = useMemo(() => {
     const index = options?.findIndex((item) => item.value === value);
     return { label: options[index]?.label, icon: options[index]?.icon };
@@ -27,6 +33,7 @@ const SelectToken = ({ options, defaultValue }) => {
       <div
         className="dd-token-label border border-gray-600 rounded-full cursor-pointer gap-1 flex items-center justify-around"
         onClick={toggleOpen}
+        ref={refOutside}
       >
         <img
           className="rounded-full w-7 h-7  "
