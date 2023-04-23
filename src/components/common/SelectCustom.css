@@ -30,6 +30,7 @@
     overflow: hidden;
     border-radius: 3px;
     transition: all .3s ease-in-out;
+    z-index: 9999999;
 }
 
 .select-custom .group-tooltip .tooltip {

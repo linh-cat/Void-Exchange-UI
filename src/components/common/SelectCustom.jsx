@@ -6,7 +6,7 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
 
-const SelectCustom = ({ options, defaultValue, label, tooltip }) => {
+const SelectCustom = ({ options, defaultValue, label, tooltip, className }) => {
   const [openList, setOpenList] = useState(false);
   const [values, setValues] = useState(defaultValue);
   const toggleOpen = () => {
@@ -24,7 +24,7 @@ const SelectCustom = ({ options, defaultValue, label, tooltip }) => {
   }, [options, values]);
 
   return (
-    <div className="select-custom flex flex-col gap-y-1">
+    <div className={`${className} select-custom flex flex-col gap-y-1`}>
       <div className="flex items-center gap-1">
         <label className="text-sm">{label}</label>
         <div className="group-tooltip">

@@ -17,6 +17,6 @@
 .input-custom .right-action {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 45%;
     transform: translateX(-50%, -50%);
 }
