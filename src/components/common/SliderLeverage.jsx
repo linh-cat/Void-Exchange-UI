@@ -45,7 +45,7 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
         </div>
       </div>
       <Slider
-        min={1.1}
+        min={2}
         marks={leverageMarks}
         max={50}
         handle={handle}

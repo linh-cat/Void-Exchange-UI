@@ -35,7 +35,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 userSelect: "none",
               },
             })}
-            className="flex items-center md:border rounded px-4 border-gray-700 wallet-btn"
+            className="flex items-center border rounded px-4 border-gray-700 wallet-btn"
           >
             {(() => {
               if (!connected) {
@@ -43,17 +43,17 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="flex md:gap-3 connect-wallet-btn"
+                    className="flex md:gap-3 connect-wallet-btn items-center"
                   >
-                    {imgSrc && (
+                    {imgSrc && width > 768 && (
                       <img
                         className="btn-icon"
                         src={imgSrc}
                         alt="Connect Wallet"
                       />
                     )}
-                    <span className="btn-label">
-                      {width < 432 ? "Wallet" : "Connect Wallet"}
+                    <span className="btn-label text-sm md:text-base">
+                      {width < 768 ? "Wallet" : "Connect Wallet"}
                     </span>
                   </button>
                 );

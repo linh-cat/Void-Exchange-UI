@@ -18,7 +18,7 @@ const Header = () => {
   const { width } = useUserWindow();
 
   return (
-    <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full">
+    <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full text-base">
       <div className="flex items-center">
         <a href="/" className="flex items-center">
           <img
@@ -32,7 +32,7 @@ const Header = () => {
         </a>
         <div className="w-full mobile-hidden">
           <ul
-            className="flex menu-item justify-center ml-20 gap-x-10 items-center"
+            className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base"
             id="navbar-default"
           >
             <li className="item">
