@@ -6,13 +6,10 @@
     background: linear-gradient(90deg, rgb(34 37 68) 0%, var(--arbitrum-blue) 100%);
 }
 
-/* .slider-custom .rc-slider-dot {
+.slider-custom .rc-slider-dot {
+    background: rgba(70, 79, 106, 1);
     border: none;
-    border-radius: 50%;
-    width: 3px;
-    height: 10px;
-    margin-left: -1px;
-} */
+}
 
 .slider-custom .rc-slider-dot-active {
     background: var(--arbitrum-blue);
