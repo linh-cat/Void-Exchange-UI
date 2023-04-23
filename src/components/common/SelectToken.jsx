@@ -15,7 +15,7 @@ const SelectToken = ({ options, defaultValue }) => {
   };
   const onChangeValue = (token) => {
     setValue(token);
-    setOpen(!open);
+    setOpen(false);
   };
 
   const handleClickOutside = () => {

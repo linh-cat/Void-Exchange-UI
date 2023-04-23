@@ -16,7 +16,7 @@ const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
   const onChangeValue = (val) => {
     setValue(val);
     setPickValue();
-    setOpen(!open);
+    setOpen(false);
   };
   const onChangePickValue = (e) => {
     e.preventDefault();
@@ -70,6 +70,7 @@ const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
               className="w-full"
               placeholder="0."
               onChange={onChangePickValue}
+              ref={refOutside}
             />
             <div>%</div>
           </div>
