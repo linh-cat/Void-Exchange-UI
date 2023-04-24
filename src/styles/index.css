@@ -89,7 +89,6 @@ input[type="number"] {
 }
 
 input {
-    font-size: 2rem;
     color: white;
     outline: none;
     background: none;
@@ -98,6 +97,7 @@ input {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
 button {
@@ -110,22 +110,6 @@ button.App-cta:disabled {
     cursor: not-allowed;
     opacity: 0.9;
     box-shadow: none;
-}
-
-table {
-    margin: 0;
-    padding: 0;
-}
-
-tr {
-    margin: 0;
-    padding: 0;
-}
-
-td {
-    margin: 0;
-    padding: 0;
-    padding-right: 0.465rem;
 }
 
 .border {
