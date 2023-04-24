@@ -4,10 +4,11 @@ import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 const InputCustom = ({
   label,
   tooltip,
-  rightAction,
+  leftSide,
   placeHolder,
   className,
   showBalance,
+  rightAction,
 }) => {
   return (
     <div
@@ -20,17 +21,19 @@ const InputCustom = ({
           <div className="tooltip p-3 rounded">{tooltip}</div>
         </div>
       </div>
-      <input
-        type="number"
-        className=".bg-input border border-gray-700  rounded w-full h-full text-lg"
-        placeholder={placeHolder}
-      />
-      {showBalance && (
-        <label className="text-xs lg:text-sm text-zinc-500 balance">
-          Balance: 50 BNB
-        </label>
-      )}
-      {rightAction && <div className="right-action">{rightAction}</div>}
+      <div className="flex h-full items-center bg-input rounded pl-1 pr-1">
+        {leftSide && <div className="left-action">{leftSide}</div>}
+        <input
+          type="number"
+          className="rounded w-full h-full text-lg"
+          placeholder={placeHolder}
+        />
+        {showBalance && (
+          <label className="text-xs lg:text-sm text-zinc-500 balance">
+            500000 BNB
+          </label>
+        )}
+      </div>
     </div>
   );
 };

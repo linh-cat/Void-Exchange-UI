@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./SelectToken.css";
 import {
-  PlusCircleIcon,
+  CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/solid";
@@ -25,13 +25,16 @@ const SelectToken = ({ options, defaultValue }) => {
 
   const renderLabel = useMemo(() => {
     const index = options?.findIndex((item) => item.value === value);
+
     return { label: options[index]?.label, icon: options[index]?.icon };
   }, [value, options]);
+
+  console.log({ renderLabel, value });
 
   return (
     <div className={`dd-token`}>
       <div
-        className="dd-token-label border border-gray-600 rounded-full cursor-pointer gap-1 flex items-center justify-around"
+        className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full"
         onClick={toggleOpen}
         ref={refOutside}
       >
@@ -50,7 +53,7 @@ const SelectToken = ({ options, defaultValue }) => {
       <div className={`${open ? "open" : "close"} dd-token-list p-2 rounded`}>
         {options?.map((item, idx) => (
           <div
-            className="dd-token-item flex items-center justify-between w-full p-1"
+            className="dd-token-item flex items-center justify-between w-full p-3"
             onClick={() => onChangeValue(item.value)}
             key={idx}
           >
@@ -62,12 +65,13 @@ const SelectToken = ({ options, defaultValue }) => {
               />
               <div className="text-sm">
                 <label>{item.label}</label>
-                <div className="balance">0</div>
               </div>
             </div>
-            <div>
-              <PlusCircleIcon className="w-5 h-5 plus" />
-            </div>
+            {item.value === renderLabel?.label && (
+              <div>
+                <CheckIcon className="w-5 h-5 plus" />
+              </div>
+            )}
           </div>
         ))}
       </div>

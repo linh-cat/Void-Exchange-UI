@@ -2,12 +2,6 @@
     position: relative;
 }
 
-.input-custom .balance {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
 .input-custom .group-tooltip .tooltip {
     display: none;
 }
@@ -20,9 +14,6 @@
     font-size: small;
 }
 
-.input-custom .right-action {
-    position: absolute;
-    right: 10px;
-    top: 45%;
-    transform: translateX(-50%, -50%);
+.input-custom .left-action {
+    border-right: 2px solid rgba(163, 165, 196, 0.2);
 }

@@ -1,3 +1,7 @@
+.dd-wrapper .dd-header {
+    padding: 1.3rem;
+}
+
 .dd-wrapper {
     position: relative;
 }

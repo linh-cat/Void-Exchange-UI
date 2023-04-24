@@ -22,14 +22,14 @@ const OrderBox = ({ type }) => {
           defaultValue="limit"
           classNameInput={"h-10"}
         />
-        <div className="h-1">
+        <div className="">
           <InputCustom label="Price" placeHolder={"0.0"} />
         </div>
       </div>
       <div className="mt-3">
         <InputCustom
           label="Pay"
-          rightAction={
+          leftSide={
             <SelectToken
               options={[
                 { label: "BTC", value: "BTC", icon: BTC },
@@ -46,7 +46,7 @@ const OrderBox = ({ type }) => {
       <div className="mt-3">
         <InputCustom
           label="Position Size"
-          rightAction={
+          leftSide={
             <SelectToken
               options={[
                 { label: "BTC", value: "BTC", icon: BTC },

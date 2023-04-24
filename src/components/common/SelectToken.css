@@ -11,28 +11,20 @@
 .dd-token-list {
     position: absolute;
     top: 2.5rem;
-    right: 0;
+    left: 0;
     width: 200px;
-    background: var(--main-card-color-secondary);
+    background: #343F51;
     transition: all .3s ease-in-out;
     z-index: 9999999;
 }
 
 .dd-token-item {
-    border-bottom: 1px solid #c4bfbf;
     cursor: pointer;
 }
 
-.dd-token-item:hover label {
-    color: var(--arbitrum-blue);
-}
-
-.dd-token-item:hover .plus {
-    color: var(--arbitrum-blue);
-}
-
-.dd-token-item:hover .balance {
-    color: var(--arbitrum-blue);
+.dd-token-item:hover {
+    background: var(--input-bg-color);
+    border-radius: 3px;
 }
 
 .dd-token .close {
