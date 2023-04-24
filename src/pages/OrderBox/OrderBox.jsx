@@ -20,6 +20,7 @@ const OrderBox = ({ type }) => {
             { label: "Market order", value: "market" },
           ]}
           defaultValue="limit"
+          classNameInput={"h-10"}
         />
         <div className="h-1">
           <InputCustom label="Price" placeHolder={"0.0"} />
@@ -39,6 +40,7 @@ const OrderBox = ({ type }) => {
             />
           }
           placeHolder={"0.0"}
+          showBalance={true}
         />
       </div>
       <div className="mt-3">
@@ -55,6 +57,7 @@ const OrderBox = ({ type }) => {
             />
           }
           placeHolder={"0.0"}
+          showBalance={true}
         />
       </div>
       <div className="mt-3">

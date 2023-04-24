@@ -7,6 +7,7 @@ const InputCustom = ({
   rightAction,
   placeHolder,
   className,
+  showBalance,
 }) => {
   return (
     <div
@@ -24,6 +25,11 @@ const InputCustom = ({
         className=".bg-input border border-gray-700  rounded w-full h-full text-lg"
         placeholder={placeHolder}
       />
+      {showBalance && (
+        <label className="text-xs lg:text-sm text-zinc-500 balance">
+          Balance: 50 BNB
+        </label>
+      )}
       {rightAction && <div className="right-action">{rightAction}</div>}
     </div>
   );
