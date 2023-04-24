@@ -6,6 +6,7 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
 import useOutsideDetect from "../../hooks/useOutsideDetect";
+import DownIcon from "../../img/downicon.svg";
 
 const SelectCustom = ({
   options,
@@ -54,21 +55,21 @@ const SelectCustom = ({
           <label className="dd-header-title text-sm md:text-sm">
             {renderValue}
           </label>
-          {openList ? (
-            <ChevronUpIcon className="w-3 h-3" />
-          ) : (
-            <ChevronDownIcon className="w-3 h-3" />
-          )}
+          <img
+            src={DownIcon}
+            alt="down"
+            className={openList ? "rotate180" : ""}
+          />
         </div>
         <div
           className={`${
             openList ? "open" : "close"
-          } dd-list round-b w-full h-full bg-input`}
+          } dd-list round-b w-full h-full bg-input p-2`}
         >
           {options?.map((op, idx) => (
             <div key={idx}>
               <div
-                className="dd-list-item p-2 cursor-pointer text-sm md:text-base"
+                className="dd-list-item p-3 cursor-pointer text-sm md:text-base"
                 onClick={() => onChangeValue(op.value)}
               >
                 {op.label}

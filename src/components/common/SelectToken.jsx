@@ -2,10 +2,9 @@ import React, { useMemo, useState } from "react";
 import "./SelectToken.css";
 import {
   CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
 } from "@heroicons/react/24/solid";
 import useOutsideDetect from "../../hooks/useOutsideDetect";
+import DownIcon from "../../img/downicon.svg";
 
 const SelectToken = ({ options, defaultValue }) => {
   const [open, setOpen] = useState(false);
@@ -42,11 +41,8 @@ const SelectToken = ({ options, defaultValue }) => {
           alt="btc"
         />
         <label className="cursor-pointer">{renderLabel?.label}</label>
-        {open ? (
-          <ChevronUpIcon className="w-5 h-5" />
-        ) : (
-          <ChevronDownIcon className="w-5 h-5" />
-        )}
+
+        <img src={DownIcon} alt="down" className={open ? "rotate180" : ""} />
       </div>
       <div className={`${open ? "open" : "close"} dd-token-list p-2 rounded`}>
         {options?.map((item, idx) => (
@@ -67,7 +63,7 @@ const SelectToken = ({ options, defaultValue }) => {
             </div>
             {item.value === renderLabel?.label && (
               <div>
-                <CheckIcon className="w-5 h-5 plus" />
+                <CheckIcon className="w-5 h-5" />
               </div>
             )}
           </div>

@@ -7,7 +7,7 @@
 }
 
 .dd-wrapper .dd-list .dd-list-item:hover {
-    background: var(--arbitrum-blue);
+    background: var(--input-bg-color);
 }
 
 .dd-wrapper .close {
@@ -26,7 +26,7 @@
 
 .dd-wrapper .dd-list {
     position: absolute;
-    top: 3rem;
+    top: 4rem;
     left: 0;
     width: 100%;
     height: auto;
@@ -34,6 +34,7 @@
     border-radius: 3px;
     transition: all .3s ease-in-out;
     z-index: 9999999;
+    background: #343F51;
 }
 
 .select-custom .group-tooltip .tooltip {
