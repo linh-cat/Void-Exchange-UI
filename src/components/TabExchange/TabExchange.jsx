@@ -7,7 +7,7 @@ import React, { useMemo, useState } from "react";
 import OrderBox from "../../pages/OrderBox/OrderBox";
 import Swap from "../../pages/Swap/Swap";
 import "./TabExchange.css";
-import { type_order } from "../../constant/tab";
+import { TYPE_ORDER } from "../../constant/tab";
 
 const tabData = [
   {
@@ -23,7 +23,7 @@ const tabData = [
         }}
       />
     ),
-    component: <OrderBox type={type_order.LONG} />,
+    component: <OrderBox type={TYPE_ORDER.LONG} />,
   },
   {
     label: "Short",
@@ -38,7 +38,7 @@ const tabData = [
         }}
       />
     ),
-    component: <OrderBox type={type_order.SHORT} />,
+    component: <OrderBox type={TYPE_ORDER.SHORT} />,
   },
   {
     label: "Swap",

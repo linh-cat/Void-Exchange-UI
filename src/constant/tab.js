@@ -1,4 +1,5 @@
-export const type_order = {
-    LONG: 'long',
-    SHORT: 'short'
-}
+export const TYPE_ORDER = {
+  LONG: "LONG",
+  SHORT: "SHORT",
+};
+

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const UseUserWindow = () => {
+const useUserWindow = () => {
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
     dynamicHeight: window.innerHeight,
@@ -22,4 +22,4 @@ const UseUserWindow = () => {
   return { width: screenSize.dynamicWidth, height: screenSize.dynamicHeight };
 };
 
-export default UseUserWindow;
+export default useUserWindow;
