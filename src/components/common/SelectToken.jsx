@@ -29,8 +29,6 @@ const SelectToken = ({ options, defaultValue }) => {
     return { label: options[index]?.label, icon: options[index]?.icon };
   }, [value, options]);
 
-  console.log({ renderLabel, value });
-
   return (
     <div className={`dd-token`}>
       <div
