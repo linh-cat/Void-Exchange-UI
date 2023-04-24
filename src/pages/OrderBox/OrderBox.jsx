@@ -21,7 +21,7 @@ const OrderBox = ({ type }) => {
           ]}
           defaultValue="limit"
         />
-        <div className="h-2">
+        <div className="h-1">
           <InputCustom label="Price" placeHolder={"0.0"} />
         </div>
       </div>

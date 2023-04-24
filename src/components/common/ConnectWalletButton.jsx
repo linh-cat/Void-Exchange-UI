@@ -82,7 +82,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                           }}
                           className="w-3 overflow-hidden mr-4 rounded"
                         >
-                          {chain.iconUrl && width > 432 && (
+                          {chain.iconUrl && (
                             <img
                               alt={chain.name ?? "Chain icon"}
                               src={chain.iconUrl}

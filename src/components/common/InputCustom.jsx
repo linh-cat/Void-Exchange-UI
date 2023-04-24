@@ -21,7 +21,7 @@ const InputCustom = ({
       </div>
       <input
         type="number"
-        className="border border-gray-700 bg-slate-900 rounded w-full h-full text-lg"
+        className=".bg-input border border-gray-700  rounded w-full h-full text-lg"
         placeholder={placeHolder}
       />
       {rightAction && <div className="right-action">{rightAction}</div>}

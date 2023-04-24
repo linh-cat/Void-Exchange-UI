@@ -26,7 +26,6 @@
     left: 0;
     width: 100%;
     height: auto;
-    background: var(--main-card-color-secondary);
     overflow: hidden;
     border-radius: 3px;
     transition: all .3s ease-in-out;

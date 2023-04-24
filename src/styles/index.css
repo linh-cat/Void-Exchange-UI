@@ -1,11 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
 
 
 :root {
-    --main-bg-color: #121B2D;
-    --main-card-color: linear-gradient(70deg, #161c33, #2e3e52);
+    --main-bg-color: #0C0F13;
+    --main-card-color: #1B2028;
+    --input-bg-color: #2A3341;
     --main-long: #16BE76;
     --main-short: #E43E53;
     --main-card-color-secondary: #32435e;
@@ -18,8 +20,12 @@
     --font-xl: 3.4rem;
 }
 
+.bg-input {
+    background: var(--input-bg-color);
+}
+
 .bg-card {
-    background-color: linear-gradient(to right, #202538, #2e3e52);
+    background-color: var(--main-card-color);
 }
 
 html,
@@ -31,6 +37,7 @@ body,
     padding: 0;
     color: white;
     background-color: var(--main-bg-color);
+    font-family: 'Poppins', sans-serif;
 }
 
 .active {
@@ -130,14 +137,6 @@ td {
     margin: 0;
     padding: 0;
     padding-right: 0.465rem;
-}
-
-.bg-card {
-    background: -webkit-linear-gradient(to right,
-            #161c33,
-            #414345);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #161c33, #2e3e52);
 }
 
 .border {
