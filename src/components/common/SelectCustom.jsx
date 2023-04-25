@@ -1,10 +1,6 @@
 import React, { useMemo, useState } from "react";
 import "./SelectCustom.css";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/react/24/solid";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import useOutsideDetect from "../../hooks/useOutsideDetect";
 import DownIcon from "../../img/downicon.svg";
 
@@ -31,7 +27,7 @@ const SelectCustom = ({
   };
   const refOutside = useOutsideDetect(handleClickOutside);
 
-  const renderValue = useMemo(() => {
+  const renderLabel = useMemo(() => {
     const index = options.findIndex((item) => item.value === values);
     return options[index]?.label;
   }, [options, values]);
@@ -48,12 +44,12 @@ const SelectCustom = ({
 
       <div className="dd-wrapper">
         <div
-          className={`${classNameInput} dd-header border rounded w-full h-full p-2 cursor-pointer flex items-center justify-between`}
+          className={`${classNameInput} dd-header border rounded w-full h-full cursor-pointer flex items-center justify-between input`}
           onClick={toggleOpen}
           ref={refOutside}
         >
           <label className="dd-header-title text-sm md:text-sm">
-            {renderValue}
+            {renderLabel}
           </label>
           <img
             src={DownIcon}

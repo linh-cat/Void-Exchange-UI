@@ -11,6 +11,7 @@
     --main-long: #16BE76;
     --main-short: #E43E53;
     --main-card-color-secondary: #32435e;
+    --bg-dropdown-list: #343F51;
     --arbitrum-blue: #28a0f0;
     --border-radius-sm: 0.4rem;
     --font-sm: 1.4rem;
@@ -18,6 +19,19 @@
     --font-md: 1.6rem;
     --font-lg: 2.4rem;
     --font-xl: 3.4rem;
+    --font-small: .8rem;
+}
+
+.green-up {
+    color: var(--main-long);
+}
+
+.font-small {
+    font-size: var(--font-small);
+}
+
+.red-down {
+    color: var(--main-short);
 }
 
 .bg-input {
@@ -88,7 +102,7 @@ input[type="number"] {
     transform: rotate(180deg);
 }
 
-input {
+input, .input {
     color: white;
     outline: none;
     background: none;

@@ -13,15 +13,18 @@ const OrderBox = ({ type }) => {
   return (
     <div className="order-box">
       <div className="grid grid-cols-2 gap-2">
-        <SelectCustom
-          label="Order Type"
-          options={[
-            { label: "Limit order", value: "limit" },
-            { label: "Market order", value: "market" },
-          ]}
-          defaultValue="limit"
-          classNameInput={"h-10"}
-        />
+        <div className="">
+          <SelectCustom
+            label="Order Type"
+            options={[
+              { label: "Limit order", value: "limit" },
+              { label: "Market order", value: "market" },
+            ]}
+            defaultValue="limit"
+            // classNameInput={"h-10"}
+          />
+        </div>
+
         <div className="">
           <InputCustom label="Price" placeHolder={"0.0"} />
         </div>

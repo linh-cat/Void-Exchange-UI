@@ -1,3 +1,7 @@
 .exchange {
     /* height: 100vh; */
 }
+
+.exchange-container .top-chart {
+    background: var(--main-card-color);
+}
