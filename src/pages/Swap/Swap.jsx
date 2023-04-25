@@ -19,7 +19,7 @@ const Swap = () => {
               { label: "BNB", value: "BNB", icon: BNB },
               { label: "ETH", value: "ETH", icon: ETH },
             ]}
-            defaultValue={"BTC"}
+            defaultValue={"ETH"}
           />
         }
       />

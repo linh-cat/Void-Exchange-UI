@@ -1,17 +1,17 @@
 import React, { useMemo, useState } from "react";
 import "./SelectToken.css";
-import {
-  CheckIcon,
-} from "@heroicons/react/24/solid";
+import { CheckIcon } from "@heroicons/react/24/solid";
 import useOutsideDetect from "../../hooks/useOutsideDetect";
 import DownIcon from "../../img/downicon.svg";
 
 const SelectToken = ({ options, defaultValue }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(defaultValue);
+
   const toggleOpen = () => {
     setOpen(!open);
   };
+
   const onChangeValue = (token) => {
     setValue(token);
     setOpen(false);
@@ -20,6 +20,7 @@ const SelectToken = ({ options, defaultValue }) => {
   const handleClickOutside = () => {
     setOpen(false);
   };
+
   const refOutside = useOutsideDetect(handleClickOutside);
 
   const renderLabel = useMemo(() => {

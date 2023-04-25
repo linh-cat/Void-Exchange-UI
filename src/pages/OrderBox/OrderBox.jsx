@@ -39,7 +39,7 @@ const OrderBox = ({ type }) => {
                 { label: "BNB", value: "BNB", icon: BNB },
                 { label: "ETH", value: "ETH", icon: ETH },
               ]}
-              defaultValue={"BTC"}
+              defaultValue={"ETH"}
             />
           }
           placeHolder={"0.0"}
@@ -56,7 +56,7 @@ const OrderBox = ({ type }) => {
                 { label: "BNB", value: "BNB", icon: BNB },
                 { label: "ETH", value: "ETH", icon: ETH },
               ]}
-              defaultValue={"BNB"}
+              defaultValue={"ETH"}
             />
           }
           placeHolder={"0.0"}
