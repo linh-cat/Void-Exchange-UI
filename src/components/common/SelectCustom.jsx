@@ -48,7 +48,7 @@ const SelectCustom = ({
           onClick={toggleOpen}
           ref={refOutside}
         >
-          <label className="dd-header-title text-sm lg:text-lg">
+          <label className="dd-header-title text-xs lg:text-sm">
             {renderLabel}
           </label>
           <img

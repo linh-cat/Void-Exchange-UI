@@ -25,7 +25,7 @@ const InputCustom = ({
         {leftSide && <div className="left-action">{leftSide}</div>}
         <input
           type="number"
-          className="rounded w-full h-full text-sm lg:text-lg"
+          className="rounded w-full h-full text-xs lg:text-sm"
           placeholder={placeHolder}
         />
         {showBalance && (
