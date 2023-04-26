@@ -20,6 +20,7 @@
     --font-lg: 2.4rem;
     --font-xl: 3.4rem;
     --font-small: .8rem;
+    --font-very-small: .7rem;
 }
 
 .green-up {
@@ -28,6 +29,10 @@
 
 .font-small {
     font-size: var(--font-small);
+}
+
+.font-very-small {
+    font-size: var(--font-very-small);
 }
 
 .red-down {
