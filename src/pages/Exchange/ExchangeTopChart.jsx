@@ -60,13 +60,13 @@ const ExchangeTopChart = () => {
         </div>
         <div className="flex justify-between items-center sm:gap-1 md:gap-2 lg:gap-5 xl:gap-6 2xl:gap-7">
           <div className="">
-            <label className="text-slate-500 font-very-small">Volumn</label>
+            <label className="text-slate-500 font-very-small">Volume</label>
             <div className="font-small">
               55.003 <Badge text="BTC" />
             </div>
           </div>
           <div className="">
-            <label className=" text-slate-500 font-very-small">Volumn</label>
+            <label className=" text-slate-500 font-very-small">Volume</label>
             <div className="font-small">$1,505,660</div>
           </div>
           <div>

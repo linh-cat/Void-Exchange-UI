@@ -65,10 +65,11 @@ const SelectCustom = ({
           {options?.map((op, idx) => (
             <div key={idx}>
               <div
-                className="dd-list-item p-3 cursor-pointer text-sm md:text-base"
+                className="dd-list-item p-3 cursor-pointer text-sm 2xl:text-base flex items-center gap-2"
                 onClick={() => onChangeValue(op.value)}
               >
-                {op.label}
+                <img src={op.icon} alt="icon" className="w-5 h- 5 icon" />
+                <label className="whitespace-nowrap">{op.label}</label>
               </div>
             </div>
           ))}

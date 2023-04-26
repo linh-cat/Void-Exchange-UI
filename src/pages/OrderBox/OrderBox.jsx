@@ -8,6 +8,8 @@ import BTC from "../../img/btc.png";
 import BNB from "../../img/CAKE.png";
 import ETH from "../../img/WETH.png";
 import SlippageCustom from "../../components/common/SlippageCustom";
+import LimitIcon from "../../img/icons/Limit.svg";
+import MarketIcon from "../../img/icons/Market.svg";
 
 const OrderBox = ({ type }) => {
   return (
@@ -17,8 +19,8 @@ const OrderBox = ({ type }) => {
           <SelectCustom
             label="Order Type"
             options={[
-              { label: "Limit order", value: "limit" },
-              { label: "Market order", value: "market" },
+              { label: "Limit", value: "limit", icon: LimitIcon },
+              { label: "Market", value: "market", icon: MarketIcon },
             ]}
             defaultValue="limit"
             // classNameInput={"h-10"}

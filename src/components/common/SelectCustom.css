@@ -3,7 +3,12 @@
 }
 
 .dd-wrapper .dd-list .dd-list-item:hover {
-    background: var(--arbitrum-blue);
+    background: var(--main-card-color);
+    color: var(--arbitrum-blue);
+}
+
+.dd-wrapper .dd-list-item svg:hover {
+    fill: #fff !important;
 }
 
 .dd-wrapper .close {
@@ -24,7 +29,7 @@
     position: absolute;
     top: 4rem;
     left: 0;
-    width: 100%;
+    width: auto;
     height: auto;
     overflow: hidden;
     border-radius: 3px;
