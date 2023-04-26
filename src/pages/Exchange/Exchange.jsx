@@ -11,7 +11,7 @@ const Exchange = () => {
           <ExchangeTVChart />
         </div>
         <div className="right-side">
-          <div className="w-full p-5 bg-card">
+          <div className="w-full bg-card">
             <TabExchange defaultValue="long" />
           </div>
         </div>
