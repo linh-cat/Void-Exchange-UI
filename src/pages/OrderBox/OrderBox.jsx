@@ -23,12 +23,12 @@ const OrderBox = ({ type }) => {
               { label: "Market", value: "market", icon: MarketIcon },
             ]}
             defaultValue="limit"
-            // classNameInput={"h-10"}
+            classNameInput={"p-2"}
           />
         </div>
 
         <div className="">
-          <InputCustom label="Price" placeHolder={"0.0"} />
+          <InputCustom label="Price" placeHolder={"0.0"} classNameInput="p-2" />
         </div>
       </div>
       <div className="mt-3 2xl:mt-5">
@@ -44,8 +44,10 @@ const OrderBox = ({ type }) => {
               defaultValue={"ETH"}
             />
           }
+          showMaxBtn={true}
           placeHolder={"0.0"}
           showBalance={true}
+          showUsd={true}
         />
       </div>
       <div className="mt-3 2xl:mt-5">
@@ -61,8 +63,10 @@ const OrderBox = ({ type }) => {
               defaultValue={"ETH"}
             />
           }
+          showMaxBtn={true}
           placeHolder={"0.0"}
           showBalance={true}
+          showUsd={true}
         />
       </div>
       <div className="mt-3 2xl:mt-5">

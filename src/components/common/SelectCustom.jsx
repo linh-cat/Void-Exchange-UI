@@ -44,7 +44,7 @@ const SelectCustom = ({
 
       <div className="dd-wrapper">
         <div
-          className={`${classNameInput} dd-header border rounded w-full h-full cursor-pointer flex items-center justify-between input`}
+          className={`${classNameInput} dd-header border rounded w-full h-full cursor-pointer flex items-center justify-between `}
           onClick={toggleOpen}
           ref={refOutside}
         >

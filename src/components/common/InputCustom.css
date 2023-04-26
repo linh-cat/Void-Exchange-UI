@@ -17,3 +17,16 @@
 .input-custom .left-action {
     border-right: 2px solid rgba(163, 165, 196, 0.2);
 }
+
+.input-custom .balance {
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.input-custom .max-btn {
+    position: absolute;
+    top: 55%;
+    right: 10px;
+    transform: translateY(-50%, 50%);
+}
