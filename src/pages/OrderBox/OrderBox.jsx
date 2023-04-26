@@ -31,7 +31,7 @@ const OrderBox = ({ type }) => {
           <InputCustom label="Price" placeHolder={"0.0"} />
         </div>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 2xl:mt-5">
         <InputCustom
           label="Pay"
           leftSide={
@@ -48,7 +48,7 @@ const OrderBox = ({ type }) => {
           showBalance={true}
         />
       </div>
-      <div className="mt-3">
+      <div className="mt-3 2xl:mt-5">
         <InputCustom
           label="Position Size"
           leftSide={
@@ -65,13 +65,13 @@ const OrderBox = ({ type }) => {
           showBalance={true}
         />
       </div>
-      <div className="mt-3">
+      <div className="mt-3 2xl:mt-5">
         <SliderLeverage label="Leverage" />
       </div>
       <div className="mt-10 w-full">
         <button className="default-btn w-full ">Approve</button>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 2xl:mt-5">
         <SlippageCustom
           label="Slippage"
           options={[
@@ -82,7 +82,7 @@ const OrderBox = ({ type }) => {
           defaultValue={0.1}
         />
       </div>
-      <div className="mt-3">
+      <div className="mt-3 2xl:mt-5">
         <div className="collateral-asset flex justify-between text-base lg:text-sm">
           <label>Collateral Asset</label>
           <div className="flex items-center gap-1">
@@ -115,7 +115,7 @@ const OrderBox = ({ type }) => {
           </div>
         </div>
         <div className="w-full h-1 bg-slate-400 mt-3"></div>
-        <div className="mt-3">
+        <div className="mt-3 2xl:mt-5">
           <title>Market Infor</title>
           <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
             <label>Borrow Fee</label>
