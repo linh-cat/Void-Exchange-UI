@@ -3,6 +3,7 @@ import SelectCoupleToken from "../../components/common/SelectCoupleToken";
 import BTC from "../../img/btc.png";
 import ETH from "../../img/WETH.png";
 import Up from "../../img/up.svg";
+import Badge from "../../components/common/Badge";
 
 const ExchangeTopChart = () => {
   return (
@@ -57,11 +58,13 @@ const ExchangeTopChart = () => {
         </div>
         <div className="flex justify-between items-center sm:gap-1 md:gap-2 lg:gap-5 xl:gap-6 2xl:gap-7">
           <div className="font-very-small 2xl:text-base">
-            <label className="text-slate-500">Volumn (BTC)</label>
-            <div className="">55.003</div>
+            <label className="text-slate-500">Volumn</label>
+            <div className="">
+              55.003 <Badge text="BTC" />
+            </div>
           </div>
           <div className="font-very-small 2xl:text-base">
-            <label className=" text-slate-500">Volumn (USD)</label>
+            <label className=" text-slate-500">Volumn</label>
             <div className="">$1,505,660</div>
           </div>
           <div>

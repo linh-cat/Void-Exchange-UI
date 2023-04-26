@@ -6,6 +6,10 @@
     background: var(--main-card-color);
 }
 
+.top-chart {
+    font-family: 'Roboto', sans-serif;
+}
+
 .top-chart .top-chart-price {
     color: var(--arbitrum-blue);
 }

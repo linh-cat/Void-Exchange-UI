@@ -1,0 +1,5 @@
+.badge {
+    background-color: var(--arbitrum-blue);
+    font-size: .5rem;
+    color: #fff;
+}
