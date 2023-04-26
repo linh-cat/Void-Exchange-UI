@@ -29,7 +29,7 @@ const SelectCustom = ({
 
   const renderLabel = useMemo(() => {
     const index = options.findIndex((item) => item.value === values);
-    return options[index]?.label;
+    return { label: options[index]?.label, icon: options[index]?.icon };
   }, [options, values]);
 
   return (
@@ -48,9 +48,13 @@ const SelectCustom = ({
           onClick={toggleOpen}
           ref={refOutside}
         >
-          <label className="dd-header-title text-xs lg:text-sm">
-            {renderLabel}
-          </label>
+          <div className="flex items-center gap-1">
+            <img src={renderLabel.icon} alt="icon" />
+            <label className="dd-header-title text-xs lg:text-sm">
+              {renderLabel.label}
+            </label>
+          </div>
+
           <img
             src={DownIcon}
             alt="down"
