@@ -57,9 +57,7 @@ const ExchangeTopChart = () => {
         </div>
         <div className="flex justify-between items-center sm:gap-1 md:gap-2 lg:gap-5 xl:gap-6 2xl:gap-7">
           <div className="font-very-small 2xl:text-base">
-            <label className="font-very-small text-slate-500">
-              Volumn (BTC)
-            </label>
+            <label className="text-slate-500">Volumn (BTC)</label>
             <div className="">55.003</div>
           </div>
           <div className="font-very-small 2xl:text-base">
