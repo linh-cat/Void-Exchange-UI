@@ -13,7 +13,7 @@
     top: 2.5rem;
     left: 0;
     width: 200px;
-    background: #343F51;
+    background: var(--bg-dropdown-list);
     transition: all .3s ease-in-out;
     z-index: 9999999;
 }
@@ -23,7 +23,7 @@
 }
 
 .dd-token-item:hover {
-    background: var(--input-bg-color);
+    background: var(--arbitrum-blue);
     border-radius: 3px;
 }
 

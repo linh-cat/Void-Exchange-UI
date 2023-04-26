@@ -3,7 +3,7 @@
 }
 
 .dd-wrapper .dd-list .dd-list-item:hover {
-    background: var(--input-bg-color);
+    background: var(--arbitrum-blue);
 }
 
 .dd-wrapper .close {

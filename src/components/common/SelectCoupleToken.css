@@ -3,7 +3,7 @@
 }
 
 .couple-token .label {
-    color: var(--arbitrum-blue);
+    color: #fff;
 }
 
 .couple-token .dd-couple-token-list {
@@ -27,13 +27,14 @@
 
 .couple-token .open {
     opacity: 1;
-    animation: growDown 300ms ease-in-out forwards;
+    animation: growDown 200ms ease-in-out forwards;
     transform-style: flat;
     transform-origin: top center
 }
 
 .couple-token .dd-couple-token-item:hover {
-    background: var(--input-bg-color);
+    background: var(--main-card-color);
+    color: var(--arbitrum-blue);
 }
 
 

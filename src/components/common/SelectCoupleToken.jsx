@@ -37,7 +37,7 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
         onClick={toggleOpen}
       >
         <img src={BTC} alt="btc" className="rounded-full w-7 h-7" />
-        <label className="cursor-pointer text-xl label font-bold">
+        <label className="cursor-pointer text-lg label font-bold">
           {renderLabel}
         </label>
         <img
@@ -54,13 +54,16 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
         <table className="w-full text-sm text-left">
           <thead className="text-xs uppercase ">
             <tr>
-              <th scope="col" className="px-6 py-3 rounded-l-lg">
+              <th scope="col" className="px-8 py-3 rounded-l-lg">
                 Pair
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-8 py-3 whitespace-nowrap">
                 Last price
               </th>
-              <th scope="col" className="px-6 py-3 rounded-r-lg">
+              <th
+                scope="col"
+                className="px-8 py-3 rounded-r-lg whitespace-nowrap"
+              >
                 24h Change
               </th>
             </tr>
@@ -74,12 +77,17 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 font-medium whitespace-nowrap "
+                  className="px-8 py-4 font-medium whitespace-nowrap flex items-center"
                 >
-                  {item.label}
+                  <img
+                    src={item.icon}
+                    alt="icon"
+                    className="rounded-full w-5 h-5 mr-1"
+                  />
+                  <label>{item.label}</label>
                 </th>
-                <td className="px-6 py-4 red-down">{item.price}</td>
-                <td className="px-6 py-4 green-up">{item.dayChange}</td>
+                <td className="px-8 py-4 red-down">{item.price}</td>
+                <td className="px-8 py-4 green-up">{item.dayChange}</td>
               </tr>
             ))}
           </tbody>
