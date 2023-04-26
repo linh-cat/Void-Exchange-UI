@@ -33,7 +33,7 @@ const ExchangeTopChart = () => {
           <label className="text-xl green-up">$27,382.31</label>
         </div>
       </div>
-      <div className="group-infor p-1 md:flex sm:gap-1 md:gap-2 lg:gap-5">
+      <div className="group-infor p-1 flex flex-col sm:flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-5">
         <div className="flex justify-between items-center sm:gap-1 md:gap-2 lg:gap-5 xl:gap-6 2xl:gap-7">
           <div className="gap-1 font-very-small">
             <label className="text-slate-500">24h Change %</label>
