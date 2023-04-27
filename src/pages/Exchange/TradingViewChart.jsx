@@ -52,7 +52,7 @@ export default function TradingViewWidget() {
   }, []);
 
   return (
-    <div className="tradingview-widget-container" style={{ height: "50vh" }}>
+    <div className="tradingview-widget-container">
       <div id="tradingview_1327e" />
     </div>
   );
