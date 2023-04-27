@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@icons/*": ["src/img/icons/*"],
+      "@img/*": ["src/img/*"]
+    }
+  },
+  "exclude": ["node_modules", "public"]
+}
