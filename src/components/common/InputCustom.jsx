@@ -44,7 +44,9 @@ const InputCustom = ({
         />
 
         {showMaxBtn && (
-          <label className="text-xs cursor-pointer max-btn">Max</label>
+          <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">
+            Max
+          </label>
         )}
       </div>
 

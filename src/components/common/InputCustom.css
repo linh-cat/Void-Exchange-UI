@@ -26,7 +26,8 @@
 
 .input-custom .max-btn {
     position: absolute;
-    top: 55%;
+    top: 45%;
     right: 10px;
-    transform: translateY(-50%, 50%);
+    border-color: var(--arbitrum-blue);
+    color: var(--arbitrum-blue);
 }
