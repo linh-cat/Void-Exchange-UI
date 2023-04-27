@@ -1,15 +1,16 @@
 import React from "react";
-import SelectCustom from "../../components/common/SelectCustom";
-import InputCustom from "../../components/common/InputCustom";
+import {
+  SelectCustom,
+  InputCustom,
+  SliderLeverage,
+  SelectToken,
+  SlippageCustom,
+} from "@components/common";
+import BTC from "@img/btc.png";
+import BNB from "@img/CAKE.png";
+import ETH from "@img/WETH.png";
+import { LimitIcon, MarketIcon } from "@icons/index";
 import "./OrderBox.css";
-import SliderLeverage from "../../components/common/SliderLeverage";
-import SelectToken from "../../components/common/SelectToken";
-import BTC from "../../img/btc.png";
-import BNB from "../../img/CAKE.png";
-import ETH from "../../img/WETH.png";
-import SlippageCustom from "../../components/common/SlippageCustom";
-import LimitIcon from "../../img/icons/Limit.svg";
-import MarketIcon from "../../img/icons/Market.svg";
 
 const OrderBox = ({ type }) => {
   return (
