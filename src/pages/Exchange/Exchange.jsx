@@ -1,24 +1,22 @@
 import React from "react";
 import "./Exchange.css";
 import TabExchange from "../../components/TabExchange/TabExchange";
-import ExchangeTopChart from "./ExchangeTopChart";
 import TradingViewChart from "./TradingViewChart";
+import InforBarChar from "./InforBarChar";
 
 const Exchange = () => {
   return (
-    <div className="exchange w-full h-full p-0 md:p-5">
-      <div className="">
-        <ExchangeTopChart />
-      </div>
-      <div className="lg:grid lg:grid-cols-3 xl:grid-cols-5 gap-3">
-        <div className="lg:col-span-2 xl:col-span-4 left-side">
+    <div className="exchange w-full lg:grid lg:grid-cols-5">
+      <div className="left-side md:col-span-3 lg:col-span-4 lg:flex lg:flex-col">
+        <div className="">
+          <InforBarChar />
+        </div>
+        <div className="h-full">
           <TradingViewChart />
         </div>
-        <div className="right-side">
-          <div className="w-full bg-card">
-            <TabExchange defaultValue="long" />
-          </div>
-        </div>
+      </div>
+      <div className="lg:col-span-1">
+        <TabExchange defaultValue="long" />
       </div>
     </div>
   );

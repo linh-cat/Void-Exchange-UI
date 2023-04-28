@@ -44,7 +44,7 @@ function App() {
       <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
         <Header />
         <FullApp />
-        <Footer />
+        {/* <Footer /> */}
       </RainbowKitProvider>
     </WagmiConfig>
   );

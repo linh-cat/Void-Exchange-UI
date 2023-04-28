@@ -5,10 +5,10 @@ import ETH from "../../img/WETH.png";
 import Up from "../../img/up.svg";
 import Badge from "../../components/common/Badge";
 
-const ExchangeTopChart = () => {
+const InforBarChar = () => {
   return (
-    <div className="top-chart w-full h-full md:flex md:gap-5 items-center md:pl-3">
-      <div className="h-full flex justify-between items-center md:gap-5 p-1">
+    <div className="top-chart w-full h-full md:flex md:gap-5 items-center">
+      <div className="h-full flex justify-between items-center md:gap-5">
         <div>
           <SelectCoupleToken
             options={[
@@ -91,4 +91,4 @@ const ExchangeTopChart = () => {
   );
 };
 
-export default ExchangeTopChart;
+export default InforBarChar;
