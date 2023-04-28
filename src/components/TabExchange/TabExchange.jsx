@@ -69,15 +69,15 @@ const TabExchange = ({ defaultValue }) => {
   }, [activeTab]);
 
   return (
-    <div key={activeTab} className="w-full h-full border">
-      <ul className="grid grid-flow-col text-center main-tab">
+    <div key={activeTab} className="w-full h-full border border-gray-700">
+      <ul className="grid grid-flow-col text-center main-tab py-4 tab-item border-b border-gray-700">
         {tabData.map((item, idx) => {
           return (
             <li
               onClick={() => changeTab(item.value)}
               className={
                 activeTab === item.value
-                  ? "flex items-center justify-center cursor-pointer tab-item text-center h-full active"
+                  ? "flex items-center justify-center cursor-pointer tab-item text-center h-full"
                   : "flex items-center justify-center cursor-pointer tab-item text-center h-full"
               }
               key={idx}
