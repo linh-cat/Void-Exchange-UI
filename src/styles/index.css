@@ -64,11 +64,19 @@ body,
     background-color: var(--arbitrum-blue);
 }
 
+.heroicon path {
+    fill: #00A8CC !important;
+}
+
 body {
     margin: 0;
     -webkit-font-smoothing: subpixel-antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+svg path {
+    fill: #ffffff !important;
 }
 
 

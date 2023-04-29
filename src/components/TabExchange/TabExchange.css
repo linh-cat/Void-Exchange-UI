@@ -16,11 +16,12 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
+    gap: 3px;
 }
 
 .main-tab .active {
     color: var(--arbitrum-blue);
     border-top: 2px solid var(--arbitrum-blue);
-    font-weight: bold;
+    font-weight: 500;
     background: rgba(127, 212, 130, 0.05);
 }

@@ -1,8 +1,6 @@
-import {
-  ArrowTrendingDownIcon,
-  ArrowTrendingUpIcon,
-  ArrowsRightLeftIcon,
-} from "@heroicons/react/24/solid";
+import ArrowTrendingUpIcon from "@img/icons/ArrowTrendingUp.svg";
+import ArrowRightLeftIcon from "@img/icons/ArrowRightLeft.svg";
+import ArrowTrendingDown from "@img/icons/ArrowTredingDown.svg";
 import React, { useMemo, useState } from "react";
 import OrderBox from "../../pages/OrderBox/OrderBox";
 import Swap from "../../pages/Swap/Swap";
@@ -13,46 +11,19 @@ const tabData = [
   {
     label: "Long",
     value: "long",
-    icon: (
-      <ArrowTrendingUpIcon
-        style={{
-          color: "#fff",
-          width: "15px",
-          display: "inline",
-          marginRight: "10px",
-        }}
-      />
-    ),
+    icon: ArrowTrendingUpIcon,
     component: <OrderBox type={TYPE_ORDER.LONG} />,
   },
   {
     label: "Short",
     value: "short",
-    icon: (
-      <ArrowTrendingDownIcon
-        style={{
-          color: "#fff",
-          width: "15px",
-          display: "inline",
-          marginRight: "10px",
-        }}
-      />
-    ),
+    icon: ArrowTrendingDown,
     component: <OrderBox type={TYPE_ORDER.SHORT} />,
   },
   {
     label: "Swap",
     value: "swap",
-    icon: (
-      <ArrowsRightLeftIcon
-        style={{
-          color: "#fff",
-          width: "15px",
-          display: "inline",
-          marginRight: "10px",
-        }}
-      />
-    ),
+    icon: ArrowRightLeftIcon,
     component: <Swap />,
   },
 ];
@@ -72,7 +43,7 @@ const TabExchange = ({ defaultValue }) => {
     <div key={activeTab} className="w-full h-full border border-gray-700">
       <div className="order-tab">
         <label className="text-center label py-1 border-b border-gray-700">
-          Order Box
+          Make Order
         </label>
         <ul className="grid grid-flow-col text-center main-tab border-b border-gray-700 mt-auto h-full">
           {tabData.map((item, idx) => {
@@ -84,7 +55,7 @@ const TabExchange = ({ defaultValue }) => {
                 }
                 key={idx}
               >
-                {item.icon}
+                <img src={item.icon} alt="icon" className="w-5" />
                 <label className="flex justify-center">{item.label}</label>
               </li>
             );
