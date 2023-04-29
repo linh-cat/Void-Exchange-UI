@@ -1,6 +1,7 @@
 // TradingViewWidget.jsx
 
 import React, { useEffect, useRef } from "react";
+import { defaultChartProps } from "./constant";
 
 let tvScriptLoadingPromise;
 
@@ -43,6 +44,7 @@ export default function TradingViewWidget() {
           style: "1",
           locale: "en",
           toolbar_bg: "#f1f3f6",
+          custom_css_url: defaultChartProps.custom_css_url,
           enable_publishing: false,
           allow_symbol_change: true,
           container_id: "tradingview_1327e",
