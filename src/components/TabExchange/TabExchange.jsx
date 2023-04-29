@@ -40,7 +40,10 @@ const TabExchange = ({ defaultValue }) => {
   }, [activeTab]);
 
   return (
-    <div key={activeTab} className="w-full h-full border border-gray-700">
+    <div
+      key={activeTab}
+      className="w-full h-full border-l border-b border-gray-700"
+    >
       <div className="order-tab">
         <ul className="grid grid-flow-col text-center main-tab border-b border-gray-700 mt-auto h-full">
           {tabData.map((item, idx) => {

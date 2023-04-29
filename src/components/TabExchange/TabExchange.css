@@ -1,7 +1,7 @@
 .order-tab {
     display: flex;
     flex-direction: column;
-    height: 65px;
+    height: 70px;
 }
 
 .order-tab .label {
