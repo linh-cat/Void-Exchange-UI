@@ -70,24 +70,28 @@ const TabExchange = ({ defaultValue }) => {
 
   return (
     <div key={activeTab} className="w-full h-full border border-gray-700">
-      <ul className="grid grid-flow-col text-center main-tab py-4 tab-item border-b border-gray-700">
-        {tabData.map((item, idx) => {
-          return (
-            <li
-              onClick={() => changeTab(item.value)}
-              className={
-                activeTab === item.value
-                  ? "flex items-center justify-center cursor-pointer tab-item text-center h-full"
-                  : "flex items-center justify-center cursor-pointer tab-item text-center h-full"
-              }
-              key={idx}
-            >
-              {item.icon}
-              <p className="flex justify-center py-1 h-full">{item.label}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="order-tab">
+        <label className="text-center label py-1 border-b border-gray-700">
+          Order Box
+        </label>
+        <ul className="grid grid-flow-col text-center main-tab border-b border-gray-700 mt-auto h-full">
+          {tabData.map((item, idx) => {
+            return (
+              <li
+                onClick={() => changeTab(item.value)}
+                className={
+                  activeTab === item.value ? "tab-item active" : "tab-item"
+                }
+                key={idx}
+              >
+                {item.icon}
+                <label className="flex justify-center">{item.label}</label>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
       <div className="tab-content p-3">{tabContent}</div>
     </div>
   );

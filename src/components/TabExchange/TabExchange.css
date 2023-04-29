@@ -1,0 +1,26 @@
+.order-tab {
+    display: flex;
+    flex-direction: column;
+    height: 65px;
+}
+
+.order-tab .label {
+    text-transform: uppercase;
+}
+
+.main-tab {}
+
+.main-tab .tab-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.main-tab .active {
+    color: var(--arbitrum-blue);
+    border-top: 2px solid var(--arbitrum-blue);
+    font-weight: bold;
+    background: rgba(127, 212, 130, 0.05);
+}
