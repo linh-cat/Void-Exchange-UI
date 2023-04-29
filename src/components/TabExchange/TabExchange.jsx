@@ -42,9 +42,6 @@ const TabExchange = ({ defaultValue }) => {
   return (
     <div key={activeTab} className="w-full h-full border border-gray-700">
       <div className="order-tab">
-        <label className="text-center label py-1 border-b border-gray-700">
-          Make Order
-        </label>
         <ul className="grid grid-flow-col text-center main-tab border-b border-gray-700 mt-auto h-full">
           {tabData.map((item, idx) => {
             return (
