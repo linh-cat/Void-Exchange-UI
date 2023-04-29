@@ -1,8 +1,8 @@
-import React from "react";
-import "./Exchange.css";
-import TabExchange from "../../components/TabExchange/TabExchange";
-import TradingViewChart from "./TradingViewChart";
-import InforBarChar from "./InforBarChar";
+import React from "react"
+import "./Exchange.css"
+import TabExchange from "../../components/TabExchange/TabExchange"
+import TradingViewChart from "./TradingViewChart"
+import InforBarChar from "./InforBarChar"
 
 const Exchange = () => {
   return (
@@ -19,7 +19,7 @@ const Exchange = () => {
         <TabExchange defaultValue="long" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Exchange;
+export default Exchange

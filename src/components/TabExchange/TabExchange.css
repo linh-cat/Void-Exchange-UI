@@ -8,7 +8,8 @@
     text-transform: uppercase;
 }
 
-.main-tab {}
+.main-tab {
+}
 
 .main-tab .tab-item {
     display: flex;
@@ -19,9 +20,17 @@
     gap: 3px;
 }
 
-.main-tab .active {
-    color: var(--arbitrum-blue);
-    border-top: 2px solid var(--arbitrum-blue);
+.main-tab .active-long {
+    color: var(--main-long);
+    border-top: 2px solid var(--main-long);
     font-weight: 500;
     background: rgba(127, 212, 130, 0.05);
 }
+
+.main-tab .active-short {
+    color: var(--main-short);
+    border-top: 2px solid var(--main-short);
+    font-weight: 500;
+    background: rgba(161, 69, 69, 0.05);
+}
+
