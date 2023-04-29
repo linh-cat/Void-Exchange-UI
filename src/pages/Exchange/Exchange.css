@@ -13,3 +13,18 @@
 .top-chart .top-chart-price {
     color: var(--arbitrum-blue);
 }
+
+.latest-trade {
+    height: 50rem;
+    overflow-y: scroll;
+}
+
+@media only screen and (max-width: 640px) {
+    .latest-trade {
+        height: 20rem
+    }
+}
+
+.latest-trade::-webkit-scrollbar {
+    display: none;
+}
