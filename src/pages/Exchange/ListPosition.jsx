@@ -2,7 +2,7 @@ import React from "react"
 
 const ListPosition = () => {
   return (
-    <div className="postion-list overflow-x-auto">
+    <div className="postion-list h-full overflow-auto">
       <table className="w-full text-left ">
         <thead className="text-xs border-b border-slate-700 overflow-auto w-full">
           <tr className="text-slate-400">

@@ -3,7 +3,7 @@ import React from "react"
 
 const TradeHistory = () => {
   return (
-    <div className="trade-history overflow-x-auto">
+    <div className="trade-history h-full overflow-auto">
       <div className="trade-header lg:flex lg:items-start ">
         <div className="header-group-filter flex flex-grow basis-10 gap-x-5">
           <div className="w-32">
