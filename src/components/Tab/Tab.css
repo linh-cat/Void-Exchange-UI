@@ -1,0 +1,9 @@
+.tab-custom {
+    display: flex;
+    gap: 1rem;
+}
+
+.tab-custom .active {
+    color: #fff;
+    background: none !important;
+}

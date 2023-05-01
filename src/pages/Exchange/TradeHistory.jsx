@@ -1,0 +1,87 @@
+import { SelectCustom } from "@components/common"
+import React from "react"
+
+const TradeHistory = () => {
+  return (
+    <div className="trade-history">
+      <div className="trade-header">
+        <div className="header-group-filter flex flex-grow basis-10 gap-x-5">
+          <div className="w-32">
+            <SelectCustom
+              label="Period"
+              options={[
+                { label: "1 day", value: "day" },
+                { label: "1 Month", value: "month" },
+                { label: "3 Months", value: "3months" }
+              ]}
+              defaultValue="month"
+              classNameInput={"p-2"}
+            />
+          </div>
+          <div className="w-32">
+            <SelectCustom
+              label="Market"
+              options={[{ label: "All", value: "all" }]}
+              defaultValue="all"
+              classNameInput={"p-2"}
+            />
+          </div>
+          <div className="w-32">
+            <SelectCustom
+              label="Type"
+              options={[
+                { label: "All", value: "all" },
+                { label: "With PNL", value: "pnl" }
+              ]}
+              defaultValue="all"
+              classNameInput={"p-2"}
+            />{" "}
+          </div>
+        </div>
+        <div className="trade-header-info"></div>
+      </div>
+      <table className="w-full text-left">
+        <thead className="text-xs border-b border-slate-700">
+          <tr className="text-slate-400">
+            <th scope="col" className="py-3">
+              Time
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Market
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Operation
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Side
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Price
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Amount
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Fee
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Realized PNL & ROE
+            </th>
+          </tr>
+        </thead>
+        <tbody className="text-xs">
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+export default TradeHistory

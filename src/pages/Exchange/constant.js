@@ -13,3 +13,13 @@ export const defaultChartProps = {
         intervals: ["5", "15", "60", "240", "1D"],
     },
 };
+export const POSITIONS = "Positions";
+export const ORDERS = "Orders";
+export const TRADES = "Trades";
+
+export const optionLabels = {
+    position: POSITIONS,
+    Order: ORDERS,
+    trade: TRADES
+}
+export const LIST_SECTIONS = [POSITIONS, ORDERS, TRADES]
