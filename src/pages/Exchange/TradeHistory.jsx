@@ -4,7 +4,7 @@ import React from "react"
 const TradeHistory = () => {
   return (
     <div className="trade-history">
-      <div className="trade-header">
+      <div className="trade-header flex items-start">
         <div className="header-group-filter flex flex-grow basis-10 gap-x-5">
           <div className="w-32">
             <SelectCustom
@@ -38,7 +38,11 @@ const TradeHistory = () => {
             />{" "}
           </div>
         </div>
-        <div className="trade-header-info"></div>
+        <div className="trade-header-info flex items-center gap-5">
+          <div className="font-medium text-sm">1W Volume: $0</div>
+          <div className="font-medium text-sm">1W PNL: $0</div>
+          <div className="font-medium text-sm">1W Fees: $0</div>
+        </div>
       </div>
       <table className="w-full text-left">
         <thead className="text-xs border-b border-slate-700">
