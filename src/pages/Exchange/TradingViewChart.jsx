@@ -32,13 +32,13 @@ export default function TradingViewWidget() {
         new window.TradingView.widget({
           width: "100%",
           height: "100%",
-          symbol: "NASDAQ:AAPL",
+          symbol: "Binance:BTCUSDT",
           interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",
           style: "1",
           locale: "en",
-          toolbar_bg: "#f1f3f6",
+          toolbar_bg: "#121217",
           enable_publishing: false,
           allow_symbol_change: true,
           container_id: "tradingview_1327e"
