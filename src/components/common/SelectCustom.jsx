@@ -4,7 +4,7 @@ import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
 import DownIcon from "../../img/downicon.svg"
 
-const SelectCustom = ({ options, defaultValue, label, tooltip, className, classNameInput }) => {
+const SelectCustom = ({ options, defaultValue, label, tooltip, className, classNameInput, classNameOption }) => {
   const [openList, setOpenList] = useState(false)
   const [values, setValues] = useState(defaultValue)
   const toggleOpen = () => {
@@ -50,7 +50,7 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className, classN
 
           <img src={DownIcon} alt="down" className={openList ? "rotate180" : ""} />
         </div>
-        <div className={`${openList ? "open" : "close"} dd-list round-b w-full h-full bg-input p-2`}>
+        <div className={`${openList ? "open" : "close"}  dd-list round-b w-full h-full bg-input p-2 `}>
           {options?.map((op, idx) => (
             <div key={idx}>
               <div
@@ -58,7 +58,7 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className, classN
                 onClick={() => onChangeValue(op.value)}
               >
                 {op.icon && <img src={op.icon} alt="icon" className="w-5 h- 5 icon" />}
-                <label className="whitespace-nowrap">{op.label}</label>
+                <label className={`${classNameOption} whitespace-nowrap`}>{op.label}</label>
               </div>
             </div>
           ))}

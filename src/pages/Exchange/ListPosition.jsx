@@ -2,9 +2,9 @@ import React from "react"
 
 const ListPosition = () => {
   return (
-    <div className="postion-list">
-      <table className="w-full text-left">
-        <thead className="text-xs border-b border-slate-700">
+    <div className="postion-list overflow-x-auto">
+      <table className="w-full text-left ">
+        <thead className="text-xs border-b border-slate-700 overflow-auto w-full">
           <tr className="text-slate-400">
             <th scope="col" className="py-3">
               Market

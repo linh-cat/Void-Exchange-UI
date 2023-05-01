@@ -3,8 +3,8 @@ import React from "react"
 
 const TradeHistory = () => {
   return (
-    <div className="trade-history">
-      <div className="trade-header flex items-start">
+    <div className="trade-history overflow-x-auto">
+      <div className="trade-header lg:flex lg:items-start ">
         <div className="header-group-filter flex flex-grow basis-10 gap-x-5">
           <div className="w-32">
             <SelectCustom
@@ -16,6 +16,7 @@ const TradeHistory = () => {
               ]}
               defaultValue="month"
               classNameInput={"p-2"}
+              classNameOption={"text-sm"}
             />
           </div>
           <div className="w-32">
@@ -24,6 +25,7 @@ const TradeHistory = () => {
               options={[{ label: "All", value: "all" }]}
               defaultValue="all"
               classNameInput={"p-2"}
+              classNameOption={"text-sm"}
             />
           </div>
           <div className="w-32">
@@ -35,10 +37,11 @@ const TradeHistory = () => {
               ]}
               defaultValue="all"
               classNameInput={"p-2"}
-            />{" "}
+              classNameOption={"text-sm"}
+            />
           </div>
         </div>
-        <div className="trade-header-info flex items-center gap-5">
+        <div className="trade-header-info flex items-center gap-5 mt-3 lg:mt-0">
           <div className="font-medium text-sm">1W Volume: $0</div>
           <div className="font-medium text-sm">1W PNL: $0</div>
           <div className="font-medium text-sm">1W Fees: $0</div>

@@ -22,7 +22,7 @@ const Exchange = () => {
 
   const renderListSections = () => {
     return (
-      <div className="p-3 h-96">
+      <div className="p-3 h-96 w-full">
         <Tab
           optionLabels={optionLabels}
           options={LIST_SECTIONS}

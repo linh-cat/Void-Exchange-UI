@@ -2,7 +2,7 @@ import React from "react"
 
 const OrderList = () => {
   return (
-    <div className="order-list">
+    <div className="order-list overflow-x-auto">
       <table className="w-full text-left">
         <thead className="text-xs border-b border-slate-700">
           <tr className="text-slate-400">
