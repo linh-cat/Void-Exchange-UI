@@ -13,6 +13,7 @@ import { ORDERS } from "./constant"
 import { TRADES } from "./constant"
 import TradeHistory from "./TradeHistory"
 import cx from "classnames"
+import TradingViewCustom from "./TradingViewCustom"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
@@ -64,7 +65,7 @@ const Exchange = () => {
                 "h-96 lg:h-full": true
               })}
             >
-              <TradingViewChart />
+              <TradingViewCustom />
             </div>
           </div>
         </div>
