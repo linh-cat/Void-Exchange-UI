@@ -38,6 +38,62 @@ const OrderList = () => {
             <td className="px-6 py-4">Laptop</td>
             <td className="px-6 py-4">$2999</td>
           </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th scope="row" className="py-4 ">
+              Apple MacBook Pro 17"
+            </th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -42,13 +42,19 @@ const Exchange = () => {
   return (
     <div>
       <div className="exchange w-full xl:grid xl:grid-cols-5 xl:grid-rows-3">
-        <div className="left-side xl:col-span-3 xl:row-span-3 xl:flex xl:flex-col">
+        <div
+          className={cx({
+            "xl:col-span-3": showHistory,
+            "xl:col-span-4": !showHistory,
+            "left-side xl:row-span-3 xl:flex xl:flex-col": true
+          })}
+        >
           <div className="relative border border-gray-700">
             <InforBarChar />
-            {/* <div className="flex items-center absolute right-2">
+            <div className="flex items-center absolute top-1/3 right-2">
               <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
               <label className="text-xs">Show History</label>
-            </div> */}
+            </div>
           </div>
           <div className="flex-1 border border-gray-700">
             <div
@@ -62,9 +68,11 @@ const Exchange = () => {
             </div>
           </div>
         </div>
-        <div className="xl:col-span-1 xl:row-span-3 middle-side border-b border-zinc-700">
-          <LatestTrade />
-        </div>
+        {showHistory && (
+          <div className="xl:col-span-1 xl:row-span-3 middle-side border-b border-zinc-700">
+            <LatestTrade />
+          </div>
+        )}
         <div className="xl:col-span-1 xl:row-span-3 right-side">
           <TabExchange defaultValue="long" />
         </div>

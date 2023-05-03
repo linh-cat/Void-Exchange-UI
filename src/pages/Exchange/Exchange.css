@@ -33,4 +33,30 @@
     display: none;
 }
 
-.position-list {}
+.position-list {
+    height: 15rem;
+    overflow-y: scroll;
+}
+
+
+.trade-history {
+    height: 15rem;
+    overflow-y: scroll;
+}
+
+.order-list {
+    height: 15rem;
+    overflow-y: scroll;
+}
+
+.position-list::-webkit-scrollbar {
+    display: none;
+}
+
+.trade-history::-webkit-scrollbar {
+    display: none;
+}
+
+.order-list::-webkit-scrollbar {
+    display: none;
+}

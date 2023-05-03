@@ -83,6 +83,42 @@ const TradeHistory = () => {
             <td className="px-6 py-4">Laptop</td>
             <td className="px-6 py-4">$2999</td>
           </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
+          <tr className="">
+            <th className="py-4 font-light">test</th>
+            <td className="px-6 py-4">Silver</td>
+            <td className="px-6 py-4">Laptop</td>
+            <td className="px-6 py-4">$2999</td>
+          </tr>
         </tbody>
       </table>
     </div>
