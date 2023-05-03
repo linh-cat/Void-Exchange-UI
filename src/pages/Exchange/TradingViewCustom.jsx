@@ -8,12 +8,14 @@ const TradingViewCustom = (props) => {
   const { colors: { backgroundColor = "#0C0F13", textColor = "white" } = {} } = props
 
   const chartContainerRef = useRef()
-  const chart = useRef()
-  const resizeObserver = useRef()
-  const [height, setHeight] = React.useState(0)
+  const [height, setHeight] = useState(null)
+  const [width, setWidth] = useState(null)
 
   const onResize = React.useCallback(() => {
-    if (chartContainerRef.current) setHeight(chartContainerRef.current.clientHeight)
+    if (chartContainerRef.current) {
+      setHeight(chartContainerRef.current.clientHeight)
+      setWidth(chartContainerRef.current.clientWidth)
+    }
   }, [])
 
   useEffect(() => {
@@ -26,11 +28,10 @@ const TradingViewCustom = (props) => {
         vertLines: { color: "#444" },
         horzLines: { color: "#444" }
       },
-      width: chartContainerRef.current.clientWidth,
-      height: chartContainerRef.current.clientHeight
+      width: chartContainerRef.current?.clientWidth,
+      height: chartContainerRef.current?.clientHeight
     })
 
-    console.log({ test: chartContainerRef.current.clientHeight })
     chart.applyOptions({
       crosshair: {
         // Change mode from default 'magnet' to 'normal'.
@@ -76,23 +77,7 @@ const TradingViewCustom = (props) => {
       window.removeEventListener("resize", onResize)
       chart.remove()
     }
-  }, [backgroundColor, onResize, textColor])
-
-  // Resize chart on container resizes.
-  //   useEffect(() => {
-  //     resizeObserver.current = new ResizeObserver((entries) => {
-  //       const { width, height } = entries[0].contentRect
-  //       console.log({ width, height })
-  //       chart.current?.applyOptions({ width, height })
-  //       setTimeout(() => {
-  //         chart.current?.timeScale().fitContent()
-  //       }, 0)
-  //     })
-
-  //     resizeObserver.current.observe(chartContainerRef.current)
-
-  //     return () => resizeObserver.current.disconnect()
-  //   }, [chart])
+  }, [backgroundColor, onResize, textColor, height, width])
 
   return (
     <div className="relative h-full">

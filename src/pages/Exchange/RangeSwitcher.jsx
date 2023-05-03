@@ -24,7 +24,6 @@ const rangeSwitcher = [
 ]
 
 const RangeSwitcher = ({ setRangeSwitcher, rangeSwitcherValue }) => {
-  console.log({ rangeSwitcherValue })
   return (
     <div className="switcher-group border inline-block">
       {rangeSwitcher?.map((i) => {
