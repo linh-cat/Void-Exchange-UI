@@ -7,8 +7,8 @@ import Badge from "../../components/common/Badge"
 
 const InforBarChar = () => {
   return (
-    <div className="top-chart w-full h-full md:flex md:gap-5 items-center">
-      <div className="h-full flex justify-between items-center md:gap-5 md:ml-3">
+    <div className="top-chart w-full h-full flex flex-col lg:flex-row md:gap-5 lg:items-center">
+      <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
           <SelectCoupleToken
             options={[
@@ -34,8 +34,8 @@ const InforBarChar = () => {
           <label className="text-xl green-up">$27,382.31</label>
         </div>
       </div>
-      <div className="group-infor p-1 flex flex-col sm:flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-5">
-        <div className="grid grid-cols-4 md:grid-cols-8 text-center lg:gap-5">
+      <div className="group-infor">
+        <div className="grid grid-cols-4 sm:grid-cols-8 text-center">
           <div className="flex flex-col items-center justify-center">
             <label className="text-slate-500 font-very-small">24h Change %</label>
             <div className="flex items-center gap-x-1">

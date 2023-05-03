@@ -12,7 +12,7 @@ const Tab = ({ options, className, optionLabels, option, setOption, onChange }) 
     }
   }
   return (
-    <div className={cx(className, "tab-custom", "text-slate-400")}>
+    <div className={cx(className, "tab-custom", "text-zinc-400")}>
       {options?.map((opt) => {
         const label = optionLabels && optionLabels[opt] ? optionLabels[opt] : opt
         return (

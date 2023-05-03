@@ -5,7 +5,7 @@ const OrderList = () => {
     <div className="order-list h-full overflow-auto">
       <table className="w-full text-left">
         <thead className="text-xs border-b border-slate-700">
-          <tr className="text-slate-400">
+          <tr className="text-slate-600">
             <th scope="col" className="py-3">
               Time
             </th>

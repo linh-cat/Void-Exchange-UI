@@ -3,7 +3,7 @@ import React from "react"
 
 const TradeHistory = () => {
   return (
-    <div className="trade-history h-full overflow-auto">
+    <div className="trade-history w-full">
       <div className="trade-header lg:flex lg:items-start ">
         <div className="header-group-filter flex flex-grow basis-10 gap-x-5">
           <div className="w-32">
@@ -49,7 +49,7 @@ const TradeHistory = () => {
       </div>
       <table className="w-full text-left">
         <thead className="text-xs border-b border-slate-700">
-          <tr className="text-slate-400">
+          <tr className="text-slate-600">
             <th scope="col" className="py-3">
               Time
             </th>
@@ -78,9 +78,7 @@ const TradeHistory = () => {
         </thead>
         <tbody className="text-xs">
           <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
+            <th className="py-4 font-light">test</th>
             <td className="px-6 py-4">Silver</td>
             <td className="px-6 py-4">Laptop</td>
             <td className="px-6 py-4">$2999</td>

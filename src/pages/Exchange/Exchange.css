@@ -19,6 +19,10 @@
     overflow-y: scroll;
 }
 
+.position::-webkit-scrollbar {
+    display: none;
+}
+
 @media only screen and (max-width: 640px) {
     .latest-trade {
         height: 20rem

@@ -2,10 +2,10 @@ import React from "react"
 
 const ListPosition = () => {
   return (
-    <div className="postion-list h-full overflow-auto">
+    <div className="postion-list h-full">
       <table className="w-full text-left ">
-        <thead className="text-xs border-b border-slate-700 overflow-auto w-full">
-          <tr className="text-slate-400">
+        <thead className="text-xs border-b border-zinc-600 w-full">
+          <tr className="text-zinc-600">
             <th scope="col" className="py-3">
               Market
             </th>
@@ -37,9 +37,7 @@ const ListPosition = () => {
         </thead>
         <tbody className="text-xs">
           <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
+            <th className="py-4 font-light">test</th>
             <td className="px-6 py-4">Silver</td>
             <td className="px-6 py-4">Laptop</td>
             <td className="px-6 py-4">$2999</td>
