@@ -48,8 +48,8 @@ const TradeHistory = () => {
         </div>
       </div>
       <table className="w-full text-left">
-        <thead className="text-xs border-b border-slate-700">
-          <tr className="text-slate-600">
+        <thead className="text-xs border-b border-zinc-700">
+          <tr className="text-zinc-600">
             <th scope="col" className="py-3">
               Time
             </th>
