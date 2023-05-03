@@ -3,44 +3,20 @@ import { priceData } from "./PriceData"
 import { CrosshairMode, LineStyle, createChart } from "lightweight-charts"
 import RangeSwitcher from "./RangeSwitcher"
 
-const rangeSwitcher = [
-  {
-    label: "5m",
-    value: "5m"
-  },
-  {
-    label: "15m",
-    value: "15m"
-  },
-  {
-    label: "1h",
-    value: "1h"
-  },
-  {
-    label: "4h",
-    value: "4h"
-  },
-  {
-    label: "1D",
-    value: "1d"
-  }
-]
-
 const TradingViewCustom = (props) => {
   const [rangeSwitcherTime, setRangeSwitcherTime] = useState("5m")
   const { colors: { backgroundColor = "#0C0F13", textColor = "white" } = {} } = props
 
-  const rangeSwitcherChange = (val) => {
-    setRangeSwitcherTime(val)
-  }
-
   const chartContainerRef = useRef()
+  const chart = useRef()
+  const resizeObserver = useRef()
+  const [height, setHeight] = React.useState(0)
+
+  const onResize = React.useCallback(() => {
+    if (chartContainerRef.current) setHeight(chartContainerRef.current.clientHeight)
+  }, [])
 
   useEffect(() => {
-    const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current.clientWidth })
-    }
-
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: "solid", color: backgroundColor },
@@ -51,15 +27,22 @@ const TradingViewCustom = (props) => {
         horzLines: { color: "#444" }
       },
       width: chartContainerRef.current.clientWidth,
-      height: 600
+      height: chartContainerRef.current.clientHeight
     })
 
+    console.log({ test: chartContainerRef.current.clientHeight })
     chart.applyOptions({
       crosshair: {
         // Change mode from default 'magnet' to 'normal'.
         // Allows the crosshair to move freely without snapping to datapoints
-        mode: CrosshairMode.Normal,
-
+        mode: CrosshairMode.Magnet,
+        priceScale: {
+          autoScale: true,
+          borderColor: "#485c7b"
+        },
+        timeScale: {
+          borderColor: "#485c7b"
+        },
         // Vertical crosshair line (showing Date in Label)
         vertLine: {
           width: 5,
@@ -86,19 +69,35 @@ const TradingViewCustom = (props) => {
 
     chart.timeScale().fitContent()
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", onResize)
+    onResize()
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-
+      window.removeEventListener("resize", onResize)
       chart.remove()
     }
-  }, [backgroundColor, textColor])
+  }, [backgroundColor, onResize, textColor])
+
+  // Resize chart on container resizes.
+  //   useEffect(() => {
+  //     resizeObserver.current = new ResizeObserver((entries) => {
+  //       const { width, height } = entries[0].contentRect
+  //       console.log({ width, height })
+  //       chart.current?.applyOptions({ width, height })
+  //       setTimeout(() => {
+  //         chart.current?.timeScale().fitContent()
+  //       }, 0)
+  //     })
+
+  //     resizeObserver.current.observe(chartContainerRef.current)
+
+  //     return () => resizeObserver.current.disconnect()
+  //   }, [chart])
 
   return (
-    <div>
+    <div className="relative h-full">
       <RangeSwitcher setRangeSwitcher={setRangeSwitcherTime} rangeSwitcherValue={rangeSwitcherTime} />
-      <div ref={chartContainerRef} />
+      <div ref={chartContainerRef} className="chart-custom h-full" />
     </div>
   )
 }

@@ -62,7 +62,7 @@ const Exchange = () => {
               className={cx({
                 "xl:col-span-3 sm:col-span-5": showHistory,
                 "xl:col-span-4": !showHistory,
-                "h-96 lg:h-full": true
+                "h-96 lg:h-full relative": true
               })}
             >
               <TradingViewCustom />
