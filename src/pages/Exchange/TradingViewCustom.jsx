@@ -1,17 +1,38 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { priceData } from "./PriceData"
 import { CrosshairMode, LineStyle, createChart } from "lightweight-charts"
+import RangeSwitcher from "./RangeSwitcher"
+
+const rangeSwitcher = [
+  {
+    label: "5m",
+    value: "5m"
+  },
+  {
+    label: "15m",
+    value: "15m"
+  },
+  {
+    label: "1h",
+    value: "1h"
+  },
+  {
+    label: "4h",
+    value: "4h"
+  },
+  {
+    label: "1D",
+    value: "1d"
+  }
+]
 
 const TradingViewCustom = (props) => {
-  const {
-    colors: {
-      backgroundColor = "#0C0F13",
-      lineColor = "#2962FF",
-      textColor = "white",
-      areaTopColor = "#2962FF",
-      areaBottomColor = "rgba(41, 98, 255, 0.28)"
-    } = {}
-  } = props
+  const [rangeSwitcherTime, setRangeSwitcherTime] = useState("5m")
+  const { colors: { backgroundColor = "#0C0F13", textColor = "white" } = {} } = props
+
+  const rangeSwitcherChange = (val) => {
+    setRangeSwitcherTime(val)
+  }
 
   const chartContainerRef = useRef()
 
@@ -30,12 +51,9 @@ const TradingViewCustom = (props) => {
         horzLines: { color: "#444" }
       },
       width: chartContainerRef.current.clientWidth,
-      height: 300
+      height: 600
     })
-    chart.applyOptions({
-      "paneProperties.background": "#16182e",
-      "paneProperties.backgroundType": "solid"
-    })
+
     chart.applyOptions({
       crosshair: {
         // Change mode from default 'magnet' to 'normal'.
@@ -65,10 +83,8 @@ const TradingViewCustom = (props) => {
       wickDownColor: "#E43E53"
     })
     candlestickSeries.setData(priceData)
-    chart.timeScale().fitContent()
 
-    // const newSeries = chart.addAreaSeries({ lineColor, topColor: areaTopColor, bottomColor: areaBottomColor });
-    // newSeries.setData(data);
+    chart.timeScale().fitContent()
 
     window.addEventListener("resize", handleResize)
 
@@ -77,9 +93,14 @@ const TradingViewCustom = (props) => {
 
       chart.remove()
     }
-  }, [backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor])
+  }, [backgroundColor, textColor])
 
-  return <div ref={chartContainerRef} />
+  return (
+    <div>
+      <RangeSwitcher setRangeSwitcher={setRangeSwitcherTime} rangeSwitcherValue={rangeSwitcherTime} />
+      <div ref={chartContainerRef} />
+    </div>
+  )
 }
 
 export default TradingViewCustom

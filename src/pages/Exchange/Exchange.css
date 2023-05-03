@@ -60,3 +60,12 @@
 .order-list::-webkit-scrollbar {
     display: none;
 }
+
+.switcher-group .active {
+    color: var(--arbitrum-blue) !important;
+    background: none;
+}
+
+.range-switcher:hover {
+    background: var(--main-card-color);
+}

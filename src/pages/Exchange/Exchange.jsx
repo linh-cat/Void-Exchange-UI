@@ -66,6 +66,7 @@ const Exchange = () => {
               })}
             >
               <TradingViewCustom />
+              {/* <TradingViewChart /> */}
             </div>
           </div>
         </div>
