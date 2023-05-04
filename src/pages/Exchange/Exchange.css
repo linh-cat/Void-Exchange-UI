@@ -59,6 +59,7 @@
     /* to enable vertical scrolling */
     max-height: 200px;
     /* e.g. */
+    height: 200px;
     overflow-y: scroll;
     /* keeps the scrollbar even if it doesn't need it; display purpose */
 }
