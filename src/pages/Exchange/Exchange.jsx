@@ -42,15 +42,16 @@ const Exchange = () => {
   }
   return (
     <div>
-      <div className="exchange w-full xl:grid xl:grid-cols-5 xl:grid-rows-3">
+      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3 ">
+        {/* left side chart and infor bar */}
         <div
           className={cx({
             "xl:col-span-3": showHistory,
             "xl:col-span-4": !showHistory,
-            "left-side xl:row-span-3 xl:flex xl:flex-col": true
+            "left-side xl:row-span-2 xl:flex xl:flex-col ": true
           })}
         >
-          <div className="relative border border-zinc-700">
+          <div className="relative border border-zinc-700 ">
             <InforBarChar />
             <div className="flex items-center absolute top-1/3 right-2">
               <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
@@ -70,22 +71,26 @@ const Exchange = () => {
             </div>
           </div>
         </div>
+        {/* position */}
+        <div
+          className={cx({
+            "position border border-gray-700 ": true,
+            "xl:row-span-1 xl:col-span-3": showHistory,
+            "xl:col-span-4 xl:row-span-1": !showHistory
+          })}
+        >
+          {renderListSections()}
+        </div>
+        {/* history */}
         {showHistory && (
-          <div className="xl:col-span-1 xl:row-span-3 middle-side border-b border-zinc-700">
+          <div className="xl:col-span-1 xl:row-span-3 border-b border-zinc-700">
             <LatestTrade />
           </div>
         )}
+        {/* order box */}
         <div className="xl:col-span-1 xl:row-span-3 right-side">
           <TabExchange defaultValue="long" />
         </div>
-      </div>
-      <div
-        className={cx({
-          position: true,
-          "border border-gray-700": true
-        })}
-      >
-        {renderListSections()}
       </div>
     </div>
   )

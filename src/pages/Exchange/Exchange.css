@@ -15,13 +15,14 @@
 }
 
 .latest-trade {
-    height: 50rem;
+    height: 55rem;
     overflow-y: scroll;
 }
 
-.position::-webkit-scrollbar {
+.latest-trade::-webkit-scrollbar {
     display: none;
 }
+
 
 @media only screen and (max-width: 640px) {
     .latest-trade {
