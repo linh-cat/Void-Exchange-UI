@@ -356,32 +356,7 @@ a.plain {
     color: #ffffff61;
 }
 
-@keyframes ripple {
-    to {
-        transform: scale(2);
-        opacity: 0.4;
-    }
-}
 
-button.btn-link {
-    margin-top: 1.5rem;
-    background: none;
-    color: white;
-    border: none;
-    padding: 0;
-    font-size: var(--font-base);
-    display: block;
-    text-align: left;
-}
-
-.logout-icon {
-    vertical-align: middle;
-    font-size: 1.7rem;
-    margin-top: -0.31rem;
-    margin-right: 0.5rem;
-    margin-left: -0.465rem;
-    opacity: 0.8;
-}
 
 button.btn-link:hover {
     text-decoration: underline;
@@ -391,37 +366,6 @@ button.btn-link:hover .logout-icon {
     opacity: 1;
 }
 
-.mt-0 {
-    margin-top: 0 !important;
-}
-
-.m-0 {
-    margin: 0 !important;
-}
-
-.mt-sm {
-    margin-top: 1rem;
-}
-
-.mt-md {
-    margin-top: 1.5rem;
-}
-
-.page-layout {
-    min-height: calc(100vh - 62px);
-    display: flex;
-    flex-direction: column;
-    padding-bottom: calc(4.65rem + 20rem);
-    padding-top: 4.65rem;
-}
-
-.d-flex {
-    display: flex;
-}
-
-.w-100 {
-    width: 100%;
-}
 
 .font-sm {
     font-size: var(--font-sm);

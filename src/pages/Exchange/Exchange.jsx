@@ -65,8 +65,8 @@ const Exchange = () => {
                 "h-96 lg:h-full relative": true
               })}
             >
-              <TradingViewCustom />
-              {/* <TradingViewChart /> */}
+              {/* <TradingViewCustom /> */}
+              <TradingViewChart />
             </div>
           </div>
         </div>

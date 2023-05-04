@@ -2,101 +2,197 @@ import React from "react"
 
 const OrderList = () => {
   return (
-    <div className="order-list h-full overflow-auto">
-      <table className="w-full text-left">
-        <thead className="text-xs border-b border-zinc-700">
-          <tr className="text-zinc-600">
-            <th scope="col" className="py-3">
-              Time
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Market & Size
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Operation & Type
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Price
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Amount
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Collateral
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-xs">
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="">
-            <th scope="row" className="py-4 ">
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table className="w-full">
+      <thead className="border-b border-zinc-700 text-zinc-500 text-xs md:text-sm">
+        <tr>
+          <th scope="col" className="font-medium">
+            Time
+          </th>
+          <th scope="col" className="font-medium">
+            Market & Side
+          </th>
+          <th scope="col" className="font-medium">
+            Operation & Type
+          </th>
+          <th scope="col" className=" font-medium">
+            Price
+          </th>
+          <th scope="col" className=" font-medium">
+            Amount
+          </th>
+          <th scope="col" className=" font-medium">
+            Collateral
+          </th>
+          <th scope="col" className=" font-medium">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>{" "}
+        <tr>
+          <th className="text-xs font-medium">1</th>
+          <td className="text-xs font-medium">2</td>
+          <td className="text-xs font-medium">3</td>
+          <td className="text-xs font-medium">4</td>
+          <td className="text-xs font-medium">5</td>
+          <td className="text-xs font-medium">6</td>
+          <td className="text-xs font-medium">7</td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
