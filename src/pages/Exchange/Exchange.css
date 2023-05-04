@@ -38,23 +38,23 @@
     background: var(--main-card-color);
 }
 
-table {
+.section-list table {
     width: 100% !important;
 }
 
-table, td {
+.section-list table, .section-list td {
     border-collapse: collapse !important;
     text-align: left !important;
 }
 
-thead {
+.section-list thead {
     display: table;
     /* to take the same width as tr */
     width: calc(100%);
     /* - 17px because of the scrollbar width */
 }
 
-tbody {
+.section-list tbody {
     display: block;
     /* to enable vertical scrolling */
     max-height: 200px;
@@ -63,11 +63,11 @@ tbody {
     /* keeps the scrollbar even if it doesn't need it; display purpose */
 }
 
-tbody::-webkit-scrollbar {
+.section-list tbody::-webkit-scrollbar {
     display: none;
 }
 
-th, td {
+.section-list th, .section-list td {
     width: 10%;
     /* to enable "word-break: break-all" */
     padding: 5px;
@@ -75,12 +75,12 @@ th, td {
     /* 4. */
 }
 
-tr {
+.section-list tr {
     display: table;
     width: 100%;
 }
 
-td {
+.section-list td {
     text-align: center;
     border-bottom: none;
     border-left: none;
