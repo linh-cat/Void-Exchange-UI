@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import "./CollateralPopup.css"
+import cx from "classnames"
+import useOutsideDetect from "src/hooks/useOutsideDetect"
 
-const CollateralPopup = () => {
+const CollateralPopup = ({ open, setOpen }) => {
+  const handleClickOutside = () => {
+    setOpen(false)
+  }
+
+  const refOutside = useOutsideDetect(handleClickOutside)
   return (
-    <div className="collateral-popup text-xs p-3 font-medium">
+    <div
+      className={cx({ "collateral-popup text-xs p-3 font-medium ": true, block: open, hidden: !open })}
+      ref={refOutside}
+    >
       <div className="collateral-header">
         <label className="font-medium">
           Change Collateral - <span className="red-down">Short ETH</span>

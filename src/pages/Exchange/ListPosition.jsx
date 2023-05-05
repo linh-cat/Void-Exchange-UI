@@ -1,12 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import ETH from "@img/WETH.png"
 import Plus from "@img/icons/Plus.svg"
 import CollateralPopup from "@components/common/CollateralPopup"
 
 const ListPosition = () => {
+  const [collateral, setCollateral] = useState(false)
+
+  const toggleCollateral = () => {
+    setCollateral(!collateral)
+  }
   return (
     <>
-      <CollateralPopup />
+      <CollateralPopup open={collateral} setOpen={setCollateral} />
       <table className="w-full">
         <thead className="border-b border-zinc-700 text-zinc-500 text-xs md:text-sm">
           <tr>
@@ -53,7 +58,7 @@ const ListPosition = () => {
               <div className="flex flex-col gap-y-1">
                 <div className="flex gap-x-1 items-center">
                   <label>1.96 USDT</label>
-                  <img src={Plus} alt="icon" className="w-5 cursor-pointer" />
+                  <img src={Plus} alt="icon" className="w-5 cursor-pointer" onClick={toggleCollateral} />
                 </div>
                 <label className="text-zinc-500">$1.96</label>
               </div>
