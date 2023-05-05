@@ -1,0 +1,50 @@
+.collateral-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 21rem;
+    background: var(--main-card-color);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 99999999999999999;
+}
+
+.collateral-popup .colateral-tab {
+    width: 100%;
+    background: var(--main-bg-color);
+    border-radius: 5px;
+}
+
+.collateral-popup .colateral-tab button {
+    padding: .5rem;
+    width: 50%;
+}
+
+.collateral-popup .colateral-tab .active {
+    border-radius: 5px;
+}
+
+.collateral-popup .collateral-content .collateral-input {
+    background: var(--main-bg-color);
+    border-radius: 5px;
+}
+
+.collateral-popup .collateral-content .collateral-input input {
+    padding: 0px;
+}
+
+.collateral-popup .collateral-content .bottom button {
+    border-radius: 5px;
+
+}
+
+.collateral-popup .collateral-content .bottom .active {
+    background: #03d1cf;
+}
+
+.collateral-popup .collateral-footer .btn {
+    width: 100% !important;
+    text-align: center;
+    padding: 10px 0px;
+}

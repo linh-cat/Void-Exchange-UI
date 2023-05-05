@@ -22,6 +22,9 @@
     --font-xl: 3.4rem;
     --font-small: .8rem;
     --font-very-small: .7rem;
+    --bg-linear-active: linear-gradient(to right,
+            #0C7B93,
+            #00A8CC);
 }
 
 .green-up {
@@ -61,7 +64,7 @@ body,
 }
 
 .active {
-    background-color: var(--arbitrum-blue);
+    background: var(--bg-linear-active)
 }
 
 .heroicon path {
