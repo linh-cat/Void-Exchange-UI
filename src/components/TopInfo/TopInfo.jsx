@@ -35,7 +35,7 @@ const TopInfo = () => {
             <div>128 Gwei</div>
           </div>
           <div className="flex justify-between items-center">
-            <label className="text-zinc-500"> Standard</label>
+            <label className="text-zinc-500">Standard</label>
             <div>128 Gwei</div>
           </div>
           <div className="flex justify-between items-center">
