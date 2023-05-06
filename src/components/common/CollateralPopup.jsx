@@ -24,7 +24,10 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
             <button className={cx({ active: collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
               Add
             </button>
-            <button className={cx({ active: collateralTab === "remove" })} onClick={() => setCollateralTab("remove")}>
+            <button
+              className={cx({ active: collateralTab === "remove", "bg-orange": collateralTab === "remove" })}
+              onClick={() => setCollateralTab("remove")}
+            >
               Remove
             </button>
           </div>
@@ -41,7 +44,11 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
               <div>USDT</div>
             </div>
             <div className="bottom flex justify-between">
-              <button className="px-3 py-1 bg-zinc-700 active">25%</button>
+              <button
+                className={cx({ "px-3 py-1 bg-zinc-700": true, active: true, "bg-orange": collateralTab === "remove" })}
+              >
+                25%
+              </button>
               <button className="px-3 py-1 bg-zinc-700">50%</button>
               <button className="px-3 py-1 bg-zinc-700">75%</button>
               <button className="px-3 py-1 bg-zinc-700">100%</button>
@@ -80,7 +87,13 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
           </div>
         </div>
         <div className="collateral-footer mt-3">
-          <button className="secondary-btn btn">
+          <button
+            className={cx({
+              "secondary-btn": collateralTab === "add",
+              btn: true,
+              "bg-orange": collateralTab === "remove"
+            })}
+          >
             {collateralTab === "add" ? "Add Collateral" : "Remove Collateral"}
           </button>
         </div>

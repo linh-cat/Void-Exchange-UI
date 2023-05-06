@@ -131,6 +131,16 @@ input, .input {
     font-family: 'Poppins', sans-serif;
 }
 
+.bg-orange {
+    background: #FDC830 !important;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F37335, #FDC830) !important;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F37335, #FDC830) !important;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 button {
     outline: none;
     cursor: pointer;
