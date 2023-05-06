@@ -1,3 +1,12 @@
+.collateral-container {
+    background: rgba(0, 0, 0, 8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
 .collateral-popup {
     position: fixed;
     top: 50%;
@@ -7,7 +16,7 @@
     background: var(--main-card-color);
     border-radius: 5px;
     overflow: hidden;
-    z-index: 99999999999999999;
+    z-index: 1001;
 }
 
 .collateral-popup .colateral-tab {

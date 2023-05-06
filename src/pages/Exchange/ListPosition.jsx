@@ -5,13 +5,19 @@ import CollateralPopup from "@components/common/CollateralPopup"
 
 const ListPosition = () => {
   const [collateral, setCollateral] = useState(false)
+  const [collateralTab, setCollateralTab] = useState("add")
 
   const toggleCollateral = () => {
     setCollateral(!collateral)
   }
   return (
     <>
-      <CollateralPopup open={collateral} setOpen={setCollateral} />
+      <CollateralPopup
+        open={collateral}
+        setOpen={setCollateral}
+        collateralTab={collateralTab}
+        setCollateralTab={setCollateralTab}
+      />
       <table className="w-full">
         <thead className="border-b border-zinc-700 text-zinc-500 text-xs md:text-sm">
           <tr>
