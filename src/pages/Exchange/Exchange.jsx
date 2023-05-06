@@ -51,7 +51,7 @@ const Exchange = () => {
             "left-side xl:row-span-2 xl:flex xl:flex-col ": true
           })}
         >
-          <div className="relative border border-zinc-700 ">
+          <div className="relative">
             <InforBarChar />
             <div className="flex items-center absolute top-1/3 right-2">
               <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />

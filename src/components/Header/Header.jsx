@@ -1,40 +1,31 @@
-import React, { useState } from "react";
-import "./Header.css";
-import ConnectWalletButton from "../common/ConnectWalletButton";
-import connectWalletImg from "../../img/ic_wallet_24.svg";
-import { useLocation } from "react-router-dom";
-import useUserWindow from "../../hooks/useUserWindow";
-import { useDisconnect } from "wagmi";
+import React, { useState } from "react"
+import "./Header.css"
+import ConnectWalletButton from "../common/ConnectWalletButton"
+import connectWalletImg from "../../img/ic_wallet_24.svg"
+import { useLocation } from "react-router-dom"
+import useUserWindow from "../../hooks/useUserWindow"
+import { useDisconnect } from "wagmi"
 
 const Header = () => {
-  const { disconnect } = useDisconnect();
-  const [show, setShow] = useState("notShow");
-  const location = useLocation();
+  const { disconnect } = useDisconnect()
+  const [show, setShow] = useState("notShow")
+  const location = useLocation()
 
   const showMenu = () => {
-    setShow(show === "show" ? "notShow" : "show");
-  };
+    setShow(show === "show" ? "notShow" : "show")
+  }
 
-  const { width } = useUserWindow();
+  const { width } = useUserWindow()
 
   return (
-    <header className="header flex justify-between items-center border-b border-gray-700 h-16 w-full text-base">
+    <header className="header flex justify-between items-center border-b border-zinc-700 h-16 w-full text-base">
       <div className="flex items-center">
         <a href="/" className="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
-          <span className="self-center font-semibold whitespace-nowrap dark:text-white">
-            ZK Perp
-          </span>
+          <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
+          <span className="self-center font-semibold whitespace-nowrap dark:text-white">ZK Perp</span>
         </a>
         <div className="w-full mobile-hidden">
-          <ul
-            className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base"
-            id="navbar-default"
-          >
+          <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
             <li className="item">
               <a href="/dashboard">Dashboard</a>
             </li>
@@ -94,18 +85,12 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a
-              href="/Docs"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
+            <a href="/Docs" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
               Docs
             </a>
           </li>
           <li>
-            <a
-              href="/Trade"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
+            <a href="/Trade" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
               Trade
             </a>
           </li>
@@ -118,7 +103,7 @@ const Header = () => {
         </ul>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,0 +1,25 @@
+.top-info .market:hover .tooltip-market {
+    display: block;
+}
+
+.top-info .tooltip-market {
+    background-color: var(--main-card-color);
+    display: none;
+}
+
+.top-info .tooltip-gas {
+    background-color: var(--main-card-color);
+    display: none;
+}
+
+.top-info .gas:hover .tooltip-gas {
+    display: block;
+}
+
+.author {
+    background: var(--text-color-green);
+}
+
+.data-from {
+    background: var(--text-color-purple);
+}

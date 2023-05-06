@@ -11,6 +11,8 @@
     --input-bg-color: #2A3341;
     --main-long: #16BE76;
     --main-short: #E43E53;
+    --text-color-green: #84CC16;
+    --text-color-purple: #A78BFA;
     --main-card-color-secondary: #32435e;
     --bg-dropdown-list: #1b1c1f;
     --arbitrum-blue: #28a0f0;
@@ -25,6 +27,14 @@
     --bg-linear-active: linear-gradient(to right,
             #0C7B93,
             #00A8CC);
+}
+
+.green-color {
+    color: var(--text-color-green);
+}
+
+.purple-color {
+    color: var(--text-color-purple);
 }
 
 .green-up {
