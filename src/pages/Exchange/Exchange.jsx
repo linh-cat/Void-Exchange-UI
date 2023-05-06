@@ -83,7 +83,7 @@ const Exchange = () => {
         </div>
         {/* history */}
         {showHistory && (
-          <div className="xl:col-span-1 xl:row-span-3 border-b border-zinc-700">
+          <div className="xl:col-span-1 xl:row-span-3 border-l border-b border-zinc-700">
             <LatestTrade />
           </div>
         )}

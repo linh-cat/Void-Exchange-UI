@@ -43,15 +43,19 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
               <input placeholder="0.01" />
               <div>USDT</div>
             </div>
-            <div className="bottom flex justify-between">
+            <div className="bottom flex justify-between gap-3">
               <button
-                className={cx({ "px-3 py-1 bg-zinc-700": true, active: true, "bg-orange": collateralTab === "remove" })}
+                className={cx({
+                  "bg-zinc-700 w-1/4 py-1": true,
+                  active: true,
+                  "bg-orange": collateralTab === "remove"
+                })}
               >
                 25%
               </button>
-              <button className="px-3 py-1 bg-zinc-700">50%</button>
-              <button className="px-3 py-1 bg-zinc-700">75%</button>
-              <button className="px-3 py-1 bg-zinc-700">100%</button>
+              <button className="bg-zinc-700 w-1/4 py-1">50%</button>
+              <button className="bg-zinc-700 w-1/4 py-1">75%</button>
+              <button className="bg-zinc-700 w-1/4 py-1">100%</button>
             </div>
           </div>
           {/* infor */}
