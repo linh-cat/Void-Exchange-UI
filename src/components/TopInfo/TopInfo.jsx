@@ -29,7 +29,7 @@ const TopInfo = () => {
       <div className="flex items-center gap-2 relative gas">
         <label>ETH Gas:</label>
         <div className="purple-color">131 Gwei</div>
-        <div className="tooltip-gas absolute top-5 -left-1/2 z-50 w-40 p-3 rounded-sm text-xs flex flex-col gap-y-2">
+        <div className="tooltip-gas absolute top-5 -left-1/4 z-50 w-40 p-3 rounded-sm text-xs flex flex-col gap-y-2">
           <div className="flex justify-between items-center">
             <label className="text-zinc-500">Safe</label>
             <div>128 Gwei</div>
