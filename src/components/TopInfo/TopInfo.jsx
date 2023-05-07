@@ -44,12 +44,18 @@ const TopInfo = () => {
           </div>
           <div className="flex justify-between items-center p-1 mt-3 bg-violet-600 rounded-sm data-from">
             <label className="">Data From</label>
-            <div>Etherscan</div>
+            <div className="text-teal-400">Etherscan</div>
           </div>
         </div>
       </div>
       <div>
-        <label>Network:</label>
+        <label>Network: Ethereum</label>
+      </div>
+      <div>
+        <label>BTC Dominance: {47}%</label>
+      </div>
+      <div>
+        <label>ETH Dominance: {19.3}%</label>
       </div>
     </div>
   )
