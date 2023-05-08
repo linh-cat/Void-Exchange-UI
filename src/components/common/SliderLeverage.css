@@ -24,8 +24,25 @@
 }
 
 .rc-slider-handle {
+    position: relative;
     background-color: transparent;
     border: none;
+}
+
+.rc-slider-handle::before {
+    position: absolute;
+    white-space: pre;
+    display: inline;
+    top: 5%;
+    left: 50%;
+    font-size: 14px;
+    transform: translate(-50%);
+    content: attr(aria-label);
+    font-weight: 600;
+}
+
+.slider-custom .rc-slider-tooltip-placement-right {
+    margin-right: -50px;
 }
 
 .slider-custom .rc-slider-mark-text,

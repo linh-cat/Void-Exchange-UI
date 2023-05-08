@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react"
-import Slider, { SliderTooltip, Tooltip } from "rc-slider"
+import React, { useMemo, useRef, useState } from "react"
+import Slider, { SliderTooltip } from "rc-slider"
 import "rc-slider/assets/index.css"
 import "./SliderLeverage.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
@@ -29,6 +29,7 @@ const HEALTH_CATEGORIES = {
 
 const handleCustomTooltip = (props) => {
   const { value, dragging, index, ...restProps } = props
+
   const color = () => {
     if (value > 0 && value <= 20) {
       return "#16BE76"
@@ -38,6 +39,7 @@ const handleCustomTooltip = (props) => {
       return "#E43E53"
     }
   }
+
   const background = () => {
     if (value > 0 && value <= 20) {
       return "#284539"
@@ -47,6 +49,7 @@ const handleCustomTooltip = (props) => {
       return "#452C28"
     }
   }
+
   const title = () => {
     if (value > 0 && value <= 20) {
       return "Safe"
@@ -61,27 +64,26 @@ const handleCustomTooltip = (props) => {
     <SliderTooltip
       prefixCls="rc-slider-tooltip"
       overlay={title}
-      visible={true}
+      visible={false}
       key={index}
       showArrow={false}
-      overlayStyle={{
-        background: background(),
-
-        padding: "5px 10px",
-        borderRadius: "5px",
-        fontWeight: "500",
-        letterSpacing: "1px",
-        cursor: "pointer",
-        fontSize: "10px"
-      }}
-      overlayInnerStyle={{
-        background: "none",
-        boxShadow: "unset",
-        padding: 0,
-        height: "100%",
-        borderRadius: 0,
-        color: color()
-      }}
+      // overlayStyle={{
+      //   background: background(),
+      //   padding: "5px 10px",
+      //   borderRadius: "5px",
+      //   fontWeight: "500",
+      //   letterSpacing: "1px",
+      //   cursor: "pointer",
+      //   fontSize: "10px"
+      // }}
+      // overlayInnerStyle={{
+      //   background: "none",
+      //   boxShadow: "unset",
+      //   padding: 0,
+      //   height: "100%",
+      //   borderRadius: 0,
+      //   color: color()
+      // }}
     >
       <Handle value={value} {...restProps} />
     </SliderTooltip>
@@ -107,8 +109,50 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
     setValue(amount)
   }
 
+  const onChange = (amount) => {
+    setValue(amount)
+  }
+
+  const onBeforeChange = (amount) => {
+    console.log({ amount })
+  }
+
+  const title = useMemo(() => {
+    if (value > 0 && value <= 20) {
+      return "Safe"
+    } else if (value > 20 && value <= 40) {
+      return "Risky"
+    } else {
+      return "Danger"
+    }
+  }, [value])
+
+  const background = useMemo(() => {
+    if (value > 0 && value <= 20) {
+      return "#284539"
+    } else if (value > 20 && value <= 40) {
+      return "#61662B"
+    } else {
+      return "#452C28"
+    }
+  }, [value])
+
+  const color = useMemo(() => {
+    if (value > 0 && value <= 20) {
+      return "#16BE76"
+    } else if (value > 20 && value <= 40) {
+      return "#F3FF6C"
+    } else {
+      return "#E43E53"
+    }
+  }, [value])
+
+  const width = useMemo(() => {
+    return value > 40 ? "65px" : "55px"
+  }, [value])
+
   return (
-    <div className="w-full h-full slider-custom flex flex-col gap-y-2">
+    <div className="w-full h-full slider-custom flex flex-col gap-y-5">
       <div className="title flex items-center gap-x-1">
         <label className="text-sm">{label}</label>
         <div className="group-tooltip">
@@ -126,6 +170,17 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
         railStyle={railStyle}
         key={value}
         className="slider-custom-tooltip"
+        handleStyle={{
+          background: background,
+          color: color,
+          width: width,
+          height: "24px",
+          borderRadius: 5,
+          marginTop: -10
+        }}
+        // onBeforeChange={onBeforeChange}
+        // onChange={onChange}
+        ariaLabelForHandle={title}
       />
     </div>
   )
