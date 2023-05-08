@@ -1,16 +1,10 @@
-import React from "react";
-import {
-  SelectCustom,
-  InputCustom,
-  SliderLeverage,
-  SelectToken,
-  SlippageCustom,
-} from "@components/common";
-import BTC from "@img/btc.png";
-import BNB from "@img/CAKE.png";
-import ETH from "@img/WETH.png";
-import { LimitIcon, MarketIcon } from "@icons/index";
-import "./OrderBox.css";
+import React from "react"
+import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
+import BTC from "@img/btc.png"
+import BNB from "@img/CAKE.png"
+import ETH from "@img/WETH.png"
+import { LimitIcon, MarketIcon } from "@icons/index"
+import "./OrderBox.css"
 
 const OrderBox = ({ type }) => {
   return (
@@ -21,7 +15,7 @@ const OrderBox = ({ type }) => {
             label="Order Type"
             options={[
               { label: "Limit", value: "limit", icon: LimitIcon },
-              { label: "Market", value: "market", icon: MarketIcon },
+              { label: "Market", value: "market", icon: MarketIcon }
             ]}
             defaultValue="limit"
             classNameInput={"p-2"}
@@ -40,7 +34,7 @@ const OrderBox = ({ type }) => {
               options={[
                 { label: "BTC", value: "BTC", icon: BTC },
                 { label: "BNB", value: "BNB", icon: BNB },
-                { label: "ETH", value: "ETH", icon: ETH },
+                { label: "ETH", value: "ETH", icon: ETH }
               ]}
               defaultValue={"ETH"}
             />
@@ -59,7 +53,7 @@ const OrderBox = ({ type }) => {
               options={[
                 { label: "BTC", value: "BTC", icon: BTC },
                 { label: "BNB", value: "BNB", icon: BNB },
-                { label: "ETH", value: "ETH", icon: ETH },
+                { label: "ETH", value: "ETH", icon: ETH }
               ]}
               defaultValue={"ETH"}
             />
@@ -71,7 +65,7 @@ const OrderBox = ({ type }) => {
         />
       </div>
       <div className="mt-3 2xl:mt-5">
-        <SliderLeverage label="Leverage" />
+        <SliderLeverage label="Leverage" defaultValue={30} />
       </div>
       <div className="mt-10 w-full">
         <button className="default-btn w-full ">Approve</button>
@@ -82,7 +76,7 @@ const OrderBox = ({ type }) => {
           options={[
             { label: "0.1", value: 0.1 },
             { label: "0.2", value: 0.2 },
-            { label: "0.3", value: 0.3 },
+            { label: "0.3", value: 0.3 }
           ]}
           defaultValue={0.1}
         />
@@ -133,7 +127,7 @@ const OrderBox = ({ type }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrderBox;
+export default OrderBox

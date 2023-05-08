@@ -1,40 +1,112 @@
-import React, { useState } from "react";
-import Slider, { SliderTooltip } from "rc-slider";
-import "rc-slider/assets/index.css";
-import "./SliderLeverage.css";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
+import React, { useMemo, useState } from "react"
+import Slider, { SliderTooltip, Tooltip } from "rc-slider"
+import "rc-slider/assets/index.css"
+import "./SliderLeverage.css"
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 
-const { Handle } = Slider;
+const { Handle } = Slider
 
-const handle = (props) => {
-  const { value, dragging, index, ...restProps } = props;
+const HEALTH_CATEGORIES = {
+  SAFE: {
+    label: "SAFE",
+    colors: {
+      LIGHT: "#16BE76"
+    }
+  },
+  RISKY: {
+    label: "RISKY",
+    colors: {
+      LIGHT: "#F3FF6C"
+    }
+  },
+  DANGER: {
+    label: "DANGER",
+    colors: {
+      LIGHT: "#E43E53"
+    }
+  }
+}
+
+const handleCustomTooltip = (props) => {
+  const { value, dragging, index, ...restProps } = props
+  const color = () => {
+    if (value > 0 && value <= 20) {
+      return "#16BE76"
+    } else if (value > 20 && value <= 40) {
+      return "#F3FF6C"
+    } else {
+      return "#E43E53"
+    }
+  }
+  const background = () => {
+    if (value > 0 && value <= 20) {
+      return "#284539"
+    } else if (value > 20 && value <= 40) {
+      return "#61662B"
+    } else {
+      return "#452C28"
+    }
+  }
+  const title = () => {
+    if (value > 0 && value <= 20) {
+      return "Safe"
+    } else if (value > 20 && value <= 40) {
+      return "Risky"
+    } else {
+      return "Danger"
+    }
+  }
+
   return (
     <SliderTooltip
       prefixCls="rc-slider-tooltip"
-      overlay={`${value} x`}
-      visible={dragging}
-      placement="top"
+      overlay={title}
+      visible={true}
       key={index}
+      showArrow={false}
+      overlayStyle={{
+        background: background(),
+
+        padding: "5px 10px",
+        borderRadius: "5px",
+        fontWeight: "500",
+        letterSpacing: "1px",
+        cursor: "pointer",
+        fontSize: "10px"
+      }}
+      overlayInnerStyle={{
+        background: "none",
+        boxShadow: "unset",
+        padding: 0,
+        height: "100%",
+        borderRadius: 0,
+        color: color()
+      }}
     >
       <Handle value={value} {...restProps} />
     </SliderTooltip>
-  );
-};
+  )
+}
+
+const railStyle = {
+  opacity: 0.9,
+  background: `linear-gradient(to right, ${HEALTH_CATEGORIES.SAFE.colors.LIGHT}, ${HEALTH_CATEGORIES.SAFE.colors.LIGHT} 37%, ${HEALTH_CATEGORIES.RISKY.colors.LIGHT} 37%, ${HEALTH_CATEGORIES.RISKY.colors.LIGHT} 78%,  ${HEALTH_CATEGORIES.DANGER.colors.LIGHT} 78%, ${HEALTH_CATEGORIES.DANGER.colors.LIGHT})`,
+  height: "5px"
+}
 
 const leverageMarks = {
   2: "2x",
-  10: "10x",
   20: "20x",
-  30: "30x",
   40: "40x",
-  50: "50x",
-};
+  50: "50x"
+}
 
 const SliderLeverage = ({ label, tooltip, defaultValue }) => {
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue)
   const onAfterChage = (amount) => {
-    setValue(amount);
-  };
+    setValue(amount)
+  }
+
   return (
     <div className="w-full h-full slider-custom flex flex-col gap-y-2">
       <div className="title flex items-center gap-x-1">
@@ -45,14 +117,18 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
         </div>
       </div>
       <Slider
+        defaultValue={value}
         min={2}
         marks={leverageMarks}
         max={50}
-        handle={handle}
+        handle={handleCustomTooltip}
         onAfterChange={onAfterChage}
+        railStyle={railStyle}
+        key={value}
+        className="slider-custom-tooltip"
       />
     </div>
-  );
-};
+  )
+}
 
-export default SliderLeverage;
+export default SliderLeverage

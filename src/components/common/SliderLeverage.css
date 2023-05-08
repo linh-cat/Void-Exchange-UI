@@ -1,40 +1,36 @@
-.slider-custom .rc-slider-rail {
-    background: #83a4d4;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #b6fbff, #83a4d4);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-}
-
 .slider-custom .rc-slider-track {
-    background: linear-gradient(90deg, rgb(34 37 68) 0%, var(--arbitrum-blue) 100%);
+    background: transparent;
 }
 
 .slider-custom .rc-slider-dot {
-    background: var(--arbitrum-blue);
+    width: 3px;
     border: none;
-    opacity: 0.5;
 }
 
-.slider-custom .rc-slider-dot-active {
-    background: var(--arbitrum-blue);
+.slider-custom .rc-slider-dot:nth-child(1) {
+    background-color: var(--main-long);
 }
 
-.slider-custom .rc-slider-handle {
-    background: #303652;
-    border: solid 2px var(--arbitrum-blue);
+.slider-custom .rc-slider-dot:nth-child(2) {
+    background-color: #F3FF6C;
 }
 
-.slider-custom .rc-slider-handle:active {
-    box-shadow: 0 0 0.4rem 0.6rem rgba(45, 66, 252, 0.2);
+.slider-custom .rc-slider-dot:nth-child(3) {
+    background-color: #F3FF6C;
+}
+
+.slider-custom .rc-slider-dot:nth-child(4) {
+    background-color: var(--main-short);
+}
+
+.rc-slider-handle {
+    background-color: transparent;
+    border: none;
 }
 
 .slider-custom .rc-slider-mark-text,
 .slider-custom .rc-slider-mark-text-active {
-    color: white;
+    color: #fff !important;
     opacity: 0.5;
 }
 
