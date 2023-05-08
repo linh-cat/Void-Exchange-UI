@@ -166,9 +166,8 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
         marks={leverageMarks}
         max={50}
         handle={handleCustomTooltip}
-        onAfterChange={onAfterChage}
+        // onAfterChange={onAfterChage}
         railStyle={railStyle}
-        key={value}
         className="slider-custom-tooltip"
         handleStyle={{
           background: background,
@@ -179,7 +178,7 @@ const SliderLeverage = ({ label, tooltip, defaultValue }) => {
           marginTop: -10
         }}
         // onBeforeChange={onBeforeChange}
-        // onChange={onChange}
+        onChange={onChange}
         ariaLabelForHandle={title}
       />
     </div>
