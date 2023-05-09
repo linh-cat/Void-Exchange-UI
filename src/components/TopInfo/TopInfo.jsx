@@ -4,7 +4,7 @@ import Down from "@img/downicon.svg"
 
 const TopInfo = () => {
   return (
-    <div className="top-info border-b border-zinc-700 text-sm flex items-center justify-center gap-5 p-1">
+    <div className="w-full top-info text-sm grid grid-flow-row grid-cols-2 md:grid-cols-3 xl:flex xl:justify-center xl:items-center xl:gap-5 p-1 place-items-center">
       <div className="relative flex gap-2 market cursor-pointer">
         <label className="">Market:</label>
         <div className="flex items-center gap-2">
@@ -48,14 +48,17 @@ const TopInfo = () => {
           </div>
         </div>
       </div>
-      <div>
-        <label>Network: Ethereum</label>
+      <div className="flex items-center gap-2">
+        <label>Network: </label>
+        <div className="text-zinc-500">Ethereum</div>
       </div>
-      <div>
-        <label>BTC Dominance: {47}%</label>
+      <div className="flex items-center gap-2">
+        <label>BTC Dominance: </label>
+        <div className="text-zinc-500">{47}%</div>
       </div>
-      <div>
-        <label>ETH Dominance: {19.3}%</label>
+      <div className="flex items-center gap-2">
+        <label>ETH Dominance: </label>
+        <div className="text-zinc-500">{19.3}%</div>
       </div>
     </div>
   )

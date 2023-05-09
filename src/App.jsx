@@ -40,7 +40,9 @@ function App() {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
         <Header />
-        <TopInfo />
+        <div className="border-b border-zinc-700 place-items-center">
+          <TopInfo />
+        </div>
         <FullApp />
         {/* <Footer /> */}
       </RainbowKitProvider>
