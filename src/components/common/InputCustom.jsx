@@ -18,6 +18,34 @@ const InputCustom = ({
   min,
   max
 }) => {
+  const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
+
+  const handleChange = (val) => {
+    if (isNaN(Number(val))) {
+      return onChange("0")
+    }
+
+    if (Number(val) < 0) {
+      return onChange("0")
+    }
+
+    if (Number(val) !== 0) {
+      // if it is integer, remove leading zeros
+      if (!DECIMAL_REGEX.test(val)) {
+        val = Number(val).toString()
+      }
+    }
+    // else {
+    //   // remain input box w single zero, but keep zero when have decimal
+    //   val = val.replace(/^[0]+/g, "0")
+    //   // if it is no value
+    //   if (val.length === 0) {
+    //     val = "0"
+    //   }
+    // }
+
+    return onChange(val)
+  }
   return (
     <div className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}>
       <div className="title flex items-center gap-x-1">
@@ -42,7 +70,7 @@ const InputCustom = ({
         <input
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
           placeholder={placeHolder}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => handleChange(Number(e.target.value))}
           value={value}
           type={type || "number"}
           min={min}

@@ -64,9 +64,6 @@ const leverageMarks = {
 const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange, onBeforeChange }) => {
   const changeLeverage = useCallback(
     (val) => {
-      if (val < 2 || val > 50) {
-        return
-      }
       onChangeLeverage(val)
     },
     [onChangeLeverage]
@@ -100,6 +97,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
       return "#E43E53"
     }
   }, [value])
+  console.log({ value })
 
   const alertContent = useMemo(() => {
     if (value > 20 && value <= 40) {
