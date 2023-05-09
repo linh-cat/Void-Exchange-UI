@@ -57,14 +57,14 @@ const TabExchange = ({ defaultValue }) => {
                 key={idx}
               >
                 <img src={item.icon} alt="icon" className="w-5" />
-                <label className="flex justify-center">{item.label}</label>
+                <label className="flex justify-center ">{item.label}</label>
               </li>
             )
           })}
         </ul>
       </div>
 
-      <div className="tab-content p-3">{tabContent}</div>
+      <div className="tab-content py-3 px-3 overflow-hidden">{tabContent}</div>
     </div>
   )
 }

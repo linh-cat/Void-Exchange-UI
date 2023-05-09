@@ -7,6 +7,11 @@
     border: none;
 }
 
+.slider-custom .alert-badge {
+    background-color: rgba(243, 255, 108, 0.1);
+    border-color: rgb(243, 255, 108);
+}
+
 .slider-custom .rc-slider-dot:nth-child(1) {
     background-color: var(--main-long);
 }
@@ -38,7 +43,7 @@
     font-size: 14px;
     transform: translate(-50%);
     content: attr(aria-label);
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .slider-custom .rc-slider-tooltip-placement-right {

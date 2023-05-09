@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
 import BTC from "@img/btc.png"
 import BNB from "@img/CAKE.png"
@@ -7,6 +7,8 @@ import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
 
 const OrderBox = ({ type }) => {
+  const [leverage, setLeverage] = useState(10)
+
   return (
     <div className="order-box">
       <div className="grid grid-cols-2 gap-2">
@@ -65,7 +67,12 @@ const OrderBox = ({ type }) => {
         />
       </div>
       <div className="mt-3 2xl:mt-5">
-        <SliderLeverage label="Leverage" defaultValue={30} />
+        <SliderLeverage
+          label="Leverage"
+          defaultValue={20}
+          onChangeLeverage={(amount) => setLeverage(amount)}
+          value={leverage}
+        />
       </div>
       <div className="mt-10 w-full">
         <button className="default-btn w-full ">Approve</button>

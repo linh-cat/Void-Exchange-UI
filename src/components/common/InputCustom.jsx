@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import "./InputCustom.css";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from "react"
+import "./InputCustom.css"
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 const InputCustom = ({
   label,
   tooltip,
@@ -12,19 +12,22 @@ const InputCustom = ({
   classNameInput,
   showMaxBtn,
   showUsd,
+  onChange,
+  value,
+  type,
+  min,
+  max
 }) => {
-  const [value, setValue] = useState("");
-
   return (
-    <div
-      className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}
-    >
+    <div className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}>
       <div className="title flex items-center gap-x-1">
         <label className="text-sm">{label}</label>
-        <div className="group-tooltip">
-          <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />
-          <div className="tooltip p-3 rounded">{tooltip}</div>
-        </div>
+        {label && (
+          <div className="group-tooltip">
+            <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />
+            <div className="tooltip p-3 rounded">{tooltip}</div>
+          </div>
+        )}
         {showUsd && value && (
           <div
             className="text-xs 
@@ -37,26 +40,21 @@ const InputCustom = ({
       <div className="flex h-full items-center border border-gray-700 rounded pl-1 pr-1">
         {leftSide && <div className="left-action">{leftSide}</div>}
         <input
-          type="number"
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
           placeholder={placeHolder}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onChange(Number(e.target.value))}
+          value={value}
+          type={type || "number"}
+          min={min}
+          max={max}
         />
-
-        {showMaxBtn && (
-          <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">
-            Max
-          </label>
-        )}
+        {rightAction}
+        {showMaxBtn && <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">Max</label>}
       </div>
 
-      {showBalance && (
-        <label className="text-xs lg:text-sm text-zinc-500 balance">
-          500000 ETC
-        </label>
-      )}
+      {showBalance && <label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
     </div>
-  );
-};
+  )
+}
 
-export default InputCustom;
+export default InputCustom
