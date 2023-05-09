@@ -72,7 +72,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
     [onChangeLeverage]
   )
   const title = useMemo(() => {
-    if (value > 2 && value <= 20) {
+    if (value > 1 && value <= 20) {
       return "Safe"
     } else if (value > 20 && value <= 40) {
       return "Risky"
@@ -82,7 +82,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
   }, [value])
 
   const background = useMemo(() => {
-    if (value > 2 && value <= 20) {
+    if (value > 1 && value <= 20) {
       return "#284539"
     } else if (value > 20 && value <= 40) {
       return "#61662B"
@@ -92,7 +92,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
   }, [value])
 
   const color = useMemo(() => {
-    if (value > 2 && value <= 20) {
+    if (value > 1 && value <= 20) {
       return "#16BE76"
     } else if (value > 20 && value <= 40) {
       return "#F3FF6C"
