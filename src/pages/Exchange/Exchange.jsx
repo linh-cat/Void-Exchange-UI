@@ -42,7 +42,7 @@ const Exchange = () => {
   }
   return (
     <div>
-      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3 ">
+      <div className="exchange w-full h-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3">
         {/* left side chart and infor bar */}
         <div
           className={cx({

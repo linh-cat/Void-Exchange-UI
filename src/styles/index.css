@@ -61,16 +61,18 @@
     background-color: var(--main-card-color);
 }
 
-html,
-body,
-#root {
-    height: 100%;
-    width: 100%;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+    width: 100%;
     color: white;
-    background-color: var(--main-bg-color);
     font-family: 'Poppins', sans-serif;
+    background: #181C27 !important;
 }
 
 .active {
@@ -79,13 +81,6 @@ body,
 
 .heroicon path {
     fill: #00A8CC !important;
-}
-
-body {
-    margin: 0;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 svg path {
