@@ -6,45 +6,13 @@ import { ArrowRight, DownIconGreen, DownIconRed } from "@icons/index"
 import DogeCoin from "@img/dogecoin.png"
 import Solana from "@img/solana.png"
 import Polygon from "@img/polygon.png"
+import Banner from "@components/Banner/Banner"
 
 const Dashboard = () => {
   return (
-    <div className="dashboard container mx-auto py-10 ">
-      <section className="banner-db animation-container">
-        {/* <div class="lightning-container">
-          <div class="lightning white"></div>
-          <div class="lightning blu"></div>
-        </div> */}
-        <div className="boom-container">
-          <div className="shape circle big white"></div>
-          <div className="shape circle white"></div>
-          <div className="shape triangle big yellow"></div>
-          <div className="shape disc white"></div>
-          <div className="shape triangle blue"></div>
-        </div>
-        <div className="boom-container second">
-          <div className="shape circle big white"></div>
-          <div className="shape circle white"></div>
-          <div className="shape disc white"></div>
-          <div className="shape triangle blue"></div>
-        </div>
-        <div className="boom-container third">
-          <div className="shape circle big white"></div>
-          <div className="shape circle white"></div>
-          <div className="shape disc white"></div>
-          <div className="shape triangle blue"></div>
-        </div>
-        <div className="banner-container">
-          <h1 className="text-5xl font-bold">Long or Short Assets</h1>
-          <p className="py-3 md:py-8">ZK Pern is a perpetual futures dex for assets</p>
-          <div>
-            <a className="trade-now py-3 px-5 rounded-lg font-medium" href="/trade">
-              Trade Now
-            </a>
-          </div>
-        </div>
-      </section>
-      <section className="standard-asset rounded border border-slate-500 mt-10">
+    <div className="dashboard mx-auto ">
+      <Banner />
+      <section className="standard-asset rounded border border-slate-500 mt-10 container">
         <h3 className="font-medium text-lg p-3">Standard Assets</h3>
         <table className="w-full">
           <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm ">

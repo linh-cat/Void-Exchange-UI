@@ -5,6 +5,7 @@ import connectWalletImg from "../../img/ic_wallet_24.svg"
 import { useLocation } from "react-router-dom"
 import useUserWindow from "../../hooks/useUserWindow"
 import { useDisconnect } from "wagmi"
+import cx from "classnames"
 
 const Header = () => {
   const { disconnect } = useDisconnect()
@@ -18,7 +19,12 @@ const Header = () => {
   const { width } = useUserWindow()
 
   return (
-    <header className="header flex justify-between items-center border-b border-slate-700 h-16 w-full text-base">
+    <header
+      className={cx({
+        "header flex justify-between items-center  h-16 w-full text-base": true,
+        "border-b border-slate-700": location.pathname === "/" ? false : true
+      })}
+    >
       <div className="flex items-center">
         <a href="/" className="flex items-center">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
