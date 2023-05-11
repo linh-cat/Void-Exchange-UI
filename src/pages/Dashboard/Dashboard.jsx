@@ -33,7 +33,7 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody className="pt-1">
-            <tr className="border-b border-slate-700">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
                 <div className="flex gap-2">
                   <img src={BTC} alt="btc" className="w-12 h-12" />
@@ -56,7 +56,7 @@ const Dashboard = () => {
               <td className="text-sm font-medium">$1</td>
               <td className="text-sm font-medium">$67,964.57</td>
             </tr>
-            <tr className="border-b border-slate-700">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
                 <div className="flex gap-2">
                   <img src={ETH} alt="eth" className="w-12 h-12" />
@@ -79,7 +79,7 @@ const Dashboard = () => {
               <td className="text-sm font-medium">$1</td>
               <td className="text-sm font-medium">$67,964.57</td>
             </tr>
-            <tr className="border-b border-slate-700">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
                 <div className="flex gap-2">
                   <img src={DogeCoin} alt="eth" className="w-12 h-12" />
@@ -102,7 +102,7 @@ const Dashboard = () => {
               <td className="text-sm font-medium">$1</td>
               <td className="text-sm font-medium">$67,964.57</td>
             </tr>
-            <tr className="border-b border-slate-700">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
                 <div className="flex gap-2">
                   <img src={Solana} alt="solana" className="w-12 h-12" />
@@ -125,7 +125,7 @@ const Dashboard = () => {
               <td className="text-sm font-medium">$0</td>
               <td className="text-sm font-medium">-</td>
             </tr>
-            <tr className="border-b border-slate-700">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
                 <div className="flex gap-2">
                   <img src={Polygon} alt="polygon" className="w-12 h-12" />
@@ -136,7 +136,7 @@ const Dashboard = () => {
                 </div>
               </td>
               <td className="text-sm font-medium">$17.8200</td>
-              <td className="text-sm font-medium green-up">
+              <td className="text-sm font-medium red-down">
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down" />
