@@ -14,6 +14,7 @@ import { TRADES } from "./constant"
 import TradeHistory from "./TradeHistory"
 import cx from "classnames"
 import TradingViewCustom from "./TradingViewCustom"
+import TopInfo from "@components/TopInfo/TopInfo"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
@@ -42,6 +43,9 @@ const Exchange = () => {
   }
   return (
     <div>
+      <div className="border-b border-zinc-700 place-items-center">
+        <TopInfo />
+      </div>
       <div className="exchange w-full h-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3">
         {/* left side chart and infor bar */}
         <div

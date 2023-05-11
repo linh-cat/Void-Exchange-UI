@@ -8,6 +8,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import Exchange from "./pages/Exchange/Exchange"
 import TopInfo from "@components/TopInfo/TopInfo"
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -31,6 +32,11 @@ const FullApp = () => {
       <Route exact path="/trade">
         <Exchange />
       </Route>
+      <Route exact path="/">
+        <div className="app-dashboard">
+          <Dashboard />
+        </div>
+      </Route>
     </Switch>
   )
 }
@@ -40,11 +46,7 @@ function App() {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
         <Header />
-        <div className="border-b border-zinc-700 place-items-center">
-          <TopInfo />
-        </div>
         <FullApp />
-        {/* <Footer /> */}
       </RainbowKitProvider>
     </WagmiConfig>
   )

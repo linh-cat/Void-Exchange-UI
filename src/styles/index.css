@@ -29,6 +29,16 @@
             #00A8CC);
 }
 
+.app-dashboard {
+    width: 100%;
+    height: 100%;
+    background: url("../img/decor-wave-bg.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-attachment: fixed;
+}
+
+
 .green-color {
     color: var(--text-color-green);
 }
@@ -309,7 +319,7 @@ a.plain {
 }
 
 .secondary-btn {
-    background: #03d1cf;
+    background-image: linear-gradient(to right top, #05c3af, #0096a1, #006984, #0e3f5b, #121b2d);
     border-radius: 4px;
     box-sizing: border-box;
     position: relative;

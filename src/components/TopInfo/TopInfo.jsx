@@ -1,6 +1,6 @@
 import React from "react"
 import "./TopInfo.css"
-import Down from "@img/downicon.svg"
+import { DownIcon } from "@img/icons/index"
 
 const TopInfo = () => {
   return (
@@ -9,7 +9,7 @@ const TopInfo = () => {
         <label className="">Market:</label>
         <div className="flex items-center gap-2">
           <span className="text-slate-500 text-xs green-color">Greed</span>
-          <img src={Down} alt="downicon" className="w-2" />
+          <img src={DownIcon} alt="downicon" className="w-2" />
         </div>
         <div className="tooltip-market absolute top-5 -left-1/2 z-50 w-64 p-3 rounded-sm text-xs flex flex-col gap-y-1">
           <div className="flex justify-between">

@@ -1,33 +1,33 @@
-import React, { useMemo, useState } from "react";
-import "./SelectToken.css";
-import { CheckIcon } from "@heroicons/react/24/solid";
-import useOutsideDetect from "../../hooks/useOutsideDetect";
-import DownIcon from "../../img/downicon.svg";
+import React, { useMemo, useState } from "react"
+import "./SelectToken.css"
+import { CheckIcon } from "@heroicons/react/24/solid"
+import useOutsideDetect from "../../hooks/useOutsideDetect"
+import { DownIcon } from "@icons/index"
 
 const SelectToken = ({ options, defaultValue }) => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue);
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState(defaultValue)
 
   const toggleOpen = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
   const onChangeValue = (token) => {
-    setValue(token);
-    setOpen(false);
-  };
+    setValue(token)
+    setOpen(false)
+  }
 
   const handleClickOutside = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
-  const refOutside = useOutsideDetect(handleClickOutside);
+  const refOutside = useOutsideDetect(handleClickOutside)
 
   const renderLabel = useMemo(() => {
-    const index = options?.findIndex((item) => item.value === value);
+    const index = options?.findIndex((item) => item.value === value)
 
-    return { label: options[index]?.label, icon: options[index]?.icon };
-  }, [value, options]);
+    return { label: options[index]?.label, icon: options[index]?.icon }
+  }, [value, options])
 
   return (
     <div className={`dd-token`}>
@@ -36,11 +36,7 @@ const SelectToken = ({ options, defaultValue }) => {
         onClick={toggleOpen}
         ref={refOutside}
       >
-        <img
-          className="rounded-full w-7 h-7  "
-          src={renderLabel?.icon}
-          alt="btc"
-        />
+        <img className="rounded-full w-7 h-7  " src={renderLabel?.icon} alt="btc" />
         <label className="cursor-pointer">{renderLabel?.label}</label>
 
         <img src={DownIcon} alt="down" className={open ? "rotate180" : ""} />
@@ -53,11 +49,7 @@ const SelectToken = ({ options, defaultValue }) => {
             key={idx}
           >
             <div className="flex items-center gap-2">
-              <img
-                className="rounded-full w-7 h-7"
-                src={item?.icon}
-                alt="btc"
-              />
+              <img className="rounded-full w-7 h-7" src={item?.icon} alt="btc" />
               <div className="text-sm">
                 <label>{item.label}</label>
               </div>
@@ -71,7 +63,7 @@ const SelectToken = ({ options, defaultValue }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SelectToken;
+export default SelectToken

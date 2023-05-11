@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react"
 import "./SelectCustom.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
-import DownIcon from "../../img/downicon.svg"
+import { DownIcon } from "@icons/index"
 
 const SelectCustom = ({ options, defaultValue, label, tooltip, className, classNameInput, classNameOption }) => {
   const [openList, setOpenList] = useState(false)

@@ -27,7 +27,7 @@ const Header = () => {
         <div className="w-full mobile-hidden">
           <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
             <li className="item">
-              <a href="/dashboard">Dashboard</a>
+              <a href="/">Dashboard</a>
             </li>
             <li className="item">
               <a href="/document">Docs</a>
