@@ -10,9 +10,9 @@ import Banner from "@components/Banner/Banner"
 
 const Dashboard = () => {
   return (
-    <div className="dashboard mx-auto ">
+    <div className="dashboard">
       <Banner />
-      <section className="standard-asset rounded border border-slate-500 mt-10 container">
+      <section className="standard-asset rounded border border-slate-500 mt-10 container mx-auto">
         <h3 className="font-medium text-lg p-3">Standard Assets</h3>
         <table className="w-full">
           <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm ">
