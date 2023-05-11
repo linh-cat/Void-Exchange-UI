@@ -2,21 +2,55 @@ import React from "react"
 import "./Dashboard.css"
 import BTC from "@img/btc.png"
 import ETH from "@img/WETH.png"
-import { DownIconGreen, DownIconRed } from "@icons/index"
+import { ArrowRight, DownIconGreen, DownIconRed } from "@icons/index"
 import DogeCoin from "@img/dogecoin.png"
 import Solana from "@img/solana.png"
 import Polygon from "@img/polygon.png"
 
 const Dashboard = () => {
   return (
-    <div className="dashboard container mx-auto pt-10">
-      <section className="standard-asset p-5 rounded border border-slate-500">
-        <h3 className="font-medium text-lg">Standard Assets</h3>
+    <div className="dashboard container mx-auto py-10 ">
+      <section className="banner-db animation-container">
+        {/* <div class="lightning-container">
+          <div class="lightning white"></div>
+          <div class="lightning blu"></div>
+        </div> */}
+        <div className="boom-container">
+          <div className="shape circle big white"></div>
+          <div className="shape circle white"></div>
+          <div className="shape triangle big yellow"></div>
+          <div className="shape disc white"></div>
+          <div className="shape triangle blue"></div>
+        </div>
+        <div className="boom-container second">
+          <div className="shape circle big white"></div>
+          <div className="shape circle white"></div>
+          <div className="shape disc white"></div>
+          <div className="shape triangle blue"></div>
+        </div>
+        <div className="boom-container third">
+          <div className="shape circle big white"></div>
+          <div className="shape circle white"></div>
+          <div className="shape disc white"></div>
+          <div className="shape triangle blue"></div>
+        </div>
+        <div className="banner-container">
+          <h1 className="text-5xl font-bold">Long or Short Assets</h1>
+          <p className="py-3 md:py-8">ZK Pern is a perpetual futures dex for assets</p>
+          <div>
+            <a className="trade-now py-3 px-5 rounded-lg font-medium" href="/trade">
+              Trade Now
+            </a>
+          </div>
+        </div>
+      </section>
+      <section className="standard-asset rounded border border-slate-500 mt-10">
+        <h3 className="font-medium text-lg p-3">Standard Assets</h3>
         <table className="w-full">
-          <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm">
-            <tr>
-              <th scope="col" className="font-medium">
-                Asset
+          <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm ">
+            <tr className="">
+              <th scope="col" className="font-medium pl-3">
+                <div className="pl-3">Asset</div>
               </th>
               <th scope="col" className="font-medium">
                 Price
@@ -33,9 +67,9 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody className="pt-1">
-            <tr className="border-b border-slate-700 cursor-pointer asset-item">
-              <td className="text-sm font-medium">
-                <div className="flex gap-2">
+            <tr className="border-b border-slate-700 cursor-pointer asset-item ">
+              <td className="text-sm font-medium pl-5">
+                <div className="flex gap-2 pl-3">
                   <img src={BTC} alt="btc" className="w-12 h-12" />
                   <div>
                     <label>Bitcoin</label>
@@ -48,9 +82,8 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down icon" />
-                    <label>$-235.95</label>
+                    <div className="font-mono">-0.79%</div>
                   </div>
-                  <div className="font-mono">-0.79%</div>
                 </div>
               </td>
               <td className="text-sm font-medium">$1</td>
@@ -58,7 +91,7 @@ const Dashboard = () => {
             </tr>
             <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
-                <div className="flex gap-2">
+                <div className="flex gap-2  pl-3">
                   <img src={ETH} alt="eth" className="w-12 h-12" />
                   <div>
                     <label>Ethereum</label>
@@ -71,9 +104,8 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down" />
-                    <label>$-23.95</label>
+                    <div className="font-mono">-1.70%</div>
                   </div>
-                  <div className="font-mono">-1.70%</div>
                 </div>
               </td>
               <td className="text-sm font-medium">$1</td>
@@ -81,7 +113,7 @@ const Dashboard = () => {
             </tr>
             <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
-                <div className="flex gap-2">
+                <div className="flex gap-2  pl-3">
                   <img src={DogeCoin} alt="eth" className="w-12 h-12" />
                   <div>
                     <label>Dogecoin</label>
@@ -94,9 +126,8 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconGreen} alt="up" className="rotate180" />
-                    <label>$+235.95</label>
+                    <div className="font-mono">100%</div>
                   </div>
-                  <div className="font-mono">100%</div>
                 </div>
               </td>
               <td className="text-sm font-medium">$1</td>
@@ -104,7 +135,7 @@ const Dashboard = () => {
             </tr>
             <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
-                <div className="flex gap-2">
+                <div className="flex gap-2  pl-3">
                   <img src={Solana} alt="solana" className="w-12 h-12" />
                   <div>
                     <label>Solana</label>
@@ -117,9 +148,8 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconGreen} alt="up" className="rotate180" />
-                    <label>$0,06542</label>
+                    <div className="font-mono">5.52%</div>
                   </div>
-                  <div className="font-mono">5.52%</div>
                 </div>
               </td>
               <td className="text-sm font-medium">$0</td>
@@ -127,7 +157,7 @@ const Dashboard = () => {
             </tr>
             <tr className="border-b border-slate-700 cursor-pointer asset-item">
               <td className="text-sm font-medium">
-                <div className="flex gap-2">
+                <div className="flex gap-2  pl-3">
                   <img src={Polygon} alt="polygon" className="w-12 h-12" />
                   <div>
                     <label>Polygon</label>
@@ -140,9 +170,8 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down" />
-                    <label>$0,06542</label>
+                    <div className="font-mono">-2.22%</div>
                   </div>
-                  <div className="font-mono">-2.22%</div>
                 </div>
               </td>
               <td className="text-sm font-medium">$0</td>

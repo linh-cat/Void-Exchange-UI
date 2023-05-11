@@ -18,7 +18,7 @@ const Header = () => {
   const { width } = useUserWindow()
 
   return (
-    <header className="header flex justify-between items-center border-b border-zinc-700 h-16 w-full text-base">
+    <header className="header flex justify-between items-center border-b border-slate-700 h-16 w-full text-base">
       <div className="flex items-center">
         <a href="/" className="flex items-center">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
@@ -36,19 +36,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex">
-        <div className="flex gap-x-3">
-          <a
-            className={
-              width < 432
-                ? "hidden"
-                : location.pathname === "/trade"
-                ? "hidden default-btn pointer-events-none"
-                : "default-btn"
-            }
-            href="/trade"
-          >
-            Trade
-          </a>
+        <div className="">
           <ConnectWalletButton imgSrc={connectWalletImg} />
         </div>
 
