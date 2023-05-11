@@ -21,6 +21,7 @@
 
 .animation-container {
     position: relative;
+    overflow: hidden;
 }
 
 .animation-container .lightning-container {
@@ -70,8 +71,8 @@
     text-align: center;
     align-items: center;
     transform: translateY(-50%);
-    left: 200px;
-    top: -145px;
+    left: 0;
+    top: 0;
 }
 
 .animation-container .boom-container .shape {
@@ -168,23 +169,13 @@
 }
 
 .animation-container .boom-container.second {
-    left: 485px;
-    top: 155px;
+    left: 30%;
+    top: 20%;
 }
 
 .animation-container .boom-container.third {
-    left: 885px;
-    top: 355px;
-}
-
-.animation-container .boom-container.four {
-    left: 1085px;
-    top: 205px;
-}
-
-.animation-container .boom-container.five {
-    left: 450px;
-    top: 305px;
+    left: 60%;
+    top: 65%;
 }
 
 .animation-container .boom-container.second .shape.triangle, .animation-container .boom-container.second .shape.circle, .animation-container .boom-container.second .shape.circle.big, .animation-container .boom-container.second .shape.disc {
