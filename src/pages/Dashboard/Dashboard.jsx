@@ -82,7 +82,7 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down icon" />
-                    <div className="font-mono">-0.79%</div>
+                    <div className="">-0.79%</div>
                   </div>
                 </div>
               </td>
@@ -104,7 +104,7 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down" />
-                    <div className="font-mono">-1.70%</div>
+                    <div className="">-1.70%</div>
                   </div>
                 </div>
               </td>
@@ -126,7 +126,7 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconGreen} alt="up" className="rotate180" />
-                    <div className="font-mono">100%</div>
+                    <div className="">100%</div>
                   </div>
                 </div>
               </td>
@@ -148,7 +148,7 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconGreen} alt="up" className="rotate180" />
-                    <div className="font-mono">5.52%</div>
+                    <div className="">5.52%</div>
                   </div>
                 </div>
               </td>
@@ -170,7 +170,7 @@ const Dashboard = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <img src={DownIconRed} alt="down" />
-                    <div className="font-mono">-2.22%</div>
+                    <div className="">-2.22%</div>
                   </div>
                 </div>
               </td>
