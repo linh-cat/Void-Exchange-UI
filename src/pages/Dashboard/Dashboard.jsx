@@ -4,11 +4,13 @@ import "./Dashboard.css"
 import StandardAsset from "@components/StandardAsset/StandardAsset"
 import Banner from "@components/Banner/Banner"
 import StatisticInfo from "@components/StatisticInfo/StatisticInfo"
+import TradeForFree from "@components/TradeForFree/TradeForFree"
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
       <Banner />
+      <TradeForFree />
       <StatisticInfo />
       <StandardAsset />
     </div>
