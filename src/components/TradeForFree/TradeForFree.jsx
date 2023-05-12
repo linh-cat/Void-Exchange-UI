@@ -26,7 +26,7 @@ const TradeForFree = () => {
           <img
             src={TradingIMG}
             alt="trading img"
-            className="w-full h-full border-8 border-slate-200 rounded-md absolute top-0 -right-24"
+            className="w-full h-full border rounded-md absolute top-0 -right-24"
           />
         </div>
       </div>
