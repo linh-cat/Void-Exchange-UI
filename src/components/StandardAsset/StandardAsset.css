@@ -1,0 +1,68 @@
+/* standard asset */
+.standard-asset {
+    box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
+}
+
+.standard-asset .asset-item:hover {
+    background: var(--input-bg-color);
+    box-shadow: rgba(120, 120, 136, 0.2) 0px 7px 29px 0px;
+}
+
+.standard-asset table {
+    width: 100% !important;
+}
+
+.standard-asset table, .standard-asset td {
+    border-collapse: collapse !important;
+    text-align: left !important;
+}
+
+.standard-asset thead {
+    display: table;
+    /* to take the same width as tr */
+    width: calc(100%);
+    /* - 17px because of the scrollbar width */
+}
+
+.standard-asset tbody {
+    display: block;
+    /* to enable vertical scrolling */
+    max-height: 500px;
+    /* e.g. */
+    height: 500px;
+    overflow-y: scroll;
+    /* keeps the scrollbar even if it doesn't need it; display purpose */
+}
+
+.standard-asset tbody::-webkit-scrollbar {
+    display: none;
+}
+
+.standard-asset th, .standard-asset td {
+    width: 10%;
+    /* to enable "word-break: break-all" */
+    padding: 5px;
+    word-break: break-all;
+    /* overflow-x: scroll; */
+    /* 4. */
+}
+
+/* .standard-asset tbody th, .standard-asset tbody td {
+    overflow: scroll;
+    word-break: unset;
+}
+
+.standard-asset tbody th, .standard-asset tbody td::-webkit-scrollbar {
+    display: none;
+} */
+
+.standard-asset tr {
+    display: table;
+    width: 100%;
+}
+
+.standard-asset td {
+    text-align: center;
+    border-bottom: none;
+    border-left: none;
+}
