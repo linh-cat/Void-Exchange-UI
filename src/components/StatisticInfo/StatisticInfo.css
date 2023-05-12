@@ -1,0 +1,4 @@
+.statistic-container .statistic-bottom {
+    box-shadow: rgba(120, 120, 136, 0.2) 0px 7px 29px 0px;
+    backdrop-filter: blur(8px);
+}
