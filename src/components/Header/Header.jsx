@@ -53,6 +53,9 @@ const Header = () => {
           </a>
           <div className="w-full mobile-hidden">
             <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
+              <span className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
+                Testnet
+              </span>
               <li className="item">
                 <a href="/">Dashboard</a>
               </li>
