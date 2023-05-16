@@ -1,5 +1,9 @@
 .vault-card {
-    height: 28rem;
+    height: 30rem;
+}
+
+.vault-card .capacity {
+    background-color: #25252A;
 }
 
 .vault-card .vault-card-header .btn {

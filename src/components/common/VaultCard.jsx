@@ -25,7 +25,7 @@ const VaultCard = () => {
         </div>
         <img src={ETH} alt="eth" className="w-12 h-12 absolute left-5 -bottom-6" />
       </div>
-      <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-2">
+      <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-5">
         <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
 
         <div className="flex justify-between items-center">
@@ -67,6 +67,10 @@ const VaultCard = () => {
             <label className="text-xs text-slate-500">Current Price</label>
             <p className="text-sm">$1,814.58</p>
           </div>
+        </div>
+        <div className="relative">
+          <div className="percent w-1/4 bg-white h-1 absolute top-0 z-10"></div>
+          <div className="capacity w-full h-1 absolute top-0"></div>
         </div>
         <div className="deposit-cap flex justify-between">
           <div className="flex flex-col gap-2">
