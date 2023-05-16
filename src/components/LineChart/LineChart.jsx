@@ -10,7 +10,8 @@ import { Line } from "react-chartjs-2"
 //         tension: 0.4,
 //         backgroundColor: "#536BC7",
 //         borderColor: "#536BC7",
-//         pointRadius: 0
+//         pointRadius: 0,
+//         the rest props...
 //       }
 //     ]
 //   }

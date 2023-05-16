@@ -40,10 +40,11 @@ const VaultCard = () => {
                   {
                     id: 1,
                     data: [1, 50, 2, 100],
-                    tension: 0.4,
+                    tension: 0.1,
                     backgroundColor: "#536BC7",
                     borderColor: "#536BC7",
                     pointRadius: 0
+                    // the rest props...
                   }
                 ]
               }}
