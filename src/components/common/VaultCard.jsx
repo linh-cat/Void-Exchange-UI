@@ -68,10 +68,6 @@ const VaultCard = () => {
             <p className="text-sm">$1,814.58</p>
           </div>
         </div>
-        <div className="relative">
-          <div className="percent w-1/4 bg-white h-1 absolute top-0 z-10"></div>
-          <div className="capacity w-full h-1 absolute top-0"></div>
-        </div>
         <div className="deposit-cap flex justify-between">
           <div className="flex flex-col gap-2">
             <label className="text-xs text-slate-500">Current Deposit</label>
@@ -81,6 +77,10 @@ const VaultCard = () => {
             <label className="text-xs text-slate-500">Max Capacity</label>
             <p className="text-sm">20K ETH</p>
           </div>
+        </div>
+        <div className="relative">
+          <div className="percent w-1/4 bg-white h-1 absolute top-0 z-10"></div>
+          <div className="capacity w-full h-1 absolute top-0"></div>
         </div>
       </div>
     </div>
