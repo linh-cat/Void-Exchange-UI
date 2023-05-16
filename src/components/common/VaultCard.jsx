@@ -26,9 +26,14 @@ const VaultCard = () => {
         <img src={ETH} alt="eth" className="w-12 h-12 absolute left-5 -bottom-6" />
       </div>
       <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-2">
+        <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
+
         <div className="flex justify-between">
-          <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
-          <div className="w-24">
+          <div className="flex flex-col gap-2 project-yeild ">
+            <label className="text-xs text-slate-500">Total Project Yield (APY)</label>
+            <p className="font-medium text-2xl">57.39%</p>
+          </div>
+          <div className="w-20">
             <LineChart
               showGrid={false}
               showXaxis={false}
@@ -53,10 +58,6 @@ const VaultCard = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 project-yeild ">
-          <label className="text-xs text-slate-500">Total Project Yield (APY)</label>
-          <p className="font-medium text-2xl">57.39%</p>
-        </div>
         <div className="weekly-strike flex justify-between">
           <div className="flex flex-col gap-2">
             <label className="text-xs text-slate-500">Weekly Strike Price</label>
