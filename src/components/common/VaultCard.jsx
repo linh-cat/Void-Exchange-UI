@@ -2,6 +2,10 @@ import React from "react"
 import "./VaultCard.css"
 import ETH from "@img/WETH.png"
 import { useHistory } from "react-router-dom"
+import Chart, { CategoryScale } from "chart.js/auto"
+
+import LineChart from "@components/LineChart/LineChart"
+Chart.register(CategoryScale)
 
 const VaultCard = () => {
   const history = useHistory()
@@ -9,6 +13,7 @@ const VaultCard = () => {
     history.push("/vault/1")
     window.location.reload()
   }
+
   return (
     <div
       className="vault-card flex flex-col w-full border rounded-lg border-slate-500 cursor-pointer bg-hover-eth overflow-hidden"
@@ -21,7 +26,13 @@ const VaultCard = () => {
         <img src={ETH} alt="eth" className="w-12 h-12 absolute left-5 -bottom-6" />
       </div>
       <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-2">
-        <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
+        <div className="flex justify-between">
+          <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
+          <div className="w-24">
+            <LineChart />
+          </div>
+        </div>
+
         <div className="flex flex-col gap-2 project-yeild ">
           <label className="text-xs text-slate-500">Total Project Yield (APY)</label>
           <p className="font-medium text-2xl">57.39%</p>
