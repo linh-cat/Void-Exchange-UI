@@ -28,7 +28,7 @@ const VaultCard = () => {
       <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-2">
         <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2 project-yeild ">
             <label className="text-xs text-slate-500">Total Project Yield (APY)</label>
             <p className="font-medium text-2xl">57.39%</p>
@@ -46,8 +46,8 @@ const VaultCard = () => {
                     id: 1,
                     data: [1, 50, 2, 100],
                     tension: 0.4,
-                    backgroundColor: "#536BC7",
-                    borderColor: "#536BC7",
+                    backgroundColor: "#16BE76",
+                    borderColor: "#16BE76",
                     pointRadius: 0
                     // the rest props...
                   }
