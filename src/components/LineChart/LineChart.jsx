@@ -1,38 +1,46 @@
 import React from "react"
 import { Line } from "react-chartjs-2"
-
-const LineChart = ({ chartData }) => {
+// data for chart
+// {
+//     labels: ["Jun", "Jul", "Aug", "Sep"],
+//     datasets: [
+//       {
+//         id: 1,
+//         data: [1, 50, 2, 100],
+//         tension: 0.4,
+//         backgroundColor: "#536BC7",
+//         borderColor: "#536BC7",
+//         pointRadius: 0
+//       }
+//     ]
+//   }
+const LineChart = ({
+  chartData,
+  showXaxis = true,
+  showYaxis = true,
+  showGrid = true,
+  showTooltip = true,
+  showLegend = true
+}) => {
   return (
     <div className="chart-container">
       <label className="text-xs text-slate-500">BTC/USDT</label>
       <Line
-        data={{
-          labels: ["Jun", "Jul", "Aug", "Sep"],
-          datasets: [
-            {
-              id: 1,
-              data: [1, 50, 2, 100],
-              tension: 0.4,
-              backgroundColor: "#536BC7",
-              borderColor: "#536BC7",
-              pointRadius: 0
-            }
-          ]
-        }}
+        data={chartData}
         options={{
           scales: {
             y: {
               beginAtZero: true,
               ticks: {
-                display: false
+                display: showYaxis
               },
               grid: {
-                display: false
+                display: showGrid
               }
             },
             x: {
               beginAtZero: true,
-              ticks: { display: false },
+              ticks: { display: showXaxis },
               grid: {
                 display: false
               }
@@ -41,10 +49,10 @@ const LineChart = ({ chartData }) => {
           responsive: true,
           plugins: {
             tooltip: {
-              enabled: false
+              enabled: showTooltip
             },
             legend: {
-              display: false
+              display: showLegend
             }
           }
         }}

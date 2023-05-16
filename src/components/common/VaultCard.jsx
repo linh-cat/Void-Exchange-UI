@@ -29,7 +29,25 @@ const VaultCard = () => {
         <div className="flex justify-between">
           <h3 className="vault-card-title font-medium text-2xl">T-ETH-C</h3>
           <div className="w-24">
-            <LineChart />
+            <LineChart
+              showGrid={false}
+              showXaxis={false}
+              showYaxis={false}
+              showLegend={false}
+              chartData={{
+                labels: ["Jun", "Jul", "Aug", "Sep"],
+                datasets: [
+                  {
+                    id: 1,
+                    data: [1, 50, 2, 100],
+                    tension: 0.4,
+                    backgroundColor: "#536BC7",
+                    borderColor: "#536BC7",
+                    pointRadius: 0
+                  }
+                ]
+              }}
+            />
           </div>
         </div>
 
