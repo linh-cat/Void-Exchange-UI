@@ -7,6 +7,9 @@ const DetailVaultPage = () => {
     console.log({ value, index, values })
     return value
   }
+  const customTooltip = () => {
+    return {}
+  }
   return (
     <div className="vault-detail">
       <div
@@ -42,6 +45,7 @@ const DetailVaultPage = () => {
             ]
           }}
           yAxisFormatter={yAxisFormatter}
+          customTooltip={customTooltip}
         />
       </div>
     </div>

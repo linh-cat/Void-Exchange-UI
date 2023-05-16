@@ -24,7 +24,8 @@ const LineChart = ({
   showLegend = true,
   optionsConfig = {},
   label = "",
-  yAxisFormatter
+  yAxisFormatter,
+  customTooltip = {}
 }) => {
   return (
     <div className="chart-container">
@@ -59,7 +60,11 @@ const LineChart = ({
           responsive: true,
           plugins: {
             tooltip: {
-              enabled: showTooltip
+              enabled: showTooltip,
+              callbacks: {
+                ...customTooltip
+                // rest of property
+              }
             },
             legend: {
               position: "top",
