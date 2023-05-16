@@ -1,0 +1,52 @@
+.vault-card {
+    height: 27rem;
+}
+
+.vault-card .vault-card-header .btn {
+    background: #536BC7;
+}
+
+.bg-eth {
+    background-image: linear-gradient(90deg, #202335 0%, #333c5c 25%, #384167 50%, #445599 100%);
+    background-size: 400%;
+    background-attachment: fixed;
+    animation: animationBg 20s ease-in-out infinite;
+    -webkit-animation: animationBg 20s ease infinite;
+}
+
+.bg-hover-eth {
+    transition: box-shadow 0.25s ease-out 0s, border 0.25s ease-out 0s;
+}
+
+.bg-hover-eth:hover {
+    border: 1px solid #536BC7;
+    box-shadow: #536BC7 0px 13px 27px -5px, #536BC7 0px 8px 16px -8px;
+}
+
+@keyframes animationBg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@-webkit-keyframes animationBg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

@@ -9,6 +9,8 @@ import { publicProvider } from "wagmi/providers/public"
 import Exchange from "./pages/Exchange/Exchange"
 import TopInfo from "@components/TopInfo/TopInfo"
 import Dashboard from "./pages/Dashboard/Dashboard"
+import VaultPage from "./pages/VaultPage/VaultPage"
+import DetailVaultPage from "./pages/DetailVaultPage/DetailVaultPage"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -35,6 +37,16 @@ const FullApp = () => {
       <Route exact path="/">
         <div className="app-dashboard">
           <Dashboard />
+        </div>
+      </Route>
+      <Route exact path="/vault">
+        <div className="app-dashboard">
+          <VaultPage />
+        </div>
+      </Route>
+      <Route exact path="/vault/:id">
+        <div>
+          <DetailVaultPage />
         </div>
       </Route>
     </Switch>

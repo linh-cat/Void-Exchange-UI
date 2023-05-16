@@ -62,6 +62,9 @@ const Header = () => {
               <li className="item">
                 <a href="/document">Docs</a>
               </li>
+              <li className="item">
+                <a href="/vault">Vault</a>
+              </li>
             </ul>
           </div>
         </div>
