@@ -21,29 +21,38 @@ const LineChart = ({
   showYaxis = true,
   showGrid = true,
   showTooltip = true,
-  showLegend = true
+  showLegend = true,
+  optionsConfig = {},
+  label = "",
+  yAxisFormatter
 }) => {
   return (
     <div className="chart-container">
-      <label className="text-xs text-slate-500">BTC/USDT</label>
+      <label className="text-xs">{label}</label>
       <Line
         data={chartData}
         options={{
+          ...optionsConfig,
           scales: {
             y: {
               beginAtZero: true,
               ticks: {
-                display: showYaxis
+                display: showYaxis,
+                color: "#fff",
+                callback: yAxisFormatter
+                // callback function (value, index, values) => format
               },
               grid: {
-                display: showGrid
+                display: showGrid,
+                color: "#373B47"
               }
             },
             x: {
               beginAtZero: true,
-              ticks: { display: showXaxis },
+              ticks: { display: showXaxis, color: "#fff" },
               grid: {
-                display: false
+                display: showGrid,
+                color: "#373B47"
               }
             }
           },
@@ -53,6 +62,7 @@ const LineChart = ({
               enabled: showTooltip
             },
             legend: {
+              position: "top",
               display: showLegend
             }
           }
