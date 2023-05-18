@@ -37,7 +37,7 @@ const DetailVaultPage = () => {
         </div>
       </div>
       <div className="container mx-auto max-w-5xl mt-10">
-        <div className="card-deposit-vault w-full h-96 border border-slate-500 rounded overflow-hidden flex flex-col gap-5">
+        <div className="card-deposit-vault w-full border border-slate-500 rounded overflow-hidden flex flex-col">
           <div className="card-header flex px-5 py-3 gap-20 border-b border-slate-700 ">
             <div className="currency">
               <label>USDT</label>
@@ -56,59 +56,61 @@ const DetailVaultPage = () => {
               <label className="text-sm text-slate-500">Total Borrowed</label>
             </div>
           </div>
-          <div className="deposit-card p-3 w-1/2 border rounded ml-3 flex flex-col gap-3">
-            <div className="btn-group flex border rounded overflow-hidden">
-              <div
-                className={cx({
-                  "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                  active: tab === "deposit"
-                })}
-                onClick={() => onChangeTab("deposit")}
-              >
-                Deposit
+          <div className="flex-1 p-5">
+            <div className="deposit-card p-5 w-1/2 border rounded flex flex-col gap-3">
+              <div className="btn-group flex border rounded overflow-hidden">
+                <div
+                  className={cx({
+                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                    active: tab === "deposit"
+                  })}
+                  onClick={() => onChangeTab("deposit")}
+                >
+                  Deposit
+                </div>
+                <div
+                  className={cx({
+                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                    active: tab === "withdraw"
+                  })}
+                  onClick={() => onChangeTab("withdraw")}
+                >
+                  Withdraw
+                </div>
               </div>
-              <div
-                className={cx({
-                  "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                  active: tab === "withdraw"
-                })}
-                onClick={() => onChangeTab("withdraw")}
-              >
-                Withdraw
-              </div>
+              {tab === "deposit" && (
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm">Amount (ETH)</label>
+                    <div>
+                      <input className="border w-full p-3" />
+                    </div>
+                  </div>
+
+                  <div className="text-sm flex justify-between text-slate-300">
+                    <label>Wallet Balance</label>
+                    <div>0 ETH</div>
+                  </div>
+                </div>
+              )}
+              {tab === "withdraw" && (
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm">Amount (ETH)</label>
+                    <div>
+                      <input className="border w-full p-3" />
+                    </div>
+                  </div>
+
+                  <div className="text-sm flex justify-between text-slate-300">
+                    <label>Instant withdraw limit</label>
+                    <div>0 ETH</div>
+                  </div>
+                </div>
+              )}
+              {tab === "withdraw" && <button className="btn-add py-3 tracking-wider rounded">Withdraw</button>}
+              {tab === "deposit" && <button className="btn-add py-3 tracking-wider rounded">Add Liquidity</button>}
             </div>
-            {tab === "deposit" && (
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm">Amount (ETH)</label>
-                  <div>
-                    <input className="border w-full p-3" />
-                  </div>
-                </div>
-
-                <div className="text-sm flex justify-between text-slate-300">
-                  <label>Wallet Balance</label>
-                  <div>0 ETH</div>
-                </div>
-              </div>
-            )}
-            {tab === "withdraw" && (
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm">Amount (ETH)</label>
-                  <div>
-                    <input className="border w-full p-3" />
-                  </div>
-                </div>
-
-                <div className="text-sm flex justify-between text-slate-300">
-                  <label>Instant withdraw limit</label>
-                  <div>0 ETH</div>
-                </div>
-              </div>
-            )}
-            {tab === "withdraw" && <button className="btn-add py-3 tracking-wider rounded">Withdraw</button>}
-            {tab === "deposit" && <button className="btn-add py-3 tracking-wider rounded">Add Liquidity</button>}
           </div>
         </div>
       </div>
