@@ -13,7 +13,7 @@ const DetailVaultPage = () => {
   return (
     <div className="vault-detail">
       <div className="banner">
-        <div className="container mx-auto max-w-3xl flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col gap-7 col-span-2 w-96">
             <h2 className="font-medium text-5xl">T-ETH-C</h2>
             <div className="capacity flex flex-col">
