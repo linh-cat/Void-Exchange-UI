@@ -68,8 +68,8 @@ const DetailVaultPage = () => {
                       label: "Supply APY",
                       data: [1, 40, 60, 100],
                       tension: 0.4,
-                      backgroundColor: "#0725B6",
-                      borderColor: "#0725B6"
+                      backgroundColor: "#09a7eb",
+                      borderColor: "#09a7eb"
                       // pointRadius: 0,
                       // pointHitRadius: 0,
                       // pointHoverRadius: 0
