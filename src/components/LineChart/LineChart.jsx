@@ -44,16 +44,14 @@ const LineChart = ({
                 // callback function (value, index, values) => format
               },
               grid: {
-                display: showGrid,
-                color: "#373B47"
+                display: showGrid
               }
             },
             x: {
               beginAtZero: true,
               ticks: { display: showXaxis, color: "#fff" },
               grid: {
-                display: showGrid,
-                color: "#373B47"
+                display: showGrid
               }
             }
           },
