@@ -3,3 +3,27 @@
     padding: 40px 0px;
     overflow: hidden;
 }
+
+.vault-detail .rank .max {
+    background-color: #3d3d47;
+}
+
+.vault-detail .card-deposit-vault {
+    box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
+}
+
+.vault-detail .card-deposit-vault .card-header {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.vault-detail .deposit-card .btn-group {
+    width: 230px;
+}
+
+.vault-detail .deposit-card .active {
+    background: #6D89ED;
+}
+
+.vault-detail .btn-add {
+    background-color: #6D89ED;
+}
