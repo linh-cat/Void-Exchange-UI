@@ -13,7 +13,7 @@ const DetailVaultPage = () => {
   return (
     <div className="vault-detail">
       <div className="banner">
-        <div className="container mx-auto max-w-3xl  flex justify-between items-center">
+        <div className="container mx-auto max-w-3xl flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col gap-7 col-span-2 w-96">
             <h2 className="font-medium text-5xl">T-ETH-C</h2>
             <div className="capacity flex flex-col">
@@ -38,7 +38,7 @@ const DetailVaultPage = () => {
       </div>
       <div className="container mx-auto max-w-5xl mt-10">
         <div className="card-deposit-vault w-full border border-slate-500 rounded overflow-hidden flex flex-col">
-          <div className="card-header flex px-5 py-3 gap-20 border-b border-slate-700 ">
+          <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 border-b border-slate-700 ">
             <div className="currency">
               <label>USDT</label>
               <div className="text-slate-500">$1.00</div>
@@ -57,7 +57,7 @@ const DetailVaultPage = () => {
             </div>
           </div>
           <div className="flex-1 p-5">
-            <div className="deposit-card p-5 w-1/2 border rounded flex flex-col gap-3">
+            <div className="deposit-card p-5 w-full md:w-1/2 border rounded flex flex-col gap-3">
               <div className="btn-group flex border rounded overflow-hidden">
                 <div
                   className={cx({
