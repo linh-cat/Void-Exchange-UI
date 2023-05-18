@@ -31,29 +31,7 @@ const LineChart = ({
     <div className="chart-container">
       <label className="text-xs">{label}</label>
       <Line
-        data={{
-          labels: ["Utilization", "40%", "60%", "100%"],
-          datasets: [
-            {
-              id: 1,
-              label: "Supply APY",
-              data: [1, 40, 60, 100],
-              tension: 0.4,
-              backgroundColor: "#0725B6",
-              borderColor: "#0725B6",
-              pointRadius: 1
-            },
-            {
-              id: 1,
-              label: "Borrow APY",
-              data: [1, 20, 40, 90],
-              tension: 0.4,
-              backgroundColor: "#16BE76",
-              borderColor: "#16BE76",
-              pointRadius: 1
-            }
-          ]
-        }}
+        data={chartData}
         options={{
           ...optionsConfig,
           scales: {

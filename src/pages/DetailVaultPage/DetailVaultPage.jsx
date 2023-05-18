@@ -69,8 +69,10 @@ const DetailVaultPage = () => {
                       data: [1, 40, 60, 100],
                       tension: 0.4,
                       backgroundColor: "#0725B6",
-                      borderColor: "#0725B6",
-                      pointRadius: 0
+                      borderColor: "#0725B6"
+                      // pointRadius: 0,
+                      // pointHitRadius: 0,
+                      // pointHoverRadius: 0
                     },
                     {
                       id: 1,
@@ -78,8 +80,10 @@ const DetailVaultPage = () => {
                       data: [1, 20, 40, 90],
                       tension: 0.4,
                       backgroundColor: "#16BE76",
-                      borderColor: "#16BE76",
-                      pointRadius: 0
+                      borderColor: "#16BE76"
+                      // pointRadius: 0,
+                      // pointHitRadius: 0,
+                      // pointHoverRadius: 0
                     }
                   ]
                 }}
