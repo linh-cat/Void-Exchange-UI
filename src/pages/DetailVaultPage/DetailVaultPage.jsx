@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./DetailVaultPage.css"
 import ETH from "@img/WETH.png"
 import cx from "classnames"
+import LineChart from "@components/LineChart/LineChart"
 
 const DetailVaultPage = () => {
   const [tab, setTab] = useState("deposit")
@@ -36,7 +37,7 @@ const DetailVaultPage = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto max-w-5xl mt-10">
+      <div className="container mx-auto max-w-7xl mt-10">
         <div className="card-deposit-vault w-full border border-slate-500 rounded overflow-hidden flex flex-col">
           <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 border-b border-slate-700 ">
             <div className="currency">
@@ -56,8 +57,37 @@ const DetailVaultPage = () => {
               <label className="text-sm text-slate-500">Total Borrowed</label>
             </div>
           </div>
-          <div className="flex-1 p-5">
-            <div className="deposit-card p-5 w-full md:w-1/2 border rounded flex flex-col gap-3">
+          <div className="flex-1 p-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div className="supply-liquidity-chart border border-slate-500 col-span-2 rounded">
+              <LineChart
+                chartData={{
+                  labels: ["Utilization", "40%", "60%", "100%"],
+                  datasets: [
+                    {
+                      id: 1,
+                      label: "Supply APY",
+                      data: [1, 40, 60, 100],
+                      tension: 0.4,
+                      backgroundColor: "#0725B6",
+                      borderColor: "#0725B6",
+                      pointRadius: 0
+                    },
+                    {
+                      id: 1,
+                      label: "Borrow APY",
+                      data: [1, 20, 40, 90],
+                      tension: 0.4,
+                      backgroundColor: "#16BE76",
+                      borderColor: "#16BE76",
+                      pointRadius: 0
+                    }
+                  ]
+                }}
+                showYaxis={false}
+                showGrid={false}
+              />
+            </div>
+            <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
               <div className="btn-group flex border rounded overflow-hidden">
                 <div
                   className={cx({
@@ -114,6 +144,7 @@ const DetailVaultPage = () => {
           </div>
         </div>
       </div>
+      <div className="container mx-auto max-w-5xl mt-10"></div>
     </div>
   )
 }

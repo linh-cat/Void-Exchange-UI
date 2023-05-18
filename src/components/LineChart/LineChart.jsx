@@ -31,7 +31,29 @@ const LineChart = ({
     <div className="chart-container">
       <label className="text-xs">{label}</label>
       <Line
-        data={chartData}
+        data={{
+          labels: ["Utilization", "40%", "60%", "100%"],
+          datasets: [
+            {
+              id: 1,
+              label: "Supply APY",
+              data: [1, 40, 60, 100],
+              tension: 0.4,
+              backgroundColor: "#0725B6",
+              borderColor: "#0725B6",
+              pointRadius: 1
+            },
+            {
+              id: 1,
+              label: "Borrow APY",
+              data: [1, 20, 40, 90],
+              tension: 0.4,
+              backgroundColor: "#16BE76",
+              borderColor: "#16BE76",
+              pointRadius: 1
+            }
+          ]
+        }}
         options={{
           ...optionsConfig,
           scales: {
@@ -79,7 +101,37 @@ const LineChart = ({
             },
             legend: {
               position: "top",
-              display: showLegend
+              display: showLegend,
+              onClick: (evt, legentItem, legend) => {
+                const datasets = legend.legendItems.map((dataset, index) => {
+                  return dataset.text
+                })
+                const index = datasets.indexOf(legentItem.text)
+                if (legend.chart.isDatasetVisible(index)) {
+                  legend.chart.hide(index)
+                } else {
+                  legend.chart.show(index)
+                }
+              },
+              labels: {
+                generateLabels: (chart) => {
+                  let visibility = []
+                  for (let i = 0; i < chart.data.datasets.length; i++) {
+                    if (!chart.isDatasetVisible(i)) {
+                      visibility.push(true)
+                    } else {
+                      visibility.push(false)
+                    }
+                  }
+                  return chart.data.datasets.map((dataset, index) => ({
+                    text: dataset.label,
+                    fillStyle: dataset.backgroundColor,
+                    strokeStyle: dataset.backgroundColor,
+                    fontColor: dataset.borderColor,
+                    hidden: visibility[index]
+                  }))
+                }
+              }
             }
           }
         }}
