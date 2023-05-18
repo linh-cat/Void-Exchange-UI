@@ -29,7 +29,7 @@ const Banner = () => {
       </div>
       <div className="banner-container">
         <h1 className="text-5xl font-bold">Long or Short Assets</h1>
-        <p className="py-3 md:py-8">ZK Pern is a perpetual futures dex for assets</p>
+        <p className="py-3 md:py-8">Void Exchange is a perpetual futures dex for assets</p>
         <div>
           <a className="trade-now py-3 px-5 rounded-lg font-medium" href="/trade">
             Trade Now

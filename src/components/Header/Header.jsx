@@ -49,7 +49,7 @@ const Header = () => {
         <div className="flex items-center">
           <a href="/" className="flex items-center">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-            <span className="self-center font-semibold whitespace-nowrap dark:text-white">ZK Perp</span>
+            <span className="self-center font-semibold whitespace-nowrap dark:text-white">Void Exchange</span>
           </a>
           <div className="w-full mobile-hidden">
             <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
@@ -57,13 +57,13 @@ const Header = () => {
                 Testnet
               </span>
               <li className="item">
+                <a href="/vault">Earn</a>
+              </li>
+              <li className="item">
                 <a href="/">Dashboard</a>
               </li>
               <li className="item">
                 <a href="/document">Docs</a>
-              </li>
-              <li className="item">
-                <a href="/vault">Vault</a>
               </li>
             </ul>
           </div>
