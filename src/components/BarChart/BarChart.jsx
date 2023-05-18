@@ -19,6 +19,7 @@ const BarChart = ({
   showLegend = true,
   chartData,
   label,
+  labelForChart = "",
   customTooltip
 }) => {
   return (
@@ -74,8 +75,9 @@ const BarChart = ({
               }
             },
             title: {
-              display: false,
-              text: "Chart.js Bar Chart"
+              display: true,
+              text: labelForChart,
+              color: "#fff"
             }
           }
         }}

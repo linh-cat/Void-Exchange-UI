@@ -151,8 +151,19 @@ const DetailVaultPage = () => {
       </div>
       <div className="container mx-auto max-w-7xl mt-10">
         <div className="card-deposit-vault grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-5 gap-5">
-          <div className="xl:col-span-2 border border-slate-500 rounded">
-            <BarChart showGrid={false} showLegend={false} showXaxis={false} showYaxis={false} />
+          <div className="xl:col-span-2 border border-slate-500 rounded relative">
+            <div className="w-40 border border-slate-500 rounded p-3 absolute left-0 top-0">
+              <div className="filter-bar flex justify-between">
+                <div>1D</div>
+                <div>1W</div>
+                <div>1M</div>
+                <div>1Y</div>
+                <div>ALL</div>
+              </div>
+            </div>
+            <div className="">
+              <BarChart showGrid={false} showLegend={false} showXaxis={false} showYaxis={false} labelForChart="Earn" />
+            </div>
           </div>
           <div className="gr-info border border-slate-500 grid grid-cols-1 md:grid-cols-2 grid-rows-3 p-5 gap-5">
             <div className="liquidity border border-slate-500 p-3 shadow">
