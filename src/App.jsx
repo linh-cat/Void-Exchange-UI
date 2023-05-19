@@ -10,7 +10,7 @@ import Exchange from "./pages/Exchange/Exchange"
 import TopInfo from "@components/TopInfo/TopInfo"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import VaultPage from "./pages/VaultPage/VaultPage"
-import DetailVaultPage from "./pages/DetailVaultPage/DetailVaultPage"
+import DetailVaultPage from "./pages/DetailVaultPage/index"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
