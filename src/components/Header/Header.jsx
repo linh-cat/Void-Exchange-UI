@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import "./Header.css"
 import ConnectWalletButton from "../common/ConnectWalletButton"
 import connectWalletImg from "../../img/ic_wallet_24.svg"
+import VoidExchangeLogo from "@img/logo/void_exchange_beta.png"
 import { useLocation } from "react-router-dom"
 import useUserWindow from "../../hooks/useUserWindow"
 import { useDisconnect } from "wagmi"
@@ -48,8 +49,8 @@ const Header = () => {
       >
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-            <span className="self-center font-semibold whitespace-nowrap dark:text-white">Void Exchange</span>
+            <img src={VoidExchangeLogo} height={70} width={200} alt="Flowbite Logo" />
+            {/* <span className="self-center font-semibold whitespace-nowrap dark:text-white">Void Exchange</span> */}
           </a>
           <div className="w-full mobile-hidden">
             <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
