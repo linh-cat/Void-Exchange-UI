@@ -8,10 +8,6 @@
     background-color: #3d3d47;
 }
 
-.vault-detail .card-deposit-vault {
-    box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
-}
-
 .vault-detail .card-deposit-vault .card-header {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }

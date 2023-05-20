@@ -1,6 +1,7 @@
 import LineChart from "@components/LineChart/LineChart"
 import React, { useState } from "react"
 import cx from "classnames"
+import CardWrapper from "@components/CardWrapper/CardWrapper"
 const SectionVaultDeposit = () => {
   const [tab, setTab] = useState("deposit")
 
@@ -9,28 +10,33 @@ const SectionVaultDeposit = () => {
   }
   return (
     <div className="container mx-auto max-w-7xl mt-10">
-      <div className="card-deposit-vault w-full border border-slate-500 rounded overflow-hidden flex flex-col">
-        <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 border-b border-slate-700 ">
-          <div className="currency">
-            <label>USDT</label>
-            <div className="text-slate-500">$1.00</div>
+      <CardWrapper
+        className="card-deposit-vault w-full overflow-hidden"
+        header={
+          <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 ">
+            <div className="currency">
+              <label>USDT</label>
+              <div className="text-slate-500">$1.00</div>
+            </div>
+            <div className="current-apy">
+              <div>4.96%</div>
+              <label className="text-sm text-slate-500">Current APY</label>
+            </div>
+            <div className="total-supply">
+              <div>874,700 USDT</div>
+              <label className="text-sm text-slate-500">Total Supplied</label>
+            </div>
+            <div className="total-borrow">
+              <div>746,200 USDT</div>
+              <label className="text-sm text-slate-500">Total Borrowed</label>
+            </div>
           </div>
-          <div className="current-apy">
-            <div>4.96%</div>
-            <label className="text-sm text-slate-500">Current APY</label>
-          </div>
-          <div className="total-supply">
-            <div>874,700 USDT</div>
-            <label className="text-sm text-slate-500">Total Supplied</label>
-          </div>
-          <div className="total-borrow">
-            <div>746,200 USDT</div>
-            <label className="text-sm text-slate-500">Total Borrowed</label>
-          </div>
-        </div>
+        }
+        hasShadow={true}
+      >
         {/* bottom content */}
         <div className="flex-1 p-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
-          <div className="supply-liquidity-chart border border-slate-500 rounded col-span-full lg:col-span-3">
+          <CardWrapper className="supply-liquidity-chart col-span-full lg:col-span-3">
             <LineChart
               chartData={{
                 labels: ["Utilization", "40%", "60%", "100%"],
@@ -62,7 +68,7 @@ const SectionVaultDeposit = () => {
               showYaxis={false}
               showGrid={false}
             />
-          </div>
+          </CardWrapper>
           <div className="flex flex-col gap-3">
             <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
               <div className="btn-group flex border rounded overflow-hidden">
@@ -118,35 +124,38 @@ const SectionVaultDeposit = () => {
               {tab === "withdraw" && <button className="btn-add py-3 tracking-wider rounded">Withdraw</button>}
               {tab === "deposit" && <button className="btn-add py-3 tracking-wider rounded">Add Liquidity</button>}
             </div>
-            <div className="my-position border border-slate-500 rounded p-5 flex flex-col gap-3">
-              <div>
-                <label className="text-xs text-slate-500">Portfolio Value</label>
-                <div>$7243.13</div>
+            {/* my positions */}
+            <CardWrapper className="my-position p-3">
+              <div className="flex flex-col gap-3">
+                <div>
+                  <label className="text-xs text-slate-500">Portfolio Value</label>
+                  <div>$7243.13</div>
+                </div>
+                <div className="flex justify-between">
+                  <div>
+                    <label className="text-xs text-slate-500">Collateral</label>
+                    <div>$3000</div>
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-500">Leverage</label>
+                    <div>0.5x</div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <div>
+                    <label className="text-xs text-slate-500">Total Unrealized P&L</label>
+                    <div className="green-up">+21.04</div>
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-500">Total Realized P&L</label>
+                    <div className="green-up">+320</div>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <div>
-                  <label className="text-xs text-slate-500">Collateral</label>
-                  <div>$3000</div>
-                </div>
-                <div>
-                  <label className="text-xs text-slate-500">Leverage</label>
-                  <div>0.5x</div>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <div>
-                  <label className="text-xs text-slate-500">Total Unrealized P&L</label>
-                  <div className="green-up">+21.04</div>
-                </div>
-                <div>
-                  <label className="text-xs text-slate-500">Total Realized P&L</label>
-                  <div className="green-up">+320</div>
-                </div>
-              </div>
-            </div>
+            </CardWrapper>
           </div>
         </div>
-      </div>
+      </CardWrapper>
     </div>
   )
 }

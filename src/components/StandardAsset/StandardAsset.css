@@ -1,7 +1,4 @@
 /* standard asset */
-.standard-asset {
-    box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
-}
 
 .standard-asset .asset-item:hover {
     background: var(--input-bg-color);

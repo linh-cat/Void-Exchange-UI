@@ -6,10 +6,11 @@ import DogeCoin from "@img/dogecoin.png"
 import Solana from "@img/solana.png"
 import Polygon from "@img/polygon.png"
 import { DownIconGreen, DownIconRed } from "@icons/index"
+import CardWrapper from "@components/CardWrapper/CardWrapper"
 
 const StandardAsset = () => {
   return (
-    <section className="standard-asset rounded border border-slate-500 mt-10 container mx-auto">
+    <CardWrapper className="standard-asset mt-10 container mx-auto" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
       <table className="w-full">
         <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm ">
@@ -144,7 +145,7 @@ const StandardAsset = () => {
           </tr>
         </tbody>
       </table>
-    </section>
+    </CardWrapper>
   )
 }
 
