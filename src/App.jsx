@@ -11,6 +11,7 @@ import TopInfo from "@components/TopInfo/TopInfo"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import VaultPage from "./pages/VaultPage/VaultPage"
 import DetailVaultPage from "./pages/DetailVaultPage/index"
+import Document from "./pages/Document/Document"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -37,6 +38,11 @@ const FullApp = () => {
       <Route exact path="/">
         <div className="app-dashboard">
           <Dashboard />
+        </div>
+      </Route>
+      <Route exact path="/document">
+        <div className="app-dashboard">
+          <Document />
         </div>
       </Route>
       <Route exact path="/vault">

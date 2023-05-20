@@ -1,7 +1,6 @@
 .banner-db {
     position: relative;
     height: 60vh;
-    box-shadow: rgba(113, 113, 166, 0.2) 0px 15px 20px -15px;
     width: 100%;
     background: url("../../img/decor-wave-bg.png") right top no-repeat;
 }

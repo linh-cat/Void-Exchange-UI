@@ -4,5 +4,8 @@ import DownIcon from "./Downicon.svg"
 import DownIconRed from "./Downiconred.svg"
 import DownIconGreen from "./Downicongreen.svg"
 import ArrowRight from "./ArrowRight.svg"
+import BracketIcon from "./Bracket.svg"
+import CloudIcon from "./Cloud.svg"
+import ComputerIcon from "./Computer.svg"
 
-export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight };
+export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon };
