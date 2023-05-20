@@ -7,5 +7,5 @@ import ArrowRight from "./ArrowRight.svg"
 import BracketIcon from "./Bracket.svg"
 import CloudIcon from "./Cloud.svg"
 import ComputerIcon from "./Computer.svg"
-
-export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon };
+import GithubMarkIcon from "./github-mark.svg"
+export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon, GithubMarkIcon };

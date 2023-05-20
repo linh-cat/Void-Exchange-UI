@@ -1,7 +1,7 @@
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import React from "react"
 import "./Document.css"
-import { BracketIcon, CloudIcon, ComputerIcon } from "@icons/index"
+import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from "@icons/index"
 import Button from "@components/Button/Button"
 
 const Document = () => {
@@ -53,8 +53,18 @@ const Document = () => {
         </CardWrapper>
       </div>
       <div className="btn-gr flex gap-5">
-        <Button text={"Github"} />
-        <Button text={"Feedback"} />
+        <Button
+          text={"Github"}
+          isDefault={false}
+          className={"border border-white px-5 rounded btn-github"}
+          icon={<img src={GithubMarkIcon} alt="github" className="w-5 h-5" />}
+        />
+        <Button
+          text={"Feedback"}
+          icon={<img src={ArrowRight} alt="arrow-right" className="w-5 h-5" />}
+          isDefault={false}
+          className={"border border-white px-5 rounded btn-feedback"}
+        />
       </div>
     </div>
   )
