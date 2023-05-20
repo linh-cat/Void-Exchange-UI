@@ -6,7 +6,7 @@ const Button = ({ text, className }) => {
   return (
     <div
       className={cx(className, {
-        "text-center default-btn": true
+        "text-center default-btn text-sm": true
       })}
     >
       {text}
