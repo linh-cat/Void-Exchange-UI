@@ -2,6 +2,8 @@ import LineChart from "@components/LineChart/LineChart"
 import React, { useState } from "react"
 import cx from "classnames"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
+import ETH from "@img/WETH.png"
+import Button from "@components/Button/Button"
 const SectionVaultDeposit = () => {
   const [tab, setTab] = useState("deposit")
 
@@ -70,60 +72,80 @@ const SectionVaultDeposit = () => {
             />
           </CardWrapper>
           <div className="flex flex-col gap-3">
-            <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
-              <div className="btn-group flex border rounded overflow-hidden">
-                <div
-                  className={cx({
-                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                    active: tab === "deposit"
-                  })}
-                  onClick={() => onChangeTab("deposit")}
-                >
-                  Deposit
+            <CardWrapper>
+              <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
+                <div className="btn-group flex border rounded overflow-hidden w-full">
+                  <div
+                    className={cx({
+                      "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                      "active-tab": tab === "deposit"
+                    })}
+                    onClick={() => onChangeTab("deposit")}
+                  >
+                    Deposit
+                  </div>
+                  <div
+                    className={cx({
+                      "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                      "active-tab": tab === "withdraw"
+                    })}
+                    onClick={() => onChangeTab("withdraw")}
+                  >
+                    Withdraw
+                  </div>
                 </div>
-                <div
-                  className={cx({
-                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                    active: tab === "withdraw"
-                  })}
-                  onClick={() => onChangeTab("withdraw")}
-                >
-                  Withdraw
-                </div>
+                {tab === "deposit" && (
+                  <>
+                    <div className="flex flex-col gap-3 border p-3 rounded">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Currency</label>
+                        <div className="flex gap-3">
+                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">50%</div>
+                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
+                        </div>
+                      </div>
+                      <div className="token flex gap-2 justify-between">
+                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
+                          <img src={ETH} alt="ETH" className="w-5 h-5" />
+                          <label className="">ETH</label>
+                        </div>
+                        <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
+                      </div>
+                      <div className="ballance flex items-center gap-2">
+                        <label className="text-sm">Ballance:</label>
+                        <div>0</div>
+                      </div>
+                    </div>
+                    <Button className="py-1 tracking-wider rounded" text="Add Liquidity" />
+                  </>
+                )}
+                {tab === "withdraw" && (
+                  <>
+                    <div className="flex flex-col gap-3 border p-3 rounded">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Currency</label>
+                        <div className="flex gap-3">
+                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">50%</div>
+                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
+                        </div>
+                      </div>
+                      <div className="token flex gap-2 justify-between">
+                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
+                          <img src={ETH} alt="ETH" className="w-5 h-5" />
+                          <label className="">ETH</label>
+                        </div>
+                        <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
+                      </div>
+                      <div className="ballance flex items-center gap-2">
+                        <label className="text-sm">Ballance:</label>
+                        <div>0</div>
+                      </div>
+                    </div>
+                    <Button className="py-2 tracking-wider rounded" text="Withdraw" />
+                  </>
+                )}
               </div>
-              {tab === "deposit" && (
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm">Amount (ETH)</label>
-                    <div>
-                      <input className="border w-full p-3" />
-                    </div>
-                  </div>
-
-                  <div className="text-sm flex justify-between text-slate-300">
-                    <label>Wallet Balance</label>
-                    <div>0 ETH</div>
-                  </div>
-                </div>
-              )}
-              {tab === "withdraw" && (
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm">Amount (ETH)</label>
-                    <div>
-                      <input className="border w-full p-3" />
-                    </div>
-                  </div>
-
-                  <div className="text-sm flex justify-between text-slate-300">
-                    <label>Instant withdraw limit</label>
-                    <div>0 ETH</div>
-                  </div>
-                </div>
-              )}
-              {tab === "withdraw" && <button className="btn-add py-3 tracking-wider rounded">Withdraw</button>}
-              {tab === "deposit" && <button className="btn-add py-3 tracking-wider rounded">Add Liquidity</button>}
-            </div>
+            </CardWrapper>
             {/* my positions */}
             <CardWrapper className="my-position p-3">
               <div className="flex flex-col gap-3">

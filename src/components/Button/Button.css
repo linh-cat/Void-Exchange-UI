@@ -1,0 +1,23 @@
+.default-btn {
+    background: var(--arbitrum-blue);
+    letter-spacing: 0px;
+    color: #ffffff !important;
+    display: inline-block !important;
+    box-sizing: border-box;
+    text-align: center;
+    border: none;
+    appearance: none;
+    text-align: center;
+}
+
+.default-btn:hover {
+    background: linear-gradient(to right,
+            #0C7B93,
+            #00A8CC);
+}
+
+.default-btn:active {
+    border: none;
+    box-sizing: border-box;
+    overflow: hidden;
+}

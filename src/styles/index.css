@@ -66,15 +66,6 @@
     z-index: 1;
 }
 
-/* .app-dashboard {
-    width: 100%;
-    height: 100%;
-    background: url("../img/decor-wave-bg.png");
-    background-repeat: no-repeat;
-    background-position: top right;
-} */
-
-
 .green-color {
     color: var(--text-color-green);
 }
@@ -252,6 +243,9 @@ button.App-cta:disabled {
     color: rgba(255, 255, 255, 0.7);
 }
 
+.active-tab {
+    background-color: var(--arbitrum-blue);
+}
 
 a.plain {
     text-decoration: none;
@@ -310,42 +304,6 @@ a.plain {
         display: block;
     }
 }
-
-
-.default-btn:hover {
-    background: linear-gradient(to right,
-            #0C7B93,
-            #00A8CC);
-}
-
-/* .default-btn:focus {
-  background: #515ed8;
-  border: 1px solid #3D4FFE;
-  box-sizing: border-box;
-  padding-left: 15px;
-  padding-right: 15px;
-} */
-
-.default-btn:active {
-    border: none;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-/* .default-btn:active::after {
-  opacity: 0.239;
-  content: " ";
-  width: 5.2rem;
-  height: 5.2rem;
-  position: absolute;
-  left: calc(50% - 2.6rem);
-  top: -0.8rem;
-  background: white;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple 600ms linear;
-} */
-
 
 .default-container {
     max-width: 126.4rem;
