@@ -5,6 +5,7 @@ import BNB from "@img/CAKE.png"
 import ETH from "@img/WETH.png"
 import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
+import CollateralModal from "@components/CollateralModal/CollateralModal"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
@@ -132,6 +133,7 @@ const OrderBox = ({ type }) => {
             <span className="text-zinc-500">17,050 Cake ~ $57</span>
           </div>
         </div>
+        <CollateralModal />
       </div>
     </div>
   )
