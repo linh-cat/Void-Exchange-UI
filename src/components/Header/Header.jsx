@@ -49,7 +49,7 @@ const Header = () => {
       >
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <img src={VoidExchangeLogo} className="h-full w-200" alt="Flowbite Logo" />
+            <img src={VoidExchangeLogo} alt="Flowbite Logo" />
             {/* <span className="self-center font-semibold whitespace-nowrap dark:text-white">Void Exchange</span> */}
           </a>
           <div className="w-full mobile-hidden">
