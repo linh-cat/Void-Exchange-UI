@@ -11,20 +11,51 @@
 }
 
 .bg-eth {
-    background-image: linear-gradient(90deg, #202335 0%, #333c5c 25%, #384167 50%, #445599 100%);
-    background-size: 400%;
-    background-attachment: fixed;
+    background-image: url("../../img/etherium-bg.jpg");
+    background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
+}
+
+.bg-btc {
+    background-image: url("../../img/btc-bg.jpg");
+    background-size: cover;
+    animation: animationBg 20s ease-in-out infinite;
+    -webkit-animation: animationBg 20s ease infinite;
+}
+
+.bg-doge {
+    background-image: url("../../img/doge-bg.jpg");
+    background-size: cover;
+    animation: animationBg 20s ease-in-out infinite;
+    -webkit-animation: animationBg 20s ease infinite;
+}
+
+.bg-hover-btc {
+    transition: box-shadow 0.25s ease-out 0s, border 0.25s ease-out 0s;
 }
 
 .bg-hover-eth {
     transition: box-shadow 0.25s ease-out 0s, border 0.25s ease-out 0s;
 }
 
+.bg-hover-doge {
+    transition: box-shadow 0.25s ease-out 0s, border 0.25s ease-out 0s;
+}
+
+.bg-hover-btc:hover {
+    border: 1px solid #000040;
+    box-shadow: #000040 0px 13px 27px -5px, #000040 0px 8px 16px -8px;
+}
+
+.bg-hover-doge:hover {
+    border: 1px solid #c4802d;
+    box-shadow: #c4802d 0px 13px 27px -5px, #c4802d 0px 8px 16px -8px;
+}
+
 .bg-hover-eth:hover {
-    border: 1px solid #536BC7;
-    box-shadow: #536BC7 0px 13px 27px -5px, #536BC7 0px 8px 16px -8px;
+    border: 1px solid #7848B8;
+    box-shadow: #7848B8 0px 13px 27px -5px, #7848B8 0px 8px 16px -8px;
 }
 
 @keyframes animationBg {
