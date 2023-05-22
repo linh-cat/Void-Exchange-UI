@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard/Dashboard"
 import VaultPage from "./pages/VaultPage/VaultPage"
 import DetailVaultPage from "./pages/DetailVaultPage/index"
 import Document from "./pages/Document/Document"
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 
 const { chains, provider } = configureChains(

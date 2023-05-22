@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"
 
 const VaultPage = () => {
   return (
-    <div className="container-vault container mx-auto mt-10">
+    <div className="">
       <Outlet />
     </div>
   )
