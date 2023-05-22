@@ -1,17 +1,15 @@
 import React from "react"
 import "./VaultCard.css"
 import ETH from "@img/WETH.png"
-import { useHistory } from "react-router-dom"
 import Chart, { CategoryScale } from "chart.js/auto"
-
+import { useNavigate } from "react-router-dom"
 import LineChart from "@components/LineChart/LineChart"
 Chart.register(CategoryScale)
 
 const VaultCard = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   function handleClick() {
-    history.push("/vault/1")
-    window.location.reload()
+    navigate("/vault/1")
   }
 
   return (

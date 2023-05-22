@@ -3,16 +3,15 @@ import "./Header.css"
 import ConnectWalletButton from "../common/ConnectWalletButton"
 import connectWalletImg from "../../img/ic_wallet_24.svg"
 import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
-import { useLocation } from "react-router-dom"
-import useUserWindow from "../../hooks/useUserWindow"
 import { useDisconnect } from "wagmi"
 import cx from "classnames"
+import { Link, useLocation } from "react-router-dom"
 
 const Header = () => {
   const { disconnect } = useDisconnect()
+  const location = useLocation()
   const [y, setY] = useState(0)
   const [show, setShow] = useState("notShow")
-  const location = useLocation()
 
   const showMenu = () => {
     setShow(show === "show" ? "notShow" : "show")
@@ -20,14 +19,8 @@ const Header = () => {
 
   const handleNavigation = (e) => {
     const window = e.currentTarget
-    if (y > window.scrollY) {
-      console.log("scrolling up")
-    } else if (y < window.scrollY) {
-      console.log("scrolling down")
-    }
     setY(window.scrollY)
   }
-  console.log({ y })
 
   useEffect(() => {
     setY(window.scrollY)
@@ -44,27 +37,26 @@ const Header = () => {
       <header
         className={cx({
           "header flex justify-between items-center  h-16 w-full text-base ": true,
-          "border-b border-slate-700": location.pathname === "/" ? false : true
+          "border-b border-gray-700": location.pathname === "/trade" ? true : false
         })}
       >
         <div className="flex items-center">
-          <a href="/" className="flex items-center">
+          <Link to={"/"} className="flex items-center">
             <img src={VoidExchangeLogo} alt="Flowbite Logo" />
-            {/* <span className="self-center font-semibold whitespace-nowrap dark:text-white">Void Exchange</span> */}
-          </a>
+          </Link>
           <div className="w-full mobile-hidden">
             <ul className="flex menu-item justify-center ml-20 gap-x-10 items-center text-base" id="navbar-default">
               <span className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </span>
               <li className="item">
-                <a href="/vault">Earn</a>
+                <Link to={`/vault/list`}>Earn</Link>
               </li>
               <li className="item">
-                <a href="/">Dashboard</a>
+                <Link to={`/`}>Dashboard</Link>
               </li>
               <li className="item">
-                <a href="/document">Docs</a>
+                <Link to={`/document`}>Docs</Link>
               </li>
             </ul>
           </div>
@@ -98,29 +90,14 @@ const Header = () => {
         {/* responsive hambuger */}
         <div className={`rounded absolute right-5 top-20 bg-slate-700 ${show}`}>
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-400">
-            <li>
-              <a
-                href="/dashboard"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
+            <li className="item">
+              <Link to={`/`}>Dashboard</Link>
             </li>
-            <li>
-              <a
-                href="/Docs"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Docs
-              </a>
+            <li className="item">
+              <Link to={`/document`}>Docs</Link>
             </li>
-            <li>
-              <a
-                href="/Trade"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Trade
-              </a>
+            <li className="item">
+              <Link to={`/Trade`}>Trade</Link>
             </li>
             <li
               onClick={() => disconnect()}
