@@ -12,6 +12,7 @@
     "classnames": "^2.3.2",
     "ethers": "^5.7.2",
     "lightweight-charts": "^4.0.1",
+    "prop-types": "^15.8.1",
     "rc-slider": "^9.7.5",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
