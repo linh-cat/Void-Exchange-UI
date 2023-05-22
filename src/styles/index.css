@@ -33,6 +33,14 @@
     box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
 }
 
+.bg-card {
+    background-color: var(--main-card-color);
+}
+
+.bg-operacity {
+    background: rgba(0, 0, 0, 8);
+}
+
 ::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
