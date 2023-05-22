@@ -1,7 +1,6 @@
 // TradingViewWidget.jsx
 
 import React, { useEffect, useRef } from "react"
-import { defaultChartProps } from "./constant"
 
 let tvScriptLoadingPromise
 

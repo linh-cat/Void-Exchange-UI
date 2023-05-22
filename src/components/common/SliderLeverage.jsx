@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react"
+import React, { useCallback, useMemo } from "react"
 import Slider, { SliderTooltip } from "rc-slider"
 import "rc-slider/assets/index.css"
 import "./SliderLeverage.css"
@@ -97,16 +97,15 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
       return "#E43E53"
     }
   }, [value])
-  console.log({ value })
 
-  const alertContent = useMemo(() => {
-    if (value > 20 && value <= 40) {
-      return "Leverage is risky."
-    } else if (value > 40) {
-      return "Leverage is too danger."
-    }
-    return null
-  }, [value])
+  // const alertContent = useMemo(() => {
+  //   if (value > 20 && value <= 40) {
+  //     return "Leverage is risky."
+  //   } else if (value > 40) {
+  //     return "Leverage is too danger."
+  //   }
+  //   return null
+  // }, [value])
 
   const width = useMemo(() => {
     return value > 40 ? "65px" : "55px"

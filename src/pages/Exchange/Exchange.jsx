@@ -13,7 +13,6 @@ import { ORDERS } from "./constant"
 import { TRADES } from "./constant"
 import TradeHistory from "./TradeHistory"
 import cx from "classnames"
-import TradingViewCustom from "./TradingViewCustom"
 import TopInfo from "@components/TopInfo/TopInfo"
 
 const Exchange = () => {

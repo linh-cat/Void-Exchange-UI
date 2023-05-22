@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import "./InputCustom.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 const InputCustom = ({

@@ -1,11 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import "./VaultCard.css"
-import ETH from "@img/WETH.png"
 import Chart, { CategoryScale } from "chart.js/auto"
 import { useNavigate } from "react-router-dom"
 import LineChart from "@components/LineChart/LineChart"
-import cx from "classnames"
 Chart.register(CategoryScale)
 
 const VaultCard = ({ title, bg, hoverBg, icon, id }) => {

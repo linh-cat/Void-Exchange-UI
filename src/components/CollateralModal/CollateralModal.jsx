@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Fragment, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
-import { CheckIcon } from "@heroicons/react/24/outline"
 
 const OptionType = {
   UniswapLP: "UniswapLP",
@@ -47,7 +47,7 @@ export default function Example() {
     return (
       <div>
         <h2 className="mb-8">Your positions</h2>
-        <img src={base64} className="w-30 h-72" />
+        <img src={base64} className="w-30 h-72" alt="alt" />
       </div>
     )
   }

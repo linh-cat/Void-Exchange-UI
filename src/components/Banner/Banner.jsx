@@ -1,5 +1,6 @@
 import React from "react"
 import "./Banner.css"
+import { Link } from "react-router-dom"
 
 const Banner = () => {
   return (
@@ -31,9 +32,9 @@ const Banner = () => {
         <h1 className="text-5xl font-bold">Long or Short Assets</h1>
         <p className="py-3 md:py-8">Void Exchange is a perpetual futures dex for assets</p>
         <div>
-          <a className="trade-now py-3 px-5 rounded-lg font-medium" href="/trade">
+          <Link className="trade-now py-3 px-5 rounded-lg font-medium" to="/trade">
             Trade Now
-          </a>
+          </Link>
         </div>
       </div>
     </section>
