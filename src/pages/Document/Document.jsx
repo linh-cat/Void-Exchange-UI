@@ -8,7 +8,7 @@ const Document = () => {
   return (
     <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5">
       <h2 className="font-medium text-4xl">Developers</h2>
-      <div className="doc-banner relative shadow border border-slate-500 rounded">
+      <div className="doc-banner relative shadow border rounded">
         <div className="absolute top-1/2 left-0 flex flex-col gap-3 px-6">
           <h3 className="font-medium text-2xl tracking-wider">Documentation</h3>
           <div className="text-lg tracking-wider">

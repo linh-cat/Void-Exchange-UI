@@ -5,14 +5,14 @@ const CardWrapper = ({ header, children, hasShadow, className }) => {
   return (
     <div
       className={cx(className, {
-        "border border-s-slate-500 rounded flex flex-col": true,
+        "border rounded flex flex-col": true,
         shadow: hasShadow
       })}
     >
       <div
         className={cx({
           "w-full": true,
-          "border-b border-slate-700": header
+          "border-b": header
         })}
       >
         {header}

@@ -42,7 +42,7 @@ const Exchange = () => {
   }
   return (
     <div>
-      <div className="border-b border-zinc-700 place-items-center">
+      <div className="border-b place-items-center">
         <TopInfo />
       </div>
       <div className="exchange w-full h-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3">
@@ -61,7 +61,7 @@ const Exchange = () => {
               <label className="text-xs">Show History</label>
             </div>
           </div>
-          <div className="flex-1 border border-zinc-700">
+          <div className="flex-1 border">
             <div
               className={cx({
                 "xl:col-span-3 sm:col-span-5": showHistory,
@@ -77,7 +77,7 @@ const Exchange = () => {
         {/* position */}
         <div
           className={cx({
-            "position border border-gray-700 ": true,
+            "position border": true,
             "xl:row-span-1 xl:col-span-3": showHistory,
             "xl:col-span-4 xl:row-span-1": !showHistory
           })}
@@ -86,7 +86,7 @@ const Exchange = () => {
         </div>
         {/* history */}
         {showHistory && (
-          <div className="xl:col-span-1 xl:row-span-3 border-l border-b border-zinc-700">
+          <div className="xl:col-span-1 xl:row-span-3 border-l border-b">
             <LatestTrade />
           </div>
         )}

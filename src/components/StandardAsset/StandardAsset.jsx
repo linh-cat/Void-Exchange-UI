@@ -13,7 +13,7 @@ const StandardAsset = () => {
     <CardWrapper className="standard-asset mt-10 container mx-auto" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
       <table className="w-full">
-        <thead className="border-b border-slate-700 text-slate-400 text-sm md:text-sm ">
+        <thead className="border-b text-slate-400 text-sm md:text-sm ">
           <tr className="">
             <th scope="col" className="font-medium pl-3">
               <div className="pl-3">Asset</div>
@@ -33,7 +33,7 @@ const StandardAsset = () => {
           </tr>
         </thead>
         <tbody className="pt-1">
-          <tr className="border-b border-slate-700 cursor-pointer asset-item ">
+          <tr className="border-b cursor-pointer asset-item ">
             <td className="text-sm font-medium pl-5">
               <div className="flex gap-2 pl-3">
                 <img src={BTC} alt="btc" className="w-12 h-12" />
@@ -55,7 +55,7 @@ const StandardAsset = () => {
             <td className="text-sm font-medium">$1</td>
             <td className="text-sm font-medium">$67,964.57</td>
           </tr>
-          <tr className="border-b border-slate-700 cursor-pointer asset-item">
+          <tr className="border-b cursor-pointer asset-item">
             <td className="text-sm font-medium">
               <div className="flex gap-2  pl-3">
                 <img src={ETH} alt="eth" className="w-12 h-12" />
@@ -77,7 +77,7 @@ const StandardAsset = () => {
             <td className="text-sm font-medium">$1</td>
             <td className="text-sm font-medium">$67,964.57</td>
           </tr>
-          <tr className="border-b border-slate-700 cursor-pointer asset-item">
+          <tr className="border-b cursor-pointer asset-item">
             <td className="text-sm font-medium">
               <div className="flex gap-2  pl-3">
                 <img src={DogeCoin} alt="eth" className="w-12 h-12" />
@@ -99,7 +99,7 @@ const StandardAsset = () => {
             <td className="text-sm font-medium">$1</td>
             <td className="text-sm font-medium">$67,964.57</td>
           </tr>
-          <tr className="border-b border-slate-700 cursor-pointer asset-item">
+          <tr className="border-b cursor-pointer asset-item">
             <td className="text-sm font-medium">
               <div className="flex gap-2  pl-3">
                 <img src={Solana} alt="solana" className="w-12 h-12" />
@@ -121,7 +121,7 @@ const StandardAsset = () => {
             <td className="text-sm font-medium">$0</td>
             <td className="text-sm font-medium">-</td>
           </tr>
-          <tr className="border-b border-slate-700 cursor-pointer asset-item">
+          <tr className="border-b cursor-pointer asset-item">
             <td className="text-sm font-medium">
               <div className="flex gap-2  pl-3">
                 <img src={Polygon} alt="polygon" className="w-12 h-12" />

@@ -48,7 +48,7 @@ const TradeHistory = () => {
         </div>
       </div>
       <table className="w-full mt-5">
-        <thead className="border-b border-zinc-700 text-zinc-500 text-xs md:text-sm">
+        <thead className="border-b text-zinc-500 text-xs md:text-sm">
           <tr>
             <th scope="col" className="font-medium">
               Time

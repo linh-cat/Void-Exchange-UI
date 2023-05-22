@@ -3,7 +3,7 @@ import React from "react"
 const OrderList = () => {
   return (
     <table className="w-full">
-      <thead className="border-b border-zinc-700 text-zinc-500 text-xs md:text-sm">
+      <thead className="border-b text-zinc-500 text-xs md:text-sm">
         <tr>
           <th scope="col" className="font-medium">
             Time

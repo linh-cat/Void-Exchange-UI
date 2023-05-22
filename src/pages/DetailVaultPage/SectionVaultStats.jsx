@@ -7,7 +7,7 @@ const SectionVaultStats = () => {
     <div className="container mx-auto max-w-7xl mt-10">
       <div className="card-deposit-vault grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         <CardWrapper className="xl:col-span-2 relative p-3">
-          <CardWrapper className="w-40 border border-slate-500 rounded p-2 absolute left-2 top-2">
+          <CardWrapper className="w-40 border rounded p-2 absolute left-2 top-2">
             <div className="filter-bar flex justify-between">
               <div>1D</div>
               <div>1W</div>
@@ -20,7 +20,7 @@ const SectionVaultStats = () => {
             <BarChart showGrid={false} showLegend={false} showXaxis={false} showYaxis={false} labelForChart="Earn" />
           </div>
         </CardWrapper>
-        <div className="gr-info border border-slate-500 grid grid-cols-1 md:grid-cols-2 grid-rows-3 p-5 gap-5">
+        <div className="gr-info border grid grid-cols-1 md:grid-cols-2 grid-rows-3 p-5 gap-5">
           <CardWrapper className="liquidity p-3" hasShadow={true}>
             <label className="text-slate-500 text-xs">Liquidity</label>
             <div className="">$11.06m</div>

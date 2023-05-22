@@ -71,7 +71,7 @@ export default function Example() {
           {options.map((option) => (
             <div
               key={option.email}
-              className="relative flex items-center space-x-3 rounded-lg border border-zinc-700 px-3 py-1 shadow-sm hover:opacity-70"
+              className="relative flex items-center space-x-3 rounded-lg border px-3 py-1 shadow-sm hover:opacity-70"
               onClick={() => onSelectOption(option.type)}
             >
               <div className="flex-shrink-0">

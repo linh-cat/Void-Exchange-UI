@@ -67,7 +67,6 @@
 
 .blur-bg {
     background-color: rgba(0, 0, 0, .1);
-    ;
     box-shadow: 0 0.625rem 1.25rem 0 rgba(113, 113, 166, 0.2);
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
@@ -207,48 +206,20 @@ button.App-cta:disabled {
     border: 1px solid rgba(163, 165, 196, 0.2);
 }
 
-.align-right {
-    text-align: right;
-    display: flex;
-    justify-content: flex-end;
+.border-t {
+    border-top: 1px solid rgba(163, 165, 196, 0.2);
 }
 
-.muted {
-    opacity: 0.7;
+.border-b {
+    border-bottom: 1px solid rgba(163, 165, 196, 0.2);
 }
 
-.strong {
-    font-weight: bold;
+.border-l {
+    border-left: 1px solid rgba(163, 165, 196, 0.2);
 }
 
-.clickable {
-    cursor: pointer;
-}
-
-.underline {
-    text-decoration: underline;
-}
-
-.text-none {
-    text-transform: none;
-}
-
-.relative {
-    position: relative;
-}
-
-.margin-bottom {
-    margin-bottom: 0.465rem;
-}
-
-.transition-arrow {
-    vertical-align: middle;
-    margin-top: -0.31rem;
-}
-
-.label,
-.label a {
-    color: rgba(255, 255, 255, 0.7);
+.border-r {
+    border-right: 1px solid rgba(163, 165, 196, 0.2);
 }
 
 .active-tab {
@@ -261,26 +232,6 @@ a.plain {
 
 .checkbox:checked:before {
     background-color: green;
-}
-
-.default-btn {
-    background: var(--arbitrum-blue);
-    border-radius: 4px;
-    line-height: 2rem;
-    font-weight: normal;
-    letter-spacing: 0px;
-    padding: 0px 10px;
-    color: #ffffff !important;
-    display: inline-block !important;
-    text-decoration: none;
-    box-sizing: border-box;
-    position: relative;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    appearance: none;
-    text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -318,42 +269,4 @@ a.plain {
     padding-left: 3.2rem;
     padding-right: 3.2rem;
     margin: 0 auto;
-}
-
-.secondary-btn {
-    background-image: linear-gradient(to right top, #05c3af, #0096a1, #006984, #0e3f5b, #121b2d);
-    border-radius: 4px;
-    box-sizing: border-box;
-    position: relative;
-    border: none;
-    text-align: center;
-}
-
-.secondary-btn:hover {
-    background: #3fdad9;
-}
-
-
-.font-sm {
-    font-size: var(--font-sm);
-}
-
-.font-base {
-    font-size: var(--font-base);
-}
-
-.mr-base {
-    margin-right: 1.5rem;
-}
-
-.default-cursor.App-cta {
-    cursor: default;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.gap-right>*:not(:last-child) {
-    margin-right: 1rem;
 }

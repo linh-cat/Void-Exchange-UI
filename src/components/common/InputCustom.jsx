@@ -65,7 +65,7 @@ const InputCustom = ({
           </div>
         )}
       </div>
-      <div className="flex h-full items-center border border-gray-700 rounded pl-1 pr-1">
+      <div className="flex h-full items-center border rounded pl-1 pr-1">
         {leftSide && <div className="left-action">{leftSide}</div>}
         <input
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}

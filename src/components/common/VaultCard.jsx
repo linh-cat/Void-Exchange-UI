@@ -14,7 +14,7 @@ const VaultCard = ({ title, bg, hoverBg, icon, id }) => {
 
   return (
     <div
-      className={`vault-card flex flex-col w-full border rounded-lg border-slate-500 cursor-pointer overflow-hidden ${hoverBg}`}
+      className={`vault-card flex flex-col w-full border rounded-lg cursor-pointer overflow-hidden ${hoverBg}`}
       onClick={handleClick}
     >
       <div className={`vault-card-top w-full h-1/3 bg-slate-600 relative p-5 ${bg}`}>

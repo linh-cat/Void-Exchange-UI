@@ -24,7 +24,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 userSelect: "none"
               }
             })}
-            className="flex items-center border rounded px-4 border-gray-700 wallet-btn"
+            className="flex items-center border rounded px-4 wallet-btn"
           >
             {(() => {
               if (!connected) {

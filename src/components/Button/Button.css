@@ -6,6 +6,7 @@
     letter-spacing: 0px;
     color: #ffffff !important;
     box-sizing: border-box;
+    padding: 10px;
 }
 
 .default-btn:hover {
@@ -19,4 +20,17 @@
     border: none;
     box-sizing: border-box;
     overflow: hidden;
+}
+
+.secondary-btn {
+    background-image: linear-gradient(to right top, #05c3af, #0096a1, #006984, #0e3f5b, #121b2d);
+    border-radius: 4px;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    text-align: center;
+}
+
+.secondary-btn:hover {
+    background: #3fdad9;
 }

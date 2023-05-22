@@ -18,7 +18,7 @@ const LatestTrade = () => {
           </tr>
         </thead>
         <tbody className="">
-          <tr className="border-b border-zinc-800">
+          <tr className="border-b">
             <th scope="row" className="px-6 py-4 green-up">
               178.2
             </th>

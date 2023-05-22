@@ -37,7 +37,7 @@ const Header = () => {
       <header
         className={cx({
           "header flex justify-between items-center  h-16 w-full text-base ": true,
-          "border-b border-zinc-700": location.pathname === "/trade" ? true : false
+          "border-b": location.pathname === "/trade" ? true : false
         })}
       >
         <div className="flex items-center">
