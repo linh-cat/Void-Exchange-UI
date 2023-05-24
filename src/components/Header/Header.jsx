@@ -58,6 +58,9 @@ const Header = () => {
               <li className="item">
                 <Link to={`/document`}>Docs</Link>
               </li>
+              <li className="item">
+                <Link to={`/profile`}>Account</Link>
+              </li>
             </ul>
           </div>
         </div>
