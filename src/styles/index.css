@@ -263,10 +263,3 @@ a.plain {
         display: block;
     }
 }
-
-.default-container {
-    max-width: 126.4rem;
-    padding-left: 3.2rem;
-    padding-right: 3.2rem;
-    margin: 0 auto;
-}

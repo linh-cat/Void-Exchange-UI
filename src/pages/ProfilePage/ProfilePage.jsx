@@ -4,6 +4,7 @@ import React from "react"
 import BSScan from "@img/bscscan.png"
 import DogeCoin from "@img/dogecoin.png"
 import { CopyIcon } from "@icons/index"
+import Table from "@components/Table/Table"
 
 const ProfilePage = () => {
   return (
@@ -11,8 +12,8 @@ const ProfilePage = () => {
       <h3 className="text-xl font-medium">Profile Overview</h3>
 
       <CardWrapper className={"p-5"} hasShadow={true}>
-        <div className="flex justify-between">
-          <div className="flex flex-col items-center w-96">
+        <div className="flex justify-between flex-col md:flex-row">
+          <div className="flex flex-col items-center w-full xl:w-96">
             <img className="w-28 h28" src={DogeCoin} alt="Extra large avatar" />
             <div className="address text-zinc-500">
               0xe6e6ee66e....5d01232{" "}
@@ -49,7 +50,7 @@ const ProfilePage = () => {
         </div>
       </CardWrapper>
       <CardWrapper className="p-5" hasShadow={true}>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex items-center gap-5">
             <img src={BSScan} alt="bsca" className="w-10 h-10" />
             <div>
@@ -93,6 +94,10 @@ const ProfilePage = () => {
             </div>
           </div>
         </CardWrapper>
+      </div>
+      <div>
+        <h3 className="text-lg">Affiliate History</h3>
+        <Table />
       </div>
     </div>
   )
