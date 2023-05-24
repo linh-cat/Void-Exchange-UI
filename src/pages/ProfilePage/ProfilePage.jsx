@@ -8,7 +8,7 @@ import { CopyIcon } from "@icons/index"
 const ProfilePage = () => {
   return (
     <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5">
-      <h3 className="text-xl font-medium">Account Overview</h3>
+      <h3 className="text-xl font-medium">Profile Overview</h3>
 
       <CardWrapper className={"p-5"} hasShadow={true}>
         <div className="flex justify-between">
