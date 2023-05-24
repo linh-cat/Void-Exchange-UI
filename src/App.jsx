@@ -11,6 +11,7 @@ import DetailVaultPage from "./pages/DetailVaultPage/index"
 import Document from "./pages/Document/Document"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
+import ProfilePage from "./pages/ProfilePage/ProfilePage"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -50,6 +51,7 @@ const FullApp = () => {
             </div>
           }
         />
+        <Route path="profile" element={<ProfilePage />} />
         <Route
           path="vault"
           element={
