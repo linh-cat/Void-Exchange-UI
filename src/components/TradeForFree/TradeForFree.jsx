@@ -1,6 +1,7 @@
 import React from "react"
 import "./TradeForFree.css"
 import TradingIMG from "@img/trade-img.png"
+import Button from "@components/Button/Button"
 const TradeForFree = () => {
   return (
     <section className="trade-for-free mt-10">
@@ -18,9 +19,9 @@ const TradeForFree = () => {
             control over their funds. As the world becomes more decentralized, decentralized trading is poised to become
             the norm, and it offers an exciting future for the cryptocurrency industry.
           </p>
-          <a className="mt-5 text-lg px-5 py-3 rounded-md" href="/">
-            Learn More
-          </a>
+          <div className="w-1/2 mt-3">
+            <Button text="Learn More" className="inline-block" type="secondary" />
+          </div>
         </div>
         <div className="right-side relative col-span-2">
           <img

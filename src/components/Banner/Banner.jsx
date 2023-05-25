@@ -1,6 +1,7 @@
 import React from "react"
 import "./Banner.css"
 import { Link } from "react-router-dom"
+import Button from "@components/Button/Button"
 
 const Banner = () => {
   return (
@@ -31,10 +32,8 @@ const Banner = () => {
       <div className="banner-container">
         <h1 className="text-5xl font-bold">Long or Short Assets</h1>
         <p className="py-3 md:py-8">Void Exchange is a perpetual futures dex for assets</p>
-        <div>
-          <Link className="trade-now py-3 px-5 rounded-lg font-medium" to="/trade">
-            Trade Now
-          </Link>
+        <div className="w-1/2">
+          <Button text="Trade Now" className="inline-block" type="secondary" />
         </div>
       </div>
     </section>

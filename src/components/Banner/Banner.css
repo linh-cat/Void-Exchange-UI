@@ -12,12 +12,6 @@
     transform: translate(-50%, -50%);
 }
 
-.banner-db .banner-container .trade-now {
-    display: inline-flex;
-    background: linear-gradient(150deg, #323943, #4F7D89 15%, #2193A7 25%, #189FD9, #1E84DF 50%, #232374 85%, #181C27 100%);
-    letter-spacing: 3px;
-}
-
 .animation-container {
     position: relative;
     overflow: hidden;
