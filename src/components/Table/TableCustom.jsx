@@ -51,7 +51,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
       <div className="w-full overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="tracking-wide text-left border-b text-zinc-500">
+            <tr className="tracking-wide text-left border-b text-slate-500">
               {columnDef.map((item) => (
                 <th className="px-4 py-1" key={item?.field}>
                   <p className="font-normal">{item?.headerName}</p>
