@@ -1,13 +1,14 @@
 import React from "react"
 import cx from "classnames"
 
-const CardWrapper = ({ header, children, hasShadow, className }) => {
+const CardWrapper = ({ header, children, hasShadow, className, style }) => {
   return (
     <div
       className={cx(className, {
         "border rounded flex flex-col": true,
         shadow: hasShadow
       })}
+      style={style}
     >
       <div
         className={cx({

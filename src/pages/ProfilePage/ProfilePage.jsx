@@ -5,6 +5,7 @@ import BSScan from "@img/bscscan.png"
 import DogeCoin from "@img/dogecoin.png"
 import { CopyIcon } from "@icons/index"
 import APE from "@img/ape.png"
+import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
 
 const columnDef = [
@@ -28,12 +29,15 @@ const columnDef = [
 
 const ProfilePage = () => {
   return (
-    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5">
+    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 ">
       <h3 className="text-xl font-medium">Profile Overview</h3>
-
-      <CardWrapper className={"p-5"} hasShadow={true}>
-        <div className="flex justify-between flex-col md:flex-row">
-          <div className="flex flex-col items-center w-full xl:w-96">
+      <div
+        className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
+        style={{ backgroundImage: `url(${Mobo})` }}
+      ></div>
+      <CardWrapper className={"p-5"}>
+        <div className="flex justify-between flex-col md:flex-row ">
+          <div className="flex flex-col items-center w-full xl:w-96 bg-none">
             <img className="w-20 h-20 rounded-full" src={APE} alt="Extra large avatar" />
             <div className="address text-zinc-500">
               0xe6e6ee66e....5d01232{" "}
@@ -43,7 +47,7 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-10 bg-none">
             <div className="ballance-wallet flex flex-col gap-3">
               <label className="text-zinc-500 text-lg">Wallet Ballance</label>
               <div className="flex items-center gap-2">
