@@ -14,7 +14,13 @@ const dataTest = [
 const columnDefEx = [
   {
     field: "name",
-    headerName: "Name"
+    headerName: "Name",
+    cellRenderer: (val) => {
+      return val
+    },
+    formatter: (val) => {
+      return val
+    }
   },
   {
     field: "age",
@@ -47,7 +53,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
           <thead>
             <tr className="tracking-wide text-left border-b text-zinc-500">
               {columnDef.map((item) => (
-                <th className="px-4 py-1">
+                <th className="px-4 py-1" key={item?.field}>
                   <p className="font-normal">{item?.headerName}</p>
                 </th>
               ))}
@@ -55,10 +61,13 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
           </thead>
           <tbody className="">
             {data.map((item) => (
-              <tr className="" key={item}>
+              <tr className="" key={item?.id}>
                 {columnDef.map((h) => {
                   if (h.cellRenderer) {
                     return <td className="px-4 py-3 text-sm">{h.cellRenderer(item)}</td>
+                  }
+                  if (h.formatter) {
+                    return <td className="px-4 py-3 text-sm">{h.formatter(item)}</td>
                   }
                   return <td className="px-4 py-3 text-sm">{item?.[h?.field]}</td>
                 })}

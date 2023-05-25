@@ -1,5 +1,4 @@
 import React from "react"
-import "./StandardAsset.css"
 import BTC from "@img/btc.png"
 import ETH from "@img/WETH.png"
 import DogeCoin from "@img/dogecoin.png"
@@ -7,144 +6,143 @@ import Solana from "@img/solana.png"
 import Polygon from "@img/polygon.png"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
+import TableCustom from "@components/Table/TableCustom"
+import cx from "classnames"
 
+const columnDef = [
+  {
+    field: "asset",
+    headerName: "Asset",
+    cellRenderer: (cell) => {
+      return (
+        <div className="flex gap-2 items-center">
+          <img src={cell?.img} alt={cell?.asset} className="w-6 h-6 md:w-12 md:h-12" />
+          <div>
+            <label>{cell?.asset}</label>
+            <div className="text-slate-400">{cell?.acronym}</div>
+          </div>
+        </div>
+      )
+    }
+  },
+  {
+    field: "price",
+    headerName: "Price",
+    formatter: (cell) => {
+      let formatting_options = {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      }
+      let dollarString = new Intl.NumberFormat("en-US", formatting_options)
+      let finalString = dollarString.format(cell?.price)
+      return finalString
+    }
+  },
+  {
+    field: "24h",
+    headerName: "24h Change",
+    cellRenderer: (cell) => {
+      let percentFormat = parseFloat(cell?.["24h"] * 100).toFixed(1) + "%"
+      return (
+        <div className="flex flex-col">
+          <div className="flex gap-2">
+            <img
+              src={cell?.["24h"] > 0 ? DownIconGreen : DownIconRed}
+              alt="down"
+              className={cx({
+                rotate180: cell?.["24h"] > 0
+              })}
+            />
+            <div
+              className={cx({
+                "red-down": cell?.["24h"] < 0,
+                "green-up": cell?.["24h"] > 0
+              })}
+            >
+              {percentFormat}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  },
+  {
+    field: "volume",
+    headerName: "24h Volume"
+  },
+  {
+    field: "openInterest",
+    headerName: "Open Interest",
+    formatter: (cell) => {
+      let formatting_options = {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      }
+      let dollarString = new Intl.NumberFormat("en-US", formatting_options)
+      let finalString = dollarString.format(cell?.openInterest)
+      return finalString
+    }
+  }
+]
+const dataForTable = [
+  {
+    id: 1,
+    img: BTC,
+    asset: "Bitcoin",
+    acronym: "BTC",
+    price: 2999124,
+    "24h": 1,
+    volume: 1123424,
+    openInterest: 6796457
+  },
+  {
+    id: 2,
+    img: ETH,
+    asset: "Ethereum",
+    acronym: "ETH",
+    price: 185602,
+    "24h": -0.79,
+    volume: 16576863,
+    openInterest: 112634556
+  },
+  {
+    id: 3,
+    img: DogeCoin,
+    asset: "Dogecoin",
+    acronym: "Doge",
+    price: 1,
+    "24h": 2,
+    volume: 1123434,
+    openInterest: 12563563
+  },
+  {
+    id: 4,
+    img: Solana,
+    asset: "Solana",
+    acronym: "Sol",
+    price: 299999,
+    "24h": -1,
+    volume: 121234341,
+    openInterest: 34635435
+  },
+  {
+    id: 5,
+    img: Polygon,
+    asset: "Polygon",
+    acronym: "Matic",
+    price: 111111,
+    "24h": 4,
+    volume: 12324354,
+    openInterest: 67956122
+  }
+]
 const StandardAsset = () => {
   return (
     <CardWrapper className="standard-asset mt-10 container mx-auto" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
-      <table className="w-full">
-        <thead className="border-b text-slate-400 text-sm md:text-sm ">
-          <tr className="">
-            <th scope="col" className="font-medium pl-3">
-              <div className="pl-3">Asset</div>
-            </th>
-            <th scope="col" className="font-medium">
-              Price
-            </th>
-            <th scope="col" className="font-medium">
-              24h Change
-            </th>
-            <th scope="col" className=" font-medium">
-              24h Volumn
-            </th>
-            <th scope="col" className=" font-medium">
-              Open Interest
-            </th>
-          </tr>
-        </thead>
-        <tbody className="pt-1">
-          <tr className="border-b cursor-pointer asset-item ">
-            <td className="text-sm font-medium pl-5">
-              <div className="flex gap-2 pl-3">
-                <img src={BTC} alt="btc" className="w-12 h-12" />
-                <div>
-                  <label>Bitcoin</label>
-                  <div className="text-slate-400">BTC</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$29,991.24</td>
-            <td className="text-sm font-medium red-down">
-              <div className="flex flex-col">
-                <div className="flex gap-2">
-                  <img src={DownIconRed} alt="down icon" />
-                  <div className="">-0.79%</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$1</td>
-            <td className="text-sm font-medium">$67,964.57</td>
-          </tr>
-          <tr className="border-b cursor-pointer asset-item">
-            <td className="text-sm font-medium">
-              <div className="flex gap-2  pl-3">
-                <img src={ETH} alt="eth" className="w-12 h-12" />
-                <div>
-                  <label>Ethereum</label>
-                  <div className="text-slate-400">ETH</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$1,867.87</td>
-            <td className="text-sm font-medium red-down">
-              <div className="flex flex-col">
-                <div className="flex gap-2">
-                  <img src={DownIconRed} alt="down" />
-                  <div className="">-1.70%</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$1</td>
-            <td className="text-sm font-medium">$67,964.57</td>
-          </tr>
-          <tr className="border-b cursor-pointer asset-item">
-            <td className="text-sm font-medium">
-              <div className="flex gap-2  pl-3">
-                <img src={DogeCoin} alt="eth" className="w-12 h-12" />
-                <div>
-                  <label>Dogecoin</label>
-                  <div className="text-slate-400">DOGE</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$1</td>
-            <td className="text-sm font-medium green-up">
-              <div className="flex flex-col">
-                <div className="flex gap-2">
-                  <img src={DownIconGreen} alt="up" className="rotate180" />
-                  <div className="">100%</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$1</td>
-            <td className="text-sm font-medium">$67,964.57</td>
-          </tr>
-          <tr className="border-b cursor-pointer asset-item">
-            <td className="text-sm font-medium">
-              <div className="flex gap-2  pl-3">
-                <img src={Solana} alt="solana" className="w-12 h-12" />
-                <div>
-                  <label>Solana</label>
-                  <div className="text-slate-400">SOL</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$22.6900</td>
-            <td className="text-sm font-medium green-up">
-              <div className="flex flex-col">
-                <div className="flex gap-2">
-                  <img src={DownIconGreen} alt="up" className="rotate180" />
-                  <div className="">5.52%</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$0</td>
-            <td className="text-sm font-medium">-</td>
-          </tr>
-          <tr className="border-b cursor-pointer asset-item">
-            <td className="text-sm font-medium">
-              <div className="flex gap-2  pl-3">
-                <img src={Polygon} alt="polygon" className="w-12 h-12" />
-                <div>
-                  <label>Polygon</label>
-                  <div className="text-slate-400">MATIC</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$17.8200</td>
-            <td className="text-sm font-medium red-down">
-              <div className="flex flex-col">
-                <div className="flex gap-2">
-                  <img src={DownIconRed} alt="down" />
-                  <div className="">-2.22%</div>
-                </div>
-              </div>
-            </td>
-            <td className="text-sm font-medium">$0</td>
-            <td className="text-sm font-medium">$15,115</td>
-          </tr>
-        </tbody>
-      </table>
+      <TableCustom columnDef={columnDef} data={dataForTable} />
     </CardWrapper>
   )
 }
