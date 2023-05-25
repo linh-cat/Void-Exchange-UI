@@ -4,7 +4,27 @@ import React from "react"
 import BSScan from "@img/bscscan.png"
 import DogeCoin from "@img/dogecoin.png"
 import { CopyIcon } from "@icons/index"
-import Table from "@components/Table/Table"
+import APE from "@img/ape.png"
+import TableCustom from "@components/Table/TableCustom"
+
+const columnDef = [
+  {
+    field: "account",
+    headerName: "Account",
+    cellRenderer: (cell) => {
+      return (
+        <div className="flex items-center gap-3">
+          <img src={APE} alt="ape" className="w-10 h-10 rounded" />
+          <div>{cell?.account}</div>
+        </div>
+      )
+    }
+  },
+  {
+    field: "date",
+    headerName: "Date"
+  }
+]
 
 const ProfilePage = () => {
   return (
@@ -14,7 +34,7 @@ const ProfilePage = () => {
       <CardWrapper className={"p-5"} hasShadow={true}>
         <div className="flex justify-between flex-col md:flex-row">
           <div className="flex flex-col items-center w-full xl:w-96">
-            <img className="w-28 h28" src={DogeCoin} alt="Extra large avatar" />
+            <img className="w-20 h-20 rounded-full" src={APE} alt="Extra large avatar" />
             <div className="address text-zinc-500">
               0xe6e6ee66e....5d01232{" "}
               <span className="inline-block cursor-pointer">
@@ -97,7 +117,9 @@ const ProfilePage = () => {
       </div>
       <div>
         <h3 className="text-lg">Affiliate History</h3>
-        <Table />
+        <div className="w-full md:w-1/2 ">
+          <TableCustom columnDef={columnDef} data={[{ account: "11e324e...121231", date: "13 May 2023", avt: "" }]} />
+        </div>
       </div>
     </div>
   )
