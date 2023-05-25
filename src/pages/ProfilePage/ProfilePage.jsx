@@ -122,7 +122,11 @@ const ProfilePage = () => {
       <div>
         <h3 className="text-lg">Affiliate History</h3>
         <div className="w-full md:w-1/2 ">
-          <TableCustom columnDef={columnDef} data={[{ account: "11e324e...121231", date: "13 May 2023", avt: "" }]} />
+          <TableCustom
+            columnDef={columnDef}
+            data={[{ account: "11e324e...121231", date: "13 May 2023", avt: "" }]}
+            cellStyle="p-3 "
+          />
         </div>
       </div>
     </div>
