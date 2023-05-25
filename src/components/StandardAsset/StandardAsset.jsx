@@ -69,7 +69,17 @@ const columnDef = [
   },
   {
     field: "volume",
-    headerName: "24h Volume"
+    headerName: "24h Volume",
+    formatter: (cell) => {
+      let formatting_options = {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      }
+      let dollarString = new Intl.NumberFormat("en-US", formatting_options)
+      let finalString = dollarString.format(cell?.volume)
+      return finalString
+    }
   },
   {
     field: "openInterest",
