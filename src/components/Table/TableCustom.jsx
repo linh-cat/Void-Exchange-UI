@@ -64,12 +64,12 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
               <tr className="" key={item?.id}>
                 {columnDef.map((h) => {
                   if (h.cellRenderer) {
-                    return <td className="px-4 py-3 text-sm">{h.cellRenderer(item)}</td>
+                    return <td className="px-4 py-4 text-sm">{h.cellRenderer(item)}</td>
                   }
                   if (h.formatter) {
-                    return <td className="px-4 py-3 text-sm">{h.formatter(item)}</td>
+                    return <td className="px-4 py-4 text-sm">{h.formatter(item)}</td>
                   }
-                  return <td className="px-4 py-3 text-sm">{item?.[h?.field]}</td>
+                  return <td className="px-4 py-4 text-sm">{item?.[h?.field]}</td>
                 })}
               </tr>
             ))}
