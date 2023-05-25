@@ -9,4 +9,5 @@ import CloudIcon from "./Cloud.svg"
 import ComputerIcon from "./Computer.svg"
 import GithubMarkIcon from "./github-mark.svg"
 import CopyIcon from "./Copy.svg"
-export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon, GithubMarkIcon, CopyIcon };
+import CancelIcon from "./Cancel.svg"
+export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon, GithubMarkIcon, CopyIcon, CancelIcon };

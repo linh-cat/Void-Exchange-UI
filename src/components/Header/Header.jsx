@@ -6,6 +6,7 @@ import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
 import { useDisconnect } from "wagmi"
 import cx from "classnames"
 import { Link, useLocation } from "react-router-dom"
+import { CancelIcon } from "@icons/index"
 
 const Header = () => {
   const { disconnect } = useDisconnect()
@@ -91,22 +92,22 @@ const Header = () => {
           </button>
         </div>
         {/* responsive hambuger */}
-        <div className={`rounded absolute right-5 top-20 bg-slate-700 ${show}`}>
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-400">
-            <li className="item">
+        <div className={`rounded absolute left-0 top-0 w-full z-50 bg-slate-300 ${show} bg-card`}>
+          <div className="absolute right-0">
+            <img src={CancelIcon} alt="cencel" className="w-10 h-10 cursor-pointer" onClick={showMenu} />
+          </div>
+          <ul className="py-2 text-sm flex flex-col gap-5 mt-5">
+            <li className="item px-3 py-3">
+              <Link to={`/vault/list`}>Earn</Link>
+            </li>
+            <li className="item px-3 py-3">
               <Link to={`/`}>Dashboard</Link>
             </li>
-            <li className="item">
+            <li className="item px-3 py-3">
               <Link to={`/document`}>Docs</Link>
             </li>
-            <li className="item">
-              <Link to={`/Trade`}>Trade</Link>
-            </li>
-            <li
-              onClick={() => disconnect()}
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Disconnect
+            <li className="item px-3 py-3">
+              <Link to={`/profile`}>Profile</Link>
             </li>
           </ul>
         </div>
