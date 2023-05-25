@@ -1,9 +1,10 @@
 import React from "react"
 import "./Banner.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
 
 const Banner = () => {
+  const navigate = useNavigate()
   return (
     <section className="banner-db animation-container">
       {/* <div class="lightning-container">
@@ -33,7 +34,7 @@ const Banner = () => {
         <h1 className="text-5xl font-bold">Long or Short Assets</h1>
         <p className="py-3 md:py-8">Void Exchange is a perpetual futures dex for assets</p>
         <div className="w-1/2">
-          <Button text="Trade Now" className="inline-block" type="secondary" />
+          <Button text="Trade Now" className="inline-block" type="secondary" onClick={() => navigate("/trade")} />
         </div>
       </div>
     </section>
