@@ -16,7 +16,8 @@ const InputCustom = ({
   value,
   type,
   min,
-  max
+  max,
+  headerAction
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
 
@@ -56,6 +57,7 @@ const InputCustom = ({
             <div className="tooltip p-3 rounded">{tooltip}</div>
           </div>
         )}
+        {headerAction}
         {showUsd && value && (
           <div
             className="text-xs 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
 import BTC from "@img/btc.png"
 import BNB from "@img/CAKE.png"
@@ -7,13 +7,29 @@ import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
+import SwitchButton from "@components/SwitchButton/SwitchButton"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
+  const [toggle, setToggle] = useState(false)
+  const [collateralModal, setCollateralModal] = useState(false)
+
+  const onChangeToggle = () => {
+    setToggle(!toggle)
+  }
+
+  useEffect(() => {
+    if (!collateralModal) {
+      setToggle(false)
+    }
+  }, [collateralModal])
+  useEffect(() => {
+    setCollateralModal(toggle)
+  }, [toggle])
 
   return (
     <>
-      <CollateralModal />
+      <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
@@ -32,9 +48,10 @@ const OrderBox = ({ type }) => {
             <InputCustom label="Price" placeHolder={"0.0"} classNameInput="p-2" />
           </div>
         </div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="mt-3 2xl:mt-5 relative">
           <InputCustom
             label="Pay"
+            headerAction={<SwitchButton onChange={onChangeToggle} value={toggle} />}
             leftSide={
               <SelectToken
                 options={[
