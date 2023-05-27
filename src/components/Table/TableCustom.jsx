@@ -21,7 +21,8 @@ const columnDefEx = [
     formatter: (val) => {
       return val
     },
-    classname: ""
+    classname: "",
+    headerClassName: ""
   },
   {
     field: "age",
@@ -52,9 +53,15 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
       <div className="w-full overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="tracking-wide text-left border-b text-slate-500">
+            <tr className="tracking-wide border-b text-slate-500">
               {columnDef.map((item) => (
-                <th className="px-4 py-1" key={item?.field}>
+                <th
+                  className={cx({
+                    "px-4 py-1": true,
+                    [item.headerClassName]: Boolean(item.headerClassName)
+                  })}
+                  key={item?.field}
+                >
                   <p className="font-normal">{item?.headerName}</p>
                 </th>
               ))}
@@ -62,7 +69,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
           </thead>
           <tbody className="">
             {data.map((item) => (
-              <tr className="" key={item?.id}>
+              <tr className="text-center" key={item?.id}>
                 {columnDef.map((h) => {
                   if (h.cellRenderer) {
                     return (

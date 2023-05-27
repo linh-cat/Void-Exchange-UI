@@ -13,11 +13,12 @@ const columnDef = [
   {
     field: "asset",
     headerName: "Asset",
+    headerClassName: "text-left",
     cellRenderer: (cell) => {
       return (
         <div className="flex gap-2 items-center">
           <img src={cell?.img} alt={cell?.asset} className="w-6 h-6 md:w-12 md:h-12" />
-          <div>
+          <div className="text-left">
             <label>{cell?.asset}</label>
             <div className="text-slate-400">{cell?.acronym}</div>
           </div>
@@ -45,8 +46,8 @@ const columnDef = [
     cellRenderer: (cell) => {
       let percentFormat = parseFloat(cell?.["24h"] * 100).toFixed(1) + "%"
       return (
-        <div className="flex flex-col">
-          <div className="flex gap-2">
+        <div className="flex flex-col ">
+          <div className="flex gap-2 justify-center">
             <img
               src={cell?.["24h"] > 0 ? DownIconGreen : DownIconRed}
               alt="down"
