@@ -6,8 +6,8 @@ import CardWrapper from "@components/CardWrapper/CardWrapper"
 import BTC from "@img/btc.png"
 import ETH from "@img/WETH.png"
 import Matic from "@img/matic.png"
-import USDC from "@img/usdc.png"
-import USDT from "@img/usdt.png"
+import Polygon from "@img/polygon.png"
+import Solana from "@img/solana.png"
 import { DownIconGreen } from "@icons/index"
 import { DownIconRed } from "@icons/index"
 
@@ -50,11 +50,11 @@ const Banner = () => {
           />
         </div>
 
-        <CardWrapper className="banner-info-token p-3 mt-20" hasShadow={true}>
-          <div className="flex flex-col gap-3">
+        <CardWrapper className="banner-info-token p-8 mt-20" hasShadow={true}>
+          <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
-            <div className="token grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5">
-              <div className="item flex items-center gap-3">
+            <div className="token grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
+              <div className="item flex items-center gap-3 justify-center">
                 <img src={BTC} alt="btc" className="w-8 h-8" />
                 <div className="token-info text-sm">
                   <label className="">WBTC</label>
@@ -67,7 +67,7 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3">
+              <div className="item flex items-center gap-3 justify-center">
                 <img src={ETH} alt="eth" className="w-8 h-8" />
                 <div className="token-info text-sm">
                   <label className="">WETH</label>
@@ -80,7 +80,7 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3">
+              <div className="item flex items-center gap-3 justify-center">
                 <img src={Matic} alt="Matic" className="w-8 h-8" />
                 <div className="token-info text-sm">
                   <label className="">MATIC</label>
@@ -93,10 +93,10 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3">
-                <img src={USDC} alt="btc" className="w-8 h-8" />
+              <div className="item flex items-center gap-3 justify-center">
+                <img src={Solana} alt="Solana" className="w-8 h-8" />
                 <div className="token-info text-sm">
-                  <label className="">USDC</label>
+                  <label className="">Solana</label>
                   <div className="flex items-center gap-3">
                     <div>$1</div>
                     <div className="flex items-center gap-1">
@@ -106,10 +106,10 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3">
-                <img src={USDT} alt="USDT" className="w-8 h-8" />
+              <div className="item flex justify-center items-center gap-3">
+                <img src={Polygon} alt="Polygon" className="w-8 h-8" />
                 <div className="token-info text-sm">
-                  <label className="">USDT</label>
+                  <label className="">Polygon</label>
                   <div className="flex items-center gap-3">
                     <div>$1</div>
                     <div className="flex items-center gap-1">
