@@ -54,68 +54,73 @@ const Banner = () => {
           <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
             <div className="token grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
-              <div className="item flex items-center gap-3 justify-center">
-                <img src={BTC} alt="btc" className="w-8 h-8" />
-                <div className="token-info text-sm">
-                  <label className="">WBTC</label>
-                  <div className="flex items-center gap-3">
-                    <div>$100,000.00</div>
-                    <div className="flex items-center gap-1">
-                      <img src={DownIconGreen} alt="down" className="rotate-180" />
-                      <label className="green-up">1,53%</label>
-                    </div>
+              <div className="item flex justify-center">
+                <div className="flex gap-3 w-5/6 justify-between items-center">
+                  <img src={BTC} alt="BTC" className="w-8 h-8" />
+                  <div className="text-sm">
+                    <label>WBTC</label>
+                    <div>$27,985.92</div>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-sm">
+                    <img src={DownIconGreen} alt="down" className="rotate-180" />
+                    <label className="green-up">+5.6</label>
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3 justify-center">
-                <img src={ETH} alt="eth" className="w-8 h-8" />
-                <div className="token-info text-sm">
-                  <label className="">WETH</label>
-                  <div className="flex items-center gap-3">
-                    <div>$1,845.93</div>
-                    <div className="flex items-center gap-1">
-                      <img src={DownIconGreen} alt="down" className="rotate-180" />
-                      <label className="green-up">1,53%</label>
-                    </div>
+              <div className="item flex justify-center">
+                <div className="flex gap-3 w-5/6 justify-between items-center">
+                  <img src={ETH} alt="ETH" className="w-8 h-8" />
+                  <div className="text-sm">
+                    <label className="">WETH</label>
+                    <div>$1,8324.95</div>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-sm">
+                    <img src={DownIconGreen} alt="down" className="rotate-180" />
+                    <label className="green-up">+0.1</label>
                   </div>
                 </div>
               </div>
-              <div className="item flex items-center gap-3 justify-center">
-                <img src={Matic} alt="Matic" className="w-8 h-8" />
-                <div className="token-info text-sm">
-                  <label className="">MATIC</label>
-                  <div className="flex items-center gap-3">
-                    <div>$0.917</div>
-                    <div className="flex items-center gap-1">
-                      <img src={DownIconGreen} alt="down" className="rotate-180" />
-                      <label className="green-up">2.14%</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item flex items-center gap-3 justify-center">
-                <img src={Solana} alt="Solana" className="w-8 h-8" />
-                <div className="token-info text-sm">
-                  <label className="">Solana</label>
-                  <div className="flex items-center gap-3">
+              <div className="item flex justify-center">
+                <div className="flex gap-3 w-5/6 justify-between items-center">
+                  <img src={Matic} alt="Matic" className="w-8 h-8 border rounded-full" />
+                  <div className="text-sm">
+                    <label className="">MATIC</label>
                     <div>$1</div>
-                    <div className="flex items-center gap-1">
-                      <img src={DownIconRed} alt="down" className="rotate-180" />
-                      <label className="red-down">-0.01</label>
-                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-sm">
+                    <img src={DownIconRed} alt="down" className="" />
+                    <label className="red-down">-0.01</label>
                   </div>
                 </div>
               </div>
-              <div className="item flex justify-center items-center gap-3">
-                <img src={Polygon} alt="Polygon" className="w-8 h-8" />
-                <div className="token-info text-sm">
-                  <label className="">Polygon</label>
-                  <div className="flex items-center gap-3">
-                    <div>$1</div>
-                    <div className="flex items-center gap-1">
-                      <img src={DownIconRed} alt="down" className="rotate-180" />
-                      <label className="red-down">-0.01</label>
-                    </div>
+              <div className="item flex justify-center">
+                <div className="flex gap-3 w-5/6 justify-between items-center">
+                  <img src={Solana} alt="Solana" className="w-8 h-8" />
+                  <div className="text-sm">
+                    <label className="">Solana</label>
+                    <div>$12,123.234</div>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-sm">
+                    <img src={DownIconRed} alt="down" className="" />
+                    <label className="red-down">-0.07</label>
+                  </div>
+                </div>
+              </div>
+              <div className="item flex justify-center">
+                <div className="flex gap-3 w-5/6 justify-between items-center">
+                  <img src={Polygon} alt="Polygon" className="w-8 h-8" />
+                  <div className="text-sm">
+                    <label className="">Polygon</label>
+                    <div>$27,985.92</div>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-sm">
+                    <img src={DownIconRed} alt="down" className="" />
+                    <label className="red-down">-0.9</label>
                   </div>
                 </div>
               </div>
