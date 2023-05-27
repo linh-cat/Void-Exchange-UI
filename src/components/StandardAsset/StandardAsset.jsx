@@ -150,7 +150,7 @@ const dataForTable = [
 ]
 const StandardAsset = () => {
   return (
-    <CardWrapper className="standard-asset mt-10 container mx-auto" hasShadow={true}>
+    <CardWrapper className="standard-asset mt-10 container mx-auto p-5" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
       <TableCustom columnDef={columnDef} data={dataForTable} cellStyle="px-3 py-4 border-b" />
     </CardWrapper>
