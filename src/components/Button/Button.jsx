@@ -12,7 +12,7 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type }) => {
       })}
       onClick={onClick}
     >
-      <div>{icon}</div>
+      {icon && <div>{icon}</div>}
       <div>{text}</div>
     </div>
   )

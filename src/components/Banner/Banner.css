@@ -1,15 +1,17 @@
 .banner-db {
     position: relative;
-    height: 60vh;
+    height: 70vh;
     width: 100%;
     background: url("../../img/decor-wave-bg.png") right top no-repeat;
 }
+
 
 .banner-db .banner-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 70%;
 }
 
 .animation-container {
