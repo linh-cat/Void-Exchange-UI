@@ -119,6 +119,23 @@ html, body {
     background: #181C27 !important;
 }
 
+.vh-full-screen {
+    height: 93vh;
+    overflow-y: scroll;
+}
+
+.vh-3 {
+    height: 3vh;
+}
+
+.vh-90 {
+    height: 90vh;
+}
+
+.vh-full-screen::-webkit-scrollbar {
+    display: none;
+}
+
 .active {
     background: var(--bg-linear-active)
 }

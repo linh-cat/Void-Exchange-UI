@@ -1,4 +1,6 @@
 .header {
     padding: 0px 50px;
     color: var(--main-gray-color) !important;
+    height: 7vh;
+    line-height: 7vh;
 }

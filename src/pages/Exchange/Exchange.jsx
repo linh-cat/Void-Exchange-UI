@@ -40,12 +40,13 @@ const Exchange = () => {
       </div>
     )
   }
+
   return (
-    <div>
-      <div className="border-b place-items-center">
+    <>
+      <div className="border-b place-items-center vh-3">
         <TopInfo />
       </div>
-      <div className="exchange w-full h-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3">
+      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3 vh-90">
         {/* left side chart and infor bar */}
         <div
           className={cx({
@@ -95,7 +96,7 @@ const Exchange = () => {
           <TabExchange defaultValue="long" />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

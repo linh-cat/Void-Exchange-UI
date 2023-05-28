@@ -37,16 +37,23 @@ const FullApp = () => {
         <Route
           path="/"
           element={
-            <div className="app-dashboard">
+            <div>
               <Dashboard />
             </div>
           }
         />
-        <Route path="trade" element={<Exchange />} />
+        <Route
+          path="trade"
+          element={
+            <div className="vh-full-screen">
+              <Exchange />
+            </div>
+          }
+        />
         <Route
           path="document"
           element={
-            <div className="app-dashboard">
+            <div>
               <Document />
             </div>
           }
@@ -55,7 +62,7 @@ const FullApp = () => {
         <Route
           path="vault"
           element={
-            <div className="app-dashboard">
+            <div>
               <VaultPage />
             </div>
           }
