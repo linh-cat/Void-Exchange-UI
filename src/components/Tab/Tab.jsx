@@ -17,7 +17,7 @@ const Tab = ({ options, className, optionLabels, option, setOption, onChange }) 
         const label = optionLabels && optionLabels[opt] ? optionLabels[opt] : opt
         return (
           <div
-            className={cx({ active: opt === option }, "font-medium cursor-pointer")}
+            className={cx({ active: opt === option }, "font-medium cursor-pointer text-sm")}
             onClick={() => onClick(opt)}
             key={opt}
           >

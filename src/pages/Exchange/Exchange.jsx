@@ -44,55 +44,51 @@ const Exchange = () => {
   return (
     <>
       <TopInfo />
-      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90">
+      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border">
         {/* left side chart and infor bar */}
         <div
           className={cx({
-            "xl:col-span-3": showHistory,
-            "xl:col-span-4": !showHistory,
-            "left-side xl:row-span-3 xl:flex xl:flex-col vh-70": true
+            "left-side xl:flex xl:flex-col xl:col-span-4": true
           })}
         >
-          <div className="relative">
-            <InforBarChar />
-            <div className="flex items-center absolute top-1/3 right-2">
-              <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
-              <label className="text-xs">Show History</label>
-            </div>
-          </div>
-          <div className="flex-1 border">
+          <div className="grid grid-cols-1 xl:grid-cols-4 vh-70">
             <div
               className={cx({
-                "xl:col-span-3 sm:col-span-5": showHistory,
+                "xl:col-span-3": showHistory,
                 "xl:col-span-4": !showHistory,
-                "h-96 lg:h-full relative": true
+                "flex flex-col": true
               })}
             >
-              <TradingViewChart />
+              <div className="relative">
+                <InforBarChar />
+                <div className="flex items-center absolute top-1/3 right-2">
+                  <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
+                  <label className="text-xs">Show History</label>
+                </div>
+              </div>
+              <div className="flex-1">
+                <TradingViewChart />
+              </div>
             </div>
+            {/* history */}
+            {showHistory && (
+              <div className="border-l border-b">
+                <LatestTrade />
+              </div>
+            )}
+          </div>
+
+          {/* position */}
+          <div
+            className={cx({
+              "flex-1": true
+            })}
+          >
+            {renderListSections()}
           </div>
         </div>
-
-        {/* position */}
-        <div
-          className={cx({
-            "position border flex-1": true,
-            "xl:row-span-1 xl:col-span-3": showHistory,
-            "xl:col-span-4 xl:row-span-1": !showHistory
-          })}
-        >
-          {renderListSections()}
-        </div>
-
-        {/* history */}
-        {showHistory && (
-          <div className="xl:col-span-1 xl:row-span-3 border-l border-b">
-            <LatestTrade />
-          </div>
-        )}
-
         {/* order box */}
-        <div className="xl:col-span-1 xl:row-span-4 right-side">
+        <div className="xl:col-span-1 right-side">
           <TabExchange defaultValue="long" />
         </div>
       </div>

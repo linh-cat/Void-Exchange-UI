@@ -2,6 +2,7 @@ import React from "react"
 import "./CollateralPopup.css"
 import cx from "classnames"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
+import Button from "@components/Button/Button"
 
 const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => {
   const handleClickOutside = () => {
@@ -91,15 +92,11 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
           </div>
         </div>
         <div className="collateral-footer mt-3">
-          <button
-            className={cx({
-              "secondary-btn": collateralTab === "add",
-              btn: true,
-              "bg-orange": collateralTab === "remove"
-            })}
-          >
-            {collateralTab === "add" ? "Add Collateral" : "Remove Collateral"}
-          </button>
+          {collateralTab === "add" ? (
+            <Button text="Add Collateral" />
+          ) : (
+            <Button text="Remove Collateral" className="bg-orange" isDefault={false} />
+          )}
         </div>
       </div>
     </>

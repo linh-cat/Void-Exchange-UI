@@ -3,41 +3,8 @@ import ETH from "@img/WETH.png"
 import Plus from "@img/icons/Plus.svg"
 import CollateralPopup from "@components/common/CollateralPopup"
 import TableCustom from "@components/Table/TableCustom"
+import Button from "@components/Button/Button"
 
-const columnDef = [
-  {
-    field: "market",
-    headerName: "Market"
-  },
-  {
-    field: "size",
-    headerName: "Size"
-  },
-  {
-    field: "netvalue",
-    headerName: "Net Value"
-  },
-  {
-    field: "collateral",
-    headerName: "Collateral"
-  },
-  {
-    field: "entryprice",
-    headerName: "Entry Price"
-  },
-  {
-    field: "indexprice",
-    headerName: "Index Price"
-  },
-  {
-    field: "pnlroe",
-    headerName: "Pnl & ROE"
-  },
-  {
-    field: "action",
-    headerName: "Actions"
-  }
-]
 const data = [
   {
     market: "ETH/USDT",
@@ -49,8 +16,7 @@ const data = [
     collateral: "1.96 USDT",
     entryprice: "$1,884.9",
     indexprice: "$2,001",
-    pnlroe: "+ $0.35",
-    action: ""
+    pnlroe: "+ $0.35"
   }
 ]
 const ListPosition = () => {
@@ -60,6 +26,79 @@ const ListPosition = () => {
   const toggleCollateral = () => {
     setCollateral(!collateral)
   }
+
+  const columnDef = [
+    {
+      field: "market",
+      headerName: "Market",
+      headerClassName: "text-sm text-left",
+      classname: "text-left",
+      cellRenderer: (cell) => {
+        console.log({ cell })
+        return (
+          <div className="flex items-center gap-2">
+            <img src={ETH} className="h-6 w-6" alt="eth" />
+            <div>
+              <label>{cell?.market}</label>
+              <div className="text-xs red-down">
+                {cell?.type} {cell?.leverge}
+              </div>
+            </div>
+          </div>
+        )
+      }
+    },
+    {
+      field: "size",
+      headerName: "Size",
+      headerClassName: "text-sm"
+    },
+    {
+      field: "netvalue",
+      headerName: "Net Value",
+      headerClassName: "text-sm"
+    },
+    {
+      field: "collateral",
+      headerName: "Collateral",
+      headerClassName: "text-sm",
+      cellRenderer: (cell) => {
+        return (
+          <div className="flex items-center gap-2 justify-center">
+            <label>{cell?.collateral}</label>
+            <Button text="+" className="px-2 border inline-block" isDefault={false} onClick={toggleCollateral} />
+          </div>
+        )
+      }
+    },
+    {
+      field: "entryprice",
+      headerName: "Entry Price",
+      headerClassName: "text-sm"
+    },
+    {
+      field: "indexprice",
+      headerName: "Index Price",
+      headerClassName: "text-sm"
+    },
+    {
+      field: "pnlroe",
+      headerName: "Pnl & ROE",
+      headerClassName: "text-sm",
+      cellRenderer: (cell) => {
+        return <div className="green-up">{cell?.pnlroe}</div>
+      }
+    },
+    {
+      field: "action",
+      headerName: "Actions",
+      headerClassName: "text-sm",
+      cellRenderer: () => {
+        return <Button text="close" isDefault={false} className="border px-2 py-1" />
+      }
+    }
+  ]
+
   return (
     <>
       <CollateralPopup
@@ -68,7 +107,7 @@ const ListPosition = () => {
         collateralTab={collateralTab}
         setCollateralTab={setCollateralTab}
       />
-      <TableCustom columnDef={columnDef} data={data} />
+      <TableCustom columnDef={columnDef} data={data} cellStyle="p-3 text-sm" />
     </>
   )
 }

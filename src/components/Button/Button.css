@@ -2,11 +2,12 @@
     letter-spacing: 0px;
     color: #ffffff !important;
     box-sizing: border-box;
-    padding: 10px;
+    display: inline-block;
 }
 
 .default-btn {
     background: var(--arbitrum-blue);
+    padding: 10px;
 }
 
 .secondary {

@@ -49,7 +49,7 @@
 }
 
 .collateral-popup .collateral-content .bottom .active {
-    background: #03d1cf;
+    background: var(--arbitrum-blue);
 }
 
 .collateral-popup .collateral-footer .btn {

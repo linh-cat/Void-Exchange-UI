@@ -96,7 +96,7 @@ const OrderBox = ({ type }) => {
           />
         </div>
         <div className="mt-10 w-full">
-          <Button className="w-full py-5" text="Approve" />
+          <Button className="w-full" text="Approve" />
         </div>
         <div className="mt-3 2xl:mt-5">
           <SlippageCustom
