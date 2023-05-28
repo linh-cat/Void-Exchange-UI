@@ -1,26 +1,9 @@
-.exchange {
-    /* height: 100vh; */
-}
-
-.top-chart {
-    /* background: var(--main-card-color); */
-}
-
 .top-chart {
     font-family: 'Roboto', sans-serif;
 }
 
 .top-chart .top-chart-price {
     color: var(--arbitrum-blue);
-}
-
-.latest-trade {
-    height: 55rem;
-    overflow-y: scroll;
-}
-
-.latest-trade::-webkit-scrollbar {
-    display: none;
 }
 
 

@@ -124,8 +124,24 @@ html, body {
     overflow-y: scroll;
 }
 
+.vh-10 {
+    height: 8vh;
+}
+
+.vh-8 {
+    height: 8vh;
+}
+
+.vh-70 {
+    height: 70vh;
+}
+
 .vh-3 {
     height: 3vh;
+}
+
+.vh-12 {
+    height: 12vh;
 }
 
 .vh-90 {

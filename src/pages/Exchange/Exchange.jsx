@@ -35,24 +35,22 @@ const Exchange = () => {
           className={"mb-3"}
         />
         {tabSection === POSITIONS && <ListPosition />}
-        {tabSection === ORDERS && <OrderHistory />}
-        {tabSection === TRADES && <TradeHistory />}
+        {/* {tabSection === ORDERS && <OrderHistory />} */}
+        {/* {tabSection === TRADES && <TradeHistory />} */}
       </div>
     )
   }
 
   return (
     <>
-      <div className="border-b place-items-center vh-3">
-        <TopInfo />
-      </div>
-      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 xl:grid-rows-3 vh-90">
+      <TopInfo />
+      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90">
         {/* left side chart and infor bar */}
         <div
           className={cx({
             "xl:col-span-3": showHistory,
             "xl:col-span-4": !showHistory,
-            "left-side xl:row-span-2 xl:flex xl:flex-col ": true
+            "left-side xl:row-span-3 xl:flex xl:flex-col vh-70": true
           })}
         >
           <div className="relative">
@@ -70,29 +68,31 @@ const Exchange = () => {
                 "h-96 lg:h-full relative": true
               })}
             >
-              {/* <TradingViewCustom /> */}
               <TradingViewChart />
             </div>
           </div>
         </div>
+
         {/* position */}
         <div
           className={cx({
-            "position border": true,
+            "position border flex-1": true,
             "xl:row-span-1 xl:col-span-3": showHistory,
             "xl:col-span-4 xl:row-span-1": !showHistory
           })}
         >
           {renderListSections()}
         </div>
+
         {/* history */}
         {showHistory && (
           <div className="xl:col-span-1 xl:row-span-3 border-l border-b">
             <LatestTrade />
           </div>
         )}
+
         {/* order box */}
-        <div className="xl:col-span-1 xl:row-span-3 right-side">
+        <div className="xl:col-span-1 xl:row-span-4 right-side">
           <TabExchange defaultValue="long" />
         </div>
       </div>

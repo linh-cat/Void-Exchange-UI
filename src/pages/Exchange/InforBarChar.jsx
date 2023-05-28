@@ -7,7 +7,7 @@ import Badge from "../../components/common/Badge"
 
 const InforBarChar = () => {
   return (
-    <div className="top-chart w-full h-full flex flex-col lg:flex-row md:gap-5 lg:items-center">
+    <div className="top-chart w-full flex flex-col lg:flex-row md:gap-5 lg:items-center">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
           <SelectCoupleToken
