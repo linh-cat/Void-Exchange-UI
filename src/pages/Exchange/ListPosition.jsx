@@ -31,7 +31,7 @@ const ListPosition = () => {
     {
       field: "market",
       headerName: "Market",
-      headerClassName: "text-sm text-left",
+      headerClassName: "text-xs text-left",
       classname: "text-left",
       cellRenderer: (cell) => {
         console.log({ cell })
@@ -51,17 +51,17 @@ const ListPosition = () => {
     {
       field: "size",
       headerName: "Size",
-      headerClassName: "text-sm"
+      headerClassName: "text-xs"
     },
     {
       field: "netvalue",
       headerName: "Net Value",
-      headerClassName: "text-sm"
+      headerClassName: "text-xs"
     },
     {
       field: "collateral",
       headerName: "Collateral",
-      headerClassName: "text-sm",
+      headerClassName: "text-xs",
       cellRenderer: (cell) => {
         return (
           <div className="flex items-center gap-2 justify-center">
@@ -74,17 +74,17 @@ const ListPosition = () => {
     {
       field: "entryprice",
       headerName: "Entry Price",
-      headerClassName: "text-sm"
+      headerClassName: "text-xs"
     },
     {
       field: "indexprice",
       headerName: "Index Price",
-      headerClassName: "text-sm"
+      headerClassName: "text-xs"
     },
     {
       field: "pnlroe",
       headerName: "Pnl & ROE",
-      headerClassName: "text-sm",
+      headerClassName: "text-xs",
       cellRenderer: (cell) => {
         return <div className="green-up">{cell?.pnlroe}</div>
       }
@@ -92,7 +92,7 @@ const ListPosition = () => {
     {
       field: "action",
       headerName: "Actions",
-      headerClassName: "text-sm",
+      headerClassName: "text-xs",
       cellRenderer: () => {
         return <Button text="close" isDefault={false} className="border px-2 py-1" />
       }
@@ -107,7 +107,7 @@ const ListPosition = () => {
         collateralTab={collateralTab}
         setCollateralTab={setCollateralTab}
       />
-      <TableCustom columnDef={columnDef} data={data} cellStyle="p-3 text-sm" />
+      <TableCustom columnDef={columnDef} data={data} cellStyle="p-3 text-xs" />
     </>
   )
 }
