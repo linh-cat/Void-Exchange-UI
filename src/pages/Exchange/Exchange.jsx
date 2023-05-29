@@ -51,7 +51,7 @@ const Exchange = () => {
             "left-side xl:flex xl:flex-col xl:col-span-4": true
           })}
         >
-          <div className="grid grid-cols-1 xl:grid-cols-4 vh-70">
+          <div className="grid grid-cols-1 xl:grid-cols-4 vh-65">
             <div
               className={cx({
                 "xl:col-span-3": showHistory,

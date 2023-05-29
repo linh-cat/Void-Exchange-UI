@@ -136,6 +136,11 @@ html, body {
     height: 70vh;
 }
 
+.vh-65 {
+    height: 65vh;
+}
+
+
 .vh-3 {
     height: 3vh;
 }

@@ -12,6 +12,7 @@ import Document from "./pages/Document/Document"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
+import FaucetPage from "./pages/FaucetPage/FaucetPage"
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism],
@@ -59,6 +60,7 @@ const FullApp = () => {
           }
         />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="faucet" element={<FaucetPage />} />
         <Route
           path="vault"
           element={
