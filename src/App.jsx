@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header"
 import { darkTheme, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { configureChains, createClient, WagmiConfig } from "wagmi"
-import { mainnet, optimism, polygon } from "@wagmi/core/chains"
+import { mainnet, optimism, polygon, sepolia, goerli } from "@wagmi/core/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import Exchange from "./pages/Exchange/Exchange"
@@ -13,11 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import FaucetPage from "./pages/FaucetPage/FaucetPage"
-
-const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism],
-  [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
-)
+const { chains, provider } = configureChains([sepolia, goerli], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",

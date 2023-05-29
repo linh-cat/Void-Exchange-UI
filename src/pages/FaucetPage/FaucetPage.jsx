@@ -10,6 +10,12 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
+import { Faucet } from "@void-0x/void-sdk"
+import { Contract, utils } from "ethers"
+// import { Addreses, ChainId } from "@void-0x/constants"
+import { getProvider } from "@wagmi/core"
+import FaucetABI from "../../abis/FaucetABI.json"
+import { useAccount } from "wagmi"
 
 const data = [
   {
@@ -31,6 +37,21 @@ const data = [
 
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
+  const [amount, setAmount] = useState(0)
+  const provider = getProvider()
+  const { address } = useAccount()
+
+  const ABI = FaucetABI?.abi
+
+  const contract = new Contract("0xB232278f063AB63592FCc612B3bc01662b7245f0", ABI, provider)
+
+  // const faucet = new Faucet(provider, ABI, "0xB232278f063AB63592FCc612B3bc01662b7245f0")
+
+  console.log({ amount, provider, address, unit: utils.parseUnits(amount.toString(), 8).toString() })
+
+  const mint = async () => {
+    await contract.mint(address, utils.parseUnits(amount.toString(), 8))
+  }
 
   const showModal = () => {
     setOpenModal(true)
@@ -71,6 +92,7 @@ const FaucetPage = () => {
       }
     }
   ]
+
   return (
     <div className="p-5 xl:p-0">
       <Modal
@@ -88,12 +110,13 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" />}
+        footer={<Button text="Faucet" onClick={mint} />}
         body={
           <InputCustom
             placeHolder="Amount"
             classNameInput="py-3 px-2"
             rightAction={<div className="cursor-pointer mr-2">Max</div>}
+            onChange={(val) => setAmount(val)}
           />
         }
       />
