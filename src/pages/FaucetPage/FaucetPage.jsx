@@ -63,7 +63,11 @@ const FaucetPage = () => {
       field: "action",
       headerName: "",
       cellRenderer: () => {
-        return <Button text="Faucet" className="py-2" onClick={showModal} />
+        return (
+          <div className="flex justify-center">
+            <Button text="Faucet" className="py-2 inline-block w-1/2" onClick={showModal} />
+          </div>
+        )
       }
     }
   ]
