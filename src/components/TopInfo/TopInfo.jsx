@@ -4,7 +4,7 @@ import { DownIcon } from "@img/icons/index"
 
 const TopInfo = () => {
   return (
-    <div className="w-full top-info text-sm grid grid-flow-row grid-cols-2 md:grid-cols-3 xl:flex xl:justify-center xl:items-center xl:gap-5 p-1 place-items-center vh-3 border-b">
+    <div className="w-full top-info text-sm grid grid-flow-row grid-cols-2 md:grid-cols-3 xl:flex xl:justify-center xl:items-center xl:gap-5 p-1 place-items-center border-b">
       <div className="relative flex gap-2 market cursor-pointer">
         <label className="">Market:</label>
         <div className="flex items-center gap-2">
