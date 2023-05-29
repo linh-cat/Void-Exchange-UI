@@ -63,7 +63,7 @@ const FaucetPage = () => {
       field: "action",
       headerName: "",
       cellRenderer: () => {
-        return <Button text="Faucet" type="secondary" className="py-2" isDefault={false} onClick={showModal} />
+        return <Button text="Faucet" className="py-2" onClick={showModal} />
       }
     }
   ]
@@ -78,12 +78,13 @@ const FaucetPage = () => {
               <h3>Faucet DAI</h3>
               <img src={DAI} alt="dai" className="h-5 w-5" />
             </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <label className="text-xs">Add Token</label>
               <img src={Metamask} alt="metamask" className="h-5 w-5 cursor-pointer" />
             </div>
           </div>
         }
-        footer={<Button text="Faucet" type="secondary" />}
+        footer={<Button text="Faucet" />}
         body={
           <InputCustom
             placeHolder="Amount"
