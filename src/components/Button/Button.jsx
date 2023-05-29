@@ -8,7 +8,8 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type }) => {
       className={cx(className, {
         "text-center btn text-sm flex items-center justify-center gap-2 cursor-pointer rounded overflow-hidden": true,
         "default-btn ": isDefault,
-        secondary: type === "secondary"
+        secondary: type === "secondary",
+        "inline-block": !icon
       })}
       onClick={onClick}
     >

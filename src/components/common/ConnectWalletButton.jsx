@@ -2,6 +2,7 @@ import React from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import useUserWindow from "../../hooks/useUserWindow"
 import "./ConnectWalletButton.css"
+import Button from "@components/Button/Button"
 
 const ConnectWalletButton = ({ imgSrc }) => {
   const { width } = useUserWindow()
@@ -24,34 +25,28 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 userSelect: "none"
               }
             })}
-            className="flex items-center border rounded px-4 wallet-btn"
           >
             {(() => {
               if (!connected) {
                 return (
-                  <button
+                  <Button
                     onClick={openConnectModal}
-                    type="button"
-                    className="flex md:gap-3 connect-wallet-btn items-center py-2"
-                  >
-                    {imgSrc && width > 768 && <img className="btn-icon" src={imgSrc} alt="Connect Wallet" />}
-                    <span className="btn-label text-sm md:text-base">{width < 768 ? "Wallet" : "Connect Wallet"}</span>
-                  </button>
+                    text={width > 768 ? "Connect Wallet" : "Wallet"}
+                    icon={imgSrc && width > 768 && <img className="btn-icon" src={imgSrc} alt="Connect Wallet" />}
+                    isDefault={false}
+                    className="border px-3 py-1 flex"
+                  />
                 )
               }
 
               if (chain.unsupported) {
-                return (
-                  <button onClick={openChainModal} type="button" className="py-2">
-                    Wrong network
-                  </button>
-                )
+                return <Button onClick={openChainModal} isDefault="false" className="" text="Wrong network" />
               }
 
               return (
                 <div className="flex gap-3">
                   <>
-                    <button onClick={openChainModal} className="flex items-center py-2" type="button">
+                    <button onClick={openChainModal} className="flex items-center" type="button">
                       {chain.hasIcon && (
                         <div
                           style={{
