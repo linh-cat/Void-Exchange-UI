@@ -118,7 +118,9 @@ const FaucetPage = () => {
       </div>
       <div className="faucet-list mx-auto max-w-7xl">
         <h4 className="mb-3">Test Assets</h4>
-        <TableCustom columnDef={columnDef} data={data} cellStyle="py-3" />
+        <CardWrapper>
+          <TableCustom columnDef={columnDef} data={data} cellStyle="py-3 px-3" />
+        </CardWrapper>
       </div>
     </div>
   )
