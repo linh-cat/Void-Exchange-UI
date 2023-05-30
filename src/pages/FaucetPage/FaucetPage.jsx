@@ -12,6 +12,7 @@ import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
 import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Faucet, Constants } from "@void-0x/void-sdk"
+import toast from "react-hot-toast"
 
 const data = [
   {
@@ -38,7 +39,8 @@ const FaucetPage = () => {
 
   const publicClient = usePublicClient()
   const { data: walletClient, isError, isLoading } = useWalletClient()
-  const { chain } = useNetwork()
+  const { chain, isConnected } = useNetwork()
+  const [isMinting, setIsMinting] = useState(false)
 
   useEffect(() => {
     if (!isLoading) {
@@ -52,7 +54,12 @@ const FaucetPage = () => {
   }
 
   const onMint = async () => {
-    await faucet.mint(amount)
+    setIsMinting(true)
+    const hash = await faucet.mint(amount)
+    await publicClient.waitForTransactionReceipt({ hash })
+    setIsMinting(false)
+    setOpenModal(false)
+    toast.success("Successfully minted!")
   }
 
   const columnDef = [
@@ -108,7 +115,7 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} />}
         body={
           <InputCustom
             placeHolder="Amount"

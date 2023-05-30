@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import FaucetPage from "./pages/FaucetPage/FaucetPage"
+import { Toaster } from "react-hot-toast"
 
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { sepolia, goerli } from "wagmi/chains"
@@ -86,6 +87,7 @@ function App() {
   return (
     <WagmiConfig config={config}>
       <FullApp />
+      <Toaster />
     </WagmiConfig>
   )
 }

@@ -1,8 +1,9 @@
 import React from "react"
 import cx from "classnames"
 import "./Button.css"
+import Spinner from "@components/Spinner/Spinner"
 
-const Button = ({ text, className, isDefault = true, icon, onClick, type }) => {
+const Button = ({ text, className, isDefault = true, icon, onClick, type, isLoading = false }) => {
   return (
     <div
       className={cx(className, {
@@ -13,7 +14,8 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type }) => {
       onClick={onClick}
     >
       {icon && <div>{icon}</div>}
-      <div>{text}</div>
+      {!isLoading && <div>{text}</div>}
+      {isLoading && <Spinner />}
     </div>
   )
 }
