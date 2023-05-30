@@ -100,12 +100,15 @@ const ConnectWalletButton = ({ imgSrc }) => {
             <>
               <Button
                 text={
-                  <div>
-                    {truncate(address, 5)} {chain?.name} {decialNumber(balance?.formatted, 4)} {balance?.symbol}
+                  <div className="flex items-center gap-3">
+                    <div>{truncate(address, 5)}</div>
+                    <div className="border-l pl-3 border-zinc-500">
+                      {decialNumber(balance?.formatted, 4)} {balance?.symbol}
+                    </div>
                   </div>
                 }
                 onClick={() => setChainModal(true)}
-                className="inline-block border px-2 py-3"
+                className="inline-block border px-2 py-3  shadow"
                 isDefault={false}
               />
             </>
