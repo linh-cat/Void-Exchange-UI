@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import useUserWindow from "../../hooks/useUserWindow"
-import "./ConnectWalletButton.css"
 import Button from "@components/Button/Button"
 import { useAccount, useNetwork, useConnect, useBalance, useDisconnect } from "wagmi"
 import Modal from "@components/Modal/Modal"
 import { decialNumber } from "src/common/fomatter"
 import Metamask from "@img/metamask.png"
+
+import "./ConnectWalletButton.css"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -27,7 +27,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
 
   const bodyChainModal = (
     <div>
-      {chains && (
+      {chains && chains.length && (
         <div className="list-chains flex flex-col gap-2">
           {chains.map((c) => (
             <div className="cursor-pointer border p-2 flex justify-center items-center gap-3">
