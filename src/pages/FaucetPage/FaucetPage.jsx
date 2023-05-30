@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
@@ -10,12 +10,9 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
-import { useContractWrite } from "wagmi"
-import { parseUnits } from "viem"
-// import { Addreses, ChainId } from "@void-0x/constants"
-import FaucetABI from "../../abis/FaucetABI.json"
+import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
+import { Faucet, Constants } from "@void-0x/void-sdk"
 
-const ABI = FaucetABI?.abi
 const data = [
   {
     asset: "DAI",
@@ -37,25 +34,25 @@ const data = [
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
   const [amount, setAmount] = useState(0)
+  const [faucet, setFaucet] = useState(null)
 
-  const { write } = useContractWrite({
-    address: "0xB232278f063AB63592FCc612B3bc01662b7245f0",
-    abi: ABI,
-    functionName: "mint"
-  })
+  const publicClient = usePublicClient()
+  const { data: walletClient, isError, isLoading } = useWalletClient()
+  const { chain } = useNetwork()
+
+  useEffect(() => {
+    if (!isLoading) {
+      const faucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
+      setFaucet(faucet)
+    }
+  }, [isLoading])
 
   const showModal = () => {
     setOpenModal(true)
   }
 
   const onMint = async () => {
-    if (!write) {
-      return
-    }
-
-    write({
-      args: [parseUnits(amount, 8)]
-    })
+    await faucet.mint(amount)
   }
 
   const columnDef = [
