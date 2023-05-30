@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import useUserWindow from "../../hooks/useUserWindow"
 import "./ConnectWalletButton.css"
 import Button from "@components/Button/Button"
-import { useAccount, useNetwork, useConnect, useBalance } from "wagmi"
+import { useAccount, useNetwork, useConnect, useBalance, useDisconnect } from "wagmi"
+import Modal from "@components/Modal/Modal"
+import { decialNumber } from "src/common/fomatter"
+import Metamask from "@img/metamask.png"
+
 const truncate = (string, limit) => {
   if (string.length <= limit) {
     return string
@@ -10,35 +14,85 @@ const truncate = (string, limit) => {
   return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
 }
 const ConnectWalletButton = ({ imgSrc }) => {
-  const { width } = useUserWindow()
-  const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
+  const [changeModal, setChainModal] = useState(false)
+  const [connectModal, setConnectModal] = useState(false)
+  const { connect, connectors } = useConnect()
+  const { disconnect } = useDisconnect()
   const { address, isConnected } = useAccount()
-  const { chain } = useNetwork()
+  const { chain, chains } = useNetwork()
   const { data: balance } = useBalance({ address })
 
-  const openChainModal = () => {}
+  const headerChainModal = <div>Select Chains</div>
+  const headerConnectModal = <div>Connect Wallet</div>
+
+  const bodyChainModal = (
+    <div>
+      {chains && (
+        <div className="list-chains flex flex-col gap-2">
+          {chains.map((c) => (
+            <div className="cursor-pointer border p-2 flex justify-center items-center gap-3">
+              {c.id === chain.id && <div className="active-chain"></div>}
+              <div>{c.name}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+
+  const footerChainModal = (
+    <div>
+      <Button
+        text="Disconnect"
+        onClick={() => {
+          disconnect()
+          setChainModal(false)
+        }}
+      />
+    </div>
+  )
+
+  const bodyConnectModal = (
+    <div className="flex flex-col gap-3">
+      {connectors.map((connector) => {
+        const textBtn = !connector.ready ? " (unsupported)" : connector.name
+        return (
+          <Button
+            text={textBtn}
+            onClick={() => {
+              connect({ connector })
+              setConnectModal(false)
+            }}
+            isDefault={false}
+            className="border p-3"
+            icon={connector.id === "metaMask" && <img src={Metamask} alt="metamask" className="h-4 w-4" />}
+          />
+        )
+      })}
+    </div>
+  )
 
   return (
     <div>
+      <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
+      <Modal
+        header={headerChainModal}
+        open={changeModal}
+        setOpen={setChainModal}
+        body={bodyChainModal}
+        footer={footerChainModal}
+      />
       {(() => {
         if (!isConnected) {
           return (
             <div>
-              {connectors.map((connector) => (
-                <button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
-                  {connector.name}
-                  {!connector.ready && " (unsupported)"}
-                  {isLoading && connector.id === pendingConnector?.id && " (connecting)"}
-                </button>
-              ))}
-
-              {error && <div>{error.message}</div>}
+              <Button onClick={() => setConnectModal(true)} text="Connect Wallet" />
             </div>
           )
         }
 
         if (chain.unsupported) {
-          return <Button onClick={openChainModal} isDefault="false" className="" text="Wrong network" />
+          return <Button isDefault="false" className="" text="Wrong network" onClick={() => setChainModal(true)} />
         }
 
         return (
@@ -47,9 +101,10 @@ const ConnectWalletButton = ({ imgSrc }) => {
               <Button
                 text={
                   <div>
-                    {truncate(address, 5)} {chain?.name} {balance?.formatted} {balance?.symbol}
+                    {truncate(address, 5)} {chain?.name} {decialNumber(balance?.formatted, 4)} {balance?.symbol}
                   </div>
                 }
+                onClick={() => setChainModal(true)}
                 className="inline-block border px-2 py-3"
                 isDefault={false}
               />
