@@ -10,7 +10,12 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
+import { useContractWrite } from "wagmi"
+import { parseUnits } from "viem"
+// import { Addreses, ChainId } from "@void-0x/constants"
+import FaucetABI from "../../abis/FaucetABI.json"
 
+const ABI = FaucetABI?.abi
 const data = [
   {
     asset: "DAI",
@@ -31,9 +36,26 @@ const data = [
 
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
+  const [amount, setAmount] = useState(0)
+
+  const { write } = useContractWrite({
+    address: "0xB232278f063AB63592FCc612B3bc01662b7245f0",
+    abi: ABI,
+    functionName: "mint"
+  })
 
   const showModal = () => {
     setOpenModal(true)
+  }
+
+  const onMint = async () => {
+    if (!write) {
+      return
+    }
+
+    write({
+      args: [parseUnits(amount, 8)]
+    })
   }
 
   const columnDef = [
@@ -71,6 +93,7 @@ const FaucetPage = () => {
       }
     }
   ]
+
   return (
     <div className="p-5 xl:p-0">
       <Modal
@@ -88,12 +111,13 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" />}
+        footer={<Button text="Faucet" onClick={onMint} />}
         body={
           <InputCustom
             placeHolder="Amount"
             classNameInput="py-3 px-2"
             rightAction={<div className="cursor-pointer mr-2">Max</div>}
+            onChange={(val) => setAmount(val)}
           />
         }
       />

@@ -1,84 +1,118 @@
-import React from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+import React, { useState } from "react"
 import useUserWindow from "../../hooks/useUserWindow"
 import "./ConnectWalletButton.css"
 import Button from "@components/Button/Button"
+import { useAccount, useNetwork, useConnect, useBalance, useDisconnect } from "wagmi"
+import Modal from "@components/Modal/Modal"
+import { decialNumber } from "src/common/fomatter"
+import Metamask from "@img/metamask.png"
 
+const truncate = (string, limit) => {
+  if (string.length <= limit) {
+    return string
+  }
+  return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
+}
 const ConnectWalletButton = ({ imgSrc }) => {
-  const { width } = useUserWindow()
+  const [changeModal, setChainModal] = useState(false)
+  const [connectModal, setConnectModal] = useState(false)
+  const { connect, connectors } = useConnect()
+  const { disconnect } = useDisconnect()
+  const { address, isConnected } = useAccount()
+  const { chain, chains } = useNetwork()
+  const { data: balance } = useBalance({ address })
+
+  const headerChainModal = <div>Select Chains</div>
+  const headerConnectModal = <div>Connect Wallet</div>
+
+  const bodyChainModal = (
+    <div>
+      {chains && (
+        <div className="list-chains flex flex-col gap-2">
+          {chains.map((c) => (
+            <div className="cursor-pointer border p-2 flex justify-center items-center gap-3">
+              {c.id === chain.id && <div className="active-chain"></div>}
+              <div>{c.name}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+
+  const footerChainModal = (
+    <div>
+      <Button
+        text="Disconnect"
+        onClick={() => {
+          disconnect()
+          setChainModal(false)
+        }}
+      />
+    </div>
+  )
+
+  const bodyConnectModal = (
+    <div className="flex flex-col gap-3">
+      {connectors.map((connector) => {
+        const textBtn = !connector.ready ? " (unsupported)" : connector.name
+        return (
+          <Button
+            text={textBtn}
+            onClick={() => {
+              connect({ connector })
+              setConnectModal(false)
+            }}
+            isDefault={false}
+            className="border p-3"
+            icon={connector.id === "metaMask" && <img src={Metamask} alt="metamask" className="h-4 w-4" />}
+          />
+        )
+      })}
+    </div>
+  )
+
   return (
-    <ConnectButton.Custom>
-      {({ account, chain, openAccountModal, openChainModal, openConnectModal, authenticationStatus, mounted }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== "loading"
-        const connected =
-          ready && account && chain && (!authenticationStatus || authenticationStatus === "authenticated")
+    <div>
+      <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
+      <Modal
+        header={headerChainModal}
+        open={changeModal}
+        setOpen={setChainModal}
+        body={bodyChainModal}
+        footer={footerChainModal}
+      />
+      {(() => {
+        if (!isConnected) {
+          return (
+            <div>
+              <Button onClick={() => setConnectModal(true)} text="Connect Wallet" />
+            </div>
+          )
+        }
+
+        if (chain.unsupported) {
+          return <Button isDefault="false" className="" text="Wrong network" onClick={() => setChainModal(true)} />
+        }
 
         return (
-          <div
-            {...(!ready && {
-              "aria-hidden": true,
-              style: {
-                opacity: 0,
-                pointerEvents: "none",
-                userSelect: "none"
-              }
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <Button
-                    onClick={openConnectModal}
-                    text={width > 768 ? "Connect Wallet" : "Wallet"}
-                    icon={imgSrc && width > 768 && <img className="btn-icon" src={imgSrc} alt="Connect Wallet" />}
-                    isDefault={false}
-                    className="border px-3 py-1 flex"
-                  />
-                )
-              }
-
-              if (chain.unsupported) {
-                return <Button onClick={openChainModal} isDefault="false" className="" text="Wrong network" />
-              }
-
-              return (
-                <div className="flex gap-3">
-                  <>
-                    <button onClick={openChainModal} className="flex items-center" type="button">
-                      {chain.hasIcon && (
-                        <div
-                          style={{
-                            background: chain.iconBackground
-                          }}
-                          className="w-3 overflow-hidden mr-4 rounded"
-                        >
-                          {chain.iconUrl && (
-                            <img
-                              alt={chain.name ?? "Chain icon"}
-                              src={chain.iconUrl}
-                              style={{ width: 12, height: 12 }}
-                            />
-                          )}
-                        </div>
-                      )}
-
-                      {width > 432 && <div>{chain.name}</div>}
-                    </button>
-
-                    <button onClick={openAccountModal} type="button" className="flex items-center">
-                      {width > 432 && <div className="text-xs">{account.displayName}</div>}
-                      <div className="text-xs">{account.displayBalance ? ` (${account.displayBalance})` : ""}</div>
-                    </button>
-                  </>
-                </div>
-              )
-            })()}
+          <div className="flex gap-3">
+            <>
+              <Button
+                text={
+                  <div>
+                    {truncate(address, 5)} {chain?.name} {decialNumber(balance?.formatted, 4)} {balance?.symbol}
+                  </div>
+                }
+                onClick={() => setChainModal(true)}
+                className="inline-block border px-2 py-3"
+                isDefault={false}
+              />
+            </>
           </div>
         )
-      }}
-    </ConnectButton.Custom>
+      })()}
+    </div>
   )
 }
 

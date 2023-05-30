@@ -73,6 +73,13 @@
     z-index: 9999999999999999;
 }
 
+.active-chain {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--arbitrum-blue);
+}
+
 .green-color {
     color: var(--text-color-green);
 }

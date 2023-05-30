@@ -3,13 +3,11 @@ import "./Header.css"
 import ConnectWalletButton from "../common/ConnectWalletButton"
 import connectWalletImg from "../../img/ic_wallet_24.svg"
 import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
-import { useDisconnect } from "wagmi"
 import cx from "classnames"
 import { Link, useLocation } from "react-router-dom"
 import { CancelIcon } from "@icons/index"
 
 const Header = () => {
-  const { disconnect } = useDisconnect()
   const location = useLocation()
   const [y, setY] = useState(0)
   const [show, setShow] = useState("notShow")
