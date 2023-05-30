@@ -1,9 +1,4 @@
 import Header from "./components/Header/Header"
-import { darkTheme, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
-import { configureChains, createClient, WagmiConfig } from "wagmi"
-import { mainnet, optimism, polygon, sepolia, goerli } from "@wagmi/core/chains"
-import { alchemyProvider } from "wagmi/providers/alchemy"
-import { publicProvider } from "wagmi/providers/public"
 import Exchange from "./pages/Exchange/Exchange"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import VaultPage from "./pages/VaultPage/VaultPage"
@@ -13,17 +8,32 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import FaucetPage from "./pages/FaucetPage/FaucetPage"
-const { chains, provider } = configureChains([sepolia, goerli], [publicProvider()])
 
-const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  chains
-})
+import { configureChains, createConfig, createClient, WagmiConfig } from "wagmi"
+import { mainnet, sepolia, goerli } from "wagmi/chains"
+import { alchemyProvider } from "wagmi/providers/alchemy"
+import { publicProvider } from "wagmi/providers/public"
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 
-const wagmiClient = createClient({
+const { chains, publicClient } = configureChains(
+  [sepolia],
+  [alchemyProvider({ apiKey: "N2823S8lfRKCAyMO9rfYMg0Am36_qZSc" })]
+)
+
+const config = createConfig({
   autoConnect: true,
-  connectors,
-  provider
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected",
+        shimDisconnect: true
+      }
+    })
+  ],
+  publicClient
 })
 
 const FullApp = () => {
@@ -75,10 +85,8 @@ const FullApp = () => {
 
 function App() {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
-        <FullApp />
-      </RainbowKitProvider>
+    <WagmiConfig config={config}>
+      <FullApp />
     </WagmiConfig>
   )
 }

@@ -5,14 +5,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
-    "@rainbow-me/rainbowkit": "^0.12.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@void-0x/void-sdk": "^0.0.9",
     "chart.js": "^4.3.0",
     "classnames": "^2.3.2",
-    "ethers": "^5.7.2",
     "i": "^0.3.7",
     "lightweight-charts": "^4.0.1",
     "npm": "^9.6.7",
@@ -25,7 +23,8 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
-    "wagmi": "^0.12.10",
+    "viem": "^0.3.39",
+    "wagmi": "^1.0.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
