@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
@@ -10,10 +10,10 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
-import { usePublicClient, useWalletClient, useNetwork, useContractReads } from "wagmi"
+import { useWalletClient, useNetwork, useContractReads } from "wagmi"
 import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
-import toast from "react-hot-toast"
+import useMintFaucet from "src/hooks/useMintFaucet"
 
 const tokens = [
   {
@@ -46,25 +46,8 @@ const FaucetPage = () => {
     USDC: 0
   })
 
-  const publicClient = usePublicClient()
-  const [faucets, setFaucets] = useState(null)
-  const { data: walletClient, isLoading } = useWalletClient()
+  const { data: walletClient } = useWalletClient()
   const { chain } = useNetwork()
-  const [isMinting, setIsMinting] = useState(false)
-
-  useEffect(() => {
-    if (chain && !isLoading) {
-      const wbtcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
-      const wethFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WETH)
-      const usdcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.USDC)
-
-      setFaucets({
-        WBTC: wbtcFaucet,
-        WETH: wethFaucet,
-        USDC: usdcFaucet
-      })
-    }
-  }, [isLoading, chain, publicClient, walletClient])
 
   useContractReads({
     contracts: [
@@ -106,24 +89,15 @@ const FaucetPage = () => {
   const showModal = () => {
     setOpenModal(true)
   }
-
-  const onMint = async () => {
-    setIsMinting(true)
-    const faucet = faucets[selectedToken.symbol]
-
-    if (!faucet) {
-      return
-    }
-    const hash = await faucet.mint(amount)
-    await publicClient.waitForTransactionReceipt({ hash })
-    setIsMinting(false)
-    setOpenModal(false)
-    toast.success("Successfully minted!")
-  }
-
   const onTokenSelect = (token) => {
     setSelectedToken(token)
     showModal()
+  }
+
+  const { isMinting, handleMint } = useMintFaucet({ amount, selectedToken })
+  const onMint = async () => {
+    await handleMint()
+    setOpenModal(false)
   }
 
   const columnDef = [

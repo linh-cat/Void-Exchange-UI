@@ -72,8 +72,6 @@ const ConnectWalletButton = ({ imgSrc }) => {
     </div>
   )
 
-  console.log({ chain })
-
   return (
     <div>
       <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
