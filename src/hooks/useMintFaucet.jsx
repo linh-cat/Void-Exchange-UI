@@ -27,12 +27,12 @@ const useMintFaucet = ({ amount, selectedToken }) => {
   }, [isLoading, chain, publicClient, walletClient])
 
   const handleMint = async () => {
-    setIsMinting(true)
-
     const faucet = faucets[selectedToken?.symbol]
     if (!faucet) {
       return
     }
+
+    setIsMinting(true)
     const hash = await faucet.mint(amount)
     await publicClient.waitForTransactionReceipt({ hash })
 
