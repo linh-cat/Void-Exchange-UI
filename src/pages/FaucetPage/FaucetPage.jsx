@@ -102,7 +102,7 @@ const FaucetPage = () => {
     setOpenModal(false)
   }
 
-  // const { addToken } = useAddTokenByDetailsToMetamask()
+  const { addToken } = useAddTokenByDetailsToMetamask()
 
   const columnDef = [
     {
@@ -146,7 +146,7 @@ const FaucetPage = () => {
               text="Add Token"
               className="py-1 lg:py-2 inline-block w-1/3 border text-xs lg:text-sm truncate"
               isDefault={false}
-              // onClick={() => addToken({ address, ...token })}
+              onClick={() => addToken({ address, ...token })}
               icon={<img src={Metamask} alt="metamask" className="h-4 w-4 cursor-pointer" />}
             />
           </div>
