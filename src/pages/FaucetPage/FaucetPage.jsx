@@ -10,7 +10,8 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
-import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
+import { usePublicClient, useWalletClient, useNetwork, useContractReads } from "wagmi"
+import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import toast from "react-hot-toast"
 
@@ -19,19 +20,19 @@ const tokens = [
     symbol: "WBTC",
     name: "Wrapped Bitcoin",
     img: BTC,
-    ballance: "10.00k"
+    decimals: 8
   },
   {
     symbol: "WETH",
     name: "Wrapped Ethereum",
     img: WETH,
-    ballance: "0"
+    decimals: 18
   },
   {
     symbol: "USDC",
     name: "USD Stable coin",
     img: USDC,
-    ballance: "0"
+    decimals: 6
   }
 ]
 
@@ -39,15 +40,20 @@ const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
   const [amount, setAmount] = useState(0)
   const [selectedToken, setSelectedToken] = useState(null)
+  const [balances, setBalances] = useState({
+    WBTC: 0,
+    WETH: 0,
+    USDC: 0
+  })
 
   const publicClient = usePublicClient()
   const [faucets, setFaucets] = useState(null)
-  const { data: walletClient, isError, isLoading } = useWalletClient()
+  const { data: walletClient, isLoading } = useWalletClient()
   const { chain, isConnected } = useNetwork()
   const [isMinting, setIsMinting] = useState(false)
 
   useEffect(() => {
-    if (!isLoading) {
+    if (chain && !isLoading) {
       const wbtcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
       const wethFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WETH)
       const usdcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.USDC)
@@ -58,7 +64,44 @@ const FaucetPage = () => {
         USDC: usdcFaucet
       })
     }
-  }, [isLoading])
+  }, [isLoading, chain])
+
+  useContractReads({
+    contracts: [
+      {
+        address: Constants.Addresses[chain?.id]?.Faucet?.WBTC,
+        abi: Faucet.getABI(),
+        functionName: "balanceOf",
+        args: [walletClient?.account?.address]
+      },
+      {
+        address: Constants.Addresses[chain?.id]?.Faucet?.WETH,
+        abi: Faucet.getABI(),
+        functionName: "balanceOf",
+        args: [walletClient?.account?.address]
+      },
+      {
+        address: Constants.Addresses[chain?.id]?.Faucet?.USDC,
+        abi: Faucet.getABI(),
+        functionName: "balanceOf",
+        args: [walletClient?.account?.address]
+      }
+    ],
+    onSuccess: (data) => {
+      if (!data) {
+        return
+      }
+
+      setBalances({
+        ...balances,
+        WBTC: data[0]?.result,
+        WETH: data[1]?.result,
+        USDC: data[2]?.result
+      })
+    },
+    watch: true, // refresh balance on new blocks
+    watchInterval: 2000
+  })
 
   const showModal = () => {
     setOpenModal(true)
@@ -102,8 +145,10 @@ const FaucetPage = () => {
       }
     },
     {
-      field: "ballance",
       headerName: "Wallet Balance",
+      cellRenderer: (token) => {
+        return formatUnits(balances[token.symbol], token.decimals)
+      },
       headerClassName: "text-sm"
     },
     {
