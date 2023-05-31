@@ -27,7 +27,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
 
   const bodyChainModal = (
     <div>
-      {chains && chains.length && (
+      {chain && chains.length && (
         <div className="list-chains flex flex-col gap-2">
           {chains.map((c) => (
             <div className="cursor-pointer border p-2 flex justify-center items-center gap-3">
