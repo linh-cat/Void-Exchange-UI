@@ -5,12 +5,13 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
-import { useWalletClient, useNetwork, useContractReads } from "wagmi"
+import { useWalletClient, useNetwork, useContractReads, useAccount } from "wagmi"
 import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
 import { BTC, ETH, USDC } from "@img/token"
 import { Metamask } from "@icons/index"
+import useAddTokenByDetailsToMetamask from "src/hooks/useAddTokenByDetailsToMetamask"
 
 const tokens = [
   {
@@ -45,6 +46,7 @@ const FaucetPage = () => {
     WETH: 0,
     USDC: 0
   })
+  const { address } = useAccount()
 
   const { data: walletClient } = useWalletClient()
   const { chain } = useNetwork()
@@ -100,6 +102,8 @@ const FaucetPage = () => {
     setOpenModal(false)
   }
 
+  // const { addToken } = useAddTokenByDetailsToMetamask()
+
   const columnDef = [
     {
       field: "asset",
@@ -142,6 +146,7 @@ const FaucetPage = () => {
               text="Add Token"
               className="py-1 lg:py-2 inline-block w-1/3 border text-xs lg:text-sm truncate"
               isDefault={false}
+              // onClick={() => addToken({ address, ...token })}
               icon={<img src={Metamask} alt="metamask" className="h-4 w-4 cursor-pointer" />}
             />
           </div>
