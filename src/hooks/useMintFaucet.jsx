@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { toast } from "react-hot-toast"
 import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
@@ -7,13 +7,13 @@ import { Faucet, Constants } from "@void-0x/void-sdk"
 const useMintFaucet = ({ amount, selectedToken }) => {
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading } = useWalletClient()
-  const [isMint, setIsMint] = useState(false)
+  const [isMinting, setIsMinting] = useState(false)
   const [faucets, setFaucets] = useState(null)
 
   const { chain } = useNetwork()
 
   const handleMint = async () => {
-    setIsMint(true)
+    setIsMinting(true)
 
     const faucet = faucets[selectedToken?.symbol]
     if (!faucet) {
@@ -22,7 +22,7 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     const hash = await faucet.mint(amount)
     await publicClient.waitForTransactionReceipt({ hash })
 
-    setIsMint(false)
+    setIsMinting(false)
     toast.success("Successfully minted!")
   }
 
@@ -40,12 +40,14 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     }
   }, [isLoading, chain, publicClient, walletClient])
 
-  return { isMint, handleMint }
+  return { isMinting, handleMint }
 }
 
 useMintFaucet.propTypes = {
   amount: PropTypes.string,
-  selectedToken: PropTypes.string
+  selectedToken: {
+    symbol: PropTypes.string,
+  }
 }
 
 export default useMintFaucet

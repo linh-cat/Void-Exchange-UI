@@ -94,7 +94,7 @@ const FaucetPage = () => {
     showModal()
   }
 
-  const { isMint, handleMint } = useMintFaucet({ amount, selectedToken })
+  const { isMinting, handleMint } = useMintFaucet({ amount, selectedToken })
   const onMint = async () => {
     await handleMint()
     setOpenModal(false)
@@ -155,7 +155,7 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={isMint} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} />}
         body={
           <InputCustom
             placeHolder="Amount"
