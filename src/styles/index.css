@@ -101,6 +101,11 @@
     color: var(--main-short);
 }
 
+.disable {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 .bg-input {
     background: var(--input-bg-color);
 }

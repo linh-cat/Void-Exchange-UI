@@ -9,9 +9,10 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type, isLoad
       className={cx(className, {
         "text-center btn text-sm flex items-center justify-center gap-2 cursor-pointer rounded overflow-hidden": true,
         "default-btn ": isDefault,
-        secondary: type === "secondary"
+        secondary: type === "secondary",
+        disable: isLoading
       })}
-      onClick={!isLoading ? onClick : () => {}}
+      onClick={onClick}
     >
       {icon && <div>{icon}</div>}
       {!isLoading && <div>{text}</div>}

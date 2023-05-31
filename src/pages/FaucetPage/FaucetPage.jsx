@@ -13,7 +13,7 @@ import Metamask from "@img/metamask.png"
 import { usePublicClient, useWalletClient, useNetwork, useContractReads } from "wagmi"
 import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
-import toast from "react-hot-toast"
+import useMintFaucet from "src/hooks/useMintFaucet"
 
 const tokens = [
   {
@@ -50,7 +50,6 @@ const FaucetPage = () => {
   const [faucets, setFaucets] = useState(null)
   const { data: walletClient, isLoading } = useWalletClient()
   const { chain } = useNetwork()
-  const [isMinting, setIsMinting] = useState(false)
 
   useEffect(() => {
     if (chain && !isLoading) {
@@ -106,24 +105,15 @@ const FaucetPage = () => {
   const showModal = () => {
     setOpenModal(true)
   }
-
-  const onMint = async () => {
-    setIsMinting(true)
-    const faucet = faucets[selectedToken.symbol]
-
-    if (!faucet) {
-      return
-    }
-    const hash = await faucet.mint(amount)
-    await publicClient.waitForTransactionReceipt({ hash })
-    setIsMinting(false)
-    setOpenModal(false)
-    toast.success("Successfully minted!")
-  }
-
   const onTokenSelect = (token) => {
     setSelectedToken(token)
     showModal()
+  }
+
+  const { mintLoading, handleMint } = useMintFaucet({ amount, faucets, selectedToken })
+  const onMint = async () => {
+    await handleMint()
+    setOpenModal(false)
   }
 
   const columnDef = [
@@ -181,7 +171,7 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={mintLoading} />}
         body={
           <InputCustom
             placeHolder="Amount"
