@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react"
 import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
-import DAI from "@img/DAI.svg"
-import USDT from "@img/usdt.svg"
-import USDC from "@img/usdc.svg"
+import BTC from "@img/btc.png"
+import WETH from "@img/WETH.png"
+import USDC from "@img/usdc.png"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
@@ -14,20 +14,23 @@ import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import toast from "react-hot-toast"
 
-const data = [
+const tokens = [
   {
-    asset: "DAI",
-    token: DAI,
+    symbol: "WBTC",
+    name: "Wrapped Bitcoin",
+    img: BTC,
     ballance: "10.00k"
   },
   {
-    asset: "USDT",
-    token: USDT,
+    symbol: "WETH",
+    name: "Wrapped Ethereum",
+    img: WETH,
     ballance: "0"
   },
   {
-    asset: "USDC",
-    token: USDC,
+    symbol: "USDC",
+    name: "USD Stable coin",
+    img: USDC,
     ballance: "0"
   }
 ]
@@ -35,17 +38,25 @@ const data = [
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
   const [amount, setAmount] = useState(0)
-  const [faucet, setFaucet] = useState(null)
+  const [selectedToken, setSelectedToken] = useState(null)
 
   const publicClient = usePublicClient()
+  const [faucets, setFaucets] = useState(null)
   const { data: walletClient, isError, isLoading } = useWalletClient()
   const { chain, isConnected } = useNetwork()
   const [isMinting, setIsMinting] = useState(false)
 
   useEffect(() => {
     if (!isLoading) {
-      const faucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
-      setFaucet(faucet)
+      const wbtcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
+      const wethFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WETH)
+      const usdcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.USDC)
+
+      setFaucets({
+        WBTC: wbtcFaucet,
+        WETH: wethFaucet,
+        USDC: usdcFaucet
+      })
     }
   }, [isLoading])
 
@@ -55,11 +66,21 @@ const FaucetPage = () => {
 
   const onMint = async () => {
     setIsMinting(true)
+    const faucet = faucets[selectedToken.symbol]
+
+    if (!faucet) {
+      return
+    }
     const hash = await faucet.mint(amount)
     await publicClient.waitForTransactionReceipt({ hash })
     setIsMinting(false)
     setOpenModal(false)
     toast.success("Successfully minted!")
+  }
+
+  const onTokenSelect = (token) => {
+    setSelectedToken(token)
+    showModal()
   }
 
   const columnDef = [
@@ -71,10 +92,10 @@ const FaucetPage = () => {
       cellRenderer: (cell) => {
         return (
           <div className="flex items-center gap-2">
-            <img src={cell?.token} alt="token" className="h-10 w-10" />
+            <img src={cell?.img} alt="token" className="h-10 w-10" />
             <div className="flex flex-col gap-1">
-              <label>{cell?.asset}</label>
-              <span className="text-xs text-slate-500">{cell?.asset}</span>
+              <label>{cell?.symbol}</label>
+              <span className="text-xs text-slate-500">{cell?.name}</span>
             </div>
           </div>
         )
@@ -88,10 +109,10 @@ const FaucetPage = () => {
     {
       field: "action",
       headerName: "",
-      cellRenderer: () => {
+      cellRenderer: (token) => {
         return (
           <div className="flex justify-center">
-            <Button text="Faucet" className="py-2 inline-block w-1/2" onClick={showModal} />
+            <Button text="Faucet" className="py-2 inline-block w-1/2" onClick={() => onTokenSelect(token)} />
           </div>
         )
       }
@@ -106,8 +127,8 @@ const FaucetPage = () => {
         header={
           <div className="flex justify-between">
             <div className="flex items-center gap-2">
-              <h3>Faucet DAI</h3>
-              <img src={DAI} alt="dai" className="h-5 w-5" />
+              <h3>Faucet {selectedToken?.symbol}</h3>
+              <img src={selectedToken?.img} alt="dai" className="h-5 w-5" />
             </div>
             <div className="flex items-center gap-2">
               <label className="text-xs">Add Token</label>
@@ -147,7 +168,7 @@ const FaucetPage = () => {
       <div className="faucet-list mx-auto max-w-7xl">
         <h4 className="mb-3">Test Assets</h4>
         <CardWrapper>
-          <TableCustom columnDef={columnDef} data={data} cellStyle="py-3 px-3" />
+          <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
         </CardWrapper>
       </div>
     </div>
