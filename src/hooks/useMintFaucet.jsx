@@ -5,26 +5,12 @@ import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 
 const useMintFaucet = ({ amount, selectedToken }) => {
-  const publicClient = usePublicClient()
-  const { data: walletClient, isLoading } = useWalletClient()
   const [isMinting, setIsMinting] = useState(false)
   const [faucets, setFaucets] = useState(null)
 
+  const publicClient = usePublicClient()
+  const { data: walletClient, isLoading } = useWalletClient()
   const { chain } = useNetwork()
-
-  const handleMint = async () => {
-    setIsMinting(true)
-
-    const faucet = faucets[selectedToken?.symbol]
-    if (!faucet) {
-      return
-    }
-    const hash = await faucet.mint(amount)
-    await publicClient.waitForTransactionReceipt({ hash })
-
-    setIsMinting(false)
-    toast.success("Successfully minted!")
-  }
 
   useEffect(() => {
     if (chain && !isLoading) {
@@ -40,13 +26,27 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     }
   }, [isLoading, chain, publicClient, walletClient])
 
+  const handleMint = async () => {
+    setIsMinting(true)
+
+    const faucet = faucets[selectedToken?.symbol]
+    if (!faucet) {
+      return
+    }
+    const hash = await faucet.mint(amount)
+    await publicClient.waitForTransactionReceipt({ hash })
+
+    setIsMinting(false)
+    toast.success("Successfully minted!")
+  }
+
   return { isMinting, handleMint }
 }
 
 useMintFaucet.propTypes = {
   amount: PropTypes.string,
   selectedToken: {
-    symbol: PropTypes.string,
+    symbol: PropTypes.string
   }
 }
 
