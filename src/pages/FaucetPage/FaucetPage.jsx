@@ -130,8 +130,14 @@ const FaucetPage = () => {
       headerName: "",
       cellRenderer: (token) => {
         return (
-          <div className="flex justify-center">
-            <Button text="Faucet" className="py-2 inline-block w-1/2" onClick={() => onTokenSelect(token)} />
+          <div className="flex justify-center gap-3">
+            <Button text="Faucet" className="py-2 inline-block w-1/3" onClick={() => onTokenSelect(token)} />
+            <Button
+              text="Add Token"
+              className="py-2 inline-block w-1/3 border"
+              isDefault={false}
+              icon={<img src={Metamask} alt="metamask" className="h-4 w-4 cursor-pointer" />}
+            />
           </div>
         )
       }
@@ -148,10 +154,6 @@ const FaucetPage = () => {
             <div className="flex items-center gap-2">
               <h3>Faucet {selectedToken?.symbol}</h3>
               <img src={selectedToken?.img} alt="dai" className="h-5 w-5" />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs">Add Token</label>
-              <img src={Metamask} alt="metamask" className="h-5 w-5 cursor-pointer" />
             </div>
           </div>
         }
