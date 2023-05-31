@@ -87,7 +87,22 @@ function App() {
   return (
     <WagmiConfig config={config}>
       <FullApp />
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: "bg-card shadow",
+          style: {
+            background: "#1B2028",
+            color: "#fff"
+          },
+          success: {
+            iconTheme: {
+              primary: "#28a0f0",
+              secondary: "#fff"
+            }
+          }
+        }}
+        position="top-center"
+      />
     </WagmiConfig>
   )
 }

@@ -72,6 +72,8 @@ const ConnectWalletButton = ({ imgSrc }) => {
     </div>
   )
 
+  console.log({ chain })
+
   return (
     <div>
       <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
@@ -100,15 +102,29 @@ const ConnectWalletButton = ({ imgSrc }) => {
             <>
               <Button
                 text={
-                  <div className="flex items-center gap-3">
-                    <div>{truncate(address, 5)}</div>
-                    <div className="border-l pl-3 border-zinc-500">
-                      {decialNumber(balance?.formatted, 4)} {balance?.symbol}
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <div className="active-chain"></div>
+                    <label>{chain.name}</label>
                   </div>
                 }
                 onClick={() => setChainModal(true)}
-                className="inline-block border px-2 py-3  shadow"
+                isDefault={false}
+                className="border px-3 shadow"
+              />
+              <Button
+                text={
+                  <div className="flex items-center gap-3">
+                    <div className="">
+                      {decialNumber(balance?.formatted, 4)} {balance?.symbol}
+                    </div>
+                    <Button
+                      text={<div>{truncate(address, 5)}</div>}
+                      className="border px-2 py-1 bg-input"
+                      isDefault={false}
+                    />
+                  </div>
+                }
+                className="inline-block border px-2 py-1 shadow"
                 isDefault={false}
               />
             </>

@@ -11,7 +11,7 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type, isLoad
         "default-btn ": isDefault,
         secondary: type === "secondary"
       })}
-      onClick={onClick}
+      onClick={!isLoading ? onClick : () => {}}
     >
       {icon && <div>{icon}</div>}
       {!isLoading && <div>{text}</div>}

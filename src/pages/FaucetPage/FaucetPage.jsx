@@ -49,7 +49,7 @@ const FaucetPage = () => {
   const publicClient = usePublicClient()
   const [faucets, setFaucets] = useState(null)
   const { data: walletClient, isLoading } = useWalletClient()
-  const { chain, isConnected } = useNetwork()
+  const { chain } = useNetwork()
   const [isMinting, setIsMinting] = useState(false)
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const FaucetPage = () => {
         USDC: usdcFaucet
       })
     }
-  }, [isLoading, chain])
+  }, [isLoading, chain, publicClient, walletClient])
 
   useContractReads({
     contracts: [
