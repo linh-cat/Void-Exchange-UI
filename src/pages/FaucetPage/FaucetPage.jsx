@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState } from "react"
 import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
@@ -10,7 +10,7 @@ import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
 import Metamask from "@img/metamask.png"
-import { usePublicClient, useWalletClient, useNetwork, useContractReads } from "wagmi"
+import { useWalletClient, useNetwork, useContractReads } from "wagmi"
 import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
@@ -94,7 +94,7 @@ const FaucetPage = () => {
     showModal()
   }
 
-  const { mintLoading, handleMint } = useMintFaucet({ amount, selectedToken })
+  const { isMint, handleMint } = useMintFaucet({ amount, selectedToken })
   const onMint = async () => {
     await handleMint()
     setOpenModal(false)
@@ -155,7 +155,7 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={mintLoading} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={isMint} />}
         body={
           <InputCustom
             placeHolder="Amount"

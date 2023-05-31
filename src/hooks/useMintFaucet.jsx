@@ -7,13 +7,13 @@ import { Faucet, Constants } from "@void-0x/void-sdk"
 const useMintFaucet = ({ amount, selectedToken }) => {
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading } = useWalletClient()
-  const [mintLoading, setMintLoading] = useState(false)
+  const [isMint, setIsMint] = useState(false)
   const [faucets, setFaucets] = useState(null)
 
   const { chain } = useNetwork()
 
   const handleMint = async () => {
-    setMintLoading(true)
+    setIsMint(true)
 
     const faucet = faucets[selectedToken?.symbol]
     if (!faucet) {
@@ -22,7 +22,7 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     const hash = await faucet.mint(amount)
     await publicClient.waitForTransactionReceipt({ hash })
 
-    setMintLoading(false)
+    setIsMint(false)
     toast.success("Successfully minted!")
   }
 
@@ -40,7 +40,7 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     }
   }, [isLoading, chain, publicClient, walletClient])
 
-  return { mintLoading, handleMint }
+  return { isMint, handleMint }
 }
 
 useMintFaucet.propTypes = {
