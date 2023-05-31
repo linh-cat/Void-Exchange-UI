@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
@@ -46,24 +46,8 @@ const FaucetPage = () => {
     USDC: 0
   })
 
-  const publicClient = usePublicClient()
-  const [faucets, setFaucets] = useState(null)
-  const { data: walletClient, isLoading } = useWalletClient()
+  const { data: walletClient } = useWalletClient()
   const { chain } = useNetwork()
-
-  useEffect(() => {
-    if (chain && !isLoading) {
-      const wbtcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WBTC)
-      const wethFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.WETH)
-      const usdcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.USDC)
-
-      setFaucets({
-        WBTC: wbtcFaucet,
-        WETH: wethFaucet,
-        USDC: usdcFaucet
-      })
-    }
-  }, [isLoading, chain, publicClient, walletClient])
 
   useContractReads({
     contracts: [
@@ -110,7 +94,7 @@ const FaucetPage = () => {
     showModal()
   }
 
-  const { mintLoading, handleMint } = useMintFaucet({ amount, faucets, selectedToken })
+  const { mintLoading, handleMint } = useMintFaucet({ amount, selectedToken })
   const onMint = async () => {
     await handleMint()
     setOpenModal(false)
