@@ -46,7 +46,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
   return (
     <div
       className={cx({
-        "w-full mb-8 overflow-hidden rounded": true,
+        "w-full overflow-hidden rounded": true,
         shadow: isShadow
       })}
     >
@@ -76,7 +76,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                       <td
                         className={cx({
                           [cellStyle]: Boolean(cellStyle),
-                          [h.classname]: Boolean(h.classname)
+                          [h.className]: Boolean(h.className)
                         })}
                       >
                         {h.cellRenderer(item)}
@@ -88,7 +88,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                       <td
                         className={cx({
                           [cellStyle]: Boolean(cellStyle),
-                          [h.classname]: Boolean(h.classname)
+                          [h.className]: Boolean(h.className)
                         })}
                       >
                         {h.formatter(item)}
@@ -99,7 +99,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                     <td
                       className={cx({
                         [cellStyle]: Boolean(cellStyle),
-                        [h.classname]: Boolean(h.classname)
+                        [h.className]: Boolean(h.className)
                       })}
                     >
                       {item?.[h?.field]}

@@ -30,7 +30,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
       {chain && chains.length && (
         <div className="list-chains flex flex-col gap-2">
           {chains.map((c) => (
-            <div className="cursor-pointer border p-2 flex justify-center items-center gap-3">
+            <div className="cursor-pointer border p-2 flex justify-center items-center gap-3" key={c.id}>
               {c.id === chain.id && <div className="active-chain"></div>}
               <div>{c.name}</div>
             </div>
@@ -66,6 +66,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
             isDefault={false}
             className="border p-3"
             icon={connector.id === "metaMask" && <img src={Metamask} alt="metamask" className="h-4 w-4" />}
+            key={connector.id}
           />
         )
       })}
