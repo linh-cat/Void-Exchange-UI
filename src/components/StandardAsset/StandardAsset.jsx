@@ -1,13 +1,10 @@
 import React from "react"
-import BTC from "@img/btc.png"
-import ETH from "@img/WETH.png"
 import DogeCoin from "@img/dogecoin.png"
-import Solana from "@img/solana.png"
-import Polygon from "@img/polygon.png"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import TableCustom from "@components/Table/TableCustom"
 import cx from "classnames"
+import { BTC, ETH, POLYGON, SOLANA } from "@img/token"
 
 const columnDef = [
   {
@@ -130,7 +127,7 @@ const dataForTable = [
   },
   {
     id: 4,
-    img: Solana,
+    img: SOLANA,
     asset: "Solana",
     acronym: "Sol",
     price: 299999,
@@ -140,7 +137,7 @@ const dataForTable = [
   },
   {
     id: 5,
-    img: Polygon,
+    img: POLYGON,
     asset: "Polygon",
     acronym: "Matic",
     price: 111111,

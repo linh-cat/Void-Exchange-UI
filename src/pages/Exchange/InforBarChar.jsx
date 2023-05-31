@@ -1,9 +1,8 @@
 import React from "react"
 import SelectCoupleToken from "../../components/common/SelectCoupleToken"
-import BTC from "../../img/btc.png"
-import ETH from "../../img/WETH.png"
 import Up from "../../img/up.svg"
 import Badge from "../../components/common/Badge"
+import { BTC, ETH } from "@img/token"
 
 const InforBarChar = () => {
   return (

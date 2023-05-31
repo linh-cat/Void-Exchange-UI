@@ -1,6 +1,4 @@
-import ETH from "@img/WETH.png"
-import BTC from "@img/btc.png"
-import Doge from "@img/dogecoin.png"
+import { BTC, DOGE, ETH } from "@img/token";
 
 export const vault_list = [
     {
@@ -22,6 +20,6 @@ export const vault_list = [
         title: 'Doge',
         bg: 'bg-doge',
         hoverBg: 'bg-hover-doge',
-        icon: Doge,
+        icon: DOGE,
     }
 ]

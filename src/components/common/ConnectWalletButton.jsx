@@ -3,9 +3,9 @@ import Button from "@components/Button/Button"
 import { useAccount, useNetwork, useConnect, useBalance, useDisconnect } from "wagmi"
 import Modal from "@components/Modal/Modal"
 import { decialNumber } from "src/common/fomatter"
-import Metamask from "@img/metamask.png"
 
 import "./ConnectWalletButton.css"
+import { Metamask } from "@icons/index"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -86,7 +86,11 @@ const ConnectWalletButton = ({ imgSrc }) => {
         if (!isConnected) {
           return (
             <div>
-              <Button onClick={() => setConnectModal(true)} text="Connect Wallet" />
+              <Button
+                onClick={() => setConnectModal(true)}
+                text="Connect Wallet"
+                icon={<img src={imgSrc} className="h5 w-5" alt="icon" />}
+              />
             </div>
           )
         }

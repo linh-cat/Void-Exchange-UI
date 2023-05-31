@@ -1,19 +1,16 @@
 import React, { useState } from "react"
-import ETH from "@img/WETH.png"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
-import BTC from "@img/btc.png"
-import WETH from "@img/WETH.png"
-import USDC from "@img/usdc.png"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
-import Metamask from "@img/metamask.png"
 import { useWalletClient, useNetwork, useContractReads } from "wagmi"
 import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
+import { BTC, ETH, USDC } from "@img/token"
+import { Metamask } from "@icons/index"
 
 const tokens = [
   {
@@ -25,7 +22,7 @@ const tokens = [
   {
     symbol: "WETH",
     name: "Wrapped Ethereum",
-    img: WETH,
+    img: ETH,
     decimals: 18
   },
   {

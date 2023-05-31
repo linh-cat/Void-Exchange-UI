@@ -3,13 +3,9 @@ import "./Banner.css"
 import { Link, useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
-import BTC from "@img/btc.png"
-import ETH from "@img/WETH.png"
-import Matic from "@img/matic.png"
-import Polygon from "@img/polygon.png"
-import Solana from "@img/solana.png"
 import { DownIconGreen } from "@icons/index"
 import { DownIconRed } from "@icons/index"
+import { BTC, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
 
 const Banner = () => {
   const navigate = useNavigate()
@@ -93,7 +89,7 @@ const Banner = () => {
               <div className="item flex justify-center">
                 <div className="flex w-5/6 justify-between items-center">
                   <div className="w-1/4">
-                    <img src={Solana} alt="Solana" className="w-10 h-10 border rounded-full" />
+                    <img src={SOLANA} alt="Solana" className="w-10 h-10 border rounded-full" />
                   </div>
                   <div className="text-sm w-2/4 ml-3">
                     <div className="text-left">
@@ -111,7 +107,7 @@ const Banner = () => {
               <div className="item flex justify-center">
                 <div className="flex w-5/6 justify-between items-center">
                   <div className="w-1/4">
-                    <img src={Polygon} alt="Polygon" className="w-10 h-10 border rounded-full" />
+                    <img src={POLYGON} alt="Polygon" className="w-10 h-10 border rounded-full" />
                   </div>
                   <div className="text-sm w-2/4 ml-3">
                     <div className="text-left">
@@ -129,7 +125,7 @@ const Banner = () => {
               <div className="item flex justify-center">
                 <div className="flex w-5/6 justify-between items-center">
                   <div className="w-1/4">
-                    <img src={Matic} alt="Matic" className="w-10 h-10 border rounded-full" />
+                    <img src={MATIC} alt="Matic" className="w-10 h-10 border rounded-full" />
                   </div>
                   <div className="text-sm w-2/4 ml-3">
                     <div className="text-left">

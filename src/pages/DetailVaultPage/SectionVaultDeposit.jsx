@@ -2,8 +2,8 @@ import LineChart from "@components/LineChart/LineChart"
 import React, { useState } from "react"
 import cx from "classnames"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
-import ETH from "@img/WETH.png"
 import Button from "@components/Button/Button"
+import { ETH } from "@img/token"
 const SectionVaultDeposit = () => {
   const [tab, setTab] = useState("deposit")
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import "./SelectCoupleToken.css"
-import BTC from "../../img/btc.png"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
 import { useMemo } from "react"
 import { DownIcon } from "@icons/index"
+import { BTC } from "@img/token"
 
 const SelectCoupleToken = ({ options, defaultValue }) => {
   const [openList, setOpenList] = useState(false)

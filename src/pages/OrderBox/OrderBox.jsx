@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
-import BTC from "@img/btc.png"
-import BNB from "@img/CAKE.png"
-import ETH from "@img/WETH.png"
 import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
+import { BTC, CAKE, ETH } from "@img/token"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
@@ -56,7 +54,7 @@ const OrderBox = ({ type }) => {
               <SelectToken
                 options={[
                   { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: BNB },
+                  { label: "BNB", value: "BNB", icon: CAKE },
                   { label: "ETH", value: "ETH", icon: ETH }
                 ]}
                 defaultValue={"ETH"}
@@ -75,7 +73,7 @@ const OrderBox = ({ type }) => {
               <SelectToken
                 options={[
                   { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: BNB },
+                  { label: "BNB", value: "BNB", icon: CAKE },
                   { label: "ETH", value: "ETH", icon: ETH }
                 ]}
                 defaultValue={"ETH"}
@@ -113,7 +111,7 @@ const OrderBox = ({ type }) => {
           <div className="collateral-asset flex justify-between text-base lg:text-sm">
             <label>Collateral Asset</label>
             <div className="flex items-center gap-1">
-              <img src={BNB} className="rounded-full w-5 h-5" alt="icon" />
+              <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
               <span>Cake</span>
             </div>
           </div>

@@ -1,5 +1,5 @@
+import { ETH } from "@img/token"
 import React from "react"
-import ETH from "@img/WETH.png"
 
 const Banner = () => {
   return (

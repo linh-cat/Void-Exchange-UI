@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import ETH from "@img/WETH.png"
-import Plus from "@img/icons/Plus.svg"
 import CollateralPopup from "@components/common/CollateralPopup"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
+import { ETH } from "@img/token"
 
 const data = [
   {
