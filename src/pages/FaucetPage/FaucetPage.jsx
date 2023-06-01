@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import CardWrapper from "@components/CardWrapper/CardWrapper"
 import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
@@ -11,31 +11,36 @@ import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
 import { BTC, ETH, USDC } from "@img/token"
 import { Metamask } from "@icons/index"
+import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
+import { toast } from "react-hot-toast"
 
 const tokens = [
   {
     symbol: "WBTC",
     name: "Wrapped Bitcoin",
     img: BTC,
-    decimals: 8
+    decimals: 8,
+    max: 10
   },
   {
     symbol: "WETH",
     name: "Wrapped Ethereum",
     img: ETH,
-    decimals: 18
+    decimals: 18,
+    max: 20
   },
   {
     symbol: "USDC",
     name: "USD Stable coin",
     img: USDC,
-    decimals: 6
+    decimals: 6,
+    max: 50000
   }
 ]
 
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(1)
   const [selectedToken, setSelectedToken] = useState(null)
   const [balances, setBalances] = useState({
     WBTC: 0,
@@ -97,12 +102,26 @@ const FaucetPage = () => {
     setOpenModal(false)
   }
 
+  const { addToken } = useAddTokenToMetamask()
+
+  const getFaucetAddress = useCallback(
+    (symbol) => {
+      if (!chain || !chain.id) {
+        toast.error("Please connect to Metamask!")
+        return
+      }
+
+      return Constants.Addresses[chain.id]?.Faucet?.[symbol]
+    },
+    [chain]
+  )
+
   const columnDef = [
     {
       field: "asset",
       headerName: "Asset",
       headerClassName: "text-sm text-left",
-      classname: "text-left",
+      className: "text-left text-xs lg:text-sm",
       cellRenderer: (cell) => {
         return (
           <div className="flex items-center gap-2">
@@ -120,19 +139,32 @@ const FaucetPage = () => {
       cellRenderer: (token) => {
         return formatUnits(balances[token.symbol], token.decimals)
       },
+      className: "text-xs lg:text-sm",
       headerClassName: "text-sm"
     },
     {
       field: "action",
       headerName: "",
+      className: "text-xs lg:text-sm",
       cellRenderer: (token) => {
         return (
           <div className="flex justify-center gap-3">
-            <Button text="Faucet" className="py-2 inline-block w-1/3" onClick={() => onTokenSelect(token)} />
+            <Button
+              text="Faucet"
+              className="py-1 lg:py-2 inline-block w-1/3 text-xs lg:text-sm truncate"
+              onClick={() => onTokenSelect(token)}
+            />
             <Button
               text="Add Token"
-              className="py-2 inline-block w-1/3 border"
+              className="py-1 lg:py-2 inline-block w-1/3 border text-xs lg:text-sm truncate"
               isDefault={false}
+              onClick={() =>
+                addToken({
+                  address: getFaucetAddress(token.symbol),
+                  symbol: token.symbol,
+                  decimals: token.decimals
+                })
+              }
               icon={<img src={Metamask} alt="metamask" className="h-4 w-4 cursor-pointer" />}
             />
           </div>
@@ -152,16 +184,29 @@ const FaucetPage = () => {
               <h3>Faucet {selectedToken?.symbol}</h3>
               <img src={selectedToken?.img} alt="dai" className="h-5 w-5" />
             </div>
+            <div>
+              <label className="text-sm text-slate-500">Max: {selectedToken?.max}</label>
+            </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} disabled={amount > selectedToken?.max} />}
         body={
-          <InputCustom
-            placeHolder="Amount"
-            classNameInput="py-3 px-2"
-            rightAction={<div className="cursor-pointer mr-2">Max</div>}
-            onChange={(val) => setAmount(val)}
-          />
+          <div>
+            <InputCustom
+              placeHolder="Amount"
+              classNameInput="py-3 px-2"
+              rightAction={
+                <div className="cursor-pointer mr-2" onClick={() => setAmount(selectedToken?.max)}>
+                  Max
+                </div>
+              }
+              value={amount}
+              onChange={(val) => setAmount(val)}
+            />
+            {amount > selectedToken?.max && (
+              <div className="text-sm text-yellow-500 text-left"> Mint amount must be less than max value </div>
+            )}
+          </div>
         }
       />
       <div
