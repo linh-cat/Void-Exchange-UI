@@ -44,7 +44,7 @@ const useMintFaucet = ({ amount, selectedToken }) => {
 }
 
 useMintFaucet.propTypes = {
-  amount: PropTypes.string,
+  amount: PropTypes.number,
   selectedToken: {
     symbol: PropTypes.string
   }

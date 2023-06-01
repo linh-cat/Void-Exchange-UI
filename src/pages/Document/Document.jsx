@@ -1,8 +1,9 @@
-import CardWrapper from "@components/CardWrapper/CardWrapper"
 import React from "react"
-import "./Document.css"
-import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from "@icons/index"
 import Button from "@components/Button/Button"
+import CardWrapper from "@components/CardWrapper/CardWrapper"
+import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from "@icons/index"
+
+import "./Document.css"
 
 const Document = () => {
   return (
