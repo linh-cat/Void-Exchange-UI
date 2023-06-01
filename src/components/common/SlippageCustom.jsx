@@ -1,37 +1,37 @@
-import React, { useMemo, useState } from "react";
-import "./SlippageCustom.css";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import useOutsideDetect from "../../hooks/useOutsideDetect";
+import React, { useMemo, useState } from "react"
+import "./SlippageCustom.css"
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
+import useOutsideDetect from "../../hooks/useOutsideDetect"
 
 const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue);
-  const [pickValue, setPickValue] = useState();
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState(defaultValue)
+  const [pickValue, setPickValue] = useState()
 
   const handleClickOutside = () => {
-    setOpen(false);
-  };
-  const refOutside = useOutsideDetect(handleClickOutside);
+    setOpen(false)
+  }
+  const refOutside = useOutsideDetect(handleClickOutside)
 
   const onChangeValue = (val) => {
-    setValue(val);
-    setPickValue();
-    setOpen(false);
-  };
+    setValue(val)
+    setPickValue()
+    setOpen(false)
+  }
   const onChangePickValue = (e) => {
-    e.preventDefault();
-    const value = Math.max(0, Math.min(100, Number(e.target.value)));
-    setPickValue(value);
-  };
+    e.preventDefault()
+    const value = Math.max(0, Math.min(100, Number(e.target.value)))
+    setPickValue(value)
+  }
 
   const toggleOpen = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
   const renderValue = useMemo(() => {
-    const index = options.findIndex((item) => item.value === value);
-    return options[index]?.label;
-  }, [options, value]);
+    const index = options.findIndex((item) => item.value === value)
+    return options[index]?.label
+  }, [options, value])
 
   return (
     <div className="slippage-custom">
@@ -43,11 +43,7 @@ const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
             <div className="tooltip p-3 rounded">{tooltip}</div>
           </div>
         </div>
-        <div
-          className="rounded border px-2 py-1 cursor-pointer"
-          onClick={toggleOpen}
-          ref={refOutside}
-        >
+        <div className="rounded border px-2 py-1 cursor-pointer" onClick={toggleOpen} ref={refOutside}>
           {pickValue || renderValue}%
         </div>
       </div>
@@ -77,7 +73,7 @@ const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SlippageCustom;
+export default SlippageCustom

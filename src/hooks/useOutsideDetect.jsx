@@ -1,23 +1,23 @@
-import React from "react";
+import React from "react"
 
 const useOutsideDetect = (callback) => {
-  const ref = React.useRef();
+  const ref = React.useRef()
 
   React.useEffect(() => {
     const handleClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        callback();
+        callback()
       }
-    };
+    }
 
-    document.addEventListener("click", handleClick, true);
+    document.addEventListener("click", handleClick, true)
 
     return () => {
-      document.removeEventListener("click", handleClick, true);
-    };
-  }, [callback, ref]);
+      document.removeEventListener("click", handleClick, true)
+    }
+  }, [callback, ref])
 
-  return ref;
-};
+  return ref
+}
 
-export default useOutsideDetect;
+export default useOutsideDetect

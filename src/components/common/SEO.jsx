@@ -1,15 +1,15 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
 
 const SEO = (props) => {
-  const { children, ...customMeta } = props;
+  const { children, ...customMeta } = props
   const meta = {
     title: "ZK Pern | Decentralized Perpetual Exchange",
     description:
       "Trade spot or perpetual BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet on Arbitrum and Avalanche.",
     image: "https://gmx.io/og.png",
     type: "exchange",
-    ...customMeta,
-  };
+    ...customMeta
+  }
   return (
     <>
       <Helmet>
@@ -29,7 +29,7 @@ const SEO = (props) => {
       </Helmet>
       {children}
     </>
-  );
-};
+  )
+}
 
-export default SEO;
+export default SEO
