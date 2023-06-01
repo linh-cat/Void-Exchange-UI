@@ -189,7 +189,7 @@ const FaucetPage = () => {
             </div>
           </div>
         }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} disable={amount > selectedToken?.max} />}
+        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} disabled={amount > selectedToken?.max} />}
         body={
           <div>
             <InputCustom
