@@ -13,6 +13,7 @@ import { BTC, ETH, USDC } from "@img/token"
 import { Metamask } from "@icons/index"
 import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
 import { toast } from "react-hot-toast"
+import RequireConnectionMask from "@components/RequireConnectionMask/RequireConnectionMask"
 
 const tokens = [
   {
@@ -231,7 +232,9 @@ const FaucetPage = () => {
       <div className="faucet-list mx-auto max-w-7xl">
         <h4 className="mb-3">Test Assets</h4>
         <CardWrapper>
-          <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
+          <RequireConnectionMask>
+            <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
+          </RequireConnectionMask>
         </CardWrapper>
       </div>
     </div>

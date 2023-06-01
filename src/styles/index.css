@@ -67,7 +67,7 @@
     box-shadow: 0 0.625rem 1.25rem 0 rgba(113, 113, 166, 0.2);
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
-    z-index: 9999999999999999;
+    z-index: 1;
 }
 
 .active-chain {
@@ -156,6 +156,10 @@ html, body {
 
 .vh-12 {
     height: 12vh;
+}
+
+.vh-40 {
+    height: 40vh;
 }
 
 .vh-90 {
