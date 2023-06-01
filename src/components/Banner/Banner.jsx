@@ -1,9 +1,8 @@
 import React from "react"
 import "./Banner.css"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
-import { DownIconGreen } from "@icons/index"
+import Card from "@components/Card/Card"
 import { DownIconRed } from "@icons/index"
 import { BTC, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
 
@@ -46,7 +45,7 @@ const Banner = () => {
           />
         </div>
 
-        <CardWrapper className="banner-info-token p-8 mt-20" hasShadow={true}>
+        <Card className="banner-info-token p-8 mt-20" hasShadow={true}>
           <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
             <div className="token grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
@@ -142,7 +141,7 @@ const Banner = () => {
               </div>
             </div>
           </div>
-        </CardWrapper>
+        </Card>
       </div>
     </section>
   )

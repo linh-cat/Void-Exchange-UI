@@ -1,7 +1,7 @@
 import LineChart from "@components/LineChart/LineChart"
 import React, { useState } from "react"
 import cx from "classnames"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 import Button from "@components/Button/Button"
 import { ETH } from "@img/token"
 const SectionVaultDeposit = () => {
@@ -12,7 +12,7 @@ const SectionVaultDeposit = () => {
   }
   return (
     <div className="container mx-auto max-w-7xl mt-10">
-      <CardWrapper
+      <Card
         className="card-deposit-vault w-full overflow-hidden"
         header={
           <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 ">
@@ -38,7 +38,7 @@ const SectionVaultDeposit = () => {
       >
         {/* bottom content */}
         <div className="flex-1 p-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
-          <CardWrapper className="supply-liquidity-chart col-span-full lg:col-span-3">
+          <Card className="supply-liquidity-chart col-span-full lg:col-span-3">
             <LineChart
               chartData={{
                 labels: ["Utilization", "40%", "60%", "100%"],
@@ -70,9 +70,9 @@ const SectionVaultDeposit = () => {
               showYaxis={false}
               showGrid={false}
             />
-          </CardWrapper>
+          </Card>
           <div className="flex flex-col gap-3">
-            <CardWrapper>
+            <Card>
               <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
                 <div className="btn-group flex border rounded overflow-hidden w-full">
                   <div
@@ -145,9 +145,9 @@ const SectionVaultDeposit = () => {
                   </>
                 )}
               </div>
-            </CardWrapper>
+            </Card>
             {/* my positions */}
-            <CardWrapper className="my-position p-3">
+            <Card className="my-position p-3">
               <div className="flex flex-col gap-3">
                 <div>
                   <label className="text-xs text-slate-500">Portfolio Value</label>
@@ -174,10 +174,10 @@ const SectionVaultDeposit = () => {
                   </div>
                 </div>
               </div>
-            </CardWrapper>
+            </Card>
           </div>
         </div>
-      </CardWrapper>
+      </Card>
     </div>
   )
 }

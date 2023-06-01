@@ -1,5 +1,5 @@
 import Button from "@components/Button/Button"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 import React from "react"
 import BSScan from "@img/bscscan.png"
 import DogeCoin from "@img/dogecoin.png"
@@ -35,7 +35,7 @@ const ProfilePage = () => {
         className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
         style={{ backgroundImage: `url(${Mobo})` }}
       ></div>
-      <CardWrapper className={"p-5"}>
+      <Card className={"p-5"}>
         <div className="flex justify-between flex-col md:flex-row ">
           <div className="flex flex-col items-center w-full xl:w-96 bg-none">
             <img className="w-20 h-20 rounded-full" src={APE} alt="Extra large avatar" />
@@ -72,8 +72,8 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-      </CardWrapper>
-      <CardWrapper className="p-5" hasShadow={true}>
+      </Card>
+      <Card className="p-5" hasShadow={true}>
         <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex items-center gap-5">
             <img src={BSScan} alt="bsca" className="w-10 h-10" />
@@ -89,9 +89,9 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-      </CardWrapper>
+      </Card>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <CardWrapper className={"p-5"}>
+        <Card className={"p-5"}>
           <div className="flex flex-col gap-3">
             <label className="text-zinc-500 ">Profit / Loss (%)</label>
             <div>
@@ -99,8 +99,8 @@ const ProfilePage = () => {
               <div className="text-xs text-zinc-500">Past 30 Days</div>
             </div>
           </div>
-        </CardWrapper>
-        <CardWrapper className={"p-5"}>
+        </Card>
+        <Card className={"p-5"}>
           <div className="flex flex-col gap-3">
             <label className="text-zinc-500 ">Profit / Loss ($)</label>
             <div>
@@ -108,8 +108,8 @@ const ProfilePage = () => {
               <div className="text-xs text-zinc-500">Past 30 Days</div>
             </div>
           </div>
-        </CardWrapper>
-        <CardWrapper className={"p-5"}>
+        </Card>
+        <Card className={"p-5"}>
           <div className="flex flex-col gap-3">
             <label className="text-zinc-500 ">Volume</label>
             <div>
@@ -117,7 +117,7 @@ const ProfilePage = () => {
               <div className="text-xs text-zinc-500">Past 30 Days</div>
             </div>
           </div>
-        </CardWrapper>
+        </Card>
       </div>
       <div>
         <h3 className="text-lg">Affiliate History</h3>

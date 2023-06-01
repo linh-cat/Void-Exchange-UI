@@ -1,7 +1,7 @@
 import React from "react"
 import DogeCoin from "@img/dogecoin.png"
 import { DownIconGreen, DownIconRed } from "@icons/index"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 import TableCustom from "@components/Table/TableCustom"
 import cx from "classnames"
 import { BTC, ETH, POLYGON, SOLANA } from "@img/token"
@@ -148,10 +148,10 @@ const dataForTable = [
 ]
 const StandardAsset = () => {
   return (
-    <CardWrapper className="standard-asset mt-10 container mx-auto p-5" hasShadow={true}>
+    <Card className="standard-asset mt-10 container mx-auto p-5" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
       <TableCustom columnDef={columnDef} data={dataForTable} cellStyle="px-3 py-4 border-b" />
-    </CardWrapper>
+    </Card>
   )
 }
 

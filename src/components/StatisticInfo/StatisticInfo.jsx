@@ -1,6 +1,6 @@
 import React from "react"
 import "./StatisticInfo.css"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 
 const StatisticInfo = () => {
   return (
@@ -10,7 +10,7 @@ const StatisticInfo = () => {
         <h2 className="font-medium text-2xl">Trusted by over 25,000 traders</h2>
         <p className="text-sm">We believe everyone should have access to open & powerful financial tools.</p>
       </div>
-      <CardWrapper hasShadow={true}>
+      <Card hasShadow={true}>
         <div className="statistic-bottom flex flex-col lg:grid lg:grid-flow-col lg:grid-cols-3">
           <div className="trading-volume p-5 flex flex-col gap-3">
             <h5 className="text-slate-500">Trading Volume</h5>
@@ -28,7 +28,7 @@ const StatisticInfo = () => {
             <p className="text-slate-500 text-sm">Last 24h</p>
           </div>
         </div>
-      </CardWrapper>
+      </Card>
     </div>
   )
 }

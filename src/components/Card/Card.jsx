@@ -1,7 +1,7 @@
 import React from "react"
 import cx from "classnames"
 
-const CardWrapper = ({ header, children, hasShadow, className, style }) => {
+const Card = ({ header, children, hasShadow, className, style }) => {
   return (
     <div
       className={cx(className, {
@@ -23,4 +23,4 @@ const CardWrapper = ({ header, children, hasShadow, className, style }) => {
   )
 }
 
-export default CardWrapper
+export default Card

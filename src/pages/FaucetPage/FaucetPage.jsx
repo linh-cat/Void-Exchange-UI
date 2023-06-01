@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
@@ -215,7 +215,7 @@ const FaucetPage = () => {
         style={{ backgroundImage: `url(${Mobo})` }}
       ></div>
       <div className="faucet-banner mx-auto max-w-7xl py-10 ">
-        <CardWrapper className="w-full p-5" hasShadow={true}>
+        <Card className="w-full p-5" hasShadow={true}>
           <div className="flex flex-col gap-3 ">
             <div className="title flex items-center gap-3">
               <img src={ETH} alt="eth" className="h-10 w-10" />
@@ -227,15 +227,15 @@ const FaucetPage = () => {
               transferred to your wallet. The assets on a testnet are not “real,” meaning they have no monetary value.
             </div>
           </div>
-        </CardWrapper>
+        </Card>
       </div>
       <div className="faucet-list mx-auto max-w-7xl">
         <h4 className="mb-3">Test Assets</h4>
-        <CardWrapper>
+        <Card>
           <RequireConnectionMask>
             <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
           </RequireConnectionMask>
-        </CardWrapper>
+        </Card>
       </div>
     </div>
   )

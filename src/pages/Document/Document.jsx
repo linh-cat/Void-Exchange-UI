@@ -1,6 +1,6 @@
 import React from "react"
 import Button from "@components/Button/Button"
-import CardWrapper from "@components/CardWrapper/CardWrapper"
+import Card from "@components/Card/Card"
 import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from "@icons/index"
 
 import "./Document.css"
@@ -18,7 +18,7 @@ const Document = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <CardWrapper hasShadow={true} className={"cursor-pointer"}>
+        <Card hasShadow={true} className={"cursor-pointer"}>
           <div className="p-7 flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <img src={ComputerIcon} alt="computer" className="w-10 h-10" />
@@ -26,8 +26,8 @@ const Document = () => {
             </div>
             <div className="text-slate-500 text-sm">Learn about Lighers and how it work?</div>
           </div>
-        </CardWrapper>
-        <CardWrapper hasShadow={true} className={"cursor-pointer"}>
+        </Card>
+        <Card hasShadow={true} className={"cursor-pointer"}>
           <div className="p-7 flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <img src={BracketIcon} alt="bracket" className="w-10 h-10" />
@@ -38,8 +38,8 @@ const Document = () => {
               Click here to jump to our API endpoint docs - where you can retrieve information about any orders books.
             </div>
           </div>
-        </CardWrapper>
-        <CardWrapper hasShadow={true} className={"cursor-pointer"}>
+        </Card>
+        <Card hasShadow={true} className={"cursor-pointer"}>
           <div className="p-7 flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <img src={CloudIcon} alt="Smart contract" className="w-10 h-10" />
@@ -51,7 +51,7 @@ const Document = () => {
               Order contracts.
             </div>
           </div>
-        </CardWrapper>
+        </Card>
       </div>
       <div className="btn-gr flex gap-5">
         <Button
