@@ -253,24 +253,12 @@
     "absolutePath": "src/interfaces/IOrderBook.sol",
     "id": 42068,
     "exportedSymbols": {
-      "ExternalCollateralParams": [
-        42013
-      ],
-      "IFastPriceFeed": [
-        41966
-      ],
-      "IModule": [
-        42030
-      ],
-      "IOrderBook": [
-        42067
-      ],
-      "Order": [
-        42006
-      ],
-      "OrderType": [
-        41973
-      ]
+      "ExternalCollateralParams": [42013],
+      "IFastPriceFeed": [41966],
+      "IModule": [42030],
+      "IOrderBook": [42067],
+      "Order": [42006],
+      "OrderType": [41973]
     },
     "nodeType": "SourceUnit",
     "src": "39:1868:52",
@@ -280,12 +268,7 @@
         "nodeType": "PragmaDirective",
         "src": "39:24:52",
         "nodes": [],
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".18"
-        ]
+        "literals": ["solidity", "^", "0.8", ".18"]
       },
       {
         "id": 41970,
@@ -666,9 +649,7 @@
               "pathNode": {
                 "id": 41998,
                 "name": "OrderType",
-                "nameLocations": [
-                  "776:9:52"
-                ],
+                "nameLocations": ["776:9:52"],
                 "nodeType": "IdentifierPath",
                 "referencedDeclaration": 41973,
                 "src": "776:9:52"
@@ -730,9 +711,7 @@
               "pathNode": {
                 "id": 42003,
                 "name": "ExternalCollateralParams",
-                "nameLocations": [
-                  "855:24:52"
-                ],
+                "nameLocations": ["855:24:52"],
                 "nodeType": "IdentifierPath",
                 "referencedDeclaration": 42013,
                 "src": "855:24:52"
@@ -889,9 +868,7 @@
                     "pathNode": {
                       "id": 42015,
                       "name": "IFastPriceFeed",
-                      "nameLocations": [
-                        "1316:14:52"
-                      ],
+                      "nameLocations": ["1316:14:52"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 41966,
                       "src": "1316:14:52"
@@ -926,9 +903,7 @@
                     "pathNode": {
                       "id": 42018,
                       "name": "Order",
-                      "nameLocations": [
-                        "1342:5:52"
-                      ],
+                      "nameLocations": ["1342:5:52"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 42006,
                       "src": "1342:5:52"
@@ -992,9 +967,7 @@
                     "pathNode": {
                       "id": 42024,
                       "name": "Order",
-                      "nameLocations": [
-                        "1395:5:52"
-                      ],
+                      "nameLocations": ["1395:5:52"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 42006,
                       "src": "1395:5:52"
@@ -1035,9 +1008,7 @@
           "text": "@notice Order module, will parse orders and call to corresponding handler.\n After execution complete, module will pass result to position manager to\n update related position\n Will be some kind of: StopLimitHandler, LimitHandler, MarketHandler..."
         },
         "fullyImplemented": false,
-        "linearizedBaseContracts": [
-          42030
-        ],
+        "linearizedBaseContracts": [42030],
         "name": "IModule",
         "nameLocation": "1285:7:52",
         "scope": 42068,
@@ -1084,9 +1055,7 @@
                     "pathNode": {
                       "id": 42031,
                       "name": "OrderType",
-                      "nameLocations": [
-                        "1489:9:52"
-                      ],
+                      "nameLocations": ["1489:9:52"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 41973,
                       "src": "1489:9:52"
@@ -1491,9 +1460,7 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "linearizedBaseContracts": [
-          42067
-        ],
+        "linearizedBaseContracts": [42067],
         "name": "IOrderBook",
         "nameLocation": "1443:10:52",
         "scope": 42068,

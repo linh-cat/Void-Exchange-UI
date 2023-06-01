@@ -1,9 +1,9 @@
-import "./Footer.css";
-import twitterIcon from "../../img/ic_twitter.svg";
-import discordIcon from "../../img/ic_discord.svg";
-import telegramIcon from "../../img/ic_telegram.svg";
-import githubIcon from "../../img/ic_github.svg";
-import substackIcon from "../../img/ic_substack.svg";
+import "./Footer.css"
+import twitterIcon from "../../img/ic_twitter.svg"
+import discordIcon from "../../img/ic_discord.svg"
+import telegramIcon from "../../img/ic_telegram.svg"
+import githubIcon from "../../img/ic_github.svg"
+import substackIcon from "../../img/ic_substack.svg"
 
 export const FOOTER_LINKS = {
   home: [
@@ -12,22 +12,22 @@ export const FOOTER_LINKS = {
     {
       text: "Media Kit",
       link: "https://gmxio.gitbook.io/gmx/media-kit",
-      external: true,
-    },
+      external: true
+    }
     // { text: "Jobs", link: "/jobs", isAppLink: true },
   ],
   app: [
     {
       text: "Media Kit",
       link: "https://gmxio.gitbook.io/gmx/media-kit",
-      external: true,
-    },
+      external: true
+    }
     // { text: "Jobs", link: "/jobs" },
-  ],
-};
+  ]
+}
 
 export function getFooterLinks(isHome) {
-  return FOOTER_LINKS[isHome ? "home" : "app"];
+  return FOOTER_LINKS[isHome ? "home" : "app"]
 }
 
 export const SOCIAL_LINKS = [
@@ -38,6 +38,6 @@ export const SOCIAL_LINKS = [
   {
     link: "https://discord.com/invite/ymN38YefH9",
     name: "Discord",
-    icon: discordIcon,
-  },
-];
+    icon: discordIcon
+  }
+]

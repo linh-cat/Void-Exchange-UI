@@ -33,7 +33,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "format": "npx prettier"
+    "format": "npx prettier src/**/*.{jsx,css,js} --write"
   },
   "eslintConfig": {
     "extends": [

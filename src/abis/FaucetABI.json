@@ -756,21 +756,11 @@
     "absolutePath": "test/mocks/MockERC20.sol",
     "id": 42294,
     "exportedSymbols": {
-      "Context": [
-        32354
-      ],
-      "ERC20": [
-        31422
-      ],
-      "IERC20": [
-        31500
-      ],
-      "IERC20Metadata": [
-        31569
-      ],
-      "MockERC20": [
-        42293
-      ]
+      "Context": [32354],
+      "ERC20": [31422],
+      "IERC20": [31500],
+      "IERC20Metadata": [31569],
+      "MockERC20": [42293]
     },
     "nodeType": "SourceUnit",
     "src": "39:546:73",
@@ -780,12 +770,7 @@
         "nodeType": "PragmaDirective",
         "src": "39:24:73",
         "nodes": [],
-        "literals": [
-          "solidity",
-          ">=",
-          "0.8",
-          ".0"
-        ]
+        "literals": ["solidity", ">=", "0.8", ".0"]
       },
       {
         "id": 42248,
@@ -924,9 +909,7 @@
                 "modifierName": {
                   "id": 42261,
                   "name": "ERC20",
-                  "nameLocations": [
-                    "329:5:73"
-                  ],
+                  "nameLocations": ["329:5:73"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 31422,
                   "src": "329:5:73"
@@ -1216,9 +1199,7 @@
                 }
               ]
             },
-            "baseFunctions": [
-              30910
-            ],
+            "baseFunctions": [30910],
             "functionSelector": "313ce567",
             "implemented": true,
             "kind": "function",
@@ -1283,9 +1264,7 @@
             "baseName": {
               "id": 42250,
               "name": "ERC20",
-              "nameLocations": [
-                "213:5:73"
-              ],
+              "nameLocations": ["213:5:73"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 31422,
               "src": "213:5:73"
@@ -1305,13 +1284,7 @@
           "text": " @dev THIS CONTRACT IS FOR TESTING PURPOSES ONLY."
         },
         "fullyImplemented": true,
-        "linearizedBaseContracts": [
-          42293,
-          31422,
-          31569,
-          31500,
-          32354
-        ],
+        "linearizedBaseContracts": [42293, 31422, 31569, 31500, 32354],
         "name": "MockERC20",
         "nameLocation": "200:9:73",
         "scope": 42294,

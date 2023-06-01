@@ -1,5 +1,5 @@
-import LimitIcon from "./Limit.svg";
-import MarketIcon from "./Market.svg";
+import LimitIcon from "./Limit.svg"
+import MarketIcon from "./Market.svg"
 import DownIcon from "./Downicon.svg"
 import DownIconRed from "./Downiconred.svg"
 import DownIconGreen from "./Downicongreen.svg"
@@ -11,4 +11,18 @@ import GithubMarkIcon from "./github-mark.svg"
 import CopyIcon from "./Copy.svg"
 import CancelIcon from "./Cancel.svg"
 import Metamask from "./metamask.png"
-export { LimitIcon, MarketIcon, DownIcon, DownIconRed, DownIconGreen, ArrowRight, BracketIcon, ComputerIcon, CloudIcon, GithubMarkIcon, CopyIcon, CancelIcon, Metamask };
+export {
+  LimitIcon,
+  MarketIcon,
+  DownIcon,
+  DownIconRed,
+  DownIconGreen,
+  ArrowRight,
+  BracketIcon,
+  ComputerIcon,
+  CloudIcon,
+  GithubMarkIcon,
+  CopyIcon,
+  CancelIcon,
+  Metamask
+}

@@ -10,10 +10,8 @@ module.exports = {
         // lg: '4rem',
         // xl: '5rem',
         // '2xl': '10rem',
-      },
+      }
     }
   },
-  plugins: [],
-
+  plugins: []
 }
-

@@ -1,4 +1,4 @@
-const ImportAlias = require("craco-alias");
+const ImportAlias = require("craco-alias")
 
 module.exports = {
   plugins: [
@@ -10,9 +10,9 @@ module.exports = {
         aliases: {
           "@components": "./components", // path from src folder
           "@icons": "./img/icons",
-          "@img": "./img",
-        },
-      },
-    },
-  ],
-};
+          "@img": "./img"
+        }
+      }
+    }
+  ]
+}
