@@ -10,11 +10,10 @@
 }
 
 .secondary {
-    background: linear-gradient(110deg, #2193A7 25%, #189FD9, #1E84DF 50%, #232374 85%);
+    background: linear-gradient(110deg, #2193a7 25%, #189fd9, #1e84df 50%, #232374 85%);
     border-radius: 4px;
 }
 
-
 .btn:hover {
-    opacity: .8;
+    opacity: 0.8;
 }

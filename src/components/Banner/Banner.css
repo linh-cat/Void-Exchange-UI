@@ -5,7 +5,6 @@
     background: url("../../img/header_bg.png") right top no-repeat;
 }
 
-
 .banner-db .banner-container {
     position: absolute;
     top: 50%;
@@ -52,8 +51,8 @@
 }
 
 .animation-container .lightning-container .lightning.blu {
-    background-color: #2193A7;
-    box-shadow: 0px 50px 50px 0px #2193A7;
+    background-color: #2193a7;
+    box-shadow: 0px 50px 50px 0px #2193a7;
     -webkit-animation-delay: 0.2s;
     animation-delay: 0.2s;
 }
@@ -151,7 +150,10 @@
     background-color: rgba(178, 215, 232, 0.2);
 }
 
-.animation-container .boom-container .shape.triangle, .animation-container .boom-container .shape.circle, .animation-container .boom-container .shape.circle.big, .animation-container .boom-container .shape.disc {
+.animation-container .boom-container .shape.triangle,
+.animation-container .boom-container .shape.circle,
+.animation-container .boom-container .shape.circle.big,
+.animation-container .boom-container .shape.disc {
     -webkit-animation-delay: 0.38s;
     animation-delay: 0.38s;
     -webkit-animation-duration: 3s;
@@ -173,7 +175,10 @@
     top: 45%;
 }
 
-.animation-container .boom-container.second .shape.triangle, .animation-container .boom-container.second .shape.circle, .animation-container .boom-container.second .shape.circle.big, .animation-container .boom-container.second .shape.disc {
+.animation-container .boom-container.second .shape.triangle,
+.animation-container .boom-container.second .shape.circle,
+.animation-container .boom-container.second .shape.circle.big,
+.animation-container .boom-container.second .shape.disc {
     -webkit-animation-delay: 1.9s;
     animation-delay: 1.9s;
 }

@@ -3,11 +3,11 @@
 }
 
 .vault-card .capacity {
-    background-color: #25252A;
+    background-color: #25252a;
 }
 
 .vault-card .vault-card-header .btn {
-    background: #536BC7;
+    background: #536bc7;
 }
 
 .bg-eth {
@@ -54,8 +54,8 @@
 }
 
 .bg-hover-eth:hover {
-    border: 1px solid #7848B8;
-    box-shadow: #7848B8 0px 13px 27px -5px, #7848B8 0px 8px 16px -8px;
+    border: 1px solid #7848b8;
+    box-shadow: #7848b8 0px 13px 27px -5px, #7848b8 0px 8px 16px -8px;
 }
 
 @keyframes animationBg {

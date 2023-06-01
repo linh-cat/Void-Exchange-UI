@@ -26,7 +26,7 @@
 }
 
 .collateral-popup .colateral-tab button {
-    padding: .5rem;
+    padding: 0.5rem;
     width: 50%;
 }
 
@@ -45,7 +45,6 @@
 
 .collateral-popup .collateral-content .bottom button {
     border-radius: 5px;
-
 }
 
 .collateral-popup .collateral-content .bottom .active {

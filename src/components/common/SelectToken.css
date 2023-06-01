@@ -14,7 +14,7 @@
     left: 0;
     width: 200px;
     background: var(--bg-dropdown-list);
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     z-index: 9999999;
 }
 
@@ -39,33 +39,33 @@
     opacity: 1;
     animation: growDown 300ms ease-in-out forwards;
     transform-style: flat;
-    transform-origin: top center
+    transform-origin: top center;
 }
 
 @keyframes growDown {
     0% {
-        transform: scaleY(0)
+        transform: scaleY(0);
     }
 
     80% {
-        transform: scaleY(1.1)
+        transform: scaleY(1.1);
     }
 
     100% {
-        transform: scaleY(1)
+        transform: scaleY(1);
     }
 }
 
 @keyframes growUp {
     0% {
-        transform: scaleY(1)
+        transform: scaleY(1);
     }
 
     80% {
-        transform: scaleY(1.1)
+        transform: scaleY(1.1);
     }
 
     100% {
-        transform: scaleY(0)
+        transform: scaleY(0);
     }
 }
