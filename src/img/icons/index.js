@@ -11,6 +11,9 @@ import GithubMarkIcon from "./github-mark.svg"
 import CopyIcon from "./Copy.svg"
 import CancelIcon from "./Cancel.svg"
 import Metamask from "./metamask.png"
+import VoidIcon from "./void.png"
+import BaseIcon from "./base.png"
+
 export {
   LimitIcon,
   MarketIcon,
@@ -24,5 +27,7 @@ export {
   GithubMarkIcon,
   CopyIcon,
   CancelIcon,
-  Metamask
+  Metamask,
+  VoidIcon,
+  BaseIcon
 }

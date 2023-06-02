@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import { DownIconRed } from "@icons/index"
+import { BaseIcon } from "@img/icons"
 import { BTC, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
 
 const Banner = () => {
@@ -34,7 +35,13 @@ const Banner = () => {
         <div className="shape triangle blue"></div>
       </div>
       <div className="banner-container">
-        <h1 className="text-5xl font-bold text-center">Long or Short Assets</h1>
+        <h1 className="text-5xl font-bold text-center flex items-center justify-center">
+          Perpeptual Exchange on Base
+          <a href="https://base.org/">
+            <img src={BaseIcon} className="ml-5 w-14 h-14 inline-block" />
+          </a>
+        </h1>
+
         <p className="py-3 md:py-8 text-center">Void Exchange is a perpetual futures dex for assets</p>
         <div className="w-full relative">
           <Button

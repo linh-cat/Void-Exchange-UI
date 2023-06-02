@@ -1,9 +1,8 @@
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import React from "react"
-import BSScan from "@img/bscscan.png"
 import DogeCoin from "@img/dogecoin.png"
-import { CopyIcon } from "@icons/index"
+import { CopyIcon, VoidIcon } from "@icons/index"
 import APE from "@img/ape.png"
 import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
@@ -76,7 +75,7 @@ const ProfilePage = () => {
       <Card className="p-5" hasShadow={true}>
         <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex items-center gap-5">
-            <img src={BSScan} alt="bsca" className="w-10 h-10" />
+            <img src={VoidIcon} alt="bsca" className="w-10 h-10" />
             <div>
               <div>Invite your friends to use Void Exchange</div>
               <div className="text-sm text-zinc-500">Earn up to a 40% commission on trading fees</div>

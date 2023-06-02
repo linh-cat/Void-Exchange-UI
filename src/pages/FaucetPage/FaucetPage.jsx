@@ -10,6 +10,7 @@ import { formatUnits } from "viem"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
 import { BTC, ETH, USDC } from "@img/token"
+import { VoidIcon } from "@img/icons"
 import { Metamask } from "@icons/index"
 import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
 import { toast } from "react-hot-toast"
@@ -41,7 +42,7 @@ const tokens = [
 
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
-  const [amount, setAmount] = useState(1)
+  const [amount, setAmount] = useState(0)
   const [selectedToken, setSelectedToken] = useState(null)
   const [balances, setBalances] = useState({
     WBTC: 0,
@@ -218,11 +219,11 @@ const FaucetPage = () => {
         <Card className="w-full p-5" hasShadow={true}>
           <div className="flex flex-col gap-3 ">
             <div className="title flex items-center gap-3">
-              <img src={ETH} alt="eth" className="h-10 w-10" />
-              <h1 className="text-2xl">Ethereum Market</h1>
+              <img src={VoidIcon} alt="eth" className="h-10 w-10" />
+              <h1 className="text-2xl">Void Exchange Faucet</h1>
             </div>
             <div className="text-zinc-500 text-sm">
-              With testnet Faucet you can get free assets to test the ZK Protocol. Make sure to switch your wallet
+              With testnet Faucet you can get free assets to test the Void Protocol. Make sure to switch your wallet
               provider to the appropriate testnet network, select desired asset, and click ‘Faucet’ to get tokens
               transferred to your wallet. The assets on a testnet are not “real,” meaning they have no monetary value.
             </div>
