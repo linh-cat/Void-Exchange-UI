@@ -35,7 +35,7 @@ const Banner = () => {
         <div className="shape triangle blue"></div>
       </div>
       <div className="banner-container">
-        <h1 className="text-5xl font-bold text-center flex items-center justify-center">
+        <h1 className="text-5xl font-bold text-center flex items-center justify-center drop-shadow">
           Perpeptual Exchange on Base
           <a href="https://base.org/">
             <img src={BaseIcon} className="ml-5 w-14 h-14 inline-block" />
