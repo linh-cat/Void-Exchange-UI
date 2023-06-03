@@ -62,7 +62,7 @@ const OrderBox = ({ type }) => {
             }
             showMaxBtn={true}
             placeHolder={"0.0"}
-            showBalance={true}
+            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
             showUsd={true}
           />
         </div>
@@ -81,7 +81,7 @@ const OrderBox = ({ type }) => {
             }
             showMaxBtn={true}
             placeHolder={"0.0"}
-            showBalance={true}
+            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
             showUsd={true}
           />
         </div>
