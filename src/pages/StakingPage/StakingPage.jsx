@@ -61,7 +61,7 @@ const StakingPage = () => {
                 className="bg-cover blur-3xl bg-center w-full h-6 absolute top-1/2 right-0 bg-opacity-10"
                 style={{ backgroundImage: `url(${Mobo})` }}
               ></div>
-              <Card header={<h3 className="p-3">Clain and Unstake</h3>}>
+              <Card header={<h3 className="p-3">Reward</h3>}>
                 <div className="p-3">
                   <div className="py-2">You can unstake and claim here</div>
                   <div className="flex gap-3">
