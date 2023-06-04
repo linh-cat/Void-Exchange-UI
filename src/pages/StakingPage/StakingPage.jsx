@@ -72,10 +72,10 @@ const StakingPage = () => {
                           <div>0 ~ $0</div>
                         </div>
                         <div>
-                          <Button text="Cooldown to unstake" />
+                          <Button text="Unstake" />
                         </div>
                         <div className="flex justify-between">
-                          <label className="text-sm text-slate-500">Cooldown period</label>
+                          <label className="text-sm text-slate-500">Period</label>
                           <div>20d</div>
                         </div>
                       </div>
@@ -113,7 +113,7 @@ const StakingPage = () => {
                       }
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-3">
                     <div>
                       <InputCustom
                         classNameInput="px-1 py-3"
@@ -176,6 +176,9 @@ const StakingPage = () => {
                       >
                         150 Days
                       </div>
+                    </div>
+                    <div>
+                      <Button text="Stake" />
                     </div>
                   </div>
                 </div>
