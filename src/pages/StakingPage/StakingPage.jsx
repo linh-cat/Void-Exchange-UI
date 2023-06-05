@@ -14,7 +14,7 @@ const StakingPage = () => {
     <div className="">
       <div className="bg vh-full-screen fixed"></div>
       <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 bg-transparent">
-        <Card className="w-full p-5 relative">
+        <Card className="w-full p-5 relative" hasShadow={true}>
           <div className="flex flex-col gap-3">
             <div className="title flex items-center gap-3">
               <img src={VoidIcon} alt="eth" className="h-10 w-10" />
@@ -29,7 +29,7 @@ const StakingPage = () => {
           </div>
         </Card>
         <div className="grid lg:grid-cols-3 gap-3 z-50">
-          <Card>
+          <Card hasShadow={true}>
             <div className="py-5">
               <div className="flex flex-col justify-center items-center">
                 <div className="">$63,939,379</div>
@@ -37,7 +37,7 @@ const StakingPage = () => {
               </div>
             </div>
           </Card>
-          <Card>
+          <Card hasShadow={true}>
             <div className="py-5">
               <div className="flex flex-col justify-center items-center">
                 <div className="">$63,939,379</div>
