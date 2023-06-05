@@ -30,10 +30,6 @@ const ProfilePage = () => {
   return (
     <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 ">
       <h3 className="text-xl font-medium">Profile Overview</h3>
-      <div
-        className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
-        style={{ backgroundImage: `url(${Mobo})` }}
-      ></div>
       <Card className={"p-5"}>
         <div className="flex justify-between flex-col md:flex-row ">
           <div className="flex flex-col items-center w-full xl:w-96 bg-none">
@@ -53,21 +49,21 @@ const ProfilePage = () => {
                 <img src={DogeCoin} className="h5 w-5" alt="otoken" />
                 <span className="text-lg font-medium">0.00</span>
               </div>
-              <Button text="Deposit Crypto" isDefault={false} className={"border"} />
+              <Button text="Deposit Crypto" isDefault={false} className={"border py-2"} />
             </div>
             <div className="ballance-exchange flex flex-col gap-3">
               <label className="text-zinc-500 text-lg">Exchange Ballance</label>
               <div className="flex items-center gap-2">
                 <span className="font-medium text-lg">$0.00</span>
               </div>
-              <Button text="Withdraw Crypto" isDefault={false} className={"border"} />
+              <Button text="Withdraw Crypto" isDefault={false} className={"border py-2"} />
             </div>
             <div className="fee-discount flex flex-col gap-3">
               <label className="text-zinc-500 text-lg">Fee Discount</label>
               <div className="flex items-center gap-2">
                 <span className="font-medium text-lg">0%</span>
               </div>
-              <Button text="Stake" isDefault={false} className={"border"} />
+              <Button text="Stake" isDefault={false} className={"border py-2"} />
             </div>
           </div>
         </div>

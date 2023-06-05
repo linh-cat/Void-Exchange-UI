@@ -3,7 +3,6 @@ import Exchange from "./pages/Exchange/Exchange"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import VaultPage from "./pages/VaultPage/VaultPage"
 import DetailVaultPage from "./pages/DetailVaultPage/index"
-import Document from "./pages/Document/Document"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ListVault from "./pages/VaultPage/ListVault"
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
@@ -16,6 +15,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import StakingPage from "./pages/StakingPage/StakingPage"
+import DocumentPage from "./pages/DocumentPage/DocumentPage"
 
 const { chains, publicClient } = configureChains(
   [sepolia, goerli],
@@ -40,6 +40,13 @@ const config = createConfig({
 const FullApp = () => {
   return (
     <Router>
+      <div id="bg">
+        <div className="bg">
+          <div className="orange-bg"></div>
+          <div className="blue-bg"></div>
+          <div className="white-bg"></div>
+        </div>
+      </div>
       <Header />
       <Routes>
         <Route
@@ -62,7 +69,7 @@ const FullApp = () => {
           path="document"
           element={
             <div>
-              <Document />
+              <DocumentPage />
             </div>
           }
         />

@@ -1,4 +1,5 @@
 import React from "react"
+import cx from "classnames"
 import "./InputCustom.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 const InputCustom = ({
@@ -17,6 +18,7 @@ const InputCustom = ({
   type,
   min,
   max,
+  isBorder = true,
   headerAction
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
@@ -67,7 +69,12 @@ const InputCustom = ({
           </div>
         )}
       </div>
-      <div className="flex h-full items-center border rounded pl-1 pr-1">
+      <div
+        className={cx({
+          "flex h-full items-center rounded pl-1 pr-1": true,
+          border: isBorder
+        })}
+      >
         {leftSide && <div className="left-action">{leftSide}</div>}
         <input
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
