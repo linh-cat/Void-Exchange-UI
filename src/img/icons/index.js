@@ -13,6 +13,7 @@ import CancelIcon from "./Cancel.svg"
 import Metamask from "./metamask.png"
 import VoidIcon from "./void.png"
 import BaseIcon from "./base.png"
+import DBIcon from "./db.png"
 
 export {
   LimitIcon,
@@ -29,5 +30,6 @@ export {
   CancelIcon,
   Metamask,
   VoidIcon,
-  BaseIcon
+  BaseIcon,
+  DBIcon
 }

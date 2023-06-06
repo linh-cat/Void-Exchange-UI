@@ -3,11 +3,12 @@ import React, { useState } from "react"
 import cx from "classnames"
 
 import Mobo from "@img/morpho.png"
-import { VoidIcon } from "@icons/index"
+import { DBIcon, VoidIcon } from "@icons/index"
 import { InputCustom } from "@components/common"
 import Button from "@components/Button/Button"
-import { BTC } from "@img/token"
+import { BTC, ETH } from "@img/token"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
+import { Rewards } from "@img/logo"
 
 const StakingPage = () => {
   return (
@@ -28,27 +29,9 @@ const StakingPage = () => {
             </div>
           </div>
         </Card>
-        <div className="grid lg:grid-cols-3 gap-3 z-50">
-          <Card hasShadow={true}>
-            <div className="py-5">
-              <div className="flex flex-col justify-center items-center">
-                <div className="">$63,939,379</div>
-                <label className="text-slate-500 text-sm">Total Value Locked</label>
-              </div>
-            </div>
-          </Card>
-          <Card hasShadow={true}>
-            <div className="py-5">
-              <div className="flex flex-col justify-center items-center">
-                <div className="">$63,939,379</div>
-                <label className="text-slate-500 text-sm">APY</label>
-              </div>
-            </div>
-          </Card>
-        </div>
         <div>
-          <div className="flex gap-3 z-10 relative">
-            <div className="w-1/3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 z-10 relative">
+            <div className="col-span-1">
               <Card header={<h3 className="p-3">Create Stake</h3>} hasShadow={true}>
                 <div className="p-3 flex flex-col gap-3">
                   <div className="border p-3 flex flex-col gap-1">
@@ -97,7 +80,97 @@ const StakingPage = () => {
                 </div>
               </Card>
             </div>
-            <div className="flex flex-col gap-5 w-1/2 relative"></div>
+            <div className="flex flex-col gap-5 md:col-span-2 relative">
+              <Card>
+                <div className="p-3 flex items-center justify-between">
+                  <div className="flex gap-2 items-center">
+                    <img src={Rewards} alt="rewards" className="w-12 h-12" />
+                    <div>
+                      <label className="font-medium text-lg">Void Rewards</label>
+                      <div className="text-slate-500 text-sm">Clainming Rewards</div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-10">
+                    <div className="">
+                      <div className="flex flex-col justify-center items-center">
+                        <label className="text-slate-500 text-sm">Total Value Locked</label>
+                        <div className="">$63,939,379</div>
+                      </div>
+                    </div>
+                    <div className="">
+                      <div className="flex flex-col justify-center items-center">
+                        <label className="text-slate-500 text-sm">APY</label>
+                        <div className="">$63,939,379</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+              <div className="grid grid-cols-2 gap-3">
+                <Card className="">
+                  <div className="p-3 flex flex-col gap-3">
+                    <label>Your Staking Stats</label>
+                    <div className="flex flex-col gap-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        <Card hasShadow={true}>
+                          <div className="flex flex-col gap-2 p-3">
+                            <img src={BTC} className="w-5 h-5" alt="wbtc" />
+                            <div className="text-right">
+                              <div>0.0</div>
+                              <label className="text-slate-500 text-sm">vVoid Balance</label>
+                            </div>
+                          </div>
+                        </Card>
+                        <Card hasShadow={true}>
+                          <div className="flex flex-col gap-2 p-3">
+                            <img src={ETH} className="w-5 h-5" alt="weth" />
+                            <div className="text-right">
+                              <div>0.0</div>
+                              <label className="text-slate-500 text-sm">vVoid Balance</label>
+                            </div>
+                          </div>
+                        </Card>
+                      </div>
+                      <Card hasShadow={true}>
+                        <div className="p-3 grid grid-cols-2 gap-3">
+                          <div className="text-xs text-slate-500 border-r pt-3">
+                            Earn up to 35% rebates from the referral program.{" "}
+                            <span className="underline">Learn more</span>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <img src={DBIcon} alt="db" className="w-5 h-5" />
+                            <div className="text-xs text-right">
+                              <div className="text-blue-500">Create Code</div>
+                              <div>Your Rebate Rate</div>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="p-3 flex flex-col justify-between gap-3">
+                    <div>
+                      <label>Total Rewards</label>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <label className="text-slate-500">Total</label>
+                          <div>$0.00</div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <label className="text-slate-500">Void Token</label>
+                          <div>0.00</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-auto">
+                      <Button text="Claim Rewards On Void Exchange" isDefault={false} className="border py-3 active" />
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
