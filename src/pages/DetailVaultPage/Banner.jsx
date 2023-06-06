@@ -6,7 +6,7 @@ const Banner = () => {
     <div className="banner">
       <div className="container mx-auto max-w-5xl flex flex-col md:flex-row justify-between items-center">
         <div className="flex flex-col gap-7 col-span-2 w-96">
-          <h2 className="font-medium text-5xl">T-ETH-C</h2>
+          <h2 className="font-medium text-5xl">ETH Void</h2>
           <div className="capacity flex flex-col">
             <div className="current-deposit flex justify-between">
               <label className="text-slate-500">Current Vault Deposits</label>
