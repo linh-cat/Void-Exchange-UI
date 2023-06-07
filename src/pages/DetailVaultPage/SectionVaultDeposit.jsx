@@ -33,11 +33,7 @@ const SectionVaultDeposit = ({
     watch: true
   })
 
-  const {
-    allowance,
-    approve,
-    isLoading: isApproving
-  } = useAllowance({
+  const { allowance, approve, isApproving } = useAllowance({
     token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
     account: address,
     spender: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043",
