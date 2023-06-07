@@ -3,7 +3,6 @@ import { useContractWrite, useContractRead, useWaitForTransaction, erc20ABI, use
 import { parseUnits, formatUnits } from "viem"
 
 const useAllowance = ({ token, tokenDecimals, account, spender }) => {
-  console.log("tokenDecimals", tokenDecimals)
   const [isSuccess, setIsSuccess] = useState(false)
   const publicClient = usePublicClient()
 
@@ -19,8 +18,6 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     watch: true
   })
 
-  console.log("allowance  useAllowance", allowance)
-
   const { isLoading, data, write } = useContractWrite({
     address: token,
     abi: erc20ABI,
@@ -29,7 +26,6 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
 
   const isSufficient = (allowance, amount) => {
     const expectedAllowance = parseUnits(amount.toString(), tokenDecimals)
-    console.log("allowance", allowance, expectedAllowance)
     if (allowance && allowance >= expectedAllowance) {
       return true
     }
@@ -38,9 +34,6 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
   }
 
   const approve = (amount) => {
-    console.log("tokenDecimals inside approve", tokenDecimals)
-    console.log("isSufficient", isSufficient(allowance, amount))
-    console.log("data", data)
     if (!tokenDecimals) {
       return
     }
@@ -53,8 +46,6 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
       from: account,
       args: [spender, parseUnits(amount.toString(), tokenDecimals)]
     }
-
-    console.log("args", args)
 
     write(args)
 
