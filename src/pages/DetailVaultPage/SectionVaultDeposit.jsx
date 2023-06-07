@@ -1,15 +1,38 @@
+import React, { useState, useEffect } from "react"
+import { useBalance, useAccount } from "wagmi"
+
 import LineChart from "@components/LineChart/LineChart"
-import React, { useState } from "react"
 import cx from "classnames"
 import Card from "@components/Card/Card"
 import Button from "@components/Button/Button"
 import { ETH } from "@img/token"
-const SectionVaultDeposit = () => {
+
+/**
+ * SectionVaultDeposit.
+ *
+ * @param {Object} props
+ * @param {Object} props.token Address of the token
+ */
+const SectionVaultDeposit = ({ token }) => {
   const [tab, setTab] = useState("deposit")
+  const [balance, setBalance] = useState("0")
+
+  const { address } = useAccount()
+  const { data, isError, isLoading } = useBalance({
+    address: address,
+    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD" // WETH
+  })
+
+  useEffect(() => {
+    if (!isError && !isLoading && data) {
+      setBalance(data.formatted)
+    }
+  }, [data, isError, isLoading])
 
   const onChangeTab = (val) => {
     setTab(val)
   }
+
   return (
     <div className="container mx-auto max-w-7xl mt-10">
       <Card
@@ -112,8 +135,8 @@ const SectionVaultDeposit = () => {
                         <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
                       </div>
                       <div className="ballance flex items-center gap-2">
-                        <label className="text-sm">Ballance:</label>
-                        <div>0</div>
+                        <label className="text-sm">Balance:</label>
+                        <div>{balance}</div>
                       </div>
                     </div>
                     <Button className="py-1 tracking-wider rounded" text="Add Liquidity" />
@@ -137,8 +160,8 @@ const SectionVaultDeposit = () => {
                         <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
                       </div>
                       <div className="ballance flex items-center gap-2">
-                        <label className="text-sm">Ballance:</label>
-                        <div>0</div>
+                        <label className="text-sm">Balance:</label>
+                        <div>{balance}</div>
                       </div>
                     </div>
                     <Button className="py-2 tracking-wider rounded" text="Withdraw" />
