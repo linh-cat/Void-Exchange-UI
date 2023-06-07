@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useCallback } from "react"
 import { useBalance, useAccount } from "wagmi"
 
 import LineChart from "@components/LineChart/LineChart"
@@ -18,11 +18,11 @@ import useAllowance from "src/hooks/useAllowance"
  */
 const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const [tab, setTab] = useState("deposit")
-  const [amount, setAmount] = useState(null)
+  const [amount, setAmount] = useState("")
 
   const { address } = useAccount()
 
-  const { data, isLoading: isLoadingBalance } = useBalance({
+  const { data } = useBalance({
     address: address,
     token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", // WETH
     watch: true
@@ -31,7 +31,6 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const {
     allowance,
     approve,
-    isSuccess: isApprovalSuccess,
     isLoading: isApproving
   } = useAllowance({
     token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
@@ -40,12 +39,13 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
     tokenDecimals: data?.decimals || 0
   })
 
-  console.log({ isApprovalSuccess, isLoadingBalance })
+  console.log({ amount })
+
   const { deposit, isLoading: isDepositing } = useVault("0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD")
 
   const onDeposit = React.useCallback(async () => {
-    await deposit(amount, address)
-    setAmount(0)
+    await deposit(amount, address, address)
+    setAmount("")
   }, [address, amount, deposit])
 
   const onApprove = React.useCallback(() => {
@@ -54,7 +54,7 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
 
   const renderButton = useCallback(() => {
     // if allowance is greater than amount, then render deposit button
-    console.log({ allowance, amount })
+    console.log({ allowance })
     if (allowance >= amount) {
       return (
         <Button
@@ -62,7 +62,7 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
           text="Add Liquidity"
           onClick={onDeposit}
           isLoading={isDepositing}
-          // disabled={true}
+          disabled={amount === ""}
         />
       )
     }
@@ -73,7 +73,7 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
         text="Approve"
         onClick={onApprove}
         isLoading={isApproving}
-        // disabled={amount === null || amount < 0}
+        disabled={amount === ""}
       />
     )
   }, [allowance, amount, isApproving, isDepositing, onApprove, onDeposit])
@@ -172,8 +172,18 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Currency</label>
                         <div className="flex gap-3">
-                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">50%</div>
-                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
+                          <div
+                            className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
+                            onClick={() => setAmount(data?.formatted / 2)}
+                          >
+                            50%
+                          </div>
+                          <div
+                            className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
+                            onClick={() => setAmount(data?.formatted)}
+                          >
+                            MAX
+                          </div>
                         </div>
                       </div>
                       <div className="token flex gap-2 justify-between">

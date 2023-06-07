@@ -289,11 +289,8 @@ button {
     cursor: pointer;
 }
 
-button:disabled,
-button.App-cta:disabled {
-    cursor: not-allowed;
-    opacity: 0.9;
-    box-shadow: none;
+.disable {
+    pointer-events: none !important;
 }
 
 .border {
