@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { useBalance, useAccount } from "wagmi"
 
 import LineChart from "@components/LineChart/LineChart"
@@ -6,28 +6,78 @@ import cx from "classnames"
 import Card from "@components/Card/Card"
 import Button from "@components/Button/Button"
 import { ETH } from "@img/token"
+import { useContractWrite, erc20ABI } from "wagmi"
+
+import useVault from "src/hooks/useVault"
+import useAllowance from "src/hooks/useAllowance"
 
 /**
  * SectionVaultDeposit.
  *
  * @param {Object} props
- * @param {Object} props.token Address of the token
+ * @param {Object} props.tokenAddress Address of the token
  */
-const SectionVaultDeposit = ({ token }) => {
+const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const [tab, setTab] = useState("deposit")
   const [balance, setBalance] = useState("0")
+  const [decimals, setDecimals] = useState(0)
+  const [amount, setAmount] = useState(0)
 
   const { address } = useAccount()
+
   const { data, isError, isLoading } = useBalance({
     address: address,
-    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD" // WETH
+    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", // WETH
+    watch: true
   })
 
-  useEffect(() => {
-    if (!isError && !isLoading && data) {
-      setBalance(data.formatted)
+  // useEffect(() => {
+  //   if (!isError && !isLoading && data) {
+  //     setBalance(data.formatted)
+  //     console.log("data", data)
+  //     setDecimals(data.decimals)
+  //   }
+  // }, [data, isError, isLoading])
+
+  const {
+    allowance,
+    approve,
+    isSuccess: isApprovalSuccess,
+    isLoading: isApproving
+  } = useAllowance({
+    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
+    account: address,
+    spender: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043",
+    tokenDecimals: data?.decimals || 0
+  })
+
+  const { deposit, isLoading: isDepositing } = useVault("0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD")
+
+  const onDeposit = async () => {
+    await deposit(amount, address, address)
+    setAmount(0)
+  }
+
+  const onApprove = () => {
+    approve(amount)
+  }
+
+  const renderButton = useCallback(() => {
+    console.log("amount", amount, "allowance", allowance)
+    // if allowance is greater than amount, then render deposit button
+    if (allowance >= amount) {
+      return (
+        <Button
+          className="py-1 tracking-wider rounded"
+          text="Add Liquidity"
+          onClick={onDeposit}
+          isLoading={isDepositing}
+        />
+      )
     }
-  }, [data, isError, isLoading])
+
+    return <Button className="py-1 tracking-wider rounded" text="Approve" onClick={onApprove} isLoading={isApproving} />
+  }, [allowance, amount])
 
   const onChangeTab = (val) => {
     setTab(val)
@@ -132,14 +182,21 @@ const SectionVaultDeposit = ({ token }) => {
                           <img src={ETH} alt="ETH" className="w-5 h-5" />
                           <label className="">ETH</label>
                         </div>
-                        <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
+                        <input
+                          type="number"
+                          className="p-0 flex-1 text-right"
+                          onChange={(e) => {
+                            setAmount(e.target.value)
+                          }}
+                          value={amount}
+                        />
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{balance}</div>
+                        <div>{data?.formatted}</div>
                       </div>
                     </div>
-                    <Button className="py-1 tracking-wider rounded" text="Add Liquidity" />
+                    {renderButton()}
                   </>
                 )}
                 {tab === "withdraw" && (
