@@ -199,7 +199,7 @@ const SectionVaultDeposit = ({
                           placeholder="0"
                           value={amount}
                         />
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
+                        <div className="flex gap-2 items-center border py-1 px-2 rounded-xl">
                           <img src={ETH} alt="ETH" className="w-5 h-5" />
                           <label className="">ETH</label>
                         </div>
