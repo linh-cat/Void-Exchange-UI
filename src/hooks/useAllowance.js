@@ -1,16 +1,8 @@
-import { useState, useCallback } from "react"
-import { useContractWrite, useContractRead, useWaitForTransaction, erc20ABI, usePublicClient } from "wagmi"
+import { useContractWrite, useContractRead, erc20ABI } from "wagmi"
 import { parseUnits, formatUnits } from "viem"
 
 const useAllowance = ({ token, tokenDecimals, account, spender }) => {
-  const [isSuccess, setIsSuccess] = useState(false)
-  const publicClient = usePublicClient()
-
-  const {
-    data: allowance,
-    isError,
-    isLoading: isFetchingAllowance
-  } = useContractRead({
+  const { data: allowance, isLoading: isFetchingAllowance } = useContractRead({
     address: token,
     abi: erc20ABI,
     functionName: "allowance",
@@ -18,7 +10,7 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     watch: true
   })
 
-  const { isLoading, data, write } = useContractWrite({
+  const { isLoading: isApproving, write } = useContractWrite({
     address: token,
     abi: erc20ABI,
     functionName: "approve"
@@ -48,22 +40,14 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     }
 
     write(args)
-
-    // if (data) {
-    //   await publicClient.waitForTransactionReceipt({ hash: data.hash })
-    // }
-
-    setIsSuccess(isSuccess)
   }
 
   return {
     allowance: formatUnits(allowance || "0", tokenDecimals),
     isSufficient,
     approve,
-    isError,
     isFetchingAllowance,
-    isLoading,
-    isSuccess
+    isApproving
   }
 }
 

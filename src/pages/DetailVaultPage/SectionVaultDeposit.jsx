@@ -9,14 +9,19 @@ import { ETH } from "@img/token"
 
 import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
+import { isEthereumAddress } from "src/types"
 
 /**
  * SectionVaultDeposit.
  *
  * @param {Object} props
  * @param {Object} props.tokenAddress Address of the token
+ * @param {Object} props.vaultAddress Address of the vault
  */
-const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
+const SectionVaultDeposit = ({
+  tokenAddress = "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
+  vaultAddress = "0xe9782D26ABc19FF5174F77e84B0dD19D47635043"
+}) => {
   const [tab, setTab] = useState("deposit")
   const [amount, setAmount] = useState(null)
 
@@ -260,6 +265,11 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
       </Card>
     </div>
   )
+}
+
+SectionVaultDeposit.propTypes = {
+  tokenAddress: isEthereumAddress,
+  vaultAddress: isEthereumAddress
 }
 
 export default SectionVaultDeposit
