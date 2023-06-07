@@ -23,7 +23,7 @@ const SectionVaultDeposit = ({
   vaultAddress = "0xe9782D26ABc19FF5174F77e84B0dD19D47635043"
 }) => {
   const [tab, setTab] = useState("deposit")
-  const [amount, setAmount] = useState("")
+  const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
 
   const { address } = useAccount()
 
@@ -47,10 +47,12 @@ const SectionVaultDeposit = ({
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
     setAmount("")
+    localStorage.removeItem("allowance")
   }, [address, amount, deposit])
 
   const onApprove = React.useCallback(() => {
     approve(amount)
+    localStorage.setItem("allowance", amount)
   }, [amount, approve])
 
   const renderButton = useCallback(() => {
@@ -187,20 +189,20 @@ const SectionVaultDeposit = ({
                           </div>
                         </div>
                       </div>
-                      <div className="token flex gap-2 justify-between">
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
-                          <img src={ETH} alt="ETH" className="w-5 h-5" />
-                          <label className="">ETH</label>
-                        </div>
+                      <div className="token flex gap-2 justify-between border rounded py-2 pl-2 pr-1">
                         <input
                           type="number"
-                          className="p-0 flex-1 text-right"
+                          className="p-0 flex-1 text-left"
                           onChange={(e) => {
                             setAmount(e.target.value)
                           }}
                           placeholder="0"
                           value={amount}
                         />
+                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
+                          <img src={ETH} alt="ETH" className="w-5 h-5" />
+                          <label className="">ETH</label>
+                        </div>
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
