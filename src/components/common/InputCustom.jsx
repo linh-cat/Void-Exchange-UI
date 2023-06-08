@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useMemo, useState } from "react"
 import cx from "classnames"
-import "./InputCustom.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
+
+import SelectToken from "./SelectToken"
+
+import "./InputCustom.css"
+import { useAccount, useBalance } from "wagmi"
+
 const InputCustom = ({
   label,
   tooltip,
@@ -19,9 +24,25 @@ const InputCustom = ({
   min,
   max,
   isBorder = true,
+  allowSelectToken,
+  tokenOptions,
+  defaultToken,
   headerAction
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
+  const [selectedToken, setSelectedToken] = useState(defaultToken)
+
+  const { address } = useAccount()
+
+  const { data } = useBalance({
+    address: address,
+    token: selectedToken,
+    watch: true
+  })
+
+  const onChangeToken = (token) => {
+    setSelectedToken(token)
+  }
 
   const handleChange = (val) => {
     if (isNaN(Number(val))) {
@@ -49,6 +70,7 @@ const InputCustom = ({
 
     return onChange(val)
   }
+
   return (
     <div className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}>
       <div className="title flex items-center gap-x-1">
@@ -76,6 +98,12 @@ const InputCustom = ({
         })}
       >
         {leftSide && <div className="left-action">{leftSide}</div>}
+        {allowSelectToken && (
+          <div className="left-action">
+            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
+          </div>
+        )}
+
         <input
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
           placeholder={placeHolder}
@@ -89,7 +117,11 @@ const InputCustom = ({
         {showMaxBtn && <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">Max</label>}
       </div>
 
-      {showBalance}
+      {showBalance && (
+        <label className="text-xs lg:text-sm text-zinc-500 balance">
+          {data?.formatted} {data?.symbol}
+        </label>
+      )}
     </div>
   )
 }

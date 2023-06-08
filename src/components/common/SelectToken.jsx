@@ -4,16 +4,15 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
 import { DownIcon } from "@icons/index"
 
-const SelectToken = ({ options, defaultValue }) => {
+const SelectToken = ({ options, onChange, values }) => {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState(defaultValue)
 
   const toggleOpen = () => {
     setOpen(!open)
   }
 
-  const onChangeValue = (token) => {
-    setValue(token)
+  const handleChange = (token) => {
+    onChange(token)
     setOpen(false)
   }
 
@@ -24,10 +23,10 @@ const SelectToken = ({ options, defaultValue }) => {
   const refOutside = useOutsideDetect(handleClickOutside)
 
   const renderLabel = useMemo(() => {
-    const index = options?.findIndex((item) => item.value === value)
+    const index = options?.findIndex((item) => item.value === values)
 
     return { label: options[index]?.label, icon: options[index]?.icon }
-  }, [value, options])
+  }, [values, options])
 
   return (
     <div className={`dd-token`}>
@@ -45,7 +44,7 @@ const SelectToken = ({ options, defaultValue }) => {
         {options?.map((item, idx) => (
           <div
             className="dd-token-item flex items-center justify-between w-full p-3"
-            onClick={() => onChangeValue(item.value)}
+            onClick={() => handleChange(item.value)}
             key={idx}
           >
             <div className="flex items-center gap-2">

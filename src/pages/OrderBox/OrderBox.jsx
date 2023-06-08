@@ -50,38 +50,30 @@ const OrderBox = ({ type }) => {
           <InputCustom
             label="Pay"
             headerAction={<SwitchButton onChange={onChangeToggle} value={toggle} />}
-            leftSide={
-              <SelectToken
-                options={[
-                  { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: CAKE },
-                  { label: "ETH", value: "ETH", icon: ETH }
-                ]}
-                defaultValue={"ETH"}
-              />
-            }
+            allowSelectToken={true}
+            tokenOptions={[
+              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
+              { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH }
+            ]}
+            defaultToken={"0xe9782D26ABc19FF5174F77e84B0dD19D47635043"}
             showMaxBtn={true}
             placeHolder={"0.0"}
-            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
+            showBalance={true}
             showUsd={true}
           />
         </div>
         <div className="mt-3 2xl:mt-5">
           <InputCustom
             label="Position Size"
-            leftSide={
-              <SelectToken
-                options={[
-                  { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: CAKE },
-                  { label: "ETH", value: "ETH", icon: ETH }
-                ]}
-                defaultValue={"ETH"}
-              />
-            }
+            allowSelectToken={true}
+            tokenOptions={[
+              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
+              { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH }
+            ]}
+            defaultToken={"0xe9782D26ABc19FF5174F77e84B0dD19D47635043"}
             showMaxBtn={true}
             placeHolder={"0.0"}
-            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
+            showBalance={true}
             showUsd={true}
           />
         </div>

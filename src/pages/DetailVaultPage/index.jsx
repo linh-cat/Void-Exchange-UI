@@ -25,7 +25,7 @@ const Index = () => {
           tokenAddress: Constants?.Addresses[chain?.id]?.Vaults?.WBTC,
           vaultAddress: Constants?.Addresses[chain?.id]?.Faucet?.WBTC
         }
-      case "3":
+      case "4":
         return {
           tokenAddress: Constants?.Addresses[chain?.id]?.Vaults?.USDC,
           vaultAddress: Constants?.Addresses[chain?.id]?.Faucet?.USDC
