@@ -52,10 +52,10 @@ const OrderBox = ({ type }) => {
             headerAction={<SwitchButton onChange={onChangeToggle} value={toggle} />}
             allowSelectToken={true}
             tokenOptions={[
-              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
-              { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH }
+              { label: "BTC", value: "0xB232278f063AB63592FCc612B3bc01662b7245f0", icon: BTC },
+              { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH }
             ]}
-            defaultToken={"0xe9782D26ABc19FF5174F77e84B0dD19D47635043"}
+            defaultToken={"0xB232278f063AB63592FCc612B3bc01662b7245f0"}
             showMaxBtn={true}
             placeHolder={"0.0"}
             showBalance={true}
