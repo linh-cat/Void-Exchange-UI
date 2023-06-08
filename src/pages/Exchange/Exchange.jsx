@@ -1,24 +1,30 @@
-import React, { useState } from "react"
 
-import "./Exchange.css"
-import TabExchange from "../../components/TabExchange/TabExchange"
+import React, { useEffect, useState, useMemo } from "react"
+import useWebSocket, { ReadyState } from "react-use-websocket"
+import cx from "classnames"
+import { formatUnits } from "viem"
+import { LIST_SECTIONS, optionLabels } from "./constant"
+import TopInfo from "@components/TopInfo/TopInfo"
 import TradingViewChart from "./TradingViewChart"
 import InforBarChar from "./InforBarChar"
 import LatestTrade from "./LatestTrade"
 import Tab from "@components/Tab/Tab"
-import { LIST_SECTIONS, optionLabels } from "./constant"
 import { POSITIONS } from "./constant"
 import ListPosition from "./ListPosition"
-import cx from "classnames"
-import TopInfo from "@components/TopInfo/TopInfo"
+import TabExchange from "../../components/TabExchange/TabExchange"
+import "./Exchange.css"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
+  const [messageHistory, setMessageHistory] = useState([])
+
+  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000")
 
   const onChangeTabSection = (val) => {
     setTabSection(val)
   }
+
   const onChangeHistory = () => {
     setShowHistory(!showHistory)
   }
@@ -27,6 +33,41 @@ const Exchange = () => {
    *
    * @param {[]Object} options
    */
+  const price = useMemo(() => {
+    if (lastMessage?.data) {
+      try {
+        const data = JSON.parse(lastMessage.data)
+        console.log("data", data)
+        if (data.p) {
+          return formatUnits(data.p, 18).toLocaleString("en-US", {
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 3
+          })
+        }
+      } catch (err) {
+        console.error(err)
+      }
+
+      return "0"
+    }
+  }, [lastMessage])
+
+  useEffect(() => {
+    if (readyState === ReadyState.OPEN) {
+      sendMessage(JSON.stringify({ type: "subscribe", channels: ["BTC"] }))
+    }
+  }, [readyState])
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+  }[readyState]
+
+  console.log("connectionStatus", connectionStatus)
+
   const renderListSections = () => {
     return (
       <div className={cx({ "p-3 section-list": true })}>
