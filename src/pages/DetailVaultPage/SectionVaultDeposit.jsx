@@ -68,7 +68,7 @@ const SectionVaultDeposit = ({
           text="Add Liquidity"
           onClick={onDeposit}
           isLoading={isDepositing}
-          disabled={isDepositing}
+          disabled={amount === "" || isDepositing}
         />
       )
     }
@@ -77,12 +77,12 @@ const SectionVaultDeposit = ({
       <Button
         className="py-1 tracking-wider rounded"
         text="Approve"
-        onClick={onApprove}
+        onClick={onDebounceApprove}
         isLoading={isApproving}
-        disabled={isApproving}
+        disabled={amount === "" || isApproving}
       />
     )
-  }, [allowance, amount, isApproving, isDepositing, onApprove, onDeposit])
+  }, [allowance, amount, isApproving, isDepositing, onDeposit, onDebounceApprove])
 
   const onChangeTab = (val) => {
     setTab(val)

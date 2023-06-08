@@ -1,4 +1,4 @@
-import { useContractWrite, useContractRead, erc20ABI } from "wagmi"
+import { useContractWrite, useContractRead, useWaitForTransaction, erc20ABI } from "wagmi"
 import { parseUnits, formatUnits } from "viem"
 
 const useAllowance = ({ token, tokenDecimals, account, spender }) => {
@@ -10,10 +10,14 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     watch: true
   })
 
-  const { isLoading: isApproving, write } = useContractWrite({
+  const { data, write } = useContractWrite({
     address: token,
     abi: erc20ABI,
     functionName: "approve"
+  })
+
+  const { isLoading: isApproving } = useWaitForTransaction({
+    hash: data?.hash
   })
 
   const isSufficient = (allowance, amount) => {
