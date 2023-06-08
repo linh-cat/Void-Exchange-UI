@@ -25,8 +25,8 @@ export const vaultLists = [
   {
     id: 4,
     title: "USDC",
-    bg: "bg-doge",
-    hoverBg: "bg-hover-doge",
+    bg: "bg-usdc",
+    hoverBg: "bg-hover-usdc",
     icon: USDC
   }
 ]
