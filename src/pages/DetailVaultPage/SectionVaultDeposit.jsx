@@ -19,10 +19,8 @@ import { isEthereumAddress } from "src/types"
  * @param {Object} props.tokenAddress Address of the token
  * @param {Object} props.vaultAddress Address of the vault
  */
-const SectionVaultDeposit = ({
-  tokenAddress = "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
-  vaultAddress = "0xe9782D26ABc19FF5174F77e84B0dD19D47635043"
-}) => {
+
+const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const [tab, setTab] = useState("deposit")
   const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
 
@@ -30,20 +28,18 @@ const SectionVaultDeposit = ({
 
   const { data } = useBalance({
     address: address,
-    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", // WETH
+    token: tokenAddress, // WETH
     watch: true
   })
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
+    token: tokenAddress,
     account: address,
-    spender: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043",
+    spender: vaultAddress,
     tokenDecimals: data?.decimals || 0
   })
 
-  console.log({ amount })
-
-  const { deposit, isLoading: isDepositing } = useVault("0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD")
+  const { deposit, isLoading: isDepositing } = useVault(tokenAddress)
 
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
@@ -60,7 +56,6 @@ const SectionVaultDeposit = ({
 
   const renderButton = useCallback(() => {
     // if allowance is greater than amount, then render deposit button
-    console.log({ allowance })
     if (allowance >= amount) {
       return (
         <Button

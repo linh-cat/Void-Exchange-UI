@@ -85,7 +85,7 @@ const FullApp = () => {
           }
         >
           <Route path="list" element={<ListVault />} />
-          <Route path=":vaultId" element={<DetailVaultPage />} />
+          <Route path=":id" element={<DetailVaultPage />} />
         </Route>
       </Routes>
     </Router>
