@@ -9,6 +9,7 @@ import { ETH } from "@img/token"
 
 import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
+import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
 
 /**
@@ -55,6 +56,8 @@ const SectionVaultDeposit = ({
     localStorage.setItem("allowance", amount)
   }, [amount, approve])
 
+  const onDebounceApprove = useDebounce(onApprove, 1000)
+
   const renderButton = useCallback(() => {
     // if allowance is greater than amount, then render deposit button
     console.log({ allowance })
@@ -65,7 +68,7 @@ const SectionVaultDeposit = ({
           text="Add Liquidity"
           onClick={onDeposit}
           isLoading={isDepositing}
-          disabled={amount === ""}
+          disabled={isDepositing}
         />
       )
     }
@@ -76,7 +79,7 @@ const SectionVaultDeposit = ({
         text="Approve"
         onClick={onApprove}
         isLoading={isApproving}
-        disabled={amount === ""}
+        disabled={isApproving}
       />
     )
   }, [allowance, amount, isApproving, isDepositing, onApprove, onDeposit])
