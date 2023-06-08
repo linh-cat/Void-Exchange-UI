@@ -20,7 +20,7 @@ import { isEthereumAddress } from "src/types"
  * @param {Object} props.vaultAddress Address of the vault
  */
 
-const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
+const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const [tab, setTab] = useState("deposit")
   const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
 
@@ -39,7 +39,7 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
     tokenDecimals: data?.decimals || 0
   })
 
-  const { deposit, isLoading: isDepositing } = useVault(tokenAddress)
+  const { deposit, isLoading: isDepositing } = useVault(tokenAddress, vaultAddress)
 
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
@@ -273,9 +273,9 @@ const SectionVaultDeposit = ({ tokenAddress, vaultAddress }) => {
   )
 }
 
-SectionVaultDeposit.propTypes = {
+VaultDeposit.propTypes = {
   tokenAddress: isEthereumAddress,
   vaultAddress: isEthereumAddress
 }
 
-export default SectionVaultDeposit
+export default VaultDeposit

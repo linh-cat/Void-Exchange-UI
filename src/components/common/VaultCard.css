@@ -51,8 +51,8 @@
 }
 
 .bg-hover-btc:hover {
-    border: 1px solid #000040;
-    box-shadow: #000040 0px 13px 27px -5px, #000040 0px 8px 16px -8px;
+    border: 1px solid #3B2618;
+    box-shadow: #3B2618 0px 13px 27px -5px, #3B2618 0px 8px 16px -8px;
 }
 
 .bg-hover-doge:hover {

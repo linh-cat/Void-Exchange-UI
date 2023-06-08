@@ -1,13 +1,12 @@
 import React, { useMemo } from "react"
 import "./index.css"
 import Banner from "./Banner"
-import SectionVaultDeposit from "./SectionVaultDeposit"
 import SectionVaultStats from "./SectionVaultStats"
 import { useParams } from "react-router-dom"
-import { Addresses } from "./config"
 
 import { Constants } from "@void-0x/void-sdk"
 import { useNetwork } from "wagmi"
+import VaultDeposit from "./VaultDeposit"
 
 const Index = () => {
   let { id: vaultID } = useParams()
@@ -17,18 +16,18 @@ const Index = () => {
     switch (vaultID) {
       case "1":
         return {
-          tokenAddress: Constants?.Addresses[chain?.id]?.Vaults?.WETH,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Faucet?.WETH
+          tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.WETH,
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WETH
         }
       case "2":
         return {
-          tokenAddress: Constants?.Addresses[chain?.id]?.Vaults?.WBTC,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Faucet?.WBTC
+          tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.WBTC,
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WBTC
         }
       case "4":
         return {
-          tokenAddress: Constants?.Addresses[chain?.id]?.Vaults?.USDC,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Faucet?.USDC
+          tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.USDC,
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.USDC
         }
       default:
         break
@@ -38,7 +37,7 @@ const Index = () => {
   return (
     <div className="vault-detail">
       <Banner />
-      <SectionVaultDeposit tokenAddress={vaultInfor?.tokenAddress} vaultAddress={vaultInfor?.vaultAddress} />
+      <VaultDeposit tokenAddress={vaultInfor?.tokenAddress} vaultAddress={vaultInfor?.vaultAddress} />
       <SectionVaultStats />
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import React, { useState } from "react"
 import cx from "classnames"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 
@@ -19,7 +19,7 @@ const InputCustom = ({
   showMaxBtn,
   showUsd,
   onChange,
-  value,
+  values,
   type,
   min,
   max,
@@ -34,7 +34,7 @@ const InputCustom = ({
 
   const { address } = useAccount()
 
-  const { data } = useBalance({
+  const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
     watch: true
@@ -82,14 +82,14 @@ const InputCustom = ({
           </div>
         )}
         {headerAction}
-        {showUsd && value && (
+        {/* {showUsd && values && (
           <div
             className="text-xs 
            text-zinc-500 usd"
           >
             ~$27.000
           </div>
-        )}
+        )} */}
       </div>
       <div
         className={cx({
@@ -108,18 +108,25 @@ const InputCustom = ({
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
           placeholder={placeHolder}
           onChange={(e) => handleChange(Number(e.target.value))}
-          value={value}
+          value={values}
           type={type || "number"}
           min={min}
           max={max}
         />
         {rightAction}
-        {showMaxBtn && <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">Max</label>}
+        {showMaxBtn && (
+          <label
+            className="font-very-small cursor-pointer max-btn border rounded-md p-2"
+            onClick={() => handleChange(balance?.formatted)}
+          >
+            Max
+          </label>
+        )}
       </div>
 
       {showBalance && (
         <label className="text-xs lg:text-sm text-zinc-500 balance">
-          {data?.formatted} {data?.symbol}
+          {balance?.formatted} {balance?.symbol}
         </label>
       )}
     </div>
