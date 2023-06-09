@@ -15,6 +15,7 @@ body {
 :root {
     --main-bg-color: #0c0f13;
     --main-card-color: #1b2028;
+    --bg-card: #1a1e23;
     --input-bg-color: #2a3341;
     --main-long: #16be76;
     --main-short: #e43e53;
@@ -32,6 +33,10 @@ body {
     --font-small: 0.8rem;
     --font-very-small: 0.7rem;
     --bg-linear-active: linear-gradient(to right, #0c7b93, #00a8cc);
+}
+
+.card {
+    background-color: var(--bg-card);
 }
 
 #bg {

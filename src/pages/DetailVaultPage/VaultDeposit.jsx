@@ -11,6 +11,7 @@ import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
+import { InputCustom } from "@components/common"
 
 /**
  * SectionVaultDeposit.
@@ -26,7 +27,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
 
   const { address } = useAccount()
 
-  const { data } = useBalance({
+  const { data: balance } = useBalance({
     address: address,
     token: tokenAddress, // WETH
     watch: true
@@ -36,10 +37,18 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
     token: tokenAddress,
     account: address,
     spender: vaultAddress,
-    tokenDecimals: data?.decimals || 0
+    tokenDecimals: balance?.decimals || 0
   })
 
   const { deposit, isLoading: isDepositing } = useVault(tokenAddress, vaultAddress)
+
+  const onChangeAmount = (val) => {
+    if (Number(balance?.formatted) < Number(val)) {
+      setAmount(balance?.formatted)
+      return
+    }
+    setAmount(val)
+  }
 
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
@@ -175,36 +184,36 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                         <div className="flex gap-3">
                           <div
                             className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(data?.formatted / 2)}
+                            onClick={() => setAmount(balance?.formatted / 2)}
                           >
                             50%
                           </div>
                           <div
                             className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(data?.formatted)}
+                            onClick={() => setAmount(balance?.formatted)}
                           >
                             MAX
                           </div>
                         </div>
                       </div>
-                      <div className="token flex gap-2 justify-between border rounded py-2 pl-2 pr-1">
-                        <input
+                      <div className="token border rounded py-2 pl-2">
+                        <InputCustom
                           type="number"
-                          className="p-0 flex-1 text-left"
-                          onChange={(e) => {
-                            setAmount(e.target.value)
-                          }}
-                          placeholder="0"
-                          value={amount}
+                          classNameInput="p-0"
+                          onChange={onChangeAmount}
+                          placeHolder="0.0"
+                          values={amount}
+                          isBorder={false}
+                          rightAction={
+                            <div className="flex gap-2 mr-1 items-center">
+                              <img src={ETH} alt="ETH" className="w-5 h-5" />
+                            </div>
+                          }
                         />
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-xl">
-                          <img src={ETH} alt="ETH" className="w-5 h-5" />
-                          <label className="">ETH</label>
-                        </div>
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{data?.formatted}</div>
+                        <div>{balance?.formatted}</div>
                       </div>
                     </div>
                     {renderButton()}
@@ -229,7 +238,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{data?.formatted}</div>
+                        <div>{balance?.formatted}</div>
                       </div>
                     </div>
                     <Button className="py-2 tracking-wider rounded" text="Withdraw" />

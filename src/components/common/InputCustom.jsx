@@ -1,11 +1,12 @@
 import React, { useState } from "react"
+import { useAccount, useBalance } from "wagmi"
 import cx from "classnames"
+
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 
 import SelectToken from "./SelectToken"
 
 import "./InputCustom.css"
-import { useAccount, useBalance } from "wagmi"
 
 const InputCustom = ({
   label,
@@ -59,6 +60,11 @@ const InputCustom = ({
         val = Number(val).toString()
       }
     }
+    if (showBalance) {
+      if (Number(val) > Number(balance?.formatted)) {
+        return onChange(balance?.formatted)
+      }
+    }
     // else {
     //   // remain input box w single zero, but keep zero when have decimal
     //   val = val.replace(/^[0]+/g, "0")
@@ -72,7 +78,13 @@ const InputCustom = ({
   }
 
   return (
-    <div className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}>
+    <div
+      className={cx({
+        "input-custom flex flex-col w-full h-full": true,
+        className: className,
+        "gap-y-1": label
+      })}
+    >
       <div className="title flex items-center gap-x-1">
         <label className="text-sm">{label}</label>
         {label && (
