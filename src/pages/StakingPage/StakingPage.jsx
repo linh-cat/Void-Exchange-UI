@@ -106,7 +106,7 @@ const StakingPage = () => {
                   </div>
                 </div>
               </Card>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 <Card className="">
                   <div className="p-3 flex flex-col gap-3">
                     <label>Your Staking Stats</label>

@@ -11,6 +11,7 @@ import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
+import { InputCustom } from "@components/common"
 
 /**
  * SectionVaultDeposit.
@@ -19,31 +20,35 @@ import { isEthereumAddress } from "src/types"
  * @param {Object} props.tokenAddress Address of the token
  * @param {Object} props.vaultAddress Address of the vault
  */
-const SectionVaultDeposit = ({
-  tokenAddress = "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
-  vaultAddress = "0xe9782D26ABc19FF5174F77e84B0dD19D47635043"
-}) => {
+
+const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const [tab, setTab] = useState("deposit")
   const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
 
   const { address } = useAccount()
 
-  const { data } = useBalance({
+  const { data: balance } = useBalance({
     address: address,
-    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", // WETH
+    token: tokenAddress, // WETH
     watch: true
   })
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD",
+    token: tokenAddress,
     account: address,
-    spender: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043",
-    tokenDecimals: data?.decimals || 0
+    spender: vaultAddress,
+    tokenDecimals: balance?.decimals || 0
   })
 
-  console.log({ amount })
+  const { deposit, isLoading: isDepositing } = useVault(tokenAddress, vaultAddress)
 
-  const { deposit, isLoading: isDepositing } = useVault("0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD")
+  const onChangeAmount = (val) => {
+    if (Number(balance?.formatted) < Number(val)) {
+      setAmount(balance?.formatted)
+      return
+    }
+    setAmount(val)
+  }
 
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
@@ -60,7 +65,6 @@ const SectionVaultDeposit = ({
 
   const renderButton = useCallback(() => {
     // if allowance is greater than amount, then render deposit button
-    console.log({ allowance })
     if (allowance >= amount) {
       return (
         <Button
@@ -180,36 +184,36 @@ const SectionVaultDeposit = ({
                         <div className="flex gap-3">
                           <div
                             className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(data?.formatted / 2)}
+                            onClick={() => setAmount(balance?.formatted / 2)}
                           >
                             50%
                           </div>
                           <div
                             className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(data?.formatted)}
+                            onClick={() => setAmount(balance?.formatted)}
                           >
                             MAX
                           </div>
                         </div>
                       </div>
-                      <div className="token flex gap-2 justify-between border rounded py-2 pl-2 pr-1">
-                        <input
+                      <div className="token border rounded py-2 pl-2">
+                        <InputCustom
                           type="number"
-                          className="p-0 flex-1 text-left"
-                          onChange={(e) => {
-                            setAmount(e.target.value)
-                          }}
-                          placeholder="0"
-                          value={amount}
+                          classNameInput="p-0"
+                          onChange={onChangeAmount}
+                          placeHolder="0.0"
+                          values={amount}
+                          isBorder={false}
+                          rightAction={
+                            <div className="flex gap-2 mr-1 items-center">
+                              <img src={ETH} alt="ETH" className="w-5 h-5" />
+                            </div>
+                          }
                         />
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-xl">
-                          <img src={ETH} alt="ETH" className="w-5 h-5" />
-                          <label className="">ETH</label>
-                        </div>
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{data?.formatted}</div>
+                        <div>{balance?.formatted}</div>
                       </div>
                     </div>
                     {renderButton()}
@@ -234,7 +238,7 @@ const SectionVaultDeposit = ({
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{data?.formatted}</div>
+                        <div>{balance?.formatted}</div>
                       </div>
                     </div>
                     <Button className="py-2 tracking-wider rounded" text="Withdraw" />
@@ -278,9 +282,9 @@ const SectionVaultDeposit = ({
   )
 }
 
-SectionVaultDeposit.propTypes = {
+VaultDeposit.propTypes = {
   tokenAddress: isEthereumAddress,
   vaultAddress: isEthereumAddress
 }
 
-export default SectionVaultDeposit
+export default VaultDeposit

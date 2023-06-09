@@ -31,6 +31,13 @@
     -webkit-animation: animationBg 20s ease infinite;
 }
 
+.bg-usdc {
+    background-image: url("../../img/usdc-bg.jpg");
+    background-size: cover;
+    animation: animationBg 20s ease-in-out infinite;
+    -webkit-animation: animationBg 20s ease infinite;
+}
+
 .bg-hover-btc {
     transition: box-shadow 0.25s ease-out 0s, border 0.25s ease-out 0s;
 }
@@ -44,8 +51,8 @@
 }
 
 .bg-hover-btc:hover {
-    border: 1px solid #000040;
-    box-shadow: #000040 0px 13px 27px -5px, #000040 0px 8px 16px -8px;
+    border: 1px solid #3B2618;
+    box-shadow: #3B2618 0px 13px 27px -5px, #3B2618 0px 8px 16px -8px;
 }
 
 .bg-hover-doge:hover {
@@ -56,6 +63,11 @@
 .bg-hover-eth:hover {
     border: 1px solid #7848b8;
     box-shadow: #7848b8 0px 13px 27px -5px, #7848b8 0px 8px 16px -8px;
+}
+
+.bg-hover-usdc:hover {
+    border: 1px solid #0164ed;
+    box-shadow: #0164ed 0px 13px 27px -5px, #0164ed 0px 8px 16px -8px;
 }
 
 @keyframes animationBg {

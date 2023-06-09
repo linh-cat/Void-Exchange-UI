@@ -1,7 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
+import { useAccount, useBalance } from "wagmi"
 import cx from "classnames"
-import "./InputCustom.css"
+
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
+
+import SelectToken from "./SelectToken"
+
+import "./InputCustom.css"
+
 const InputCustom = ({
   label,
   tooltip,
@@ -14,14 +20,30 @@ const InputCustom = ({
   showMaxBtn,
   showUsd,
   onChange,
-  value,
+  values,
   type,
   min,
   max,
   isBorder = true,
+  allowSelectToken,
+  tokenOptions,
+  defaultToken,
   headerAction
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
+  const [selectedToken, setSelectedToken] = useState(defaultToken)
+
+  const { address } = useAccount()
+
+  const { data: balance } = useBalance({
+    address: address,
+    token: selectedToken,
+    watch: true
+  })
+
+  const onChangeToken = (token) => {
+    setSelectedToken(token)
+  }
 
   const handleChange = (val) => {
     if (isNaN(Number(val))) {
@@ -38,6 +60,11 @@ const InputCustom = ({
         val = Number(val).toString()
       }
     }
+    if (showBalance) {
+      if (Number(val) > Number(balance?.formatted)) {
+        return onChange(balance?.formatted)
+      }
+    }
     // else {
     //   // remain input box w single zero, but keep zero when have decimal
     //   val = val.replace(/^[0]+/g, "0")
@@ -49,8 +76,15 @@ const InputCustom = ({
 
     return onChange(val)
   }
+
   return (
-    <div className={`${className} input-custom flex flex-col gap-y-1 w-full h-full`}>
+    <div
+      className={cx({
+        "input-custom flex flex-col w-full h-full": true,
+        className: className,
+        "gap-y-1": label
+      })}
+    >
       <div className="title flex items-center gap-x-1">
         <label className="text-sm">{label}</label>
         {label && (
@@ -60,14 +94,14 @@ const InputCustom = ({
           </div>
         )}
         {headerAction}
-        {showUsd && value && (
+        {/* {showUsd && values && (
           <div
             className="text-xs 
            text-zinc-500 usd"
           >
             ~$27.000
           </div>
-        )}
+        )} */}
       </div>
       <div
         className={cx({
@@ -76,20 +110,37 @@ const InputCustom = ({
         })}
       >
         {leftSide && <div className="left-action">{leftSide}</div>}
+        {allowSelectToken && (
+          <div className="left-action">
+            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
+          </div>
+        )}
+
         <input
           className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
           placeholder={placeHolder}
           onChange={(e) => handleChange(Number(e.target.value))}
-          value={value}
+          value={values}
           type={type || "number"}
           min={min}
           max={max}
         />
         {rightAction}
-        {showMaxBtn && <label className="font-very-small cursor-pointer max-btn border rounded-md p-2">Max</label>}
+        {showMaxBtn && (
+          <label
+            className="font-very-small cursor-pointer max-btn border rounded-md p-2"
+            onClick={() => handleChange(balance?.formatted)}
+          >
+            Max
+          </label>
+        )}
       </div>
 
-      {showBalance}
+      {showBalance && (
+        <label className="text-xs lg:text-sm text-zinc-500 balance">
+          {balance?.formatted} {balance?.symbol}
+        </label>
+      )}
     </div>
   )
 }

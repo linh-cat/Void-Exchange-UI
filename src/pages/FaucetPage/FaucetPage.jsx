@@ -202,7 +202,7 @@ const FaucetPage = () => {
                   Max
                 </div>
               }
-              value={amount}
+              values={amount}
               onChange={(val) => setAmount(val)}
             />
             {amount > selectedToken?.max && (

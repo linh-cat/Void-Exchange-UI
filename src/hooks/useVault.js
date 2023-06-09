@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react"
+import { useMemo, useState } from "react"
 import { toast } from "react-hot-toast"
-import { usePublicClient, useWalletClient, useNetwork, useContractWrite, erc20ABI, useAccount } from "wagmi"
-import { Vault, Constants } from "@void-0x/void-sdk"
+import { usePublicClient, useWalletClient } from "wagmi"
+import { Vault } from "@void-0x/void-sdk"
 
-import { isChainSupported } from "src/lib/chains"
-
-const useVault = (tokenAddress) => {
+const useVault = (tokenAddress, vaultAddress) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [vault, setVault] = useState(null)
 
   const publicClient = usePublicClient()
-  const { data: walletClient, isLoading: isWalletLoading } = useWalletClient()
-  const { chain } = useNetwork()
+  const { data: walletClient } = useWalletClient()
 
-  useEffect(() => {
-    if (chain && !isWalletLoading && isChainSupported(chain)) {
-      // const wbtcFaucet = new Vault(publicClient, walletClient, Constants.Addresses[chain.id].Vaults.WBTC)
-      const wethFaucet = new Vault(publicClient, walletClient, Constants.Addresses[chain.id].Vaults.WETH, tokenAddress)
-      // const usdcFaucet = new Faucet(publicClient, walletClient, Constants.Addresses[chain.id].Faucet.USDC)
-      setVault(wethFaucet)
-    }
-  }, [isLoading, chain, publicClient, walletClient, isWalletLoading, tokenAddress])
+  const selectedVault = useMemo(() => {
+    return new Vault(publicClient, walletClient, vaultAddress, tokenAddress)
+  }, [publicClient, tokenAddress, vaultAddress, walletClient])
 
   const deposit = async (amount, from, receiver) => {
-    if (!vault) {
+    if (!selectedVault) {
       return
     }
 
@@ -36,7 +27,7 @@ const useVault = (tokenAddress) => {
     //   from
     // })
 
-    const hash = await vault.deposit(amount, receiver)
+    const hash = await selectedVault.deposit(amount, receiver)
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsLoading(false)

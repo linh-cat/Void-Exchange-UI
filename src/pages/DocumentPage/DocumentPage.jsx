@@ -55,14 +55,14 @@ const DocumentPage = () => {
         <Button
           text={"Github"}
           isDefault={false}
-          className={"border border-white px-5 rounded btn-github"}
+          className={"border border-white px-5 rounded btn-github py-2"}
           icon={<img src={GithubMarkIcon} alt="github" className="w-5 h-5" />}
         />
         <Button
           text={"Feedback"}
           icon={<img src={ArrowRight} alt="arrow-right" className="w-5 h-5" />}
           isDefault={false}
-          className={"border border-white px-5 rounded btn-feedback"}
+          className={"border border-white px-5 rounded btn-feedback py-2"}
         />
       </div>
     </div>

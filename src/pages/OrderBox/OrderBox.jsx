@@ -10,10 +10,15 @@ import { BTC, CAKE, ETH } from "@img/token"
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
+  const [payAmount, setPayAmount] = useState("")
   const [collateralModal, setCollateralModal] = useState(false)
 
   const onChangeToggle = () => {
     setToggle(!toggle)
+  }
+
+  const changePayAmount = (amount) => {
+    setPayAmount(amount)
   }
 
   useEffect(() => {
@@ -50,38 +55,31 @@ const OrderBox = ({ type }) => {
           <InputCustom
             label="Pay"
             headerAction={<SwitchButton onChange={onChangeToggle} value={toggle} />}
-            leftSide={
-              <SelectToken
-                options={[
-                  { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: CAKE },
-                  { label: "ETH", value: "ETH", icon: ETH }
-                ]}
-                defaultValue={"ETH"}
-              />
-            }
+            onChange={changePayAmount}
+            allowSelectToken={true}
+            tokenOptions={[
+              { label: "BTC", value: "0xB232278f063AB63592FCc612B3bc01662b7245f0", icon: BTC },
+              { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH }
+            ]}
+            defaultToken={"0xB232278f063AB63592FCc612B3bc01662b7245f0"}
             showMaxBtn={true}
             placeHolder={"0.0"}
-            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
+            showBalance={true}
             showUsd={true}
+            values={payAmount}
           />
         </div>
         <div className="mt-3 2xl:mt-5">
           <InputCustom
             label="Position Size"
-            leftSide={
-              <SelectToken
-                options={[
-                  { label: "BTC", value: "BTC", icon: BTC },
-                  { label: "BNB", value: "BNB", icon: CAKE },
-                  { label: "ETH", value: "ETH", icon: ETH }
-                ]}
-                defaultValue={"ETH"}
-              />
-            }
-            showMaxBtn={true}
+            allowSelectToken={true}
+            tokenOptions={[
+              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
+              { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH }
+            ]}
+            defaultToken={"0xe9782D26ABc19FF5174F77e84B0dD19D47635043"}
             placeHolder={"0.0"}
-            showBalance={<label className="text-xs lg:text-sm text-zinc-500 balance">500000 ETC</label>}
+            showBalance={true}
             showUsd={true}
           />
         </div>
