@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
+import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
 import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
@@ -11,6 +11,7 @@ const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
   const [payAmount, setPayAmount] = useState("")
+  const [orderType, setOrderType] = useState("market")
   const [collateralModal, setCollateralModal] = useState(false)
 
   const onChangeToggle = () => {
@@ -19,6 +20,9 @@ const OrderBox = ({ type }) => {
 
   const changePayAmount = (amount) => {
     setPayAmount(amount)
+  }
+  const changeOrderType = (order) => {
+    setOrderType(order)
   }
 
   useEffect(() => {
@@ -39,16 +43,23 @@ const OrderBox = ({ type }) => {
             <SelectCustom
               label="Order Type"
               options={[
-                { label: "Limit", value: "limit", icon: LimitIcon },
+                { label: "Limit", value: "limit", icon: LimitIcon, disabled: true },
                 { label: "Market", value: "market", icon: MarketIcon }
               ]}
-              defaultValue="limit"
-              classNameInput={"p-2"}
+              defaultValue="market"
+              values={orderType}
+              classNameInput="pr-2"
+              onChange={changeOrderType}
             />
           </div>
 
           <div className="">
-            <InputCustom label="Price" placeHolder={"0.0"} classNameInput="p-2" />
+            <InputCustom
+              label="Price"
+              placeHolder={"0.0"}
+              classNameInput="px-1 py-2"
+              disabled={orderType === "market"}
+            />
           </div>
         </div>
         <div className="mt-3 2xl:mt-5 relative">

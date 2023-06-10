@@ -1,18 +1,19 @@
 import React, { useMemo, useState } from "react"
-import "./SelectCustom.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
 import { DownIcon } from "@icons/index"
+import cx from "classnames"
 
-const SelectCustom = ({ options, defaultValue, label, tooltip, className, classNameInput, classNameOption }) => {
+import "./SelectCustom.css"
+
+const SelectCustom = ({ options, label, tooltip, className, classNameInput, classNameOption, values, onChange }) => {
   const [openList, setOpenList] = useState(false)
-  const [values, setValues] = useState(defaultValue)
   const toggleOpen = () => {
     setOpenList(!openList)
   }
 
-  const onChangeValue = (value) => {
-    setValues(value)
+  const handleChangeOptions = (value) => {
+    onChange(value)
     setOpenList(false)
   }
   const handleClickOutside = () => {
@@ -26,7 +27,14 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className, classN
   }, [options, values])
 
   return (
-    <div className={`${className} select-custom flex flex-col gap-y-1`}>
+    <div
+      className={cx(
+        {
+          "select-custom flex flex-col gap-y-1": true
+        },
+        className
+      )}
+    >
       <div className="flex items-center gap-1">
         <label className="text-sm">{label}</label>
         {tooltip && (
@@ -39,7 +47,12 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className, classN
 
       <div className="dd-wrapper">
         <div
-          className={`${classNameInput} dd-header border rounded w-full h-full cursor-pointer flex items-center justify-between `}
+          className={cx(
+            {
+              "dd-header border rounded w-full h-full cursor-pointer flex items-center justify-between": true
+            },
+            classNameInput
+          )}
           onClick={toggleOpen}
           ref={refOutside}
         >
@@ -54,8 +67,11 @@ const SelectCustom = ({ options, defaultValue, label, tooltip, className, classN
           {options?.map((op, idx) => (
             <div key={idx}>
               <div
-                className="dd-list-item p-3 cursor-pointer text-sm 2xl:text-base flex items-center gap-2"
-                onClick={() => onChangeValue(op.value)}
+                className={cx({
+                  "dd-list-item p-3 cursor-pointer text-sm 2xl:text-base flex items-center gap-2": true,
+                  disable: op.disabled
+                })}
+                onClick={() => handleChangeOptions(op.value)}
               >
                 {op.icon && <img src={op.icon} alt="icon" className="w-5 h- 5 icon" />}
                 <label className={`${classNameOption} whitespace-nowrap`}>{op.label}</label>

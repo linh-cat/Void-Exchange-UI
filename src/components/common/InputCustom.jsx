@@ -133,11 +133,13 @@ const InputCustom = ({
         )}
 
         <input
-          className={cx({
-            "rounded w-full h-full text-xs lg:text-sm": true,
-            classNameInput: classNameInput,
-            disable: disabled
-          })}
+          className={cx(
+            {
+              "rounded w-full h-full text-xs lg:text-sm": true,
+              disable: disabled
+            },
+            classNameInput
+          )}
           placeholder={placeHolder}
           onChange={(e) => handleChange(Number(e.target.value))}
           value={values}
