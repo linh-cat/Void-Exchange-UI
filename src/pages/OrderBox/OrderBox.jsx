@@ -11,10 +11,10 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { BTC, CAKE, ETH } from "@img/token"
 import { FastPriceFeed } from "src/abis"
-
-import "./OrderBox.css"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
+
+import "./OrderBox.css"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
@@ -45,8 +45,6 @@ const OrderBox = ({ type }) => {
     spender: "0x5e263c7014ab3ae324f113c9abef573f4e6c4dde",
     tokenDecimals: balance?.decimals || 0
   })
-
-  console.log({ allowance })
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
