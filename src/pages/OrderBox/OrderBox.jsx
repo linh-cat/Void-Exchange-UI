@@ -48,17 +48,10 @@ const OrderBox = ({ type }) => {
     setOrderType(order)
   }
 
-  console.log({
-    pursha: parseUnits(payAmount?.toString(), balance?.decimals),
-    indexprice: parseUnits(indexPrice?.toString(), balance?.decimals),
-    leve: Number(leverage),
-    tokenDecimal: balance?.decimals
-  })
-
   const positionSize = useMemo(() => {
     return Position.getPositionSizeInUsd(
       parseUnits(payAmount?.toString(), balance?.decimals),
-      parseUnits(indexPrice?.toString(), balance?.decimals),
+      indexPrice,
       Number(leverage),
       balance?.decimals
     )
@@ -183,7 +176,7 @@ const OrderBox = ({ type }) => {
           <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
             <label>Leverage</label>
             <div className="">
-              <span>-</span>
+              <span>{leverage} x</span>
             </div>
           </div>
           <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">

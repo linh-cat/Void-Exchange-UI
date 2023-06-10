@@ -4,6 +4,7 @@ import "rc-slider/assets/index.css"
 import "./SliderLeverage.css"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import InputCustom from "./InputCustom"
+import cx from "classnames"
 
 const { Handle } = Slider
 
@@ -124,7 +125,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
         <div className="w-10 h-8 text-white flex items-center justify-between gap-1 relative">
           <InputCustom
             classNameInput="p-0"
-            value={value}
+            values={value}
             onChange={changeLeverage}
             rightAction={<label className="absolute right-1 text-zinc-500">x</label>}
             type="number"
@@ -134,27 +135,29 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
         </div>
       </div>
 
-      <Slider
-        value={value}
-        min={2}
-        marks={leverageMarks}
-        max={50}
-        handle={handleCustomTooltip}
-        onAfterChange={onAfterChange}
-        railStyle={railStyle}
-        className="slider-custom-tooltip"
-        handleStyle={{
-          background: background,
-          color: color,
-          width: width,
-          height: "24px",
-          borderRadius: 5,
-          marginTop: -10
-        }}
-        onBeforeChange={onBeforeChange}
-        onChange={changeLeverage}
-        ariaLabelForHandle={title}
-      />
+      <div className="px-3">
+        <Slider
+          value={value}
+          min={2}
+          marks={leverageMarks}
+          max={50}
+          handle={handleCustomTooltip}
+          onAfterChange={onAfterChange}
+          railStyle={railStyle}
+          className="slider-custom-tooltip"
+          handleStyle={{
+            background: background,
+            color: color,
+            width: width,
+            height: "24px",
+            borderRadius: 5,
+            marginTop: -10
+          }}
+          onBeforeChange={onBeforeChange}
+          onChange={changeLeverage}
+          ariaLabelForHandle={title}
+        />
+      </div>
       {/* {alertContent && (
         <div
           className={cx({
