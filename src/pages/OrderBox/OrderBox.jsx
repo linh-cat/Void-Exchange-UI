@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react"
 
-import { Position } from "@void-0x/void-sdk"
+import { Position, Exchange, OrderType, Side } from "@void-0x/void-sdk"
 import { parseUnits } from "viem"
 import { useAccount, useBalance, useContractRead } from "wagmi"
 
@@ -13,6 +13,7 @@ import { BTC, CAKE, ETH } from "@img/token"
 import { FastPriceFeed } from "src/abis"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
+import useExchange from "src/hooks/useExchange"
 
 import "./OrderBox.css"
 
@@ -23,6 +24,8 @@ const OrderBox = ({ type }) => {
   const [orderType, setOrderType] = useState("market")
   const [collateralModal, setCollateralModal] = useState(false)
   const [selectedToken, setSelectedToken] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
+
+  const { isLoading: isExchangeLoading, placeOrder } = useExchange()
 
   const { address } = useAccount()
 
@@ -86,7 +89,18 @@ const OrderBox = ({ type }) => {
     setCollateralModal(toggle)
   }, [toggle])
 
-  const onPlaceOrder = () => {}
+  const onPlaceOrder = useCallback(async () => {
+    await placeOrder({
+      orderType: OrderType.MARKET,
+      indexToken: selectedToken,
+      side: Side.LONG,
+      isIncrease: true,
+      price: indexPrice,
+      purchaseToken: selectedToken,
+      purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
+      leverage: Number(leverage)
+    })
+  }, [placeOrder, selectedToken, indexPrice, payAmount, balance, leverage])
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {
