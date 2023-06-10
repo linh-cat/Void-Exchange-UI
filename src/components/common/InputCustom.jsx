@@ -36,7 +36,8 @@ const InputCustom = ({
   allowSelectToken,
   tokenOptions,
   defaultToken,
-  headerAction
+  headerAction,
+  disabled
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
   const [selectedToken, setSelectedToken] = useState(defaultToken)
@@ -132,7 +133,11 @@ const InputCustom = ({
         )}
 
         <input
-          className={`${classNameInput} rounded w-full h-full text-xs lg:text-sm`}
+          className={cx({
+            "rounded w-full h-full text-xs lg:text-sm": true,
+            classNameInput: classNameInput,
+            disable: disabled
+          })}
           placeholder={placeHolder}
           onChange={(e) => handleChange(Number(e.target.value))}
           value={values}

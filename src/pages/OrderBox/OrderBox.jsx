@@ -82,6 +82,7 @@ const OrderBox = ({ type }) => {
             placeHolder={"0.0"}
             showBalance={true}
             showUsd={true}
+            disabled={true}
           />
         </div>
         <div className="mt-3 2xl:mt-5">
