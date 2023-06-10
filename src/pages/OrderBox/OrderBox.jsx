@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState, useCallback } from "react"
 
 import { Position } from "@void-0x/void-sdk"
 import { parseUnits } from "viem"
@@ -86,6 +86,23 @@ const OrderBox = ({ type }) => {
     setCollateralModal(toggle)
   }, [toggle])
 
+  const onPlaceOrder = () => {}
+
+  const renderButton = useCallback(() => {
+    if (allowance >= payAmount) {
+      return <Button className="w-full" text="Place Order" onClick={onPlaceOrder} isLoading={false} disabled={false} />
+    }
+
+    return (
+      <Button
+        className="w-full"
+        text="Approve"
+        onClick={onDebounceApprove}
+        isLoading={isApproving}
+        disabled={payAmount === "" || payAmount === 0 || isApproving}
+      />
+    )
+  }, [allowance, payAmount, isApproving, onPlaceOrder, onDebounceApprove])
   return (
     <>
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
@@ -159,15 +176,7 @@ const OrderBox = ({ type }) => {
             value={leverage}
           />
         </div>
-        <div className="mt-10 w-full">
-          <Button
-            className="w-full"
-            text="Approve"
-            onClick={onDebounceApprove}
-            isLoading={isApproving}
-            disabled={payAmount === "" || payAmount === 0 || isApproving}
-          />
-        </div>
+        <div className="mt-10 w-full">{renderButton()}</div>
         <div className="mt-3 2xl:mt-5">
           <SlippageCustom
             label="Slippage"
