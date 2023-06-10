@@ -45,6 +45,7 @@ const OrderBox = ({ type }) => {
     spender: "0x5e263c7014ab3ae324f113c9abef573f4e6c4dde",
     tokenDecimals: balance?.decimals || 0
   })
+  console.log({ isApproving, payAmount })
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
@@ -164,7 +165,7 @@ const OrderBox = ({ type }) => {
             text="Approve"
             onClick={onDebounceApprove}
             isLoading={isApproving}
-            disabled={payAmount === "" || isApproving}
+            disabled={payAmount === "" || payAmount === 0 || isApproving}
           />
         </div>
         <div className="mt-3 2xl:mt-5">
