@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
+
+import { Position } from "@void-0x/void-sdk"
+import { parseUnits } from "viem"
+import { useAccount, useBalance, useContractRead } from "wagmi"
+
 import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
 import { LimitIcon, MarketIcon } from "@icons/index"
-import "./OrderBox.css"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { BTC, CAKE, ETH } from "@img/token"
+import { FastPriceFeed } from "src/abis"
+
+import "./OrderBox.css"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
@@ -13,6 +20,22 @@ const OrderBox = ({ type }) => {
   const [payAmount, setPayAmount] = useState("")
   const [orderType, setOrderType] = useState("market")
   const [collateralModal, setCollateralModal] = useState(false)
+  const [selectedToken, setSelectedToken] = useState("0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD")
+
+  const { address } = useAccount()
+
+  const { data: balance } = useBalance({
+    address: address,
+    token: selectedToken,
+    watch: true
+  })
+
+  const { data: indexPrice } = useContractRead({
+    address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
+    abi: FastPriceFeed.abi,
+    functionName: "getPrice",
+    args: ["0xB232278f063AB63592FCc612B3bc01662b7245f0", true]
+  })
 
   const onChangeToggle = () => {
     setToggle(!toggle)
@@ -23,6 +46,28 @@ const OrderBox = ({ type }) => {
   }
   const changeOrderType = (order) => {
     setOrderType(order)
+  }
+
+  console.log({
+    pursha: parseUnits(payAmount?.toString(), balance?.decimals),
+    indexprice: parseUnits(indexPrice?.toString(), balance?.decimals),
+    leve: Number(leverage),
+    tokenDecimal: balance?.decimals
+  })
+
+  const positionSize = useMemo(() => {
+    return Position.getPositionSizeInUsd(
+      parseUnits(payAmount?.toString(), balance?.decimals),
+      parseUnits(indexPrice?.toString(), balance?.decimals),
+      Number(leverage),
+      balance?.decimals
+    )
+  }, [balance?.decimals, indexPrice, leverage, payAmount])
+
+  console.log({ positionSize })
+
+  const getTokenAsset = (token) => {
+    setSelectedToken(token)
   }
 
   useEffect(() => {
@@ -59,6 +104,7 @@ const OrderBox = ({ type }) => {
               placeHolder={"0.0"}
               classNameInput="px-1 py-2"
               disabled={orderType === "market"}
+              getTokenAsset={getTokenAsset}
             />
           </div>
         </div>
@@ -72,7 +118,8 @@ const OrderBox = ({ type }) => {
               { label: "BTC", value: "0xB232278f063AB63592FCc612B3bc01662b7245f0", icon: BTC },
               { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH }
             ]}
-            defaultToken={"0xB232278f063AB63592FCc612B3bc01662b7245f0"}
+            defaultToken={"0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD"}
+            getTokenAsset={getTokenAsset}
             showMaxBtn={true}
             placeHolder={"0.0"}
             showBalance={true}
@@ -86,9 +133,10 @@ const OrderBox = ({ type }) => {
             label="Position Size"
             allowSelectToken={true}
             tokenOptions={[
-              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
+              { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC, disabled: true },
               { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH }
             ]}
+            values={positionSize}
             defaultToken={"0xe9782D26ABc19FF5174F77e84B0dD19D47635043"}
             placeHolder={"0.0"}
             showBalance={true}

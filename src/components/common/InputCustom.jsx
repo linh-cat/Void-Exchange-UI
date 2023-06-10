@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useAccount, useBalance } from "wagmi"
 import cx from "classnames"
 
@@ -37,7 +37,8 @@ const InputCustom = ({
   tokenOptions,
   defaultToken,
   headerAction,
-  disabled
+  disabled,
+  getTokenAsset
 }) => {
   const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
   const [selectedToken, setSelectedToken] = useState(defaultToken)
@@ -53,6 +54,10 @@ const InputCustom = ({
   const onChangeToken = (token) => {
     setSelectedToken(token)
   }
+
+  useEffect(() => {
+    if (getTokenAsset) getTokenAsset(selectedToken)
+  }, [getTokenAsset, selectedToken])
 
   const handleChange = (val) => {
     if (type === "number") {
