@@ -55,7 +55,7 @@ const OrderBox = ({ type }) => {
       Number(leverage),
       balance?.decimals
     )
-  }, [balance?.decimals, indexPrice, leverage, payAmount])
+  }, [balance, indexPrice, leverage, payAmount])
 
   console.log({ positionSize })
 
