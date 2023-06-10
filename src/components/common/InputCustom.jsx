@@ -8,6 +8,14 @@ import SelectToken from "./SelectToken"
 
 import "./InputCustom.css"
 
+const decimalCount = (numb) => {
+  const converted = numb.toString()
+  if (converted.includes(".")) {
+    return converted.split(".")[1].length
+  }
+  return 0
+}
+
 const InputCustom = ({
   label,
   tooltip,
@@ -46,35 +54,42 @@ const InputCustom = ({
   }
 
   const handleChange = (val) => {
-    if (isNaN(Number(val))) {
-      return onChange("0")
-    }
-
-    if (Number(val) < 0) {
-      return onChange("0")
-    }
-
-    if (Number(val) !== 0) {
-      // if it is integer, remove leading zeros
-      if (!DECIMAL_REGEX.test(val)) {
-        val = Number(val).toString()
+    if (type === "number") {
+      if (isNaN(Number(val))) {
+        return onChange("0")
       }
-    }
-    if (showBalance) {
-      if (Number(val) > Number(balance?.formatted)) {
-        return onChange(balance?.formatted)
-      }
-    }
-    // else {
-    //   // remain input box w single zero, but keep zero when have decimal
-    //   val = val.replace(/^[0]+/g, "0")
-    //   // if it is no value
-    //   if (val.length === 0) {
-    //     val = "0"
-    //   }
-    // }
 
-    return onChange(val)
+      if (Number(val) < 0) {
+        return onChange("0")
+      }
+
+      if (Number(val) !== 0) {
+        // if it is integer, remove leading zeros
+        if (!DECIMAL_REGEX.test(val)) {
+          val = Number(val).toString()
+        }
+      }
+
+      if (decimalCount(val) > 8) {
+        val = Number(val).toFixed(8).toString()
+      }
+      // else {
+      //   // remain input box w single zero, but keep zero when have decimal
+      //   val = val.replace(/^[0]+/g, "0")
+      //   // if it is no value
+      //   if (val.length === 0) {
+      //     val = "0"
+      //   }
+      // }
+
+      if (showBalance) {
+        if (Number(val) > Number(balance?.formatted)) {
+          return onChange(balance?.formatted)
+        }
+      }
+      return onChange(val)
+    }
+    onChange(val)
   }
 
   return (

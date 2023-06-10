@@ -67,6 +67,7 @@ const OrderBox = ({ type }) => {
             showBalance={true}
             showUsd={true}
             values={payAmount}
+            type="number"
           />
         </div>
         <div className="mt-3 2xl:mt-5">
