@@ -13,6 +13,8 @@ import { BTC, CAKE, ETH } from "@img/token"
 import { FastPriceFeed } from "src/abis"
 
 import "./OrderBox.css"
+import useAllowance from "src/hooks/useAllowance"
+import useDebounce from "src/hooks/useDebounce"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
@@ -37,6 +39,21 @@ const OrderBox = ({ type }) => {
     args: ["0xB232278f063AB63592FCc612B3bc01662b7245f0", true]
   })
 
+  const { allowance, approve, isApproving } = useAllowance({
+    token: selectedToken,
+    account: address,
+    spender: "0x5e263c7014ab3ae324f113c9abef573f4e6c4dde",
+    tokenDecimals: balance?.decimals || 0
+  })
+
+  console.log({ allowance })
+
+  const onApprove = React.useCallback(() => {
+    approve(payAmount)
+  }, [payAmount, approve])
+
+  const onDebounceApprove = useDebounce(onApprove, 1000)
+
   const onChangeToggle = () => {
     setToggle(!toggle)
   }
@@ -56,8 +73,6 @@ const OrderBox = ({ type }) => {
       balance?.decimals
     )
   }, [balance, indexPrice, leverage, payAmount])
-
-  console.log({ positionSize })
 
   const getTokenAsset = (token) => {
     setSelectedToken(token)
@@ -146,7 +161,13 @@ const OrderBox = ({ type }) => {
           />
         </div>
         <div className="mt-10 w-full">
-          <Button className="w-full" text="Approve" />
+          <Button
+            className="w-full"
+            text="Approve"
+            onClick={onDebounceApprove}
+            isLoading={isApproving}
+            disabled={payAmount === "" || isApproving}
+          />
         </div>
         <div className="mt-3 2xl:mt-5">
           <SlippageCustom
