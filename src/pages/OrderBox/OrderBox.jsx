@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react"
 
-import { Position, Exchange, OrderType, Side } from "@void-0x/void-sdk"
+import { Position, OrderType, Side } from "@void-0x/void-sdk"
 import { parseUnits } from "viem"
 import { useAccount, useBalance, useContractRead } from "wagmi"
 
@@ -20,8 +20,8 @@ import "./OrderBox.css"
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
-  const [payAmount, setPayAmount] = useState("")
-  const [orderType, setOrderType] = useState("market")
+  const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
+  const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const [selectedToken, setSelectedToken] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
 
@@ -48,10 +48,10 @@ const OrderBox = ({ type }) => {
     spender: "0x5e263c7014ab3ae324f113c9abef573f4e6c4dde",
     tokenDecimals: balance?.decimals || 0
   })
-  console.log({ isApproving, payAmount })
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
+    localStorage.setItem("allowance", payAmount)
   }, [payAmount, approve])
 
   const onDebounceApprove = useDebounce(onApprove, 1000)
@@ -68,12 +68,15 @@ const OrderBox = ({ type }) => {
   }
 
   const positionSize = useMemo(() => {
-    return Position.getPositionSizeInUsd(
-      parseUnits(payAmount?.toString(), balance?.decimals),
-      indexPrice,
-      Number(leverage),
-      balance?.decimals
-    )
+    if (payAmount && payAmount > 0 && payAmount !== "") {
+      return Position.getPositionSizeInUsd(
+        parseUnits(payAmount?.toString(), balance?.decimals),
+        indexPrice,
+        Number(leverage),
+        balance?.decimals
+      )
+    }
+    return 0
   }, [balance, indexPrice, leverage, payAmount])
 
   const getTokenAsset = (token) => {
@@ -91,7 +94,7 @@ const OrderBox = ({ type }) => {
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
-      orderType: OrderType.MARKET,
+      orderType: orderType,
       indexToken: selectedToken,
       side: Side.LONG,
       isIncrease: true,
@@ -100,11 +103,22 @@ const OrderBox = ({ type }) => {
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
-  }, [placeOrder, selectedToken, indexPrice, payAmount, balance, leverage])
+    setPayAmount("")
+    localStorage.removeItem("allowance")
+  }, [placeOrder, orderType, selectedToken, indexPrice, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {
-      return <Button className="w-full" text="Place Order" onClick={onPlaceOrder} isLoading={false} disabled={false} />
+      console.log({ allowance, payAmount })
+      return (
+        <Button
+          className="w-full"
+          text="Place Order"
+          onClick={onPlaceOrder}
+          isLoading={isExchangeLoading}
+          disabled={payAmount === "" || payAmount === 0 || isExchangeLoading}
+        />
+      )
     }
 
     return (
@@ -113,10 +127,10 @@ const OrderBox = ({ type }) => {
         text="Approve"
         onClick={onDebounceApprove}
         isLoading={isApproving}
-        disabled={payAmount === "" || payAmount === 0 || isApproving}
+        disabled={isApproving}
       />
     )
-  }, [allowance, payAmount, isApproving, onPlaceOrder, onDebounceApprove])
+  }, [allowance, payAmount, onDebounceApprove, isApproving, onPlaceOrder, isExchangeLoading])
   return (
     <>
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
@@ -126,8 +140,8 @@ const OrderBox = ({ type }) => {
             <SelectCustom
               label="Order Type"
               options={[
-                { label: "Limit", value: "limit", icon: LimitIcon, disabled: true },
-                { label: "Market", value: "market", icon: MarketIcon }
+                { label: "Limit", value: OrderType.LIMIT, icon: LimitIcon, disabled: true },
+                { label: "Market", value: OrderType.MARKET, icon: MarketIcon }
               ]}
               defaultValue="market"
               values={orderType}
