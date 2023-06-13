@@ -133,6 +133,21 @@ body {
     background-color: var(--arbitrum-blue);
 }
 
+.close-dropdown {
+    opacity: 0;
+    transform: scaleY(0);
+    animation: growUp 300ms ease-in-out forwards;
+    transform-style: flat;
+    transform-origin: top;
+}
+
+.open-dropdown {
+    opacity: 1;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-style: flat;
+    transform-origin: top center;
+}
+
 .green-color {
     color: var(--text-color-green);
 }
@@ -163,6 +178,10 @@ body {
 
 .bg-card {
     background-color: var(--main-card-color);
+}
+
+.select-shadow {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
 }
 
 * {

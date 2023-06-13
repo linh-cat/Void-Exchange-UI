@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react"
-import { SelectCustom, InputCustom, SliderLeverage, SelectToken, SlippageCustom } from "@components/common"
+import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
 import { LimitIcon, MarketIcon } from "@icons/index"
 import "./OrderBox.css"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { BTC, CAKE, ETH } from "@img/token"
+import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 
 const OrderBox = ({ type }) => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
   const [payAmount, setPayAmount] = useState("")
   const [collateralModal, setCollateralModal] = useState(false)
+  const [tokenSelected, setTokenSelected] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
+
+  console.log({ tokenSelected })
 
   const onChangeToggle = () => {
     setToggle(!toggle)
@@ -34,6 +38,16 @@ const OrderBox = ({ type }) => {
     <>
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box">
+        <div>
+          <InputWithToken
+            tokenOptions={[
+              { label: "BTC", value: "0xB232278f063AB63592FCc612B3bc01662b7245f0", icon: BTC },
+              { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH }
+            ]}
+            tokenValues={tokenSelected}
+            onSelectToken={(token) => setTokenSelected(token)}
+          />
+        </div>
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom

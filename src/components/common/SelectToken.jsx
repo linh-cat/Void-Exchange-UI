@@ -29,9 +29,9 @@ const SelectToken = ({ options, onChange, values }) => {
   }, [values, options])
 
   return (
-    <div className={`dd-token`}>
+    <div className={`dd-token border py-2 rounded px-1 w-full`}>
       <div
-        className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full"
+        className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full "
         onClick={toggleOpen}
         ref={refOutside}
       >
