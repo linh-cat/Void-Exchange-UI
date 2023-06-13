@@ -7,17 +7,33 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 
 import "./InputWithToken.css"
+import { useAccount, useBalance } from "wagmi"
 
 const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
 
-const InputWithToken = ({ tokenOptions, tokenValues, onSelectToken, inputValues, onChangeInput }) => {
+const decimalCount = (numb) => {
+  const converted = numb.toString()
+  if (converted.includes(".")) {
+    return converted.split(".")[1].length
+  }
+  return 0
+}
+
+const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, onChangeInput, type = "number" }) => {
+  const { address } = useAccount()
+  const { data: balance } = useBalance({
+    address: address,
+    token: tokenValue,
+    watch: true
+  })
+
   const [isShowDropdownToken, setIsShowDropdownToken] = useState(false)
 
   const renderLabel = useMemo(() => {
-    const index = tokenOptions?.findIndex((item) => item.value === tokenValues)
+    const index = tokenOptions?.findIndex((item) => item.value === tokenValue)
 
     return { label: tokenOptions[index]?.label, icon: tokenOptions[index]?.icon }
-  }, [tokenValues, tokenOptions])
+  }, [tokenValue, tokenOptions])
 
   const onShowOptionToken = () => {
     setIsShowDropdownToken(!isShowDropdownToken)
@@ -33,37 +49,45 @@ const InputWithToken = ({ tokenOptions, tokenValues, onSelectToken, inputValues,
   }
 
   const onHandleChangeInput = (val) => {
-    if (isNaN(Number(val))) {
-      return onChangeInput("0")
-    }
-
-    if (Number(val) < 0) {
-      return onChangeInput("0")
-    }
-
-    if (Number(val) !== 0) {
-      // if it is integer, remove leading zeros
-      if (!DECIMAL_REGEX.test(val)) {
-        val = Number(val).toString()
+    if (type === "number") {
+      if (isNaN(Number(val))) {
+        return onChangeInput("0")
       }
+
+      if (Number(val) < 0) {
+        return onChangeInput("0")
+      }
+
+      if (Number(val) !== 0) {
+        // if it is integer, remove leading zeros
+        if (!DECIMAL_REGEX.test(val)) {
+          val = Number(val).toString()
+        }
+      }
+
+      if (decimalCount(val) > 8) {
+        val = Number(val).toFixed(8).toString()
+      }
+      // else {
+      //   // remain input box w single zero, but keep zero when have decimal
+      //   val = val.replace(/^[0]+/g, "0")
+      //   // if it is no value
+      //   if (val.length === 0) {
+      //     val = "0"
+      //   }
+      // }
+
+      if (Number(val) > Number(balance?.formatted)) {
+        return onChangeInput(balance?.formatted)
+      }
+      return onChangeInput(val)
     }
-
-    // else {
-    //   // remain input box w single zero, but keep zero when have decimal
-    //   val = val.replace(/^[0]+/g, "0")
-    //   // if it is no value
-    //   if (val.length === 0) {
-    //     val = "0"
-    //   }
-    // }
-
-    return onChangeInput(val)
   }
 
   const refOutside = useOutsideDetect(handleClickOutside)
 
   return (
-    <div className="input-custom border px-2 py-2 flex flex-col gap-1">
+    <div className="input-custom border px-2 py-2 flex flex-col gap-1 select-shadow">
       <div className="top flex items-center justify-between">
         <div className="select-token w-1/3 relative" onClick={onShowOptionToken} ref={refOutside}>
           <div className="flex items-center justify-between px-2 py-2 cursor-pointer border select-shadow rounded">
@@ -83,7 +107,10 @@ const InputWithToken = ({ tokenOptions, tokenValues, onSelectToken, inputValues,
           >
             {tokenOptions?.map((item) => (
               <div
-                className="flex items-center justify-between py-2 px-1 cursor-pointer"
+                className={cx({
+                  "flex items-center justify-between py-2 px-1 cursor-pointer": true,
+                  disable: item?.disabled
+                })}
                 onClick={() => onChangeToken(item?.value)}
               >
                 <div className="flex items-center gap-1 ">
@@ -105,16 +132,24 @@ const InputWithToken = ({ tokenOptions, tokenValues, onSelectToken, inputValues,
             className="py-1 px-0 text-right w-full"
             placeholder="0.0"
             onChange={(e) => onHandleChangeInput(e.target.value)}
+            value={inputValue}
           />
         </div>
       </div>
       <div className="middle flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           <div className="flex items-center gap-2">
             <label className="text-slate-500">Balance:</label>
-            <div className="text-slate-500">0.082</div>
+            <div className="text-slate-500">
+              {balance?.formatted} {balance?.decimals}
+            </div>
           </div>
-          <div className="text-blue-600 cursor-pointer">Max</div>
+          <div
+            className="border px-1 py-1 rounded bg-input cursor-pointer text-xs"
+            onClick={() => onChangeInput(balance?.formatted)}
+          >
+            Max
+          </div>
         </div>
         <div className="text-slate-500">$41,915</div>
       </div>

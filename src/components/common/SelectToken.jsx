@@ -1,8 +1,12 @@
 import React, { useMemo, useState } from "react"
-import "./SelectToken.css"
-import { CheckIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
+
 import { DownIcon } from "@icons/index"
+import { CheckIcon } from "@heroicons/react/24/solid"
+
+import cx from "classnames"
+
+import "./SelectToken.css"
 
 const SelectToken = ({ options, onChange, values }) => {
   const [open, setOpen] = useState(false)
@@ -29,7 +33,7 @@ const SelectToken = ({ options, onChange, values }) => {
   }, [values, options])
 
   return (
-    <div className={`dd-token border py-2 rounded px-1 w-full`}>
+    <div className={`dd-token rounded px-1 w-full`}>
       <div
         className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full "
         onClick={toggleOpen}
@@ -43,7 +47,10 @@ const SelectToken = ({ options, onChange, values }) => {
       <div className={`${open ? "open" : "close"} dd-token-list p-2 rounded`}>
         {options?.map((item, idx) => (
           <div
-            className="dd-token-item flex items-center justify-between w-full p-3"
+            className={cx({
+              "dd-token-item flex items-center justify-between w-full p-3": true,
+              disable: item.disabled
+            })}
             onClick={() => handleChange(item.value)}
             key={idx}
           >
