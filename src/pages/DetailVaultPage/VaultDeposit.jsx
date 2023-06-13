@@ -6,12 +6,12 @@ import cx from "classnames"
 import Card from "@components/Card/Card"
 import Button from "@components/Button/Button"
 import { ETH } from "@img/token"
+import { InputCustom } from "@components/common"
 
 import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
-import { InputCustom } from "@components/common"
 
 /**
  * SectionVaultDeposit.
