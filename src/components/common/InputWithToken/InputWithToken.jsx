@@ -185,12 +185,10 @@ const InputWithToken = ({
         </div>
       </div>
       <div className="middle flex flex-row-reverse items-center justify-between">
-        <div className="flex gap-2 flex-row-reverse items-center">
+        <div className="flex gap-2 items-center">
           <div className="flex items-center gap-2">
             <label className="text-slate-500 text-sm">Balance:</label>
-            <div className="text-slate-500 text-sm">
-              {balance?.formatted} {balance?.symbol}
-            </div>
+            <div className="text-slate-500 text-sm">{balance?.formatted}</div>
           </div>
           <div
             className={cx({
