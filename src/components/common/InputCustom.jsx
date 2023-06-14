@@ -146,20 +146,20 @@ const InputCustom = ({
           min={min}
           max={max}
         />
-        {allowSelectToken && (
-          <div className="left-action border-l">
-            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
-          </div>
-        )}
-        {rightAction}
         {showMaxBtn && (
           <label
-            className="font-very-small cursor-pointer max-btn border rounded-md p-2"
+            className="cursor-pointer border rounded px-1 py-1 text-xs bg-input"
             onClick={() => handleChange(balance?.formatted)}
           >
             Max
           </label>
         )}
+        {allowSelectToken && (
+          <div className="border ml-1 py-1 rounded">
+            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
+          </div>
+        )}
+        {rightAction}
       </div>
 
       {showBalance && (
