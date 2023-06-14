@@ -157,7 +157,7 @@ const OrderBox = ({ type }) => {
         </div>
         <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <label>Pay</label>
+            <label className="text-sm">Pay</label>
             <SwitchButton onChange={onChangeToggle} value={toggle} />
           </div>
 
