@@ -28,7 +28,7 @@ const InputCustom = ({
   showMaxBtn,
   showUsd,
   onChange,
-  values,
+  value,
   type,
   min,
   max,
@@ -67,6 +67,14 @@ const InputCustom = ({
 
       if (Number(val) < 0) {
         return onChange("0")
+      }
+
+      if (val < min) {
+        return onChange(min)
+      }
+
+      if (val > max) {
+        return onChange(max)
       }
 
       if (Number(val) !== 0) {
@@ -141,7 +149,7 @@ const InputCustom = ({
           )}
           placeholder={placeHolder}
           onChange={(e) => handleChange(Number(e.target.value))}
-          value={values}
+          value={value}
           type={type || "number"}
           min={min}
           max={max}

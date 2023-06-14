@@ -125,7 +125,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
         <div className="w-10 h-8 text-white flex items-center justify-between gap-1 relative">
           <InputCustom
             classNameInput="p-0"
-            values={value}
+            value={value}
             onChange={changeLeverage}
             rightAction={<label className="absolute right-1 text-zinc-500">x</label>}
             type="number"

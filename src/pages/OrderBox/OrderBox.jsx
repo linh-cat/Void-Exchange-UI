@@ -183,7 +183,7 @@ const OrderBox = ({ type }) => {
               { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH, disabled: true }
             ]}
             classNameInput="pl-1 py-4"
-            values={positionSize}
+            value={positionSize}
             defaultToken={"0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f"}
             placeHolder={"0.0"}
             showBalance={true}
