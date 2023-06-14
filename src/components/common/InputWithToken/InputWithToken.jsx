@@ -84,13 +84,37 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
     }
   }
 
+  const textContentInput = useMemo(() => {
+    if (Number(inputValue) > Number(balance?.formatted) - 1) {
+      return "Max Balance to pay."
+    }
+    if (Number(inputValue) === 0) {
+      return "Please input pay."
+    }
+    return " To ensure a smooth transaction, at least 0.05 ETH must be left in your wallet to pay for gas fees."
+  }, [balance, inputValue])
+
+  const bgslide = useMemo(() => {
+    if (Number(inputValue) > Number(balance?.formatted) - 1) {
+      return "bg-green"
+    }
+    if (Number(inputValue) === 0) {
+      return "bg-red"
+    }
+    if (Number(inputValue) !== 0) {
+      return "bg-yellow"
+    }
+  }, [balance, inputValue])
+
+  console.log({ balance })
+
   const refOutside = useOutsideDetect(handleClickOutside)
 
   return (
-    <div className="input-custom border px-2 py-2 flex flex-col gap-1 select-shadow">
+    <div className="input-custom border px-2 py-2 flex flex-col gap-1 input-shadow">
       <div className="top flex items-center justify-between">
         <div className="select-token w-1/3 relative" onClick={onShowOptionToken} ref={refOutside}>
-          <div className="flex items-center justify-between px-2 py-2 cursor-pointer border select-shadow rounded">
+          <div className="flex items-center justify-between px-2 py-2 cursor-pointer border rounded">
             <div className="flex item-center gap-2">
               <img className="w-6 h-6" alt="token" src={renderLabel?.icon} />
               <label className="">{renderLabel?.label}</label>
@@ -154,9 +178,23 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
         <div className="text-slate-500">$41,915</div>
       </div>
       <div className="infor flex flex-col gap-1">
-        <div className="h-1 w-full bg-emerald-500 rounded"></div>
-        <div className="text-xs text-green-700">
-          To ensure a smooth transaction, at least 0.05 ETH must be left in your wallet to pay for gas fees.
+        <div
+          className={cx(
+            {
+              "h-1 w-full rounded": true
+            },
+            bgslide
+          )}
+        ></div>
+        <div
+          className={cx({
+            "text-xs": true,
+            yellow: bgslide === "bg-yellow",
+            "red-down": bgslide === "bg-red",
+            "green-up": bgslide === "bg-green"
+          })}
+        >
+          {textContentInput}
         </div>
       </div>
     </div>

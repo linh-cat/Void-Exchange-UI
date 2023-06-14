@@ -26,7 +26,6 @@ const OrderBox = ({ type }) => {
   const [collateralModal, setCollateralModal] = useState(false)
   const [tokenSelected, setTokenSelected] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
 
-  console.log({ tokenSelected })
   const { isLoading: isExchangeLoading, placeOrder } = useExchange()
 
   const { address } = useAccount()
@@ -131,7 +130,7 @@ const OrderBox = ({ type }) => {
   return (
     <>
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box">
+      <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
