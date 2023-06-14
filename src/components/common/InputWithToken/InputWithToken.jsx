@@ -85,13 +85,21 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
   }
 
   const textContentInput = useMemo(() => {
+    if (inputValue === "") {
+      return ""
+    }
+
+    if (Number(inputValue) === 0) {
+      return "Please enter pay amount greater than 0"
+    }
+
     if (Number(inputValue) > Number(balance?.formatted) - 1) {
       return "Max Balance to pay."
     }
-    if (Number(inputValue) === 0) {
-      return "Please input pay."
+
+    if (Number(inputValue) > 0) {
+      return "To ensure a smooth transaction, at least 0.05 ETH must be left in your wallet to pay for gas fees."
     }
-    return " To ensure a smooth transaction, at least 0.05 ETH must be left in your wallet to pay for gas fees."
   }, [balance, inputValue])
 
   const bgslide = useMemo(() => {
@@ -106,13 +114,11 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
     }
   }, [balance, inputValue])
 
-  console.log({ balance })
-
   const refOutside = useOutsideDetect(handleClickOutside)
 
   return (
-    <div className="input-custom border px-2 py-2 flex flex-col gap-1 input-shadow">
-      <div className="top flex items-center justify-between">
+    <div className="input-custom border px-2 py-2 flex flex-col gap-2 input-shadow">
+      <div className="top flex items-center flex-row-reverse justify-between">
         <div className="select-token w-1/3 relative" onClick={onShowOptionToken} ref={refOutside}>
           <div className="flex items-center justify-between px-2 py-2 cursor-pointer border rounded">
             <div className="flex item-center gap-2">
@@ -120,11 +126,17 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
               <label className="">{renderLabel?.label}</label>
             </div>
 
-            <img src={DownIcon} alt="down" className={"rotate180"} />
+            <img
+              src={DownIcon}
+              alt="down"
+              className={cx({
+                rotate180: isShowDropdownToken
+              })}
+            />
           </div>
           <div
             className={cx({
-              "token-list absolute bg-input w-full rounded": true,
+              "token-list absolute right-0 bg-card rounded overflow-hidden p-2 z-50 w-48": true,
               "close-dropdown": !isShowDropdownToken,
               "open-dropdown": isShowDropdownToken
             })}
@@ -132,13 +144,13 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
             {tokenOptions?.map((item) => (
               <div
                 className={cx({
-                  "flex items-center justify-between py-2 px-1 cursor-pointer": true,
+                  "flex items-center justify-between py-2 px-1 cursor-pointer bg-hover ": true,
                   disable: item?.disabled
                 })}
                 onClick={() => onChangeToken(item?.value)}
               >
                 <div className="flex items-center gap-1 ">
-                  <img src={item?.icon} alt="token" className="h-6 w-6" />
+                  <img src={item?.icon} alt="token" className="h-8 w-8" />
                   <label>{item?.label}</label>
                 </div>
                 {item.label === renderLabel?.label && (
@@ -153,18 +165,18 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
         <div className="flex-1">
           <input
             type="text"
-            className="py-1 px-0 text-right w-full"
+            className="py-1 px-0 w-full"
             placeholder="0.0"
             onChange={(e) => onHandleChangeInput(e.target.value)}
             value={inputValue}
           />
         </div>
       </div>
-      <div className="middle flex items-center justify-between">
-        <div className="flex gap-2 items-center">
+      <div className="middle flex flex-row-reverse items-center justify-between">
+        <div className="flex gap-2 flex-row-reverse items-center">
           <div className="flex items-center gap-2">
-            <label className="text-slate-500">Balance:</label>
-            <div className="text-slate-500">
+            <label className="text-slate-500 text-sm">Balance:</label>
+            <div className="text-slate-500 text-sm">
               {balance?.formatted} {balance?.decimals}
             </div>
           </div>
@@ -175,13 +187,14 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
             Max
           </div>
         </div>
-        <div className="text-slate-500">$41,915</div>
+        <div className="text-slate-500 text-sm">$41,915</div>
       </div>
       <div className="infor flex flex-col gap-1">
         <div
           className={cx(
             {
-              "h-1 w-full rounded": true
+              "h-1 w-full rounded": true,
+              hidden: inputValue === ""
             },
             bgslide
           )}

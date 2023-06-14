@@ -151,7 +151,7 @@ const OrderBox = ({ type }) => {
               label="Price"
               placeHolder={"0.0"}
               classNameInput="px-1 py-2"
-              disabled={orderType === "market"}
+              disabled={orderType === OrderType.MARKET}
             />
           </div>
         </div>

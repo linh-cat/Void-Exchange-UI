@@ -70,6 +70,11 @@ body {
     background-color: var(--main-yellow);
 }
 
+.bg-hover:hover {
+    background-color: var(--arbitrum-blue);
+    border-radius: 3px;
+}
+
 #bg {
     position: fixed;
     height: 100vh;
