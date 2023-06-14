@@ -78,6 +78,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                           [cellStyle]: Boolean(cellStyle),
                           [h.className]: Boolean(h.className)
                         })}
+                        key={h.field}
                       >
                         {h.cellRenderer(item)}
                       </td>
@@ -90,6 +91,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                           [cellStyle]: Boolean(cellStyle),
                           [h.className]: Boolean(h.className)
                         })}
+                        key={h.field}
                       >
                         {h.formatter(item)}
                       </td>
@@ -101,6 +103,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                         [cellStyle]: Boolean(cellStyle),
                         [h.className]: Boolean(h.className)
                       })}
+                      key={h.field}
                     >
                       {item?.[h?.field]}
                     </td>

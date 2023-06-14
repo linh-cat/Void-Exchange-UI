@@ -204,12 +204,14 @@ const FaucetPage = () => {
               }
               values={amount}
               onChange={(val) => setAmount(val)}
+              disabled={isMinting}
             />
             {amount > selectedToken?.max && (
               <div className="text-sm text-yellow-500 text-left"> Mint amount must be less than max value </div>
             )}
           </div>
         }
+        disabled={isMinting}
       />
       <div
         className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"

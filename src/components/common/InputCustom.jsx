@@ -131,12 +131,6 @@ const InputCustom = ({
         })}
       >
         {leftSide && <div className="left-action">{leftSide}</div>}
-        {allowSelectToken && (
-          <div className="left-action">
-            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
-          </div>
-        )}
-
         <input
           className={cx(
             {
@@ -152,6 +146,11 @@ const InputCustom = ({
           min={min}
           max={max}
         />
+        {allowSelectToken && (
+          <div className="left-action border-l">
+            <SelectToken options={tokenOptions} onChange={(token) => onChangeToken(token)} values={selectedToken} />
+          </div>
+        )}
         {rightAction}
         {showMaxBtn && (
           <label

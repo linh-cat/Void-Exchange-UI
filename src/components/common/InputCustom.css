@@ -14,10 +14,6 @@
     font-size: small;
 }
 
-.input-custom .left-action {
-    border-right: 2px solid rgba(163, 165, 196, 0.2);
-}
-
 .input-custom .balance {
     position: absolute;
     right: 0;

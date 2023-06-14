@@ -39,7 +39,7 @@ const SelectToken = ({ options, onChange, values }) => {
         onClick={toggleOpen}
         ref={refOutside}
       >
-        <img className="rounded-full w-7 h-7  " src={renderLabel?.icon} alt="btc" />
+        <img className="rounded-full w-6 h-6" src={renderLabel?.icon} alt="btc" />
         <label className="cursor-pointer">{renderLabel?.label}</label>
 
         <img src={DownIcon} alt="down" className={open ? "rotate180" : ""} />

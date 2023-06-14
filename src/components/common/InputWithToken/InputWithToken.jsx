@@ -6,7 +6,6 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 
-import "./InputWithToken.css"
 import { useAccount, useBalance } from "wagmi"
 
 const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
@@ -19,7 +18,15 @@ const decimalCount = (numb) => {
   return 0
 }
 
-const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, onChangeInput, type = "number" }) => {
+const InputWithToken = ({
+  tokenOptions,
+  tokenValue,
+  onSelectToken,
+  inputValue,
+  onChangeInput,
+  type = "number",
+  disabled
+}) => {
   const { address } = useAccount()
   const { data: balance } = useBalance({
     address: address,
@@ -119,13 +126,17 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
   return (
     <div className="input-custom border px-2 py-2 flex flex-col gap-2 input-shadow">
       <div className="top flex items-center flex-row-reverse justify-between">
-        <div className="select-token w-1/3 relative" onClick={onShowOptionToken} ref={refOutside}>
-          <div className="flex items-center justify-between px-2 py-2 cursor-pointer border rounded">
-            <div className="flex item-center gap-2">
-              <img className="w-6 h-6" alt="token" src={renderLabel?.icon} />
-              <label className="">{renderLabel?.label}</label>
-            </div>
-
+        <div
+          className={cx({
+            "select-token relative": true,
+            disable: disabled
+          })}
+          onClick={onShowOptionToken}
+          ref={refOutside}
+        >
+          <div className="flex items-center justify-between px-2 py-2 cursor-pointer border rounded gap-3">
+            <img className="w-6 h-6" alt="token" src={renderLabel?.icon} />
+            <label className="text-sm">{renderLabel?.label}</label>
             <img
               src={DownIcon}
               alt="down"
@@ -165,10 +176,11 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
         <div className="flex-1">
           <input
             type="text"
-            className="py-1 px-0 w-full"
+            className="py-1 px-0 w-full text-sm"
             placeholder="0.0"
             onChange={(e) => onHandleChangeInput(e.target.value)}
             value={inputValue}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -177,11 +189,14 @@ const InputWithToken = ({ tokenOptions, tokenValue, onSelectToken, inputValue, o
           <div className="flex items-center gap-2">
             <label className="text-slate-500 text-sm">Balance:</label>
             <div className="text-slate-500 text-sm">
-              {balance?.formatted} {balance?.decimals}
+              {balance?.formatted} {balance?.symbol}
             </div>
           </div>
           <div
-            className="border px-1 py-1 rounded bg-input cursor-pointer text-xs"
+            className={cx({
+              "border px-1 py-1 rounded bg-input cursor-pointer text-xs": true,
+              disable: disabled
+            })}
             onClick={() => onChangeInput(balance?.formatted)}
           >
             Max

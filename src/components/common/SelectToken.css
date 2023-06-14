@@ -11,7 +11,7 @@
 .dd-token-list {
     position: absolute;
     top: 2.5rem;
-    left: 0;
+    right: 0;
     width: 200px;
     background: var(--bg-dropdown-list);
     transition: all 0.3s ease-in-out;
