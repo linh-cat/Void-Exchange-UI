@@ -4,6 +4,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
 
+@layer utilities {
+    @variants responsive {
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    }
+}
+
 html,
 body {
     min-height: 100%;
@@ -19,6 +37,7 @@ body {
     --input-bg-color: #2a3341;
     --main-long: #16be76;
     --main-short: #e43e53;
+    --main-yellow: #DBE765;
     --text-color-green: #84cc16;
     --text-color-purple: #a78bfa;
     --main-card-color-secondary: #32435e;
@@ -37,6 +56,23 @@ body {
 
 .card {
     background-color: var(--bg-card);
+}
+
+.bg-red {
+    background-color: var(--main-short);
+}
+
+.bg-green {
+    background-color: var(--main-long);
+}
+
+.bg-yellow {
+    background-color: var(--main-yellow);
+}
+
+.bg-hover:hover {
+    background-color: var(--arbitrum-blue);
+    border-radius: 3px;
 }
 
 #bg {
@@ -133,12 +169,31 @@ body {
     background-color: var(--arbitrum-blue);
 }
 
+.close-dropdown {
+    opacity: 0;
+    transform: scaleY(0);
+    animation: growUp 300ms ease-in-out forwards;
+    transform-style: flat;
+    transform-origin: top;
+}
+
+.open-dropdown {
+    opacity: 1;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-style: flat;
+    transform-origin: top center;
+}
+
 .green-color {
     color: var(--text-color-green);
 }
 
 .purple-color {
     color: var(--text-color-purple);
+}
+
+.yellow {
+    color: var(--main-yellow);
 }
 
 .green-up {
@@ -165,6 +220,10 @@ body {
     background-color: var(--main-card-color);
 }
 
+.input-shadow {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -186,6 +245,10 @@ body {
 
 .vh-70 {
     height: 70vh;
+}
+
+.vh-80 {
+    height: 80vh;
 }
 
 .vh-65 {

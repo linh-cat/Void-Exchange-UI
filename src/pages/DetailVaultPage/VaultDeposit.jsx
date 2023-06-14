@@ -209,6 +209,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                               <img src={ETH} alt="ETH" className="w-5 h-5" />
                             </div>
                           }
+                          disabled={isApproving || isDepositing}
                         />
                       </div>
                       <div className="ballance flex items-center gap-2">

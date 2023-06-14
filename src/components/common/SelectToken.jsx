@@ -33,13 +33,13 @@ const SelectToken = ({ options, onChange, values }) => {
   }, [values, options])
 
   return (
-    <div className={`dd-token`}>
+    <div className={`dd-token rounded px-1 w-full`}>
       <div
-        className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full"
+        className="dd-token-label cursor-pointer gap-1 flex items-center justify-around h-full "
         onClick={toggleOpen}
         ref={refOutside}
       >
-        <img className="rounded-full w-7 h-7  " src={renderLabel?.icon} alt="btc" />
+        <img className="rounded-full w-6 h-6" src={renderLabel?.icon} alt="btc" />
         <label className="cursor-pointer">{renderLabel?.label}</label>
 
         <img src={DownIcon} alt="down" className={open ? "rotate180" : ""} />

@@ -10,6 +10,7 @@ import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { BTC, CAKE, ETH } from "@img/token"
+import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import { FastPriceFeed } from "src/abis"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -23,7 +24,7 @@ const OrderBox = ({ type }) => {
   const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
-  const [selectedToken, setSelectedToken] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
+  const [tokenSelected, setTokenSelected] = useState("0xB232278f063AB63592FCc612B3bc01662b7245f0")
 
   const { isLoading: isExchangeLoading, placeOrder } = useExchange()
 
@@ -31,7 +32,7 @@ const OrderBox = ({ type }) => {
 
   const { data: balance } = useBalance({
     address: address,
-    token: selectedToken,
+    token: tokenSelected,
     watch: true
   })
 
@@ -43,7 +44,7 @@ const OrderBox = ({ type }) => {
   })
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: selectedToken,
+    token: tokenSelected,
     account: address,
     spender: "0x5e263c7014ab3ae324f113c9abef573f4e6c4dde",
     tokenDecimals: balance?.decimals || 0
@@ -79,10 +80,6 @@ const OrderBox = ({ type }) => {
     return 0
   }, [balance, indexPrice, leverage, payAmount])
 
-  const getTokenAsset = (token) => {
-    setSelectedToken(token)
-  }
-
   useEffect(() => {
     if (!collateralModal) {
       setToggle(false)
@@ -95,21 +92,20 @@ const OrderBox = ({ type }) => {
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
-      indexToken: selectedToken,
+      indexToken: tokenSelected,
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: selectedToken,
+      purchaseToken: tokenSelected,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
     setPayAmount("")
     localStorage.removeItem("allowance")
-  }, [placeOrder, orderType, selectedToken, indexPrice, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, tokenSelected, indexPrice, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {
-      console.log({ allowance, payAmount })
       return (
         <Button
           className="w-full"
@@ -131,10 +127,11 @@ const OrderBox = ({ type }) => {
       />
     )
   }, [allowance, payAmount, onDebounceApprove, isApproving, onPlaceOrder, isExchangeLoading])
+
   return (
     <>
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box">
+      <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
@@ -155,29 +152,26 @@ const OrderBox = ({ type }) => {
               label="Price"
               placeHolder={"0.0"}
               classNameInput="px-1 py-2"
-              disabled={orderType === "market"}
-              getTokenAsset={getTokenAsset}
+              disabled={orderType === OrderType.MARKET}
             />
           </div>
         </div>
-        <div className="mt-3 2xl:mt-5 relative">
-          <InputCustom
-            label="Pay"
-            headerAction={<SwitchButton onChange={onChangeToggle} value={toggle} />}
-            onChange={changePayAmount}
-            allowSelectToken={true}
+        <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <label className="text-sm">Pay</label>
+            <SwitchButton onChange={onChangeToggle} value={toggle} />
+          </div>
+
+          <InputWithToken
             tokenOptions={[
               { label: "BTC", value: "0xB232278f063AB63592FCc612B3bc01662b7245f0", icon: BTC },
-              { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH, disabled: true }
+              { label: "ETH", value: "0x1C9DC6C4c37E9D5A71386104fDE19b2511877acD", icon: ETH }
             ]}
-            defaultToken={"0xB232278f063AB63592FCc612B3bc01662b7245f0"}
-            getTokenAsset={getTokenAsset}
-            showMaxBtn={true}
-            placeHolder={"0.0"}
-            showBalance={true}
-            showUsd={true}
-            values={payAmount}
-            type="number"
+            tokenValue={tokenSelected}
+            onSelectToken={(token) => setTokenSelected(token)}
+            onChangeInput={(val) => setPayAmount(val)}
+            inputValue={payAmount}
+            disabled={isApproving || isExchangeLoading}
           />
         </div>
         <div className="mt-3 2xl:mt-5">
@@ -188,6 +182,7 @@ const OrderBox = ({ type }) => {
               { label: "BTC", value: "0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f", icon: BTC },
               { label: "ETH", value: "0xe9782D26ABc19FF5174F77e84B0dD19D47635043", icon: ETH, disabled: true }
             ]}
+            classNameInput="px-1"
             values={positionSize}
             defaultToken={"0x765C0c2D27A3EfB4064ed7f2E56e4F7CDDf4202f"}
             placeHolder={"0.0"}

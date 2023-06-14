@@ -2,7 +2,7 @@ import React from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 
-const Modal = ({ open, setOpen, body, footer, header }) => {
+const Modal = ({ open, setOpen, body, footer, header, disabled }) => {
   function closeModal() {
     setOpen(false)
   }
@@ -10,7 +10,7 @@ const Modal = ({ open, setOpen, body, footer, header }) => {
   return (
     <>
       <Transition appear show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={disabled ? () => {} : closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -20,7 +20,7 @@ const Modal = ({ open, setOpen, body, footer, header }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-30" />
+            <div className="fixed inset-0 bg-black bg-opacity-30 pointer-events-none" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
