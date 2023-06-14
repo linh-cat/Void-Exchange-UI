@@ -202,7 +202,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                           classNameInput="p-0"
                           onChange={onChangeAmount}
                           placeHolder="0.0"
-                          values={amount}
+                          value={amount}
                           isBorder={false}
                           rightAction={
                             <div className="flex gap-2 mr-1 items-center">

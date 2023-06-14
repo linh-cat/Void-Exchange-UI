@@ -202,7 +202,7 @@ const FaucetPage = () => {
                   Max
                 </div>
               }
-              values={amount}
+              value={amount}
               onChange={(val) => setAmount(val)}
               disabled={isMinting}
             />
