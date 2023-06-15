@@ -74,7 +74,7 @@ const ListPosition = () => {
     if (exchange) {
       getPositions()
     }
-  }, [exchange])
+  }, [address, exchange])
 
   const formattedPositions = useMemo(() => {
     const formatteds = positions.map((position) => {

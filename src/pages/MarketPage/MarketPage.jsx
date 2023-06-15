@@ -5,6 +5,8 @@ import React, { useState } from "react"
 import { Tab } from "@headlessui/react"
 import cx from "classnames"
 import Button from "@components/Button/Button"
+import { Popover } from "@headlessui/react"
+import { ChevronDownIcon } from "@heroicons/react/24/solid"
 
 const MarketPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -66,9 +68,10 @@ const MarketPage = () => {
                 <Tab.Panel>Content 2</Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
+            <div className="ml-3">Price: 10$</div>
           </div>
           <Button text="Test Price" className="mt-1" />
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <InputCustom
               type="string"
               classNameInput="py-2 px-1"
@@ -83,14 +86,13 @@ const MarketPage = () => {
               placeHolder="0.01%"
               disabled={true}
             />
-            <SelectCustom
-              label="Funding Fee Model"
-              options={[
-                { label: "Limit", value: "test" },
-                { label: "Market", value: "test" }
-              ]}
-              defaultValue="market"
-            />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <InputCustom type="string" classNameInput="py-2 px-1" label="Trading Fee Reciver" placeHolder="0x123434" />
+            <InputCustom type="string" classNameInput="py-2 px-1" label="Liquidity" placeHolder="$1,000,000" />
+          </div>
+          <div>
+            <Button text="Approve" />
           </div>
         </div>
       </Card>
