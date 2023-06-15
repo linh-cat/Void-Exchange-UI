@@ -78,10 +78,7 @@ const ListPosition = () => {
 
   const formattedPositions = useMemo(() => {
     const formatteds = positions.map((position) => {
-      console.log(
-        "PNL",
-        formatUnits(Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong) / BigInt(1e8), 12)
-      )
+      const pnl = Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong)
 
       return {
         /* global BigInt */
@@ -91,6 +88,7 @@ const ListPosition = () => {
         entryPrice: nf.format(BigInt(position.entryPrice / BigInt(1e12)).toString()),
         leverage: Position.getLeverage(position) + "x",
 
+        isProfitable: pnl > 0,
         // entryprice: "$1,884.9",
         indexPrice: nf.format(formatUnits(indexPrice, 12)),
         pnlRoe: nf.format(
@@ -176,7 +174,7 @@ const ListPosition = () => {
       headerName: "Pnl & ROE",
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
-        return <div className="green-up">{cell?.pnlRoe}</div>
+        return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
       }
     },
     {
