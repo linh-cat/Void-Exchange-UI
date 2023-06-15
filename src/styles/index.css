@@ -96,7 +96,7 @@ body {
     -moz-transform: translateZ(0);
     z-index: -1;
     pointer-events: none;
-    opacity: .3;
+    opacity: 0.3;
 }
 
 #bg .bg div {
@@ -210,6 +210,10 @@ body {
 
 .red-down {
     color: var(--main-short);
+}
+
+.green-up {
+    color: var(--main-long);
 }
 
 .bg-input {
@@ -428,3 +432,4 @@ a.plain {
         display: block;
     }
 }
+
