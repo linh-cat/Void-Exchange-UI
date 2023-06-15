@@ -66,6 +66,9 @@ const Header = () => {
               <li className="item">
                 <Link to={`/staking`}>Staking</Link>
               </li>
+              <li className="item">
+                <Link to={`/market`}>Market</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -117,6 +120,9 @@ const Header = () => {
             </li>
             <li className="item">
               <Link to={`/staking`}>Staking</Link>
+            </li>
+            <li className="item">
+              <Link to={`/market`}>Market</Link>
             </li>
           </ul>
         </div>

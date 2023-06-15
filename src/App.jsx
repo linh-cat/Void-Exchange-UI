@@ -16,6 +16,7 @@ import { InjectedConnector } from "wagmi/connectors/injected"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import StakingPage from "./pages/StakingPage/StakingPage"
 import DocumentPage from "./pages/DocumentPage/DocumentPage"
+import MarketPage from "./pages/MarketPage/MarketPage"
 
 const { chains, publicClient } = configureChains(
   [sepolia, goerli],
@@ -76,6 +77,7 @@ const FullApp = () => {
         <Route path="profile" element={<ProfilePage />} />
         <Route path="faucet" element={<FaucetPage />} />
         <Route path="staking" element={<StakingPage />} />
+        <Route path="market" element={<MarketPage />} />
         <Route
           path="vault"
           element={

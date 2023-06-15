@@ -263,6 +263,10 @@ body {
     height: 12vh;
 }
 
+.vh-30 {
+    height: 30vh;
+}
+
 .vh-40 {
     height: 40vh;
 }
@@ -382,7 +386,9 @@ button {
 }
 
 .active-tab {
-    background-color: var(--arbitrum-blue);
+    color: var(--arbitrum-blue);
+    border-bottom: 1px solid var(--arbitrum-blue);
+    background: rgba(127, 212, 130, 0.05);
 }
 
 a.plain {
