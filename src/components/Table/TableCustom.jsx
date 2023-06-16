@@ -21,7 +21,7 @@ const columnDefEx = [
     formatter: (val) => {
       return val
     },
-    classname: "",
+    className: "",
     headerClassName: ""
   },
   {
@@ -56,10 +56,12 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
             <tr className="tracking-wide border-b text-slate-500">
               {columnDef.map((item) => (
                 <th
-                  className={cx({
-                    "px-4 py-1": true,
-                    [item.headerClassName]: Boolean(item.headerClassName)
-                  })}
+                  className={cx(
+                    {
+                      "py-1": true
+                    },
+                    item.headerClassName
+                  )}
                   key={item?.field}
                 >
                   <p className="font-normal">{item?.headerName}</p>
@@ -73,38 +75,20 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
                 {columnDef.map((h) => {
                   if (h.cellRenderer) {
                     return (
-                      <td
-                        className={cx({
-                          [cellStyle]: Boolean(cellStyle),
-                          [h.className]: Boolean(h.className)
-                        })}
-                        key={h.field}
-                      >
+                      <td className={cx(cellStyle, h.className)} key={h.field}>
                         {h.cellRenderer(item)}
                       </td>
                     )
                   }
                   if (h.formatter) {
                     return (
-                      <td
-                        className={cx({
-                          [cellStyle]: Boolean(cellStyle),
-                          [h.className]: Boolean(h.className)
-                        })}
-                        key={h.field}
-                      >
+                      <td className={cx(cellStyle, h.className)} key={h.field}>
                         {h.formatter(item)}
                       </td>
                     )
                   }
                   return (
-                    <td
-                      className={cx({
-                        [cellStyle]: Boolean(cellStyle),
-                        [h.className]: Boolean(h.className)
-                      })}
-                      key={h.field}
-                    >
+                    <td className={cx(cellStyle, h.className)} key={h.field}>
                       {item?.[h?.field]}
                     </td>
                   )

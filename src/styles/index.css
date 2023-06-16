@@ -30,9 +30,11 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+/* card-clor: #071223 */
+
 :root {
     --main-bg-color: #0c0f13;
-    --main-card-color: #1b2028;
+    --main-card-color: #071223;
     --bg-card: #1a1e23;
     --input-bg-color: #2a3341;
     --main-long: #16be76;
@@ -192,8 +194,56 @@ body {
     color: var(--text-color-purple);
 }
 
+.eth-color {
+    color: var(--text-color-purple) !important;
+}
+
+.eth-border {
+    border-color: var(--text-color-purple) !important;
+}
+
 .yellow {
-    color: var(--main-yellow);
+    color: var(--main-yellow) !important;
+}
+
+.btc-color {
+    color: #F79D2F !important;
+}
+
+.border-binance {
+    color: #FFD42D;
+    border: 1px solid #FFD42D !important;
+}
+
+.bg-binance {
+    background-color: #FFD42D;
+}
+
+.active-binance {
+    background-color: #FFD42D !important;
+    color: #000 !important;
+}
+
+.active-okx {
+    border: 1px solid #fff !important;
+    color: #fff !important;
+}
+
+.active-chainlink {
+    border: 1px solid #122771 !important;
+    color: #122771 !important;
+}
+
+.link-color {
+    color: var(--arbitrum-blue);
+}
+
+.btc-border {
+    border-color: #F79D2F !important;
+}
+
+.hover-opacity:hover {
+    opacity: .6 !important;
 }
 
 .green-up {
@@ -432,4 +482,3 @@ a.plain {
         display: block;
     }
 }
-

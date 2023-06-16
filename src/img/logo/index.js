@@ -1,2 +1,5 @@
 import Rewards from "./rewards.png"
-export { Rewards }
+import OKX from "./okx.png"
+import ChainLink from "./chainlink.svg"
+import Binance from "./Binance.svg"
+export { Rewards, OKX, ChainLink, Binance }

@@ -14,6 +14,7 @@ import Metamask from "./metamask.png"
 import VoidIcon from "./void.png"
 import BaseIcon from "./base.png"
 import DBIcon from "./db.png"
+import SearchIcon from "./Search.svg"
 
 export {
   LimitIcon,
@@ -31,5 +32,6 @@ export {
   Metamask,
   VoidIcon,
   BaseIcon,
-  DBIcon
+  DBIcon,
+  SearchIcon
 }
