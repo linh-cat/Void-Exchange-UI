@@ -117,7 +117,7 @@ const MarketPage = () => {
                   <Tab.Panel>
                     <div className="">
                       <RadioGroup value={provider} onChange={setProvider}>
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                           {providers.map((pro) => (
                             <RadioGroup.Option
                               key={pro.id}
