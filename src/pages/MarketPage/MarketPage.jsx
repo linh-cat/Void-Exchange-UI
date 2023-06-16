@@ -12,7 +12,7 @@ import { VoidIcon } from "@icons/index"
 import { CheckIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import Editor from "@monaco-editor/react"
 import { RadioGroup, Tab } from "@headlessui/react"
-import { Binance, ChainLink, OKX } from "@img/logo"
+import { Binance, Bybit, ChainLink, Coinbase, Kucoin, OKX } from "@img/logo"
 
 const providers = [
   {
@@ -29,6 +29,21 @@ const providers = [
     id: "chainlink",
     name: "Chain Link",
     icon: ChainLink
+  },
+  {
+    id: "coinbase",
+    name: "Coinbase",
+    icon: Coinbase
+  },
+  {
+    id: "bybit",
+    name: "Bybit",
+    icon: Bybit
+  },
+  {
+    id: "kucoin",
+    name: "Ku Coin ",
+    icon: Kucoin
   }
 ]
 
@@ -100,18 +115,21 @@ const MarketPage = () => {
                 </Tab.List>
                 <Tab.Panels className="p-3">
                   <Tab.Panel>
-                    <div className="w-1/3">
+                    <div className="">
                       <RadioGroup value={provider} onChange={setProvider}>
-                        <div className="space-y-2">
+                        <div className="grid grid-cols-3 gap-3">
                           {providers.map((pro) => (
                             <RadioGroup.Option
                               key={pro.id}
                               value={pro}
                               className={({ checked }) =>
                                 cx("py-3 px-3 rounded cursor-pointer border", {
-                                  "border-binance shadow": pro.id === "binance" && checked,
+                                  "active-binance shadow": pro.id === "binance" && checked,
                                   "active-okx shadow": provider.id === "okx" && checked,
-                                  "active-chainlink shadow": provider.id === "chainlink" && checked
+                                  "active-chainlink shadow": provider.id === "chainlink" && checked,
+                                  "active-bybit shadow": provider.id === "bybit" && checked,
+                                  "active-coinbase shadow": provider.id === "coinbase" && checked,
+                                  "active-kucoin shadow": provider.id === "kucoin" && checked
                                 })
                               }
                             >
@@ -189,7 +207,7 @@ const MarketPage = () => {
                           cellRenderer: (cell) => {
                             return (
                               <div
-                                className="text-left link-color cursor-pointer py-3 px-2 text-sm"
+                                className="text-center link-color cursor-pointer py-3 px-2 text-sm"
                                 onClick={() => setIsShowModal(true)}
                               >
                                 {cell?.modal1}
@@ -203,7 +221,7 @@ const MarketPage = () => {
                           cellRenderer: (cell) => {
                             return (
                               <div
-                                className="text-left link-color cursor-pointer py-3 px-2 text-sm"
+                                className="text-center link-color cursor-pointer py-3 px-2 text-sm"
                                 onClick={() => setIsShowModal(true)}
                               >
                                 {cell?.modal2}
@@ -217,7 +235,7 @@ const MarketPage = () => {
                           cellRenderer: (cell) => {
                             return (
                               <div
-                                className="text-left link-color cursor-pointer py-3 px-2 text-sm"
+                                className="text-center link-color cursor-pointer py-3 px-2 text-sm"
                                 onClick={() => setIsShowModal(true)}
                               >
                                 {cell?.modal3}
@@ -267,7 +285,7 @@ const MarketPage = () => {
               <Button text="Approve" />
             </div>
             <div>
-              <LineLoading isLoading={true} />
+              <LineLoading isLoading={false} />
             </div>
           </div>
         </Card>
