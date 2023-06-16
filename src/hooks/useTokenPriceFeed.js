@@ -19,8 +19,6 @@ const useTokenPriceFeed = (tokenAddress) => {
     }
   })
 
-  console.log("indexPrice inside hook", indexPrice)
-
   return { indexPrice }
 }
 

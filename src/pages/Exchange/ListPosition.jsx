@@ -4,7 +4,7 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import { BTC } from "@img/token"
 
-import { useAccount, useContractRead, useToken } from "wagmi"
+import { useAccount, useToken, useNetwork } from "wagmi"
 import { Position, Constants } from "@void-0x/void-sdk"
 import useExchange from "src/hooks/useExchange"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
@@ -22,21 +22,9 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
   const [collateralTab, setCollateralTab] = useState("add")
   const [positions, setPositions] = useState([])
   const { address } = useAccount()
+  const { chain } = useNetwork()
   const { getPositions } = useExchange()
   const { indexPrice } = useTokenPriceFeed(tokenAddress)
-
-  // const {
-  //   data: indexPrice,
-  //   isError,
-  //   isLoading
-  // } = useContractRead({
-  //   address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
-  //   abi: FastPriceFeedABI.abi,
-  //   functionName: "getPrice",
-  //   args: [tokenAddress, true]
-  // })
-
-  console.log("indexPrice", indexPrice)
 
   const {
     data: token,
@@ -53,7 +41,7 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
     }
 
     get()
-  }, [address])
+  }, [address, chain])
 
   /**
    * formatValue: Format a BigInt value to a human readable string
@@ -76,7 +64,7 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
   }
 
   const formattedPositions = useMemo(() => {
-    if (!token) {
+    if (!token || !indexPrice) {
       return []
     }
 
@@ -121,7 +109,6 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
       headerClassName: "text-xs text-left",
       classname: "text-left",
       cellRenderer: (cell) => {
-        console.log({ cell })
         return (
           <div className="flex items-center gap-2">
             <img src={BTC} className="h-6 w-6" alt="eth" />
@@ -208,11 +195,3 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
 }
 
 export default ListPosition
-
-// [x]1. Load token decimals from somewhere? How to get the token deicmals. Given the token address, we can get the token decimals
-//  [x] 1.1. Load from constants
-//  [x] 1.2. If not exists, load useContractRead
-// 2. Create hook to get Price given the token address
-// 3. Use exchnage instead of hook
-// 4. Dyanmic market, don't hardcode anymore
-// 5. Calc liquidation price

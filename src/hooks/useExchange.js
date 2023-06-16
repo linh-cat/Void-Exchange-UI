@@ -37,7 +37,7 @@ const useExchange = () => {
 
   const getPositions = async (address) => {
     if (!exchange) {
-      return
+      return []
     }
 
     const positions = await exchange.getPositions(address)
