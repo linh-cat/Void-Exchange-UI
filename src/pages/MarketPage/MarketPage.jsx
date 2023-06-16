@@ -105,7 +105,7 @@ const MarketPage = () => {
                         <div className="space-y-2">
                           {providers.map((pro) => (
                             <RadioGroup.Option
-                              key={pro.name}
+                              key={pro.id}
                               value={pro}
                               className={({ checked }) =>
                                 cx("py-3 px-3 rounded cursor-pointer border", {
@@ -134,7 +134,7 @@ const MarketPage = () => {
                                   </div>
                                   {pro.id === provider.id && (
                                     <div className="shrink-0">
-                                      <CheckIcon className="h-6 w-6" />
+                                      <CheckIcon className="h-6 w-6 " />
                                     </div>
                                   )}
                                 </div>
