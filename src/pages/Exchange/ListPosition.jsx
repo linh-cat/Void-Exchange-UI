@@ -4,10 +4,10 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import { BTC } from "@img/token"
 
-import { usePublicClient, useWalletClient, useAccount, useContractRead, useToken } from "wagmi"
-import { Exchange, Position, Constants } from "@void-0x/void-sdk"
-import FastPriceFeedABI from "../../abis/FastPriceFeed.json"
-import { formatUnits } from "viem"
+import { useAccount, useContractRead, useToken } from "wagmi"
+import { Position, Constants } from "@void-0x/void-sdk"
+import useExchange from "src/hooks/useExchange"
+import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -17,40 +17,26 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
   roundingIncrement: 5
 })
 
-const data = [
-  {
-    market: "ETH/USDT",
-    type: "short",
-    leverge: "10x",
-    token: "ETH",
-    size: "$49.9",
-    netvalue: "$4.9",
-    collateral: "1.96 USDT",
-    entryprice: "$1,884.9",
-    indexprice: "$2,001",
-    pnlroe: "+ $0.35"
-  }
-]
 const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245f0" }) => {
   const [collateral, setCollateral] = useState(false)
   const [collateralTab, setCollateralTab] = useState("add")
-  const [exchange, setExchange] = useState(null)
   const [positions, setPositions] = useState([])
-
-  const publicClient = usePublicClient()
-  const { data: walletClient } = useWalletClient()
   const { address } = useAccount()
+  const { getPositions } = useExchange()
+  const { indexPrice } = useTokenPriceFeed(tokenAddress)
 
-  const {
-    data: indexPrice,
-    isError,
-    isLoading
-  } = useContractRead({
-    address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
-    abi: FastPriceFeedABI.abi,
-    functionName: "getPrice",
-    args: [tokenAddress, true]
-  })
+  // const {
+  //   data: indexPrice,
+  //   isError,
+  //   isLoading
+  // } = useContractRead({
+  //   address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
+  //   abi: FastPriceFeedABI.abi,
+  //   functionName: "getPrice",
+  //   args: [tokenAddress, true]
+  // })
+
+  console.log("indexPrice", indexPrice)
 
   const {
     data: token,
@@ -60,31 +46,14 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
     address: tokenAddress
   })
 
-  console.log("token", token)
-
   useEffect(() => {
-    if (publicClient && walletClient) {
-      const exchange = new Exchange(
-        publicClient,
-        walletClient,
-        "0x5e263C7014Ab3aE324f113C9abEf573f4e6C4DDE",
-        "0x5489ca9966067f3A2cA67370d9170d4F9171CCB7"
-      )
-
-      setExchange(exchange)
-    }
-  }, [publicClient, walletClient, address])
-
-  useEffect(() => {
-    const getPositions = async () => {
-      const positions = await exchange.getPositions(address)
-      setPositions(positions.filter((position) => position.size > 0))
+    const get = async () => {
+      const positions = await getPositions(address)
+      setPositions(positions)
     }
 
-    if (exchange) {
-      getPositions()
-    }
-  }, [exchange])
+    get()
+  }, [address])
 
   /**
    * formatValue: Format a BigInt value to a human readable string
