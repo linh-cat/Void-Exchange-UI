@@ -48,25 +48,59 @@ const Header = () => {
               <span className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </span>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false
+                })}
+              >
                 <Link to={`/vault/list`}>Earn</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/"
+                })}
+              >
                 <Link to={`/`}>Dashboard</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/document"
+                })}
+              >
                 <Link to={`/document`}>Docs</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/profile"
+                })}
+              >
                 <Link to={`/profile`}>Profile</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/faucet"
+                })}
+              >
                 <Link to={`/faucet`}>Faucet</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/staking"
+                })}
+              >
                 <Link to={`/staking`}>Staking</Link>
               </li>
-              <li className="item">
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/market"
+                })}
+              >
                 <Link to={`/market`}>Market</Link>
               </li>
             </ul>

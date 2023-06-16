@@ -4,3 +4,7 @@
     height: 7vh;
     line-height: 7vh;
 }
+
+.active-link {
+    filter: drop-shadow(0 0 10px #3596d3);
+}

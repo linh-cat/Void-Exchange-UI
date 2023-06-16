@@ -187,10 +187,6 @@
     animation-delay: 2.15s;
 }
 
-.drop-shadow {
-    filter: drop-shadow(0 0 8px #268fd1);
-}
-
 @-webkit-keyframes woosh {
     0% {
         width: 12px;
