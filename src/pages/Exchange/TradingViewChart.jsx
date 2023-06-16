@@ -40,7 +40,8 @@ export default function TradingViewWidget() {
           toolbar_bg: "#121217",
           enable_publishing: false,
           allow_symbol_change: true,
-          container_id: "tradingview_1327e"
+          container_id: "tradingview_1327e",
+          hide_legend: true
         })
       }
     }
