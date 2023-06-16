@@ -4,12 +4,12 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import { BTC } from "@img/token"
 
-import { usePublicClient, useWalletClient, useAccount, useContractRead } from "wagmi"
-import { Exchange, Position } from "@void-0x/void-sdk"
+import { usePublicClient, useWalletClient, useAccount, useContractRead, useToken } from "wagmi"
+import { Exchange, Position, Constants } from "@void-0x/void-sdk"
 import FastPriceFeedABI from "../../abis/FastPriceFeed.json"
 import { formatUnits } from "viem"
 
-const nf = new Intl.NumberFormat("en-US", {
+const numberFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 2,
@@ -31,7 +31,7 @@ const data = [
     pnlroe: "+ $0.35"
   }
 ]
-const ListPosition = () => {
+const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245f0" }) => {
   const [collateral, setCollateral] = useState(false)
   const [collateralTab, setCollateralTab] = useState("add")
   const [exchange, setExchange] = useState(null)
@@ -49,8 +49,18 @@ const ListPosition = () => {
     address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
     abi: FastPriceFeedABI.abi,
     functionName: "getPrice",
-    args: ["0xB232278f063AB63592FCc612B3bc01662b7245f0", true]
+    args: [tokenAddress, true]
   })
+
+  const {
+    data: token,
+    isError: tokenError,
+    isLoading: isTokenLoading
+  } = useToken({
+    address: tokenAddress
+  })
+
+  console.log("token", token)
 
   useEffect(() => {
     if (publicClient && walletClient) {
@@ -76,40 +86,60 @@ const ListPosition = () => {
     }
   }, [exchange])
 
+  /**
+   * formatValue: Format a BigInt value to a human readable string
+   *
+   * @param {bigint} value
+   * @param {number} decimals
+   */
+  const formatValue = (value, decimals) => {
+    return numberFormatter.format(descaleValue(value, decimals)).toString()
+  }
+
+  /**
+   * descaleValue: Descale a BigNumber value by 10**decimals
+   *
+   * @param {bigint} value
+   * @param {number} decimals
+   */
+  const descaleValue = (value, decimals) => {
+    return value / BigInt(10 ** decimals)
+  }
+
   const formattedPositions = useMemo(() => {
+    if (!token) {
+      return []
+    }
+
+    const valueDecimals = token.decimals + Constants.ORACLE_PRICE_DECIMALS
+
     const formatteds = positions.map((position) => {
-      const pnl = Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong)
+      const pnl = descaleValue(
+        Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong),
+        token.decimals
+      )
 
       return {
         /* global BigInt */
         market: "WBTC/USDT",
-        collateralValue: nf.format(BigInt(position.collateralValue / BigInt(1e20)).toString()),
-        size: nf.format(BigInt(position.size / BigInt(1e20)).toString()),
-        entryPrice: nf.format(BigInt(position.entryPrice / BigInt(1e12)).toString()),
+        collateralValue: formatValue(position.collateralValue, valueDecimals),
+        size: formatValue(position.size, valueDecimals),
+        entryPrice: formatValue(position.entryPrice, Constants.ORACLE_PRICE_DECIMALS),
         leverage: Position.getLeverage(position) + "x",
-
         isProfitable: pnl > 0,
         // entryprice: "$1,884.9",
-        indexPrice: nf.format(formatUnits(indexPrice, 12)),
-        pnlRoe: nf.format(
-          formatUnits(
-            Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong) / BigInt(1e8),
-            12
-          )
-        ),
+        indexPrice: formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS),
+        pnlRoe: formatValue(pnl, Constants.ORACLE_PRICE_DECIMALS),
         type: position.isLong ? "long" : "short",
         token: "WBTC",
-        netValue: nf.format(
-          formatUnits(
-            Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong) / BigInt(1e8) +
-              position.collateralValue / BigInt(1e8),
-            12
-          )
+        netValue: formatValue(
+          Position.getNetValue(position, indexPrice, token.decimals),
+          Constants.ORACLE_PRICE_DECIMALS
         )
       }
     })
     return formatteds
-  }, [positions, indexPrice])
+  }, [positions, token, indexPrice])
 
   const toggleCollateral = () => {
     setCollateral(!collateral)
@@ -178,6 +208,14 @@ const ListPosition = () => {
       }
     },
     {
+      field: "liquidationPrice",
+      headerName: "Liquidation Price",
+      headerClassName: "text-xs",
+      cellRenderer: (cell) => {
+        return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
+      }
+    },
+    {
       field: "action",
       headerName: "Actions",
       headerClassName: "text-xs",
@@ -201,3 +239,11 @@ const ListPosition = () => {
 }
 
 export default ListPosition
+
+// [x]1. Load token decimals from somewhere? How to get the token deicmals. Given the token address, we can get the token decimals
+//  [x] 1.1. Load from constants
+//  [x] 1.2. If not exists, load useContractRead
+// 2. Create hook to get Price given the token address
+// 3. Use exchnage instead of hook
+// 4. Dyanmic market, don't hardcode anymore
+// 5. Calc liquidation price
