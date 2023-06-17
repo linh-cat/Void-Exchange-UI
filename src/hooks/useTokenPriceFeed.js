@@ -10,7 +10,7 @@ const useTokenPriceFeed = (tokenAddress) => {
     isError,
     isLoading
   } = useContractRead({
-    address: Constants.Addresses[chain.id]?.PriceFeed,
+    address: Constants.Addresses[chain?.id]?.PriceFeed,
     abi: FastPriceFeedABI.abi,
     functionName: "getPrice",
     args: [tokenAddress, true],

@@ -12,7 +12,7 @@ const useExchange = () => {
   const { chain } = useNetwork()
 
   const exchange = useMemo(() => {
-    if (chain && !isLoading && isChainSupported(chain)) {
+    if (chain && !isWalletLoading && isChainSupported(chain)) {
       return new Exchange(
         publicClient,
         walletClient,
