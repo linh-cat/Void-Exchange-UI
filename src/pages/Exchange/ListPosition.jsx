@@ -4,12 +4,12 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import { BTC } from "@img/token"
 
-import { usePublicClient, useWalletClient, useAccount, useContractRead } from "wagmi"
-import { Exchange, Position } from "@void-0x/void-sdk"
-import FastPriceFeedABI from "../../abis/FastPriceFeed.json"
-import { formatUnits } from "viem"
+import { useAccount, useToken, useNetwork } from "wagmi"
+import { Position, Constants } from "@void-0x/void-sdk"
+import useExchange from "src/hooks/useExchange"
+import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 
-const nf = new Intl.NumberFormat("en-US", {
+const numberFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 2,
@@ -17,99 +17,86 @@ const nf = new Intl.NumberFormat("en-US", {
   roundingIncrement: 5
 })
 
-const data = [
-  {
-    market: "ETH/USDT",
-    type: "short",
-    leverge: "10x",
-    token: "ETH",
-    size: "$49.9",
-    netvalue: "$4.9",
-    collateral: "1.96 USDT",
-    entryprice: "$1,884.9",
-    indexprice: "$2,001",
-    pnlroe: "+ $0.35"
-  }
-]
-const ListPosition = () => {
+const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245f0" }) => {
   const [collateral, setCollateral] = useState(false)
   const [collateralTab, setCollateralTab] = useState("add")
-  const [exchange, setExchange] = useState(null)
   const [positions, setPositions] = useState([])
-
-  const publicClient = usePublicClient()
-  const { data: walletClient } = useWalletClient()
   const { address } = useAccount()
+  const { chain } = useNetwork()
+  const { getPositions } = useExchange()
+  const { indexPrice } = useTokenPriceFeed(tokenAddress)
 
   const {
-    data: indexPrice,
-    isError,
-    isLoading
-  } = useContractRead({
-    address: "0xaD0d06353e7fCa52BD40441a45D5A623d9284C0C",
-    abi: FastPriceFeedABI.abi,
-    functionName: "getPrice",
-    args: ["0xB232278f063AB63592FCc612B3bc01662b7245f0", true]
+    data: token,
+    isError: tokenError,
+    isLoading: isTokenLoading
+  } = useToken({
+    address: tokenAddress
   })
 
   useEffect(() => {
-    if (publicClient && walletClient) {
-      const exchange = new Exchange(
-        publicClient,
-        walletClient,
-        "0x5e263C7014Ab3aE324f113C9abEf573f4e6C4DDE",
-        "0x5489ca9966067f3A2cA67370d9170d4F9171CCB7"
-      )
-
-      setExchange(exchange)
-    }
-  }, [publicClient, walletClient, address])
-
-  useEffect(() => {
-    const getPositions = async () => {
-      const positions = await exchange.getPositions(address)
-      setPositions(positions.filter((position) => position.size > 0))
+    const get = async () => {
+      const positions = await getPositions(address)
+      setPositions(positions)
     }
 
-    if (exchange) {
-      getPositions()
-    }
-  }, [exchange])
+    get()
+  }, [address, chain])
+
+  /**
+   * formatValue: Format a BigInt value to a human readable string
+   *
+   * @param {bigint} value
+   * @param {number} decimals
+   */
+  const formatValue = (value, decimals) => {
+    return numberFormatter.format(descaleValue(value, decimals)).toString()
+  }
+
+  /**
+   * descaleValue: Descale a BigNumber value by 10**decimals
+   *
+   * @param {bigint} value
+   * @param {number} decimals
+   */
+  const descaleValue = (value, decimals) => {
+    return value / BigInt(10 ** decimals)
+  }
 
   const formattedPositions = useMemo(() => {
+    if (!token || !indexPrice) {
+      return []
+    }
+
+    const valueDecimals = token.decimals + Constants.ORACLE_PRICE_DECIMALS
+
     const formatteds = positions.map((position) => {
-      const pnl = Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong)
+      const pnl = descaleValue(
+        Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong),
+        token.decimals
+      )
 
       return {
         /* global BigInt */
         market: "WBTC/USDT",
-        collateralValue: nf.format(BigInt(position.collateralValue / BigInt(1e20)).toString()),
-        size: nf.format(BigInt(position.size / BigInt(1e20)).toString()),
-        entryPrice: nf.format(BigInt(position.entryPrice / BigInt(1e12)).toString()),
+        collateralValue: formatValue(position.collateralValue, valueDecimals),
+        size: formatValue(position.size, valueDecimals),
+        entryPrice: formatValue(position.entryPrice, Constants.ORACLE_PRICE_DECIMALS),
         leverage: Position.getLeverage(position) + "x",
-
         isProfitable: pnl > 0,
         // entryprice: "$1,884.9",
-        indexPrice: nf.format(formatUnits(indexPrice, 12)),
-        pnlRoe: nf.format(
-          formatUnits(
-            Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong) / BigInt(1e8),
-            12
-          )
-        ),
+        indexPrice: formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS),
+        pnlRoe: formatValue(pnl, Constants.ORACLE_PRICE_DECIMALS),
         type: position.isLong ? "long" : "short",
         token: "WBTC",
-        netValue: nf.format(
-          formatUnits(
-            Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong) / BigInt(1e8) +
-              position.collateralValue / BigInt(1e8),
-            12
-          )
+        netValue: formatValue(
+          Position.getNetValue(position, indexPrice, token.decimals),
+          Constants.ORACLE_PRICE_DECIMALS
         )
       }
     })
     return formatteds
-  }, [positions, indexPrice])
+  }, [positions, token, indexPrice])
 
   const toggleCollateral = () => {
     setCollateral(!collateral)
@@ -122,7 +109,6 @@ const ListPosition = () => {
       headerClassName: "text-xs text-left",
       classname: "text-left",
       cellRenderer: (cell) => {
-        console.log({ cell })
         return (
           <div className="flex items-center gap-2">
             <img src={BTC} className="h-6 w-6" alt="eth" />
@@ -172,6 +158,14 @@ const ListPosition = () => {
     {
       field: "pnlRoe",
       headerName: "Pnl & ROE",
+      headerClassName: "text-xs",
+      cellRenderer: (cell) => {
+        return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
+      }
+    },
+    {
+      field: "liquidationPrice",
+      headerName: "Liquidation Price",
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
         return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
