@@ -1,48 +1,57 @@
+import React, { useState } from "react"
+
+import cx from "classnames"
+
 import Card from "@components/Card/Card"
 import { InputCustom } from "@components/common"
-import React, { useState } from "react"
-import cx from "classnames"
 import Button from "@components/Button/Button"
 import SelectTokenModal from "@components/SelectTokenModal/SelectTokenModal"
 import TableCustom from "@components/Table/TableCustom"
 import Modal from "@components/Modal/Modal"
 import LineLoading from "@components/common/LineLoading/LineLoading"
+import ComboBoxList from "@components/ComboBoxList/ComboBoxList"
 
 import { VoidIcon } from "@icons/index"
-import { CheckIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import Editor from "@monaco-editor/react"
-import { RadioGroup, Tab } from "@headlessui/react"
+import { Tab } from "@headlessui/react"
 import { Binance, Bybit, ChainLink, Coinbase, Kucoin, OKX } from "@img/logo"
 
 const providers = [
   {
-    id: "binance",
-    name: "Binance",
+    value: "binance",
+    label: "Binance",
+    effectActive: "active-binance",
     icon: Binance
   },
   {
-    id: "okx",
-    name: "OKX",
+    value: "okx",
+    label: "OKX",
+    effectActive: "active-okx",
     icon: OKX
   },
   {
-    id: "chainlink",
-    name: "Chain Link",
+    value: "chainlink",
+    label: "Chain Link",
+    effectActive: "active-chainlink",
     icon: ChainLink
   },
   {
-    id: "coinbase",
-    name: "Coinbase",
+    value: "coinbase",
+    label: "Coinbase",
+    effectActive: "active-coinbase",
     icon: Coinbase
   },
   {
-    id: "bybit",
-    name: "Bybit",
+    value: "bybit",
+    label: "Bybit",
+    effectActive: "active-bybit",
     icon: Bybit
   },
   {
-    id: "kucoin",
-    name: "Ku Coin ",
+    value: "kucoin",
+    label: "Ku Coin ",
+    effectActive: "active-kucoin",
     icon: Kucoin
   }
 ]
@@ -51,7 +60,7 @@ const MarketPage = () => {
   const [priceFeedTab, setPriceFeed] = useState(0)
   const [price, setPrice] = useState("// some comment")
   const [isShowModal, setIsShowModal] = useState(false)
-  const [provider, setProvider] = useState(providers[0])
+  const [providersValue, setProvidersValue] = useState([providers[0]?.value])
 
   const onChangePrice = (event) => {
     setPrice(event)
@@ -114,53 +123,14 @@ const MarketPage = () => {
                   </Tab>
                 </Tab.List>
                 <Tab.Panels className="p-3">
-                  <Tab.Panel>
+                  <Tab.Panel className="flex flex-col gap-3">
                     <div className="">
-                      <RadioGroup value={provider} onChange={setProvider}>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                          {providers.map((pro) => (
-                            <RadioGroup.Option
-                              key={pro.id}
-                              value={pro}
-                              className={({ checked }) =>
-                                cx("py-3 px-3 rounded cursor-pointer border", {
-                                  "active-binance shadow": pro.id === "binance" && checked,
-                                  "active-okx shadow": provider.id === "okx" && checked,
-                                  "active-chainlink shadow": provider.id === "chainlink" && checked,
-                                  "active-bybit shadow": provider.id === "bybit" && checked,
-                                  "active-coinbase shadow": provider.id === "coinbase" && checked,
-                                  "active-kucoin shadow": provider.id === "kucoin" && checked
-                                })
-                              }
-                            >
-                              <>
-                                <div className="flex w-full items-center justify-between">
-                                  <div className="flex items-center">
-                                    <div className="text-sm">
-                                      <div className="flex gap-3 items-center">
-                                        <img src={pro?.icon} alt="icon" className="h-5 w-10" />
-                                        <RadioGroup.Label
-                                          as="p"
-                                          className={cx({
-                                            "font-medium": true
-                                          })}
-                                        >
-                                          {pro.name}
-                                        </RadioGroup.Label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {pro.id === provider.id && (
-                                    <div className="shrink-0">
-                                      <CheckIcon className="h-6 w-6 " />
-                                    </div>
-                                  )}
-                                </div>
-                              </>
-                            </RadioGroup.Option>
-                          ))}
-                        </div>
-                      </RadioGroup>
+                      <ComboBoxList
+                        options={providers}
+                        value={providersValue}
+                        setValue={setProvidersValue}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-3"
+                      />
                     </div>
                   </Tab.Panel>
                   <Tab.Panel>

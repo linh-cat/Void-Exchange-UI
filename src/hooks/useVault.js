@@ -1,17 +1,21 @@
 import { useMemo, useState } from "react"
 import { toast } from "react-hot-toast"
-import { usePublicClient, useWalletClient } from "wagmi"
+import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Vault } from "@void-0x/void-sdk"
+import { isChainSupported } from "src/lib/chains"
 
 const useVault = (tokenAddress, vaultAddress) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const publicClient = usePublicClient()
-  const { data: walletClient } = useWalletClient()
+  const { data: walletClient, isLoading: isWalletLoading } = useWalletClient()
+  const { chain } = useNetwork()
 
   const selectedVault = useMemo(() => {
-    return new Vault(publicClient, walletClient, vaultAddress, tokenAddress)
-  }, [publicClient, tokenAddress, vaultAddress, walletClient])
+    if (chain && !isWalletLoading && isChainSupported(chain)) {
+      return new Vault(publicClient, walletClient, vaultAddress, tokenAddress)
+    }
+  }, [publicClient, walletClient, isWalletLoading, chain, tokenAddress, vaultAddress])
 
   const deposit = async (amount, from, receiver) => {
     if (!selectedVault) {
@@ -19,13 +23,6 @@ const useVault = (tokenAddress, vaultAddress) => {
     }
 
     setIsLoading(true)
-
-    // const decimals = await vault.getDecimals()
-    // console.log("amount", parseUnits(amount.toString(), decimals))
-    // approve({
-    //   args: [Constants.Addresses[chain.id].Vaults.WETH, parseUnits(amount.toString(), decimals)],
-    //   from
-    // })
 
     const hash = await selectedVault.deposit(amount, receiver)
     await publicClient.waitForTransactionReceipt({ hash })
