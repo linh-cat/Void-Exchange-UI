@@ -8,14 +8,7 @@ import { Position, Constants } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
-
-const numberFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 2,
-  minimumFractionDigits: 2,
-  roundingIncrement: 5
-})
+import { formatValue, descaleValue } from "src/lib/formatter"
 
 const ListPosition = () => {
   const [collateral, setCollateral] = useState(false)
@@ -38,26 +31,6 @@ const ListPosition = () => {
     get()
   }, [exchange, address, chain])
 
-  /**
-   * formatValue: Format a BigInt value to a human readable string
-   *
-   * @param {bigint} value
-   * @param {number} decimals
-   */
-  const formatValue = (value, decimals) => {
-    return numberFormatter.format(descaleValue(value, decimals)).toString()
-  }
-
-  /**
-   * descaleValue: Descale a BigNumber value by 10**decimals
-   *
-   * @param {bigint} value
-   * @param {number} decimals
-   */
-  const descaleValue = (value, decimals) => {
-    return value / BigInt(10 ** decimals)
-  }
-
   const formattedPositions = useMemo(() => {
     if (!chain || !prices) {
       return []
@@ -79,7 +52,6 @@ const ListPosition = () => {
       const token = Tokens[chain.id][symbol]
 
       return {
-        /* global BigInt */
         market: `${token.name}/USD`,
         collateralValue: formatValue(position.collateralValue, valueDecimals),
         size: formatValue(position.size, valueDecimals),
