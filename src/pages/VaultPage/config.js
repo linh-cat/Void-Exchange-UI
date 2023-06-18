@@ -1,4 +1,4 @@
-import { BTC, DOGE, ETH, USDC } from "@img/token"
+import { BTC, DOGE, ETH, USDC, PEPE } from "@img/token"
 
 export const vaultLists = [
   {
@@ -17,10 +17,10 @@ export const vaultLists = [
   },
   {
     id: 3,
-    title: "Doge",
-    bg: "bg-doge",
-    hoverBg: "bg-hover-doge",
-    icon: DOGE
+    title: "PEPE",
+    bg: "bg-pepe",
+    hoverBg: "bg-hover-pepe",
+    icon: PEPE
   },
   {
     id: 4,
@@ -28,5 +28,12 @@ export const vaultLists = [
     bg: "bg-usdc",
     hoverBg: "bg-hover-usdc",
     icon: USDC
+  },
+  {
+    id: 5,
+    title: "Doge",
+    bg: "bg-doge",
+    hoverBg: "bg-hover-doge",
+    icon: DOGE
   }
 ]

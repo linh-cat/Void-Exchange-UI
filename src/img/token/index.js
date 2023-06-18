@@ -5,5 +5,6 @@ import SOLANA from "./solana.png"
 import MATIC from "./matic.png"
 import POLYGON from "./polygon.png"
 import CAKE from "./CAKE.png"
-import DOGE from "./dogecoin.svg"
-export { USDC, ETH, BTC, SOLANA, MATIC, POLYGON, CAKE, DOGE }
+import DOGE from "./dogecoin.png"
+import PEPE from "./pepe.png"
+export { USDC, ETH, BTC, SOLANA, MATIC, POLYGON, CAKE, DOGE, PEPE }
