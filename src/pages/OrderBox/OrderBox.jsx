@@ -18,6 +18,7 @@ import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
+import { formatValue } from "src/lib/formatter"
 
 import "./OrderBox.css"
 
@@ -152,7 +153,7 @@ const OrderBox = ({ type }) => {
           <div className="">
             <InputCustom
               label="Price"
-              placeHolder={"0.0"}
+              placeHolder={indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : "0.0"}
               classNameInput="px-1 py-2"
               disabled={orderType === OrderType.MARKET}
             />
