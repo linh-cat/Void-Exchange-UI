@@ -3,11 +3,30 @@ import "./SelectCoupleToken.css"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
 import { useMemo } from "react"
 import { DownIcon } from "@icons/index"
-import { BTC } from "@img/token"
+import { BTC, ETH } from "@img/token"
+import { useExchangeContext } from "src/contexts/MarketContext"
 
-const SelectCoupleToken = ({ options, defaultValue }) => {
+const options = [
+  {
+    label: "BTC/USD",
+    value: "BTC/USD",
+    icon: BTC,
+    price: "$27.000",
+    dayChange: "0.18%"
+  },
+  {
+    label: "ETH/USD",
+    value: "ETH/USD",
+    icon: ETH,
+    price: "$1.000",
+    dayChange: "0.1%"
+  }
+]
+
+const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   const [openList, setOpenList] = useState(false)
   const [values, setValues] = useState(defaultValue)
+  const { setPair } = useExchangeContext()
 
   const toggleOpen = () => {
     setOpenList(!openList)
@@ -15,6 +34,7 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
 
   const onChangeValue = (value) => {
     setValues(value)
+    setPair(value)
     setOpenList(false)
   }
 
@@ -24,9 +44,9 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
 
   const refOutside = useOutsideDetect(handleClickOutside)
 
-  const renderLabel = useMemo(() => {
+  const { label, icon } = useMemo(() => {
     const index = options.findIndex((item) => item.value === values)
-    return options[index]?.label
+    return { label: options[index]?.label, icon: options[index]?.icon }
   }, [options, values])
 
   return (
@@ -36,8 +56,8 @@ const SelectCoupleToken = ({ options, defaultValue }) => {
         ref={refOutside}
         onClick={toggleOpen}
       >
-        <img src={BTC} alt="btc" className="rounded-full w-7 h-7" />
-        <label className="cursor-pointer text-lg label font-bold">{renderLabel}</label>
+        <img src={icon} alt="btc" className="rounded-full w-7 h-7" />
+        <label className="cursor-pointer text-lg label font-bold">{label}</label>
         <img src={DownIcon} className={`${openList ? "rotate180" : ""} w-3`} alt="downicon" />
       </div>
       <div className={`${openList ? "open" : "close"} dd-couple-token-list overflow-x-auto rounded`}>
