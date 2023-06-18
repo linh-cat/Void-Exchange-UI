@@ -4,7 +4,7 @@ import useOutsideDetect from "../../hooks/useOutsideDetect"
 import { useMemo } from "react"
 import { DownIcon } from "@icons/index"
 import { BTC, ETH } from "@img/token"
-import { useExchangeContext } from "src/contexts/MarketContext"
+import { useExchangeContext } from "src/contexts/ExchangeContext"
 
 const options = [
   {

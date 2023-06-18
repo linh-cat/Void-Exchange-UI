@@ -6,8 +6,8 @@ import { BTC } from "@img/token"
 
 import { useAccount, useToken, useNetwork } from "wagmi"
 import { Position, Constants } from "@void-0x/void-sdk"
-import useExchange from "src/hooks/useExchange"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
+import { useExchangeContext } from "src/contexts/ExchangeContext"
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -17,13 +17,14 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
   roundingIncrement: 5
 })
 
-const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245f0" }) => {
+const ListPosition = () => {
   const [collateral, setCollateral] = useState(false)
   const [collateralTab, setCollateralTab] = useState("add")
   const [positions, setPositions] = useState([])
   const { address } = useAccount()
   const { chain } = useNetwork()
-  const { getPositions } = useExchange()
+  // const { getPositions } = useExchange()
+  const { getPositions, token: tokenAddress, pair } = useExchangeContext()
   const { indexPrice } = useTokenPriceFeed(tokenAddress)
 
   const {
@@ -78,7 +79,7 @@ const ListPosition = ({ tokenAddress = "0xB232278f063AB63592FCc612B3bc01662b7245
 
       return {
         /* global BigInt */
-        market: "WBTC/USDT",
+        market: pair,
         collateralValue: formatValue(position.collateralValue, valueDecimals),
         size: formatValue(position.size, valueDecimals),
         entryPrice: formatValue(position.entryPrice, Constants.ORACLE_PRICE_DECIMALS),
