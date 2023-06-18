@@ -10,17 +10,42 @@ import FaucetPage from "./pages/FaucetPage/FaucetPage"
 import { Toaster } from "react-hot-toast"
 
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
-import { sepolia, goerli } from "wagmi/chains"
+import { sepolia, goerli, baseGoerli } from "wagmi/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import StakingPage from "./pages/StakingPage/StakingPage"
 import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
 
-const { chains, publicClient } = configureChains(
-  [sepolia, goerli],
-  [alchemyProvider({ apiKey: "N2823S8lfRKCAyMO9rfYMg0Am36_qZSc" })]
+const baseGoerliExtended = {
+  ...baseGoerli,
+  contracts: {
+    multicall3: {
+      address: "0xca11bde05977b3631167028862be2a173976ca11",
+      blockCreated: "1376988"
+    }
+  }
+}
+
+// TODO: refactor later
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [baseGoerliExtended, sepolia, goerli],
+  [
+    jsonRpcProvider({
+      rpc: (chain) => {
+        if (chain.id == baseGoerli.id) {
+          return {
+            http: "https://base-goerli.blastapi.io/7732b118-e54f-46ca-a10b-d226670d03dc",
+            webSocket: "wss://base-goerli.blastapi.io/7732b118-e54f-46ca-a10b-d226670d03dc"
+          }
+        }
+      }
+    }),
+    // baseGoerliProvider,
+    alchemyProvider({ apiKey: "N2823S8lfRKCAyMO9rfYMg0Am36_qZSc" })
+  ]
 )
 
 const config = createConfig({

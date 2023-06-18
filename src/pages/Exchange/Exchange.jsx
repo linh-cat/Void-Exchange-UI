@@ -20,6 +20,7 @@ const Exchange = () => {
   const onChangeHistory = () => {
     setShowHistory(!showHistory)
   }
+
   const renderListSections = () => {
     return (
       <div className={cx({ "p-3 section-list": true })}>

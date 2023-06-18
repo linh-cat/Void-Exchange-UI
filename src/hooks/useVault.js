@@ -24,7 +24,9 @@ const useVault = (tokenAddress, vaultAddress) => {
 
     setIsLoading(true)
 
-    const hash = await selectedVault.deposit(amount, receiver)
+    const hash = await selectedVault.deposit(amount, receiver, {
+      simulate: true // static call before making real transaction
+    })
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsLoading(false)

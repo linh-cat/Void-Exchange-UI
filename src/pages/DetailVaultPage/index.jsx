@@ -12,7 +12,7 @@ const Index = () => {
   let { id: vaultID } = useParams()
   const { chain } = useNetwork()
 
-  const vaultInfor = useMemo(() => {
+  const vaultInfo = useMemo(() => {
     switch (vaultID) {
       case "1":
         return {
@@ -37,7 +37,7 @@ const Index = () => {
   return (
     <div className="vault-detail">
       <Banner />
-      <VaultDeposit tokenAddress={vaultInfor?.tokenAddress} vaultAddress={vaultInfor?.vaultAddress} />
+      <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} />
       <SectionVaultStats />
     </div>
   )
