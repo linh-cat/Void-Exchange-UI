@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
+import { useNetwork } from "wagmi"
+
 import "./Exchange.css"
 import TabExchange from "../../components/TabExchange/TabExchange"
 import TradingViewChart from "./TradingViewChart"
@@ -10,10 +12,13 @@ import { POSITIONS } from "./constant"
 import ListPosition from "./ListPosition"
 import cx from "classnames"
 import TopInfo from "@components/TopInfo/TopInfo"
+import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
+  const { chain } = useNetwork()
+
   const onChangeTabSection = (val) => {
     setTabSection(val)
   }
@@ -21,6 +26,10 @@ const Exchange = () => {
     setShowHistory(!showHistory)
   }
 
+  /**
+   *
+   * @param {[]Object} options
+   */
   const renderListSections = () => {
     return (
       <div className={cx({ "p-3 section-list": true })}>
@@ -39,7 +48,7 @@ const Exchange = () => {
   }
 
   return (
-    <>
+    <ExchangeContextProvider>
       <TopInfo />
       <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border">
         {/* left side chart and infor bar */}
@@ -89,7 +98,7 @@ const Exchange = () => {
           <TabExchange defaultValue="long" />
         </div>
       </div>
-    </>
+    </ExchangeContextProvider>
   )
 }
 
