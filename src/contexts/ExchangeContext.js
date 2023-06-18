@@ -21,11 +21,11 @@ export function ExchangeContextProvider({ children }) {
   const [pair, setPair] = useState("")
 
   const publicClient = usePublicClient()
-  const { data: walletClient, isLoading: isWalletLoading } = useWalletClient()
+  const { data: walletClient } = useWalletClient()
   const { chain } = useNetwork()
 
   const exchange = useMemo(() => {
-    if (chain && !isWalletLoading && isChainSupported(chain)) {
+    if (chain && isChainSupported(chain)) {
       return new Exchange(
         publicClient,
         walletClient,
@@ -33,7 +33,7 @@ export function ExchangeContextProvider({ children }) {
         Constants.Addresses[chain.id].Lens
       )
     }
-  }, [publicClient, walletClient, isWalletLoading, chain])
+  }, [publicClient, walletClient, chain])
 
   /**
    * Set default token and pair for the market

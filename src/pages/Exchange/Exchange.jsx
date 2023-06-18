@@ -12,7 +12,6 @@ import { POSITIONS } from "./constant"
 import ListPosition from "./ListPosition"
 import cx from "classnames"
 import TopInfo from "@components/TopInfo/TopInfo"
-import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
@@ -48,7 +47,7 @@ const Exchange = () => {
   }
 
   return (
-    <ExchangeContextProvider>
+    <>
       <TopInfo />
       <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border">
         {/* left side chart and infor bar */}
@@ -98,7 +97,7 @@ const Exchange = () => {
           <TabExchange defaultValue="long" />
         </div>
       </div>
-    </ExchangeContextProvider>
+    </>
   )
 }
 

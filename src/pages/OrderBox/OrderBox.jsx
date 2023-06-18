@@ -39,7 +39,7 @@ const OrderBox = ({ type }) => {
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed(token)
+  const { indexPrice } = useTokenPriceFeed([token])
 
   const { allowance, approve, isApproving } = useAllowance({
     token: tokenSelected,

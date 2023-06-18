@@ -2,12 +2,12 @@ import React, { useState, useEffect, useMemo } from "react"
 import CollateralPopup from "@components/common/CollateralPopup"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
-import { BTC } from "@img/token"
 
 import { useAccount, useToken, useNetwork } from "wagmi"
 import { Position, Constants } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
+import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -23,17 +23,11 @@ const ListPosition = () => {
   const [positions, setPositions] = useState([])
   const { address } = useAccount()
   const { chain } = useNetwork()
-  // const { getPositions } = useExchange()
-  const { getPositions, token: tokenAddress, pair } = useExchangeContext()
-  const { indexPrice } = useTokenPriceFeed(tokenAddress)
-
-  const {
-    data: token,
-    isError: tokenError,
-    isLoading: isTokenLoading
-  } = useToken({
-    address: tokenAddress
-  })
+  const { exchange, getPositions } = useExchangeContext()
+  const { prices } = useTokenPriceFeed([
+    Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
+    Constants.Addresses[chain?.id]?.IndexTokens?.WETH
+  ])
 
   useEffect(() => {
     const get = async () => {
@@ -42,7 +36,7 @@ const ListPosition = () => {
     }
 
     get()
-  }, [address, chain])
+  }, [exchange, address, chain])
 
   /**
    * formatValue: Format a BigInt value to a human readable string
@@ -65,21 +59,28 @@ const ListPosition = () => {
   }
 
   const formattedPositions = useMemo(() => {
-    if (!token || !indexPrice) {
+    if (!chain || !prices) {
       return []
     }
 
-    const valueDecimals = token.decimals + Constants.ORACLE_PRICE_DECIMALS
-
     const formatteds = positions.map((position) => {
+      const indexToken = position.indexToken
+      const indexPrice = prices[indexToken]
+      const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[indexToken]
+
+      const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
+
       const pnl = descaleValue(
         Position.getPnl(position.size, position.entryPrice, indexPrice, position.isLong),
-        token.decimals
+        tokenDecimals
       )
+
+      const symbol = AddressToSymbolMap[chain.id][indexToken]
+      const token = Tokens[chain.id][symbol]
 
       return {
         /* global BigInt */
-        market: pair,
+        market: `${token.name}/USD`,
         collateralValue: formatValue(position.collateralValue, valueDecimals),
         size: formatValue(position.size, valueDecimals),
         entryPrice: formatValue(position.entryPrice, Constants.ORACLE_PRICE_DECIMALS),
@@ -89,15 +90,16 @@ const ListPosition = () => {
         indexPrice: formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS),
         pnlRoe: formatValue(pnl, Constants.ORACLE_PRICE_DECIMALS),
         type: position.isLong ? "long" : "short",
-        token: "WBTC",
+        token: symbol,
         netValue: formatValue(
-          Position.getNetValue(position, indexPrice, token.decimals),
+          Position.getNetValue(position, indexPrice, tokenDecimals),
           Constants.ORACLE_PRICE_DECIMALS
-        )
+        ),
+        icon: token.icon
       }
     })
     return formatteds
-  }, [positions, token, indexPrice])
+  }, [positions, prices, chain])
 
   const toggleCollateral = () => {
     setCollateral(!collateral)
@@ -112,7 +114,7 @@ const ListPosition = () => {
       cellRenderer: (cell) => {
         return (
           <div className="flex items-center gap-2">
-            <img src={BTC} className="h-6 w-6" alt="eth" />
+            <img src={cell?.icon} className="h-6 w-6" alt="eth" />
             <div>
               <label>{cell?.market}</label>
               <div className="text-xs green-up">

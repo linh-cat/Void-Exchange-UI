@@ -18,6 +18,7 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import StakingPage from "./pages/StakingPage/StakingPage"
 import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
+import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 
 const baseGoerliExtended = {
   ...baseGoerli,
@@ -87,7 +88,9 @@ const FullApp = () => {
           path="trade"
           element={
             <div className="vh-full-screen">
-              <Exchange />
+              <ExchangeContextProvider>
+                <Exchange />
+              </ExchangeContextProvider>
             </div>
           }
         />
