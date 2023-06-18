@@ -47,7 +47,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   const { label, icon } = useMemo(() => {
     const index = options.findIndex((item) => item.value === values)
     return { label: options[index]?.label, icon: options[index]?.icon }
-  }, [options, values])
+  }, [values])
 
   return (
     <div className="couple-token">

@@ -53,7 +53,7 @@ export function ExchangeContextProvider({ children }) {
   useMemo(() => {
     const symbol = pairToSymbolMap[pair]
     setToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
-  }, [pair])
+  }, [chain.id, pair])
 
   const placeOrder = async (params) => {
     if (!exchange) {
@@ -69,7 +69,6 @@ export function ExchangeContextProvider({ children }) {
   }
 
   const getPositions = async (address) => {
-    console.log("exchange", exchange)
     if (!exchange) {
       return []
     }
