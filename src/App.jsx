@@ -19,6 +19,7 @@ import StakingPage from "./pages/StakingPage/StakingPage"
 import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
 import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
+import BgApp from "@components/BgApp/BgApp"
 
 const baseGoerliExtended = {
   ...baseGoerli,
@@ -67,13 +68,7 @@ const config = createConfig({
 const FullApp = () => {
   return (
     <Router>
-      <div id="bg">
-        <div className="bg">
-          <div className="orange-bg"></div>
-          <div className="blue-bg"></div>
-          <div className="white-bg"></div>
-        </div>
-      </div>
+      <BgApp />
       <Header />
       <Routes>
         <Route

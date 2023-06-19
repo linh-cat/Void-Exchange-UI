@@ -7,13 +7,14 @@ import { useParams } from "react-router-dom"
 import { Constants } from "@void-0x/void-sdk"
 import { useNetwork } from "wagmi"
 import VaultDeposit from "./VaultDeposit"
+import useVaultInforToken from "src/hooks/useVaultInforToken"
 
 const Index = () => {
-  let { id: vaultID } = useParams()
+  let { id: vaultId } = useParams()
   const { chain } = useNetwork()
 
   const vaultInfo = useMemo(() => {
-    switch (vaultID) {
+    switch (vaultId) {
       case "1":
         return {
           tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.WETH,
@@ -32,12 +33,20 @@ const Index = () => {
       default:
         break
     }
-  }, [chain?.id, vaultID])
+  }, [chain?.id, vaultId])
+
+  const { vaultItemInfo } = useVaultInforToken({ vaultId: vaultId })
 
   return (
     <div className="vault-detail">
-      <Banner />
-      <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} />
+      <Banner
+        bg={vaultItemInfo?.bg}
+        currentVault={vaultItemInfo?.currentDeposit}
+        capacity={vaultItemInfo?.capacity}
+        icon={vaultItemInfo?.icon}
+        title={vaultItemInfo?.title}
+      />
+      <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />
       <SectionVaultStats />
     </div>
   )

@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useMemo } from "react"
 import { useBalance, useAccount } from "wagmi"
 
 import LineChart from "@components/LineChart/LineChart"
 import cx from "classnames"
 import Card from "@components/Card/Card"
 import Button from "@components/Button/Button"
-import { ETH } from "@img/token"
+import { BTC, ETH, USDC } from "@img/token"
 import { InputCustom } from "@components/common"
 
 import useVault from "src/hooks/useVault"
@@ -21,7 +21,7 @@ import { isEthereumAddress } from "src/types"
  * @param {Object} props.vaultAddress Address of the vault
  */
 
-const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
+const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
   const [tab, setTab] = useState("deposit")
   const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
 
@@ -91,6 +91,21 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
   const onChangeTab = (val) => {
     setTab(val)
   }
+
+  const imgToken = useMemo(() => {
+    switch (Number(vaultId)) {
+      case 1:
+        return ETH
+      case 2:
+        return BTC
+
+      case 4:
+        return USDC
+
+      default:
+        break
+    }
+  }, [vaultId])
 
   return (
     <div className="container mx-auto max-w-7xl mt-10">
@@ -206,7 +221,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                           isBorder={false}
                           rightAction={
                             <div className="flex gap-2 mr-1 items-center">
-                              <img src={ETH} alt="ETH" className="w-5 h-5" />
+                              <img src={imgToken} alt="token" className="w-6 h-5" />
                             </div>
                           }
                           disabled={isApproving || isDepositing}
@@ -230,12 +245,21 @@ const VaultDeposit = ({ tokenAddress, vaultAddress }) => {
                           <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
                         </div>
                       </div>
-                      <div className="token flex gap-2 justify-between">
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
-                          <img src={ETH} alt="ETH" className="w-5 h-5" />
-                          <label className="">ETH</label>
-                        </div>
-                        <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
+                      <div className="token border rounded py-2 pl-2">
+                        <InputCustom
+                          type="number"
+                          classNameInput="p-0"
+                          onChange={onChangeAmount}
+                          placeHolder="0.0"
+                          value={amount}
+                          isBorder={false}
+                          rightAction={
+                            <div className="flex gap-2 mr-1 items-center">
+                              <img src={imgToken} alt="token" className="w-6 h-5" />
+                            </div>
+                          }
+                          disabled={isApproving || isDepositing}
+                        />
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
