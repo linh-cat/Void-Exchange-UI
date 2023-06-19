@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <div className="py-10 mt-10 max-w-7xl mx-auto container flex flex-col gap-5">
+    <div className="py-10 mt-20 max-w-7xl mx-auto container flex flex-col gap-5">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
         <div className="relative">
           <img

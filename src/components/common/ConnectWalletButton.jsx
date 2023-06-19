@@ -107,17 +107,17 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 text={
                   <div className="flex items-center gap-2">
                     <div className="active-chain"></div>
-                    <label>{chain.name}</label>
+                    <label className="truncate">{chain.name}</label>
                   </div>
                 }
                 onClick={() => setChainModal(true)}
                 isDefault={false}
-                className="border px-3 shadow"
+                className=" border px-3"
               />
               <Button
                 text={
                   <div className="flex items-center gap-3">
-                    <div className="">
+                    <div>
                       {decialNumber(balance?.formatted, 4)} {balance?.symbol}
                     </div>
                     <Button
@@ -127,7 +127,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     />
                   </div>
                 }
-                className="inline-block border px-2 py-1 shadow"
+                className="inline-block border px-2 py-1"
                 isDefault={false}
               />
             </>

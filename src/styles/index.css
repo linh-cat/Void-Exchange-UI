@@ -489,13 +489,3 @@ a.plain {
 .notShow {
     display: none;
 }
-
-.mobile-hidden {
-    display: none;
-}
-
-@media (min-width: 1024px) {
-    .mobile-hidden {
-        display: block;
-    }
-}
