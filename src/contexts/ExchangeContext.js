@@ -51,9 +51,11 @@ export function ExchangeContextProvider({ children }) {
    * Update token when the pair changes
    */
   useMemo(() => {
-    const symbol = pairToSymbolMap[pair]
-    setToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
-  }, [chain.id, pair])
+    if (chain && pair) {
+      const symbol = pairToSymbolMap[pair]
+      setToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
+    }
+  }, [chain, pair])
 
   const placeOrder = async (params) => {
     if (!exchange) {

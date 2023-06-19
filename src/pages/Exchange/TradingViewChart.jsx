@@ -37,7 +37,7 @@ export default function TradingViewChart() {
         new window.TradingView.widget({
           width: "100%",
           height: "100%",
-          symbol: pairMapping[pair],
+          symbol: pairMapping[pair] || "Binance:BTCUSDT",
           interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",
