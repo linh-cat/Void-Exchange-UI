@@ -48,7 +48,7 @@ const Header = () => {
         })}
         ref={refOutside}
       >
-        <div className="flex items-center xl:gap-10">
+        <div className="flex items-center xl:gap-36">
           <Link to={"/"} className="flex items-center logo">
             <img src={VoidExchangeLogo} alt="Logo" />
           </Link>
