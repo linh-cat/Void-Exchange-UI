@@ -2,32 +2,13 @@ import React from "react"
 import SelectCoupleToken from "../../components/common/SelectCoupleToken"
 import Up from "../../img/up.svg"
 import Badge from "../../components/common/Badge"
-import { BTC, ETH } from "@img/token"
 
 const InforBarChar = () => {
   return (
     <div className="top-chart w-full flex flex-col lg:flex-row md:gap-5 lg:items-center">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
-          <SelectCoupleToken
-            options={[
-              {
-                label: "BTC/USDT",
-                value: "BTC/USDT",
-                icon: BTC,
-                price: "$27.000",
-                dayChange: "0.18%"
-              },
-              {
-                label: "ETH/USDT",
-                value: "ETH/USDT",
-                icon: ETH,
-                price: "$1.000",
-                dayChange: "0.1%"
-              }
-            ]}
-            defaultValue={"BTC/USDT"}
-          />
+          <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
           <label className="text-xl green-up">$27,382.31</label>

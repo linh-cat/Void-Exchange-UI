@@ -7,6 +7,6 @@ export const isChainSupported = (chain) => {
     return false
   }
 
-  const chainIds = [ChainId.Sepolia, ChainId.Goerli, ChainId.BaseGoerli]
+  const chainIds = [ChainId.Sepolia, ChainId.BaseGoerli]
   return chainIds.includes(chain.id)
 }

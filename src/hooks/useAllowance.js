@@ -11,7 +11,11 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     watch: true
   })
 
-  const { data, write, isLoading: isLoadingWrite } = useContractWrite({
+  const {
+    data,
+    write,
+    isLoading: isLoadingWrite
+  } = useContractWrite({
     address: token,
     abi: erc20ABI,
     functionName: "approve"

@@ -40,7 +40,7 @@ const useExchange = () => {
       return []
     }
 
-    const positions = await exchange.getPositions(address)
+    const positions = await exchange.getPositions(address, chain.id)
 
     if (positions.length) {
       return positions.filter((position) => position.size > 0)

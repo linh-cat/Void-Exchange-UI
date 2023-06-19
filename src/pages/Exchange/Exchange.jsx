@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
+import { useNetwork } from "wagmi"
+
 import "./Exchange.css"
 import TabExchange from "../../components/TabExchange/TabExchange"
 import TradingViewChart from "./TradingViewChart"
@@ -14,6 +16,8 @@ import TopInfo from "@components/TopInfo/TopInfo"
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
+  const { chain } = useNetwork()
+
   const onChangeTabSection = (val) => {
     setTabSection(val)
   }
@@ -21,6 +25,10 @@ const Exchange = () => {
     setShowHistory(!showHistory)
   }
 
+  /**
+   *
+   * @param {[]Object} options
+   */
   const renderListSections = () => {
     return (
       <div className={cx({ "p-3 section-list": true })}>

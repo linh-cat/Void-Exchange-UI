@@ -1,11 +1,18 @@
 // TradingViewWidget.jsx
 
 import React, { useEffect, useRef } from "react"
+import { useExchangeContext } from "src/contexts/ExchangeContext"
 
 let tvScriptLoadingPromise
 
-export default function TradingViewWidget() {
+const pairMapping = {
+  "BTC/USD": "Binance:BTCUSDT",
+  "ETH/USD": "Binance:ETHUSDT"
+}
+
+export default function TradingViewChart() {
   const onLoadScriptRef = useRef()
+  const { pair } = useExchangeContext()
 
   useEffect(() => {
     onLoadScriptRef.current = createWidget
@@ -17,7 +24,6 @@ export default function TradingViewWidget() {
         script.src = "https://s3.tradingview.com/tv.js"
         script.type = "text/javascript"
         script.onload = resolve
-
         document.head.appendChild(script)
       })
     }
@@ -31,7 +37,7 @@ export default function TradingViewWidget() {
         new window.TradingView.widget({
           width: "100%",
           height: "100%",
-          symbol: "Binance:BTCUSDT",
+          symbol: pairMapping[pair] || "Binance:BTCUSDT",
           interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",
@@ -45,7 +51,7 @@ export default function TradingViewWidget() {
         })
       }
     }
-  }, [])
+  }, [pair])
 
   return (
     <div className="tradingview-widget-container">
