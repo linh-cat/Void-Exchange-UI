@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Bitcoin, Ethereum, USDC } from '@img/logo';
+import { BTC, ETH, USDC } from '@img/token';
 
 const useVaultInforToken = ({ vaultId }) => {
     const dataForMapping = useMemo(() => [
@@ -9,7 +9,7 @@ const useVaultInforToken = ({ vaultId }) => {
             currentDeposit: '100.000 ETH',
             capacity: '750.000 ETH',
             bg: 'bg-eth-banner',
-            icon: Ethereum
+            icon: ETH
         },
         {
             id: 2,
@@ -17,7 +17,7 @@ const useVaultInforToken = ({ vaultId }) => {
             currentDeposit: '100.000.000 BTC',
             capacity: '750.000.000 BTC',
             bg: 'bg-btc-banner',
-            icon: Bitcoin
+            icon: BTC
         },
         {
             id: 4,

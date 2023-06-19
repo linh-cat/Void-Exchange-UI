@@ -245,12 +245,21 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                           <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
                         </div>
                       </div>
-                      <div className="token flex gap-2 justify-between">
-                        <div className="flex gap-2 items-center border py-1 px-2 rounded-3xl">
-                          <img src={ETH} alt="ETH" className="w-5 h-5" />
-                          <label className="">ETH</label>
-                        </div>
-                        <input type="number" className="p-0 flex-1 text-right" placeholder="0" />
+                      <div className="token border rounded py-2 pl-2">
+                        <InputCustom
+                          type="number"
+                          classNameInput="p-0"
+                          onChange={onChangeAmount}
+                          placeHolder="0.0"
+                          value={amount}
+                          isBorder={false}
+                          rightAction={
+                            <div className="flex gap-2 mr-1 items-center">
+                              <img src={imgToken} alt="token" className="w-6 h-5" />
+                            </div>
+                          }
+                          disabled={isApproving || isDepositing}
+                        />
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
