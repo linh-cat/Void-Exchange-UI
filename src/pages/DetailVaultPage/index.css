@@ -1,5 +1,18 @@
-.vault-detail .banner {
+.vault-detail .bg-eth-banner {
     background: linear-gradient(96.84deg, rgba(98, 126, 234, 0.16) 1.04%, rgba(98, 126, 234, 0.027) 98.99%);
+    padding: 40px 0px;
+    overflow: hidden;
+}
+
+.vault-detail .bg-btc-banner {
+    background: linear-gradient(96.84deg, rgba(137, 107, 7, 0.16) 1.04%, rgba(240, 185, 11, 0.027) 98.99%);
+    padding: 40px 0px;
+    overflow: hidden;
+}
+
+
+.vault-detail .bg-usdc-banner {
+    background: linear-gradient(96.84deg, rgba(62, 115, 196, 0.16) 1.04%, rgba(62, 115, 196, 0.027) 98.99%);
     padding: 40px 0px;
     overflow: hidden;
 }

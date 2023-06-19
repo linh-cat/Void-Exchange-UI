@@ -6,6 +6,7 @@ import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
 import cx from "classnames"
 import { Link, useLocation } from "react-router-dom"
 import { CancelIcon } from "@icons/index"
+import BgApp from "@components/BgApp/BgApp"
 
 const Header = () => {
   const location = useLocation()

@@ -5,4 +5,7 @@ import Binance from "./Binance.svg"
 import Kucoin from "./kucoin.svg"
 import Coinbase from "./coinbase.svg"
 import Bybit from "./bybit.svg"
-export { Rewards, OKX, ChainLink, Binance, Kucoin, Coinbase, Bybit }
+import Ethereum from "./Ethereum.svg"
+import Bitcoin from "./Bitcoin.svg"
+import USDC from "./USDC.svg"
+export { Rewards, OKX, ChainLink, Binance, Kucoin, Coinbase, Bybit, Ethereum, Bitcoin, USDC }

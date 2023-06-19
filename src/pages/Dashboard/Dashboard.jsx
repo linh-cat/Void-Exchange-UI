@@ -5,6 +5,7 @@ import StandardAsset from "@components/StandardAsset/StandardAsset"
 import Banner from "@components/Banner/Banner"
 import StatisticInfo from "@components/StatisticInfo/StatisticInfo"
 import TradeForFree from "@components/TradeForFree/TradeForFree"
+import BgApp from "@components/BgApp/BgApp"
 
 const Dashboard = () => {
   return (
