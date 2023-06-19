@@ -3,7 +3,7 @@ import "./Banner.css"
 import { useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
-import { DownIconRed } from "@icons/index"
+import { DownIconGreen, DownIconRed } from "@icons/index"
 import { BaseIcon } from "@img/icons"
 import { BTC, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
 
@@ -52,97 +52,89 @@ const Banner = () => {
           />
         </div>
 
-        <Card className="banner-info-token p-8 mt-20" hasShadow={true}>
+        <Card className="p-8 mt-20 w-full lg:w-3/4 mx-auto" hasShadow={true}>
           <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
-            <div className="token grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
-              <div className="item flex justify-center">
-                <div className="flex w-5/6 justify-between items-center">
-                  <div className="w-1/4">
+            <div className="overflow-x-auto no-scrollbar">
+              <div className="flex justify-between items-center ">
+                <div className="item flex justify-center items-center gap-3">
+                  <div className="flex justify-center items-center">
                     <img src={BTC} alt="BTC" className="w-10 h-10 border rounded-full" />
                   </div>
-                  <div className="text-sm w-2/4 ml-3 text-left">
-                    <div className="text-left">
-                      <label className="">WBTC</label>
-                    </div>
-                    <div>$1</div>
-                  </div>
 
-                  <div className="flex items-center gap-1 text-sm w-1/4">
-                    <img src={DownIconRed} alt="down" className="" />
-                    <label className="red-down">-0.01</label>
+                  <div className="text-sm">
+                    <label className="">WBTC</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm border bg-errorLight rounded px-2">
+                        <img src={DownIconRed} alt="down" className="" />
+                        <label className="red-down">-0.01</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="item flex justify-center">
-                <div className="flex w-5/6 justify-between items-center">
-                  <div className="w-1/4">
-                    <img src={ETH} alt="ETH" className="w-10 h-10 border rounded-full" />
-                  </div>
-                  <div className="text-sm w-2/4 ml-3">
-                    <div className="text-left">
-                      <label className="">ETH</label>
-                    </div>
-                    <div>$1</div>
+                <div className="item flex justify-center items-center gap-3">
+                  <div className=" flex justify-center items-center">
+                    <img src={ETH} alt="eth" className="w-10 h-10 border rounded-full" />
                   </div>
 
-                  <div className="flex items-center gap-1 text-sm w-1/4">
-                    <img src={DownIconRed} alt="down" className="" />
-                    <label className="red-down">-0.01</label>
+                  <div className="text-sm ">
+                    <label className="">WETH</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm rounded bg-successLight px-2">
+                        <img src={DownIconGreen} alt="down" className="rotate-180" />
+                        <label className="green-up">-0.01</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="item flex justify-center">
-                <div className="flex w-5/6 justify-between items-center">
-                  <div className="w-1/4">
-                    <img src={SOLANA} alt="Solana" className="w-10 h-10 border rounded-full" />
-                  </div>
-                  <div className="text-sm w-2/4 ml-3">
-                    <div className="text-left">
-                      <label className="">Solana</label>
-                    </div>
-                    <div>$1</div>
+                <div className="item flex justify-center items-center gap-3">
+                  <div className=" flex justify-center items-center">
+                    <img src={POLYGON} alt="polygon" className="w-10 h-10 border rounded-full" />
                   </div>
 
-                  <div className="flex items-center gap-1 text-sm w-1/4">
-                    <img src={DownIconRed} alt="down" className="" />
-                    <label className="red-down">-0.01</label>
+                  <div className="text-sm ">
+                    <label className="">POLYGON</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm rounded px-2 bg-successLight">
+                        <img src={DownIconGreen} alt="down" className="rotate-180" />
+                        <label className="green-up">-0.01</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="item flex justify-center">
-                <div className="flex w-5/6 justify-between items-center">
-                  <div className="w-1/4">
-                    <img src={POLYGON} alt="Polygon" className="w-10 h-10 border rounded-full" />
-                  </div>
-                  <div className="text-sm w-2/4 ml-3">
-                    <div className="text-left">
-                      <label className="">Polygon</label>
-                    </div>
-                    <div>$1</div>
+                <div className="item flex justify-center items-center gap-3">
+                  <div className=" flex justify-center items-center">
+                    <img src={MATIC} alt="matic" className="w-10 h-10 border rounded-full" />
                   </div>
 
-                  <div className="flex items-center gap-1 text-sm w-1/4">
-                    <img src={DownIconRed} alt="down" className="" />
-                    <label className="red-down">-0.01</label>
+                  <div className="text-sm ">
+                    <label className="">WBTC</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm rounded bg-errorLight px-2">
+                        <img src={DownIconRed} alt="down" className="" />
+                        <label className="red-down">-0.01</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="item flex justify-center">
-                <div className="flex w-5/6 justify-between items-center">
-                  <div className="w-1/4">
-                    <img src={MATIC} alt="Matic" className="w-10 h-10 border rounded-full" />
-                  </div>
-                  <div className="text-sm w-2/4 ml-3">
-                    <div className="text-left">
-                      <label className="">MATIC</label>
-                    </div>
-                    <div>$1</div>
+                <div className="item flex justify-center items-center gap-3">
+                  <div className=" flex justify-center items-center">
+                    <img src={SOLANA} alt="BTC" className="w-10 h-10 border rounded-full" />
                   </div>
 
-                  <div className="flex items-center gap-1 text-sm w-1/4">
-                    <img src={DownIconRed} alt="down" className="" />
-                    <label className="red-down">-0.01</label>
+                  <div className="text-sm ">
+                    <label className="">SOLANA</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
+                        <img src={DownIconRed} alt="down" className="" />
+                        <label className="red-down">-0.01</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

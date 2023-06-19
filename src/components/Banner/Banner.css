@@ -397,3 +397,14 @@
         height: 100vh;
     }
 }
+
+@media (max-width: 1024px) {
+    .banner-container .item {
+        width: 180px !important;
+        margin-right: 20px;
+    }
+
+    .banner-container .item img {
+        max-width: fit-content;
+    }
+}

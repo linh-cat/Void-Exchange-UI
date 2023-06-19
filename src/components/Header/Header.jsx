@@ -43,91 +43,94 @@ const Header = () => {
     >
       <header
         className={cx({
-          "header flex justify-between lg:justify-around items-center w-full z-50 relative lg:text-sm xl:text-base px-3": true,
+          "header flex justify-between lg:justify-around items-center w-full z-50 relative lg:text-sm xl:text-base px-3 py-1": true,
           "border-b": location.pathname === "/trade" ? true : false
         })}
         ref={refOutside}
       >
-        <Link to={"/"} className="flex items-center logo">
-          <img src={VoidExchangeLogo} alt="Logo" />
-        </Link>
-        <div className={cx("navbar", { show: isShow })}>
-          <ul className="lg:flex items-center gap-6">
-            <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
-              Testnet
-            </li>
-            <li
-              className={cx("item", {
-                border: false
-              })}
-            >
-              <Link to={`/vault/list`} onClick={showMenu}>
-                Earn
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/"
-              })}
-            >
-              <Link to={`/`} onClick={showMenu}>
-                Dashboard
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/document"
-              })}
-            >
-              <Link to={`/document`} onClick={showMenu}>
-                Docs
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/profile"
-              })}
-            >
-              <Link to={`/profile`} onClick={showMenu}>
-                Profile
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/faucet"
-              })}
-            >
-              <Link to={`/faucet`} onClick={showMenu}>
-                Faucet
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/staking"
-              })}
-            >
-              <Link to={`/staking`} onClick={showMenu}>
-                Staking
-              </Link>
-            </li>
-            <li
-              className={cx("item", {
-                border: false,
-                "active-link font-medium": location.pathname === "/market"
-              })}
-            >
-              <Link to={`/market`} onClick={showMenu}>
-                Market
-              </Link>
-            </li>
-            {width <= 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
-          </ul>
+        <div className="flex items-center xl:gap-10">
+          <Link to={"/"} className="flex items-center logo">
+            <img src={VoidExchangeLogo} alt="Logo" />
+          </Link>
+          <div className={cx("navbar", { show: isShow })}>
+            <ul className="lg:flex items-center gap-6">
+              <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
+                Testnet
+              </li>
+              <li
+                className={cx("item", {
+                  border: false
+                })}
+              >
+                <Link to={`/vault/list`} onClick={showMenu}>
+                  Earn
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/"
+                })}
+              >
+                <Link to={`/`} onClick={showMenu}>
+                  Dashboard
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/document"
+                })}
+              >
+                <Link to={`/document`} onClick={showMenu}>
+                  Docs
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/profile"
+                })}
+              >
+                <Link to={`/profile`} onClick={showMenu}>
+                  Profile
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/faucet"
+                })}
+              >
+                <Link to={`/faucet`} onClick={showMenu}>
+                  Faucet
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/staking"
+                })}
+              >
+                <Link to={`/staking`} onClick={showMenu}>
+                  Staking
+                </Link>
+              </li>
+              <li
+                className={cx("item", {
+                  border: false,
+                  "active-link font-medium": location.pathname === "/market"
+                })}
+              >
+                <Link to={`/market`} onClick={showMenu}>
+                  Market
+                </Link>
+              </li>
+              {width <= 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
+            </ul>
+          </div>
         </div>
+
         <div className="flex">
           {width > 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
           <button type="button" onClick={showMenu} className="hamburgur-icon">

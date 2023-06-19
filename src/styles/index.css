@@ -105,6 +105,14 @@ body {
     opacity: 0.3;
 }
 
+.bg-errorLight {
+    background-color: rgba(255, 82, 82, .1);
+}
+
+.bg-successLight {
+    background-color: rgba(15, 198, 121, .3);
+}
+
 #bg .bg div {
     position: absolute;
     top: -40px;
@@ -261,10 +269,6 @@ body {
 
 .hover-opacity:hover {
     opacity: .6 !important;
-}
-
-.green-up {
-    color: var(--main-long);
 }
 
 .font-small {
