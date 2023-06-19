@@ -15,7 +15,7 @@ export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   // market is the address of the base token of a pair
   //
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState("BTC/USD")
   // pair is the combination of base/quote
   // E.g: BTC/USD
   const [pair, setPair] = useState("")
@@ -43,7 +43,6 @@ export function ExchangeContextProvider({ children }) {
       // set default token
       const token = Constants.Addresses[chain.id]?.IndexTokens?.WBTC
       setToken(token)
-      setPair("BTC/USD")
     }
   }, [chain])
 
