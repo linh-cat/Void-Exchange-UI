@@ -9,8 +9,6 @@ const useTokenPriceFeed = (tokenAddresses) => {
   // TODO: remove indexPrice
   const {
     data: indexPrice,
-    isError,
-    isLoading
   } = useContractRead({
     address: Constants.Addresses[chain?.id]?.PriceFeed,
     abi: FastPriceFeedABI.abi,
@@ -44,7 +42,7 @@ const useTokenPriceFeed = (tokenAddresses) => {
     })
 
     return result
-  }, [data])
+  }, [data, tokenAddresses])
 
   return { indexPrice, prices }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState, useCallback } from "react"
 
 import { Position, OrderType, Side } from "@void-0x/void-sdk"
 import { parseUnits } from "viem"
-import { useAccount, useBalance, useContractRead, useNetwork } from "wagmi"
+import { useAccount, useBalance, useNetwork } from "wagmi"
 
 import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
 import { LimitIcon, MarketIcon } from "@icons/index"
@@ -13,7 +13,6 @@ import { Constants } from "@void-0x/void-sdk"
 
 import { BTC, CAKE, ETH } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
-import { FastPriceFeed } from "src/abis"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
@@ -29,7 +28,7 @@ const OrderBox = ({ type }) => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { token, setToken, placeOrder, isPlacingOrder } = useExchangeContext()
+  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
   const [tokenSelected, setTokenSelected] = useState("")
 
   const { address } = useAccount()
@@ -60,9 +59,6 @@ const OrderBox = ({ type }) => {
     setToggle(!toggle)
   }
 
-  const changePayAmount = (amount) => {
-    setPayAmount(amount)
-  }
   const changeOrderType = (order) => {
     setOrderType(order)
   }
