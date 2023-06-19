@@ -390,3 +390,10 @@
         transform: scale(2) translate(-70px, -30px);
     }
 }
+
+
+@media (max-width: 600px) {
+    .banner-db {
+        height: 100vh;
+    }
+}
