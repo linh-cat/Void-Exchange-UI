@@ -38,12 +38,12 @@ const Header = () => {
   return (
     <div
       className={cx({
-        "blur-bg sticky py-3": y > 0
+        "blur-bg sticky": y > 0
       })}
     >
       <header
         className={cx({
-          "header flex justify-between items-center w-full z-50 relative lg:text-sm xl:text-base px-3": true,
+          "header flex justify-between lg:justify-around items-center w-full z-50 relative lg:text-sm xl:text-base px-3": true,
           "border-b": location.pathname === "/trade" ? true : false
         })}
         ref={refOutside}
@@ -53,7 +53,7 @@ const Header = () => {
         </Link>
         <div className={cx("navbar", { show: isShow })}>
           <ul className="lg:flex items-center gap-6">
-            <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 lg:border border-blue-500 rounded">
+            <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
               Testnet
             </li>
             <li
