@@ -58,13 +58,24 @@ const ListPosition = () => {
         entryPrice: formatValue(position.entryPrice, Constants.ORACLE_PRICE_DECIMALS),
         leverage: Position.getLeverage(position) + "x",
         isProfitable: pnl > 0,
-        // entryprice: "$1,884.9",
         indexPrice: formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS),
         pnlRoe: formatValue(pnl, Constants.ORACLE_PRICE_DECIMALS),
         type: position.isLong ? "long" : "short",
         token: symbol,
         netValue: formatValue(
           Position.getNetValue(position, indexPrice, tokenDecimals),
+          Constants.ORACLE_PRICE_DECIMALS
+        ),
+        liquidationPrice: formatValue(
+          Position.getLiquidationPrice(
+            position,
+            BigInt(Constants.POSITION_FEE),
+            /* global BigInt */
+            // TODO: fetch current funding rate from exchange
+            BigInt(0),
+            indexPrice,
+            BigInt(Constants.MIN_MARGIN_RATIO_BPS)
+          ),
           Constants.ORACLE_PRICE_DECIMALS
         ),
         icon: token.icon
@@ -141,10 +152,7 @@ const ListPosition = () => {
     {
       field: "liquidationPrice",
       headerName: "Liquidation Price",
-      headerClassName: "text-xs",
-      cellRenderer: (cell) => {
-        return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
-      }
+      headerClassName: "text-xs"
     },
     {
       field: "action",
