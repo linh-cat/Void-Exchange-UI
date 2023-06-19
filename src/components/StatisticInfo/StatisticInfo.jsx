@@ -4,7 +4,7 @@ import Card from "@components/Card/Card"
 
 const StatisticInfo = () => {
   return (
-    <div className="container mx-auto statistic-container text-center flex flex-col gap-10 mt-10">
+    <div className="container max-w-7xl  mx-auto statistic-container text-center flex flex-col gap-10 mt-10">
       <div className="statistic-top flex flex-col gap-3">
         <h3 className="text-slate-500 uppercase font-medium text-sm tracking-wider">battle tested</h3>
         <h2 className="font-medium text-2xl">Trusted by over 25,000 traders</h2>

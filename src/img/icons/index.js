@@ -15,6 +15,8 @@ import VoidIcon from "./void.png"
 import BaseIcon from "./base.png"
 import DBIcon from "./db.png"
 import SearchIcon from "./Search.svg"
+import DiscordIcon from "./discord.png"
+import TwitterIcon from "./twitter.png"
 
 export {
   LimitIcon,
@@ -33,5 +35,7 @@ export {
   VoidIcon,
   BaseIcon,
   DBIcon,
-  SearchIcon
+  SearchIcon,
+  DiscordIcon,
+  TwitterIcon
 }

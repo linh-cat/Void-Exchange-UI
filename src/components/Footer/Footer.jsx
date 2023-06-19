@@ -1,44 +1,55 @@
+import { DiscordIcon, GithubMarkIcon, TwitterIcon, VoidIcon } from "@icons/index"
 import React from "react"
-import "./Footer.css"
-import { NavLink } from "react-router-dom"
-import { getFooterLinks, SOCIAL_LINKS } from "./constants"
-import ExternalLink from "../ExternalLink/ExternalLink"
+import { Link } from "react-router-dom"
 
-export default function Footer({ showRedirectModal, redirectPopupTimestamp }) {
+const Footer = () => {
   return (
-    <div className="Footer">
-      <div className="Footer-wrapper border-t">
-        <div className="Footer-logo">
-          <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-          <span className="self-center font-semibold whitespace-nowrap dark:text-white">ZK Perp</span>
+    <div className="py-10 mt-10 max-w-7xl mx-auto container flex flex-col gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
+        <div>
+          <img src={VoidIcon} alt="void icon" className="w-10 h-10" />
         </div>
-        <div className="Footer-social-link-block">
-          {SOCIAL_LINKS.map((platform) => {
-            return (
-              <ExternalLink key={platform.name} className="App-social-link" href={platform.link}>
-                <img src={platform.icon} alt={platform.name} />
-              </ExternalLink>
-            )
-          })}
+        <div className="flex flex-col gap-2">
+          <h3>Void Exchange</h3>
+          <Link className="text-slate-500 text-sm hover">App</Link>
+          <Link className="text-slate-500 text-sm hover">Trading</Link>
+          <Link className="text-slate-500 text-sm hover">Documentation</Link>
+          <Link className="text-slate-500 text-sm hover">Security</Link>
         </div>
-        <div className="Footer-links">
-          {getFooterLinks(true).map(({ external, text, link, isAppLink }) => {
-            if (external) {
-              return (
-                <ExternalLink key={text} href={link} className="Footer-link">
-                  {text}
-                </ExternalLink>
-              )
-            }
-
-            return (
-              <NavLink key={link} to={link} className="Footer-link" activeClassName="active">
-                {text}
-              </NavLink>
-            )
-          })}
+        <div className="flex flex-col gap-2">
+          <h3>Void Exchange</h3>
+          <Link className="text-slate-500 text-sm hover">App</Link>
+          <Link className="text-slate-500 text-sm hover">Trading</Link>
+          <Link className="text-slate-500 text-sm hover">Documentation</Link>
+          <Link className="text-slate-500 text-sm hover">Security</Link>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h3>Void Exchange</h3>
+          <Link className="text-slate-500 text-sm hover">App</Link>
+          <Link className="text-slate-500 text-sm hover">Trading</Link>
+          <Link className="text-slate-500 text-sm hover">Documentation</Link>
+          <Link className="text-slate-500 text-sm hover">Security</Link>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h3>Governance</h3>
+          <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <img src={GithubMarkIcon} alt="github" className="w-4 h-4" /> <div>Github</div>
+          </Link>
+          <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <img src={DiscordIcon} alt="discord" className="w-4 h-4 bg-white rounded" /> <div>Discord</div>
+          </Link>
+          <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <img src={TwitterIcon} alt="twitter" className="w-4 h-4 bg-white rounded" /> <div>Twitter</div>
+          </Link>
+        </div>
+      </div>
+      <div className="border-t pt-3">
+        <div>
+          <div className="text-slate-500 text-xs">© 2023 Void Exchange, Inc.</div>
         </div>
       </div>
     </div>
   )
 }
+
+export default Footer

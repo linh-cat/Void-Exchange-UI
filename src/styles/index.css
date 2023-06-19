@@ -251,6 +251,10 @@ body {
     color: var(--arbitrum-blue);
 }
 
+.hover:hover {
+    color: var(--arbitrum-blue);
+}
+
 .btc-border {
     border-color: #F79D2F !important;
 }

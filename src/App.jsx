@@ -20,6 +20,7 @@ import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
 import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 import BgApp from "@components/BgApp/BgApp"
+import Footer from "@components/Footer/Footer"
 
 const baseGoerliExtended = {
   ...baseGoerli,
@@ -76,6 +77,7 @@ const FullApp = () => {
           element={
             <div>
               <Dashboard />
+              <Footer />
             </div>
           }
         />
@@ -94,13 +96,38 @@ const FullApp = () => {
           element={
             <div>
               <DocumentPage />
+              <Footer />
             </div>
           }
         />
         <Route path="profile" element={<ProfilePage />} />
-        <Route path="faucet" element={<FaucetPage />} />
-        <Route path="staking" element={<StakingPage />} />
-        <Route path="market" element={<MarketPage />} />
+        <Route
+          path="faucet"
+          element={
+            <div>
+              <FaucetPage />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="staking"
+          element={
+            <div>
+              <StakingPage />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="market"
+          element={
+            <div>
+              <MarketPage />
+              <Footer />
+            </div>
+          }
+        />
         <Route
           path="vault"
           element={

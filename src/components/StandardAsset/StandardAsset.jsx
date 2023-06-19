@@ -148,7 +148,7 @@ const dataForTable = [
 ]
 const StandardAsset = () => {
   return (
-    <Card className="standard-asset mt-10 container mx-auto p-5" hasShadow={true}>
+    <Card className="standard-asset mt-10 container mx-auto max-w-7xl  p-5" hasShadow={true}>
       <h3 className="font-medium text-lg p-3">Standard Assets</h3>
       <TableCustom columnDef={columnDef} data={dataForTable} cellStyle="px-3 py-4 border-b" />
     </Card>
