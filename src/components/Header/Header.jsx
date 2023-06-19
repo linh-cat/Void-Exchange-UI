@@ -43,12 +43,12 @@ const Header = () => {
     >
       <header
         className={cx({
-          "header flex justify-between lg:justify-around items-center w-full z-50 relative lg:text-sm xl:text-base px-3 py-1": true,
+          "header flex justify-between lg:justify-between items-center w-full z-50 relative lg:text-sm xl:text-base px-28 py-1": true,
           "border-b": location.pathname === "/trade" ? true : false
         })}
         ref={refOutside}
       >
-        <div className="flex items-center xl:gap-36">
+        <div className="flex items-center lg:gap-24">
           <Link to={"/"} className="flex items-center logo">
             <img src={VoidExchangeLogo} alt="Logo" />
           </Link>
