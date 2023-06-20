@@ -49,12 +49,12 @@ const Header = () => {
         })}
         ref={refOutside}
       >
-        <div className="flex items-center lg:gap-24">
+        <div className="flex items-center gap-0 2xl:gap-24">
           <div className="w-40" onClick={() => navigate("/")}>
             <img src={VoidExchangeLogo} alt="Logo" className="h-auto object-cover w-full" />
           </div>
           <div className={cx("navbar", { show: isShow })}>
-            <ul className="xl:flex items-center gap-6">
+            <ul className="xl:flex items-center gap-3 2xl:gap-12">
               <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </li>
