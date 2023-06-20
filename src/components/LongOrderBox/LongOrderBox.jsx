@@ -27,7 +27,6 @@ const LongOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
   const { token, placeOrder, isPlacingOrder, setToken } = useExchangeContext()
-  const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
 
@@ -40,7 +39,7 @@ const LongOrderBox = () => {
   const { indexPrice } = useTokenPriceFeed([token])
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: tokenSelected,
+    token: token,
     account: address,
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
@@ -86,12 +85,6 @@ const LongOrderBox = () => {
   useEffect(() => {
     setCollateralModal(toggle)
   }, [toggle])
-
-  console.log({ token })
-
-  useEffect(() => {
-    if (token) setTokenSelected(token)
-  }, [token])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
@@ -171,7 +164,7 @@ const LongOrderBox = () => {
               { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
               { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
             ]}
-            tokenValue={tokenSelected}
+            tokenValue={token}
             onSelectToken={(token) => {
               setToken(token)
             }}
