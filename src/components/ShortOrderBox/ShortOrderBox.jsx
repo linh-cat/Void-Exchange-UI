@@ -33,11 +33,9 @@ const ShortOrderBox = () => {
 
   const { data: balance } = useBalance({
     address: address,
-    token: token,
+    token: tokenSelected,
     watch: true
   })
-
-  console.log({ token, tokenSelected })
 
   const { indexPrice } = useTokenPriceFeed([token])
 

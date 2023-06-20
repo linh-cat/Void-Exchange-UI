@@ -26,14 +26,14 @@ const LongOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { token, placeOrder, isPlacingOrder, setToken } = useExchangeContext()
+  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
   const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
 
   const { data: balance } = useBalance({
     address: address,
-    token: token,
+    token: tokenSelected,
     watch: true
   })
 
