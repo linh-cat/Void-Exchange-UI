@@ -87,8 +87,6 @@ const LongOrderBox = () => {
     setCollateralModal(toggle)
   }, [toggle])
 
-  console.log({ token })
-
   useEffect(() => {
     if (token) setTokenSelected(token)
   }, [token])

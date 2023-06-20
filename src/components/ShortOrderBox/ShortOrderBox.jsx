@@ -26,7 +26,7 @@ const ShortOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { token, placeOrder, isPlacingOrder, setToken } = useExchangeContext()
+  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
   const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
@@ -36,7 +36,9 @@ const ShortOrderBox = () => {
     token: token,
     watch: true
   })
-  console.log({ token })
+
+  console.log({ token, tokenSelected })
+
   const { indexPrice } = useTokenPriceFeed([token])
 
   const { allowance, approve, isApproving } = useAllowance({
@@ -61,10 +63,6 @@ const ShortOrderBox = () => {
     setOrderType(order)
   }
 
-  useEffect(() => {
-    setToken(Constants.Addresses[chain?.id]?.StableCoins?.USDC)
-  }, [chain?.id, setToken])
-
   const positionSize = useMemo(() => {
     if (payAmount && payAmount > 0 && payAmount !== "") {
       return Position.getPositionSizeInUsd(
@@ -88,13 +86,13 @@ const ShortOrderBox = () => {
   }, [toggle])
 
   useEffect(() => {
-    if (token) setTokenSelected(token)
-  }, [token])
+    setTokenSelected(Constants.Addresses[chain?.id]?.StableCoins?.USDC)
+  }, [chain?.id])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
-      indexToken: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, // hard code BTC token address
+      indexToken: token,
       side: Side.SHORT,
       isIncrease: true,
       price: indexPrice,
@@ -104,7 +102,7 @@ const ShortOrderBox = () => {
     })
     setPayAmount("")
     localStorage.removeItem("allowance")
-  }, [placeOrder, orderType, chain?.id, indexPrice, token, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, indexPrice, token, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {

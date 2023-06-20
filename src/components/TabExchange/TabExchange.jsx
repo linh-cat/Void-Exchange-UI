@@ -4,7 +4,6 @@ import React, { useMemo, useState } from "react"
 import "./TabExchange.css"
 import cx from "classnames"
 import { Side } from "@void-0x/void-sdk"
-import Spinner from "@components/Spinner/Spinner"
 import LongOrderBox from "@components/LongOrderBox/LongOrderBox"
 import ShortOrderBox from "@components/ShortOrderBox/ShortOrderBox"
 
@@ -32,15 +31,10 @@ const tabData = [
 ]
 
 const TabExchange = ({ defaultValue }) => {
-  const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState(defaultValue)
 
   const changeTab = (tab) => {
-    setIsLoading(true)
     setActiveTab(tab)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
   }
 
   const tabContent = useMemo(() => {
@@ -70,15 +64,7 @@ const TabExchange = ({ defaultValue }) => {
         </ul>
       </div>
 
-      <div className="tab-content py-3 px-3 overflow-hidden">
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <Spinner />
-          </div>
-        ) : (
-          tabContent
-        )}
-      </div>
+      <div className="tab-content py-3 px-3 overflow-hidden">{tabContent}</div>
     </div>
   )
 }
