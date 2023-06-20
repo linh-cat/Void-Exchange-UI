@@ -96,7 +96,7 @@ const Banner = () => {
                   </div>
 
                   <div className="text-sm ">
-                    <label className="">POLYGON</label>
+                    <label className="">MATIC</label>
                     <div className="flex items-center gap-3 mt-1">
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm rounded px-2 bg-successLight">
@@ -128,7 +128,7 @@ const Banner = () => {
                   </div>
 
                   <div className="text-sm ">
-                    <label className="">SOLANA</label>
+                    <label className="">SOL</label>
                     <div className="flex items-center gap-3 mt-1">
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
