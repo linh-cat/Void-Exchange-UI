@@ -92,7 +92,7 @@ const Exchange = () => {
         </div>
         {/* order box */}
         <div className="xl:col-span-1 right-side">
-          <TabExchange defaultValue={"long"} />
+          <TabExchange defaultValue={0} />
         </div>
       </div>
     </>

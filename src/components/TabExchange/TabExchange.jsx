@@ -1,24 +1,26 @@
 import ArrowTrendingUpIcon from "@img/icons/ArrowTrendingUp.svg"
 import ArrowTrendingDown from "@img/icons/ArrowTredingDown.svg"
 import React, { useMemo, useState } from "react"
-import OrderBox from "../../pages/OrderBox/OrderBox"
 import "./TabExchange.css"
-import { TYPE_ORDER } from "../../constant/tab"
 import cx from "classnames"
+import { Side } from "@void-0x/void-sdk"
+import Spinner from "@components/Spinner/Spinner"
+import LongOrderBox from "@components/LongOrderBox/LongOrderBox"
+import ShortOrderBox from "@components/ShortOrderBox/ShortOrderBox"
 
 const tabData = [
   {
     label: "Long",
-    value: "long",
+    value: Side.LONG,
     icon: ArrowTrendingUpIcon,
-    component: <OrderBox type={TYPE_ORDER.LONG} />,
+    component: <LongOrderBox />,
     activeClassName: "active-long"
   },
   {
     label: "Short",
-    value: "short",
+    value: Side.SHORT,
     icon: ArrowTrendingDown,
-    component: <OrderBox type={TYPE_ORDER.SHORT} />,
+    component: <ShortOrderBox />,
     activeClassName: "active-short"
   }
   // {
@@ -30,9 +32,15 @@ const tabData = [
 ]
 
 const TabExchange = ({ defaultValue }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState(defaultValue)
+
   const changeTab = (tab) => {
+    setIsLoading(true)
     setActiveTab(tab)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
   }
 
   const tabContent = useMemo(() => {
@@ -62,7 +70,15 @@ const TabExchange = ({ defaultValue }) => {
         </ul>
       </div>
 
-      <div className="tab-content py-3 px-3 overflow-hidden">{tabContent}</div>
+      <div className="tab-content py-3 px-3 overflow-hidden">
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          tabContent
+        )}
+      </div>
     </div>
   )
 }

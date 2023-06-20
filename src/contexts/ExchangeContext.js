@@ -26,7 +26,6 @@ export function ExchangeContextProvider({ children }) {
   const { chain } = useNetwork()
 
   const exchange = useMemo(() => {
-    console.log({ chain })
     if (chain && isChainSupported(chain)) {
       return new Exchange(
         publicClient,

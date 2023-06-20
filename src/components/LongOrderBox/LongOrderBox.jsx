@@ -19,18 +19,15 @@ import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 
-import "./OrderBox.css"
-
-const OrderBox = ({ type }) => {
-  console.log({ type })
+const LongOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
   const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
-  const [tokenSelected, setTokenSelected] = useState("")
+  const { token, placeOrder, isPlacingOrder, setToken } = useExchangeContext()
+  const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
 
@@ -64,6 +61,10 @@ const OrderBox = ({ type }) => {
     setOrderType(order)
   }
 
+  useEffect(() => {
+    setToken(Constants.Addresses[chain?.id]?.IndexTokens?.WBTC)
+  }, [])
+
   const positionSize = useMemo(() => {
     if (payAmount && payAmount > 0 && payAmount !== "") {
       return Position.getPositionSizeInUsd(
@@ -81,9 +82,12 @@ const OrderBox = ({ type }) => {
       setToggle(false)
     }
   }, [collateralModal])
+
   useEffect(() => {
     setCollateralModal(toggle)
   }, [toggle])
+
+  console.log({ token })
 
   useEffect(() => {
     if (token) setTokenSelected(token)
@@ -170,7 +174,6 @@ const OrderBox = ({ type }) => {
             tokenValue={tokenSelected}
             onSelectToken={(token) => {
               setTokenSelected(token)
-              // setToken(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
@@ -269,4 +272,4 @@ const OrderBox = ({ type }) => {
   )
 }
 
-export default OrderBox
+export default LongOrderBox
