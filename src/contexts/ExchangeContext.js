@@ -37,6 +37,17 @@ export function ExchangeContextProvider({ children }) {
   }, [publicClient, walletClient, chain])
 
   /**
+   * Set default token and pair for the market
+   */
+  useEffect(() => {
+    if (chain) {
+      // set default token
+      const token = Constants.Addresses[chain.id]?.IndexTokens?.WBTC
+      setToken(token)
+    }
+  }, [chain])
+
+  /**
    * Update token when the pair changes
    */
   useEffect(() => {
