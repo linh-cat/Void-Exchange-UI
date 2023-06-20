@@ -4,7 +4,7 @@ import ConnectWalletButton from "../common/ConnectWalletButton"
 import connectWalletImg from "../../img/ic_wallet_24.svg"
 import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
 import cx from "classnames"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 import useUserWindow from "src/hooks/useUserWindow"
 
@@ -12,6 +12,7 @@ const Header = () => {
   const location = useLocation()
   const [y, setY] = useState(0)
   const [isShow, setIsShow] = useState(false)
+  const navigate = useNavigate()
 
   const showMenu = () => {
     setIsShow(!isShow)
@@ -49,11 +50,11 @@ const Header = () => {
         ref={refOutside}
       >
         <div className="flex items-center lg:gap-24">
-          <Link to={"/"} className="flex items-center logo">
-            <img src={VoidExchangeLogo} alt="Logo" />
-          </Link>
+          <div className="w-40" onClick={() => navigate("/")}>
+            <img src={VoidExchangeLogo} alt="Logo" className="h-auto object-cover w-full" />
+          </div>
           <div className={cx("navbar", { show: isShow })}>
-            <ul className="lg:flex items-center gap-6">
+            <ul className="xl:flex items-center gap-6">
               <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </li>

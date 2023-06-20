@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from "react"
-import { useNetwork } from "wagmi"
+import React, { useState } from "react"
 
 import "./Exchange.css"
 import TabExchange from "../../components/TabExchange/TabExchange"
@@ -16,7 +15,6 @@ import TopInfo from "@components/TopInfo/TopInfo"
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
-  const { chain } = useNetwork()
 
   const onChangeTabSection = (val) => {
     setTabSection(val)
@@ -94,7 +92,7 @@ const Exchange = () => {
         </div>
         {/* order box */}
         <div className="xl:col-span-1 right-side">
-          <TabExchange defaultValue="long" />
+          <TabExchange defaultValue={"long"} />
         </div>
       </div>
     </>

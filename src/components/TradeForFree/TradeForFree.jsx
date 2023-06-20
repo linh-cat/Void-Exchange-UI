@@ -6,7 +6,7 @@ import Button from "@components/Button/Button"
 const TradeForFree = () => {
   return (
     <div className="relative">
-      <section className="trade-for-free mt-10">
+      <section className="trade-for-free">
         <div className="top text-center flex flex-col gap-3">
           <p className="text-slate-500 uppercase font-medium text-sm tracking-wider">Now Live</p>
           <h3 className="font-medium text-2xl">Start Trading</h3>
@@ -29,7 +29,7 @@ const TradeForFree = () => {
             <img
               src={TradingIMG}
               alt="trading img"
-              className="w-full h-full border rounded-md absolute top-0 -right-24"
+              className="w-full h-full border rounded-md absolute top-0 -right-24 object-cover"
             />
           </div>
         </div>

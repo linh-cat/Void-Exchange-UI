@@ -7,7 +7,7 @@ import TradeForFree from "@components/TradeForFree/TradeForFree"
 
 const Dashboard = () => {
   return (
-    <div className="dashboard">
+    <div className="dashboard flex flex-col gap-5">
       <Banner />
       <TradeForFree />
       <StatisticInfo />

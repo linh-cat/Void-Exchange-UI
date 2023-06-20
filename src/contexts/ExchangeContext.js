@@ -14,8 +14,9 @@ const pairToSymbolMap = {
 export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   // market is the address of the base token of a pair
-  //
-  const [token, setToken] = useState("BTC/USD")
+
+  // token of pair
+  const [token, setToken] = useState()
   // pair is the combination of base/quote
   // E.g: BTC/USD
   const [pair, setPair] = useState("")
@@ -25,6 +26,7 @@ export function ExchangeContextProvider({ children }) {
   const { chain } = useNetwork()
 
   const exchange = useMemo(() => {
+    console.log({ chain })
     if (chain && isChainSupported(chain)) {
       return new Exchange(
         publicClient,
@@ -49,7 +51,7 @@ export function ExchangeContextProvider({ children }) {
   /**
    * Update token when the pair changes
    */
-  useMemo(() => {
+  useEffect(() => {
     if (chain && pair) {
       const symbol = pairToSymbolMap[pair]
       setToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
@@ -75,7 +77,6 @@ export function ExchangeContextProvider({ children }) {
     }
 
     const positions = await exchange.getPositions(address, chain.id)
-    console.log("position", positions, address)
 
     if (positions.length) {
       return positions.filter((position) => position.size > 0)

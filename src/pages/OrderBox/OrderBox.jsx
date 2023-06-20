@@ -22,6 +22,7 @@ import { formatValue } from "src/lib/formatter"
 import "./OrderBox.css"
 
 const OrderBox = ({ type }) => {
+  console.log({ type })
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
   const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
