@@ -61,10 +61,6 @@ const LongOrderBox = () => {
     setOrderType(order)
   }
 
-  useEffect(() => {
-    setToken(Constants.Addresses[chain?.id]?.IndexTokens?.WBTC)
-  }, [])
-
   const positionSize = useMemo(() => {
     if (payAmount && payAmount > 0 && payAmount !== "") {
       return Position.getPositionSizeInUsd(
