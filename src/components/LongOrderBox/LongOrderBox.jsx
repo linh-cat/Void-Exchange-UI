@@ -94,13 +94,15 @@ const LongOrderBox = () => {
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: token,
+      purchaseToken: tokenSelected,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
     setPayAmount("")
     localStorage.removeItem("allowance")
-  }, [placeOrder, orderType, token, indexPrice, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, token, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
+
+  console.log({ token, tokenSelected })
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {
