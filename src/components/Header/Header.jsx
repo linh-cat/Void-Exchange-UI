@@ -50,7 +50,7 @@ const Header = () => {
         ref={refOutside}
       >
         <div className="flex items-center gap-0 2xl:gap-24">
-          <div className="w-40" onClick={() => navigate("/")}>
+          <div className="w-40 cursor-pointer" onClick={() => navigate("/")}>
             <img src={VoidExchangeLogo} alt="Logo" className="h-auto object-cover w-full" />
           </div>
           <div className={cx("navbar", { show: isShow })}>
