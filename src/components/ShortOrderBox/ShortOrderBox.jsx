@@ -37,10 +37,12 @@ const ShortOrderBox = () => {
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed([token])
+  console.log({ token, tokenSelected })
+
+  const { indexPrice } = useTokenPriceFeed([tokenSelected])
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: token,
+    token: tokenSelected,
     account: address,
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
