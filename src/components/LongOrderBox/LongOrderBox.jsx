@@ -173,7 +173,7 @@ const LongOrderBox = () => {
             ]}
             tokenValue={tokenSelected}
             onSelectToken={(token) => {
-              setToken(token)
+              setTokenSelected(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}

@@ -27,6 +27,7 @@ const ShortOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
   const { token, placeOrder, isPlacingOrder, setToken } = useExchangeContext()
+  const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
 
@@ -85,6 +86,10 @@ const ShortOrderBox = () => {
   useEffect(() => {
     setCollateralModal(toggle)
   }, [toggle])
+
+  useEffect(() => {
+    if (token) setTokenSelected(token)
+  }, [token])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
@@ -161,9 +166,9 @@ const ShortOrderBox = () => {
 
           <InputWithToken
             tokenOptions={[{ label: "USDC", value: Constants.Addresses[chain?.id]?.StableCoins?.USDC, icon: USDC }]}
-            tokenValue={token}
+            tokenValue={tokenSelected}
             onSelectToken={(token) => {
-              setToken(token)
+              setTokenSelected(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
