@@ -137,7 +137,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
-                <Popover.Panel className="absolute right-0 z-10 w-52 rounded flex flex-col shadow border">
+                <Popover.Panel className="absolute right-0 z-10 w-52 rounded flex flex-col shadow border card">
                   {listChains?.map((c) => (
                     <span
                       className={cx({
@@ -201,7 +201,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     </div>
                   </div>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-0 z-10 w-96 rounded text-base shadow border">
+                <Popover.Panel className="absolute right-0 z-10 w-96 rounded text-base shadow border card">
                   <div className="px-3 py-2 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <label className="text-lg">Account</label>
