@@ -10,7 +10,7 @@ import FaucetPage from "./pages/FaucetPage/FaucetPage"
 import { Toaster } from "react-hot-toast"
 
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
-import { sepolia, goerli, baseGoerli } from "wagmi/chains"
+import { sepolia, goerli, baseGoerli, arbitrum, mainnet } from "wagmi/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 import { InjectedConnector } from "wagmi/connectors/injected"
@@ -33,12 +33,12 @@ const baseGoerliExtended = {
 }
 
 // TODO: refactor later
-const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [baseGoerliExtended, sepolia, goerli],
+const { chains, publicClient } = configureChains(
+  [mainnet, arbitrum, baseGoerliExtended, sepolia, goerli],
   [
     jsonRpcProvider({
       rpc: (chain) => {
-        if (chain.id == baseGoerli.id) {
+        if (chain.id === baseGoerli.id) {
           return {
             http: "https://base-goerli.blastapi.io/7732b118-e54f-46ca-a10b-d226670d03dc",
             webSocket: "wss://base-goerli.blastapi.io/7732b118-e54f-46ca-a10b-d226670d03dc"

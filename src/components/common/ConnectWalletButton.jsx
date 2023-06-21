@@ -10,6 +10,8 @@ import Button from "@components/Button/Button"
 
 import "./ConnectWalletButton.css"
 import { Popover } from "@headlessui/react"
+import { Arbitrum, Base, Ethereum, EthereumChain } from "@img/logo"
+import { CheckIcon } from "@heroicons/react/24/solid"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -18,9 +20,14 @@ const truncate = (string, limit) => {
   return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
 }
 const listChainNotSupport = {
-  1: "Ethereum",
-
-  42161: "Arbitrum"
+  1: "Ethereum"
+}
+const iconForMapping = {
+  1: EthereumChain,
+  84531: Base,
+  11155111: Base,
+  5: Base,
+  42161: Arbitrum
 }
 const ConnectWalletButton = ({ imgSrc }) => {
   const [connectModal, setConnectModal] = useState(false)
@@ -54,6 +61,11 @@ const ConnectWalletButton = ({ imgSrc }) => {
     </div>
   )
 
+  const listChains = chains.map((l) => ({
+    ...l,
+    icon: iconForMapping[l.id]
+  }))
+
   return (
     <div>
       <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
@@ -80,16 +92,22 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 </Popover.Button>
 
                 <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 bg-dropdown rounded flex flex-col">
-                  {chains?.map((c) => (
+                  {listChains?.map((c) => (
                     <span
                       className={cx({
-                        "cursor-pointer px-3 bg-hover h-12 flex items-center": true,
+                        "cursor-pointer px-3 h-12 flex items-center hover:bg-slate-800": true,
                         "active-chain": c.id === currentChain.id
                       })}
                       key={c.id}
                       onClick={() => switchNetwork(c.id)}
                     >
-                      <label className="">{c.name}</label>
+                      <div className="flex items-center gap-2">
+                        <img src={c.icon} alt="icon" className="w-5 h-5" />
+                        <label l className="cursor-pointer">
+                          {c.name}
+                        </label>
+                      </div>
+                      {c.id === currentChain.id && <CheckIcon className="w-5 h-5" />}
                     </span>
                   ))}
                 </Popover.Panel>
@@ -114,17 +132,22 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
-                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 bg-dropdown rounded flex flex-col">
-                  {chains?.map((c) => (
+                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-52 bg-dropdown rounded flex flex-col">
+                  {listChains?.map((c) => (
                     <span
                       className={cx({
-                        "cursor-pointer px-3 bg-hover h-12 flex items-center": true,
-                        "active-chain": c.id === currentChain.id
+                        "cursor-pointer px-3 bg-hover h-12 flex items-center justify-between hover:bg-slate-800 gap-2": true
                       })}
                       key={c.id}
                       onClick={() => switchNetwork(c.id)}
                     >
-                      <label className="">{c.name}</label>
+                      <div className="flex items-center gap-2">
+                        <img src={c.icon} alt="icon" className="w-5 h-5" />
+                        <label l className="cursor-pointer">
+                          {c.name}
+                        </label>
+                      </div>
+                      {c.id === currentChain.id && <CheckIcon className="w-5 h-5" />}
                     </span>
                   ))}
                 </Popover.Panel>

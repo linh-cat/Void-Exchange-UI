@@ -8,4 +8,7 @@ import Bybit from "./bybit.svg"
 import Ethereum from "./Ethereum.svg"
 import Bitcoin from "./Bitcoin.svg"
 import USDC from "./USDC.svg"
-export { Rewards, OKX, ChainLink, Binance, Kucoin, Coinbase, Bybit, Ethereum, Bitcoin, USDC }
+import Base from "./base.svg"
+import EthereumChain from "./ethereum-chain.svg"
+import Arbitrum from "./Arbitrum.svg"
+export { Rewards, OKX, ChainLink, Binance, Kucoin, Coinbase, Bybit, Ethereum, Bitcoin, USDC, Base, EthereumChain, Arbitrum }
