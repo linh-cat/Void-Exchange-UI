@@ -129,7 +129,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
           <div className="flex flex-col md:flex-row gap-3">
             <>
               <Popover className="relative">
-                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
+                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4 ">
                   <div className="flex items-center gap-2">
                     <img src={iconForMapping[currentChain.id]} alt="icon" className="w-5 h-5" />
                     <span className="">{currentChain.name}</span>
@@ -137,7 +137,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
-                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-52 bg-dropdown rounded flex flex-col">
+                <Popover.Panel className="absolute right-0 z-10 w-52 rounded flex flex-col shadow border">
                   {listChains?.map((c) => (
                     <span
                       className={cx({
@@ -201,7 +201,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     </div>
                   </div>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-0 z-10 w-96 bg-dropdown rounded text-base">
+                <Popover.Panel className="absolute right-0 z-10 w-96 rounded text-base shadow border">
                   <div className="px-3 py-2 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <label className="text-lg">Account</label>

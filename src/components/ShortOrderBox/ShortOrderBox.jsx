@@ -39,6 +39,7 @@ const ShortOrderBox = () => {
 
   const { indexPrice } = useTokenPriceFeed([tokenSelected])
 
+  console.log({ tokenSelected, address })
   const { allowance, approve, isApproving } = useAllowance({
     token: tokenSelected,
     account: address,
@@ -103,6 +104,7 @@ const ShortOrderBox = () => {
   }, [placeOrder, orderType, indexPrice, token, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
+    console.log({ allowance, payAmount })
     if (allowance >= payAmount) {
       return (
         <Button
