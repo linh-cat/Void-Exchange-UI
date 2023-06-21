@@ -11,7 +11,7 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { Constants } from "@void-0x/void-sdk"
 
-import { BTC, CAKE, ETH, USDC } from "@img/token"
+import { CAKE, USDC } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -36,8 +36,6 @@ const ShortOrderBox = () => {
     token: tokenSelected,
     watch: true
   })
-
-  console.log({ token, tokenSelected })
 
   const { indexPrice } = useTokenPriceFeed([tokenSelected])
 
