@@ -95,7 +95,7 @@ const ShortOrderBox = () => {
       side: Side.SHORT,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: token,
+      purchaseToken: tokenSelected,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
