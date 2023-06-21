@@ -5,13 +5,14 @@ import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitc
 import cx from "classnames"
 import Modal from "@components/Modal/Modal"
 import { decialNumber } from "src/common/fomatter"
-import { DownIcon, Metamask } from "@icons/index"
+import { ArrowTopRight, CopyIcon, DownIcon, Metamask } from "@icons/index"
 import Button from "@components/Button/Button"
 
 import "./ConnectWalletButton.css"
 import { Popover } from "@headlessui/react"
-import { Arbitrum, Base, Ethereum, EthereumChain } from "@img/logo"
+import { Arbitrum, Base, EthereumChain } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
+import { useNavigate } from "react-router-dom"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -25,7 +26,7 @@ const listChainNotSupport = {
 const iconForMapping = {
   1: EthereumChain,
   84531: Base,
-  11155111: Base,
+  11155111: EthereumChain,
   5: Base,
   42161: Arbitrum
 }
@@ -37,6 +38,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
   const { switchNetwork } = useSwitchNetwork()
   const { chain: currentChain, chains } = useNetwork()
   const { data: balance } = useBalance({ address })
+  const navigate = useNavigate()
 
   const headerConnectModal = <div>Connect Wallet</div>
 
@@ -124,11 +126,14 @@ const ConnectWalletButton = ({ imgSrc }) => {
         }
 
         return (
-          <div className="flex gap-3">
+          <div className="flex flex-col md:flex-row gap-3">
             <>
               <Popover className="relative">
-                <Popover.Button className="flex items-center border h-11 px-5 rounded gap-3">
-                  <span className="">{currentChain.name}</span>
+                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
+                  <div className="flex items-center gap-2">
+                    <img src={iconForMapping[currentChain.id]} alt="icon" className="w-5 h-5" />
+                    <span className="">{currentChain.name}</span>
+                  </div>
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
@@ -153,8 +158,8 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 </Popover.Panel>
               </Popover>
 
-              <Button
-                text={
+              <Popover className="relative">
+                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
                   <div className="flex items-center gap-3">
                     <div>
                       {decialNumber(balance?.formatted, 4)} {balance?.symbol}
@@ -164,17 +169,99 @@ const ConnectWalletButton = ({ imgSrc }) => {
                       className="border px-2 py-1 bg-input"
                       isDefault={false}
                     />
+                    <div>
+                      <div className="rounded-full overflow-hidden w-6 h-6 inline-flex p-0 m-0 bg-yellow justify-center">
+                        <svg x="0" y="0" width="24" height="18">
+                          <rect
+                            x="0"
+                            y="0"
+                            width="24"
+                            height="24"
+                            transform="translate(0.9013319580392469 5.487147309226646) rotate(176.1 12 12)"
+                            fill="#FA9A00"
+                          ></rect>
+                          <rect
+                            x="0"
+                            y="0"
+                            width="24"
+                            height="24"
+                            transform="translate(6.232414534640344 -12.646756909390337) rotate(341.3 12 12)"
+                            fill="#FB183E"
+                          ></rect>
+                          <rect
+                            x="0"
+                            y="0"
+                            width="24"
+                            height="24"
+                            transform="translate(-15.923198044392672 1.9208714646717957) rotate(188.7 12 12)"
+                            fill="#F2C202"
+                          ></rect>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                }
-                className="inline-block border px-2 py-1"
-                isDefault={false}
-              />
-              <Button
-                text="Disconnect"
-                onClick={() => {
-                  disconnect()
-                }}
-              />
+                </Popover.Button>
+                <Popover.Panel className="absolute right-0 z-10 w-96 bg-dropdown rounded text-base">
+                  <div className="px-3 py-2 flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <label className="text-lg">Account</label>
+                      <div className="text-slate-400">
+                        {balance?.formatted} {balance?.symbol}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-slate-400">Connect with metamask</label>
+                      <div>
+                        <div onClick={() => disconnect()} className="link-color cursor-pointer">
+                          Disconnect
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center gap-3 border py-2 px-2 rounded shadow">
+                      <div className="flex gap-3">
+                        <div className="rounded-full overflow-hidden w-6 h-6 inline-flex p-0 m-0 bg-yellow justify-center">
+                          <svg x="0" y="0" width="24" height="18">
+                            <rect
+                              x="0"
+                              y="0"
+                              width="24"
+                              height="24"
+                              transform="translate(0.9013319580392469 5.487147309226646) rotate(176.1 12 12)"
+                              fill="#FA9A00"
+                            ></rect>
+                            <rect
+                              x="0"
+                              y="0"
+                              width="24"
+                              height="24"
+                              transform="translate(6.232414534640344 -12.646756909390337) rotate(341.3 12 12)"
+                              fill="#FB183E"
+                            ></rect>
+                            <rect
+                              x="0"
+                              y="0"
+                              width="24"
+                              height="24"
+                              transform="translate(-15.923198044392672 1.9208714646717957) rotate(188.7 12 12)"
+                              fill="#F2C202"
+                            ></rect>
+                          </svg>
+                        </div>
+                        <div className="text-slate-400">{truncate(address, 7)}</div>
+                      </div>
+                      <div className="flex gap-3 items-center">
+                        <img src={CopyIcon} alt="copy" className="w-5 h-5 cursor-pointer" />
+                        <img
+                          src={ArrowTopRight}
+                          alt="top right"
+                          className="w-5 h-5 cursor-pointer"
+                          onClick={() => window.open(`https://etherscan.io/address/${address}`, "_blank")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Popover.Panel>
+              </Popover>
             </>
           </div>
         )

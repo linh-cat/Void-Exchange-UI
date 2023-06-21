@@ -34,7 +34,7 @@ const baseGoerliExtended = {
 
 // TODO: refactor later
 const { chains, publicClient } = configureChains(
-  [mainnet, arbitrum, baseGoerliExtended, sepolia, goerli],
+  [mainnet, arbitrum, baseGoerliExtended, sepolia],
   [
     jsonRpcProvider({
       rpc: (chain) => {

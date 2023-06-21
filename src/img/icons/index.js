@@ -17,6 +17,7 @@ import DBIcon from "./db.png"
 import SearchIcon from "./Search.svg"
 import DiscordIcon from "./discord.png"
 import TwitterIcon from "./twitter.png"
+import ArrowTopRight from "./ArrowTopRight.svg"
 
 export {
   LimitIcon,
@@ -37,5 +38,6 @@ export {
   DBIcon,
   SearchIcon,
   DiscordIcon,
-  TwitterIcon
+  TwitterIcon,
+  ArrowTopRight
 }
