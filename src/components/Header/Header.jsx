@@ -60,7 +60,8 @@ const Header = () => {
               </li>
               <li
                 className={cx("item", {
-                  border: false
+                  border: false,
+                  "active-link font-medium": location.pathname === "/vault/list"
                 })}
               >
                 <Link to={`/vault/list`} onClick={showMenu}>
