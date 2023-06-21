@@ -134,7 +134,7 @@ const Header = () => {
 
         <div className="flex">
           {width > 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
-          <button type="button" onClick={showMenu} className="hamburgur-icon">
+          <button type="button" onClick={showMenu} className="hamburgur-icon ml-3">
             <svg
               className="w-6 h-6"
               aria-hidden="true"

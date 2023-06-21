@@ -56,6 +56,10 @@ body {
     --bg-linear-active: linear-gradient(to right, #0c7b93, #00a8cc);
 }
 
+.bg-dropdown {
+    background: var(--bg-dropdown-list);
+}
+
 .drop-shadow {
     filter: drop-shadow(0 0 8px #268fd1);
 }
@@ -177,12 +181,6 @@ body {
     z-index: 1;
 }
 
-.active-chain {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--arbitrum-blue);
-}
 
 .close-dropdown {
     opacity: 0;
@@ -464,6 +462,11 @@ button {
     color: var(--arbitrum-blue);
     border-bottom: 1px solid var(--arbitrum-blue);
     background: rgba(127, 212, 130, 0.05);
+}
+
+.active-chain {
+    color: var(--arbitrum-blue);
+
 }
 
 a.plain {

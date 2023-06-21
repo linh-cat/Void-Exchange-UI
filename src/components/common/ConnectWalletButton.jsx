@@ -1,11 +1,15 @@
 import React, { useState } from "react"
-import Button from "@components/Button/Button"
-import { useAccount, useNetwork, useConnect, useBalance, useDisconnect } from "wagmi"
+
+import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitchNetwork } from "wagmi"
+
+import cx from "classnames"
 import Modal from "@components/Modal/Modal"
 import { decialNumber } from "src/common/fomatter"
+import { DownIcon, Metamask } from "@icons/index"
+import Button from "@components/Button/Button"
 
 import "./ConnectWalletButton.css"
-import { Metamask } from "@icons/index"
+import { Popover } from "@headlessui/react"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -13,44 +17,21 @@ const truncate = (string, limit) => {
   }
   return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
 }
+const listChainNotSupport = {
+  1: "Ethereum",
+
+  42161: "Arbitrum"
+}
 const ConnectWalletButton = ({ imgSrc }) => {
-  const [changeModal, setChainModal] = useState(false)
   const [connectModal, setConnectModal] = useState(false)
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
   const { address, isConnected } = useAccount()
-  const { chain, chains } = useNetwork()
+  const { switchNetwork } = useSwitchNetwork()
+  const { chain: currentChain, chains } = useNetwork()
   const { data: balance } = useBalance({ address })
 
-  const headerChainModal = <div>Select Chains</div>
   const headerConnectModal = <div>Connect Wallet</div>
-
-  const bodyChainModal = (
-    <div>
-      {chain && chains.length && (
-        <div className="list-chains flex flex-col gap-2">
-          {chains.map((c) => (
-            <div className="cursor-pointer border p-2 flex justify-center items-center gap-3" key={c.id}>
-              {c.id === chain.id && <div className="active-chain"></div>}
-              <div>{c.name}</div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-
-  const footerChainModal = (
-    <div>
-      <Button
-        text="Disconnect"
-        onClick={() => {
-          disconnect()
-          setChainModal(false)
-        }}
-      />
-    </div>
-  )
 
   const bodyConnectModal = (
     <div className="flex flex-col gap-3">
@@ -76,13 +57,6 @@ const ConnectWalletButton = ({ imgSrc }) => {
   return (
     <div>
       <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
-      <Modal
-        header={headerChainModal}
-        open={changeModal}
-        setOpen={setChainModal}
-        body={bodyChainModal}
-        footer={footerChainModal}
-      />
       {(() => {
         if (!isConnected) {
           return (
@@ -96,24 +70,66 @@ const ConnectWalletButton = ({ imgSrc }) => {
           )
         }
 
-        if (chain.unsupported) {
-          return <Button isDefault="false" className="" text="Wrong network" onClick={() => setChainModal(true)} />
+        if (currentChain.unsupported) {
+          return (
+            <div className="flex items-center gap-5">
+              <Popover className="relative">
+                <Popover.Button className="flex items-center border h-11 px-5 rounded gap-3">
+                  <span className="">{listChainNotSupport[currentChain.id] || "Not support"} </span>
+                  <img src={DownIcon} alt="down-icon" />
+                </Popover.Button>
+
+                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 bg-dropdown rounded flex flex-col">
+                  {chains?.map((c) => (
+                    <span
+                      className={cx({
+                        "cursor-pointer px-3 bg-hover h-12 flex items-center": true,
+                        "active-chain": c.id === currentChain.id
+                      })}
+                      key={c.id}
+                      onClick={() => switchNetwork(c.id)}
+                    >
+                      <label className="">{c.name}</label>
+                    </span>
+                  ))}
+                </Popover.Panel>
+              </Popover>
+              <Button text="Wrong Network" isDefault={false} className="border py-3 px-3" />
+              <Button
+                text="Disconnect"
+                onClick={() => {
+                  disconnect()
+                }}
+              />
+            </div>
+          )
         }
 
         return (
           <div className="flex gap-3">
             <>
-              <Button
-                text={
-                  <div className="flex items-center gap-2">
-                    <div className="active-chain"></div>
-                    <label className="truncate">{chain.name}</label>
-                  </div>
-                }
-                onClick={() => setChainModal(true)}
-                isDefault={false}
-                className=" border px-3"
-              />
+              <Popover className="relative">
+                <Popover.Button className="flex items-center border h-11 px-5 rounded gap-3">
+                  <span className="">{currentChain.name}</span>
+                  <img src={DownIcon} alt="down-icon" />
+                </Popover.Button>
+
+                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 bg-dropdown rounded flex flex-col">
+                  {chains?.map((c) => (
+                    <span
+                      className={cx({
+                        "cursor-pointer px-3 bg-hover h-12 flex items-center": true,
+                        "active-chain": c.id === currentChain.id
+                      })}
+                      key={c.id}
+                      onClick={() => switchNetwork(c.id)}
+                    >
+                      <label className="">{c.name}</label>
+                    </span>
+                  ))}
+                </Popover.Panel>
+              </Popover>
+
               <Button
                 text={
                   <div className="flex items-center gap-3">
@@ -129,6 +145,12 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 }
                 className="inline-block border px-2 py-1"
                 isDefault={false}
+              />
+              <Button
+                text="Disconnect"
+                onClick={() => {
+                  disconnect()
+                }}
               />
             </>
           </div>
