@@ -84,6 +84,19 @@ export function ExchangeContextProvider({ children }) {
     return []
   }
 
+  const closeOrder = async (params) => {
+    if (!exchange) {
+      return
+    }
+
+    setIsPlacingOrder(true)
+    const hash = await exchange.closeOrder(params)
+    await publicClient.waitForTransactionReceipt({ hash })
+
+    setIsPlacingOrder(false)
+    toast.success("Successfully deposited!")
+  }
+
   return (
     <ExchangeContext.Provider
       value={{
@@ -93,7 +106,8 @@ export function ExchangeContextProvider({ children }) {
         setPair,
         isPlacingOrder,
         placeOrder,
-        getPositions
+        getPositions,
+        closeOrder
       }}
     >
       {children}
