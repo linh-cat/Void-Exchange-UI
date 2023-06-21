@@ -44,17 +44,17 @@ const Header = () => {
     >
       <header
         className={cx({
-          "header flex justify-between lg:justify-between items-center w-full z-50 relative lg:text-sm xl:text-base lg: px-10 2xl:px-28 py-1": true,
+          "header flex justify-between lg:justify-around items-center w-full z-50 relative lg:text-sm xl:text-base 2xl:px-10 3xl:px-28 py-1": true,
           "border-b": location.pathname === "/trade" ? true : false
         })}
         ref={refOutside}
       >
-        <div className="flex items-center gap-0 2xl:gap-24">
+        <div className="flex items-center gap-0 xl:gap-3 2xl:gap-5 3xl:gap-10">
           <div className="w-40 cursor-pointer" onClick={() => navigate("/")}>
             <img src={VoidExchangeLogo} alt="Logo" className="h-auto object-cover w-full" />
           </div>
           <div className={cx("navbar", { show: isShow })}>
-            <ul className="xl:flex items-center gap-3 2xl:gap-12">
+            <ul className="xl:flex items-center gap-1 xl:gap-5 2xl:gap-8 3xl:gap-12">
               <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </li>
