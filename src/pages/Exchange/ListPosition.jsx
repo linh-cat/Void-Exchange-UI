@@ -4,11 +4,12 @@ import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 
 import { useAccount, useToken, useNetwork } from "wagmi"
-import { Position, Constants } from "@void-0x/void-sdk"
+import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
 import { formatValue, descaleValue } from "src/lib/formatter"
+import cx from "classnames"
 
 const ListPosition = () => {
   const [collateral, setCollateral] = useState(false)
@@ -16,7 +17,7 @@ const ListPosition = () => {
   const [positions, setPositions] = useState([])
   const { address } = useAccount()
   const { chain } = useNetwork()
-  const { exchange, getPositions } = useExchangeContext()
+  const { exchange, getPositions, closeOrder } = useExchangeContext()
   const { prices } = useTokenPriceFeed([
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
@@ -38,8 +39,9 @@ const ListPosition = () => {
 
     const formatteds = positions.map((position) => {
       const indexToken = position.indexToken
+      const collateralToken = position.collateralToken
       const indexPrice = prices[indexToken]
-      const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[indexToken]
+      const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[collateralToken]
 
       const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
 
@@ -52,6 +54,7 @@ const ListPosition = () => {
       const token = Tokens[chain.id][symbol]
 
       return {
+        raw: position,
         market: `${token.name}/USD`,
         collateralValue: formatValue(position.collateralValue, valueDecimals),
         size: formatValue(position.size, valueDecimals),
@@ -84,6 +87,25 @@ const ListPosition = () => {
     return formatteds
   }, [positions, prices, chain])
 
+  const handleCloseOrder = async (cell) => {
+    const position = cell.raw
+
+    console.log("closeOrder", {
+      orderType: OrderType.MARKET,
+      indexToken: position.indexToken,
+      size: position.size,
+      side: position.isLong ? Side.LONG : Side.SHORT,
+      price: prices[position.indexToken]
+    })
+    await closeOrder({
+      orderType: OrderType.MARKET,
+      indexToken: position.indexToken,
+      size: position.size,
+      side: position.isLong ? Side.LONG : Side.SHORT,
+      price: prices[position.indexToken]
+    })
+  }
+
   const toggleCollateral = () => {
     setCollateral(!collateral)
   }
@@ -100,7 +122,12 @@ const ListPosition = () => {
             <img src={cell?.icon} className="h-6 w-6" alt="eth" />
             <div>
               <label>{cell?.market}</label>
-              <div className="text-xs green-up">
+              <div
+                className={cx("text-xs", {
+                  "green-up": cell?.type === "long",
+                  "red-down": cell?.type === "short"
+                })}
+              >
                 {cell?.type} {cell?.leverage}
               </div>
             </div>
@@ -158,8 +185,10 @@ const ListPosition = () => {
       field: "action",
       headerName: "Actions",
       headerClassName: "text-xs",
-      cellRenderer: () => {
-        return <Button text="close" isDefault={false} className="border px-2 py-1" />
+      cellRenderer: (cell) => {
+        return (
+          <Button text="close" isDefault={false} className="border px-2 py-1" onClick={() => handleCloseOrder(cell)} />
+        )
       }
     }
   ]

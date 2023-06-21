@@ -1,24 +1,25 @@
 import ArrowTrendingUpIcon from "@img/icons/ArrowTrendingUp.svg"
 import ArrowTrendingDown from "@img/icons/ArrowTredingDown.svg"
 import React, { useMemo, useState } from "react"
-import OrderBox from "../../pages/OrderBox/OrderBox"
 import "./TabExchange.css"
-import { TYPE_ORDER } from "../../constant/tab"
 import cx from "classnames"
+import { Side } from "@void-0x/void-sdk"
+import LongOrderBox from "@components/LongOrderBox/LongOrderBox"
+import ShortOrderBox from "@components/ShortOrderBox/ShortOrderBox"
 
 const tabData = [
   {
     label: "Long",
-    value: "long",
+    value: Side.LONG,
     icon: ArrowTrendingUpIcon,
-    component: <OrderBox type={TYPE_ORDER.LONG} />,
+    component: <LongOrderBox />,
     activeClassName: "active-long"
   },
   {
     label: "Short",
-    value: "short",
+    value: Side.SHORT,
     icon: ArrowTrendingDown,
-    component: <OrderBox type={TYPE_ORDER.SHORT} />,
+    component: <ShortOrderBox />,
     activeClassName: "active-short"
   }
   // {
@@ -31,6 +32,7 @@ const tabData = [
 
 const TabExchange = ({ defaultValue }) => {
   const [activeTab, setActiveTab] = useState(defaultValue)
+
   const changeTab = (tab) => {
     setActiveTab(tab)
   }

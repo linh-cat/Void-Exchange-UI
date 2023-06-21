@@ -19,10 +19,7 @@ import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 
-import "./OrderBox.css"
-
-const OrderBox = ({ type }) => {
-  console.log({ type })
+const LongOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
   const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
@@ -30,13 +27,13 @@ const OrderBox = ({ type }) => {
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
   const { token, placeOrder, isPlacingOrder } = useExchangeContext()
-  const [tokenSelected, setTokenSelected] = useState("")
+  const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
 
   const { data: balance } = useBalance({
     address: address,
-    token: token,
+    token: tokenSelected,
     watch: true
   })
 
@@ -81,6 +78,7 @@ const OrderBox = ({ type }) => {
       setToggle(false)
     }
   }, [collateralModal])
+
   useEffect(() => {
     setCollateralModal(toggle)
   }, [toggle])
@@ -96,13 +94,15 @@ const OrderBox = ({ type }) => {
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: token,
+      purchaseToken: tokenSelected,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
     setPayAmount("")
     localStorage.removeItem("allowance")
-  }, [placeOrder, orderType, token, indexPrice, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, token, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
+
+  console.log({ token, tokenSelected })
 
   const renderButton = useCallback(() => {
     if (allowance >= payAmount) {
@@ -170,7 +170,6 @@ const OrderBox = ({ type }) => {
             tokenValue={tokenSelected}
             onSelectToken={(token) => {
               setTokenSelected(token)
-              // setToken(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
@@ -269,4 +268,4 @@ const OrderBox = ({ type }) => {
   )
 }
 
-export default OrderBox
+export default LongOrderBox

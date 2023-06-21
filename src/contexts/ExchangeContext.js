@@ -26,7 +26,6 @@ export function ExchangeContextProvider({ children }) {
   const { chain } = useNetwork()
 
   const exchange = useMemo(() => {
-    console.log({ chain })
     if (chain && isChainSupported(chain)) {
       return new Exchange(
         publicClient,
@@ -41,6 +40,7 @@ export function ExchangeContextProvider({ children }) {
    * Set default token and pair for the market
    */
   useEffect(() => {
+    console.log({ chain })
     if (chain) {
       // set default token
       const token = Constants.Addresses[chain.id]?.IndexTokens?.WBTC
@@ -84,6 +84,19 @@ export function ExchangeContextProvider({ children }) {
     return []
   }
 
+  const closeOrder = async (params) => {
+    if (!exchange) {
+      return
+    }
+
+    setIsPlacingOrder(true)
+    const hash = await exchange.closeOrder(params)
+    await publicClient.waitForTransactionReceipt({ hash })
+
+    setIsPlacingOrder(false)
+    toast.success("Successfully deposited!")
+  }
+
   return (
     <ExchangeContext.Provider
       value={{
@@ -93,7 +106,8 @@ export function ExchangeContextProvider({ children }) {
         setPair,
         isPlacingOrder,
         placeOrder,
-        getPositions
+        getPositions,
+        closeOrder
       }}
     >
       {children}

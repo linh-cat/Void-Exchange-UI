@@ -7,6 +7,11 @@ const AddressToSymbolMap = {
   [Constants.ChainId.BaseGoerli]: {
     [Constants.Addresses[ChainId.BaseGoerli].IndexTokens.WBTC]: "WBTC",
     [Constants.Addresses[ChainId.BaseGoerli].IndexTokens.WETH]: "WETH"
+  },
+
+  [Constants.ChainId.Sepolia]: {
+    [Constants.Addresses[ChainId.Sepolia].IndexTokens.WBTC]: "WBTC",
+    [Constants.Addresses[ChainId.Sepolia].IndexTokens.WETH]: "WETH"
   }
 }
 
@@ -21,6 +26,23 @@ const Tokens = {
     },
     WETH: {
       address: Constants.Addresses[ChainId.BaseGoerli].IndexTokens.WETH,
+      decimals: 18,
+      icon: ETH,
+      symbol: "WETH",
+      name: "ETH"
+    }
+  },
+
+  [Constants.ChainId.Sepolia]: {
+    WBTC: {
+      address: Constants.Addresses[ChainId.Sepolia].IndexTokens.WBTC,
+      decimals: 8,
+      icon: BTC,
+      symbol: "WBTC",
+      name: "BTC"
+    },
+    WETH: {
+      address: Constants.Addresses[ChainId.Sepolia].IndexTokens.WETH,
       decimals: 18,
       icon: ETH,
       symbol: "WETH",
