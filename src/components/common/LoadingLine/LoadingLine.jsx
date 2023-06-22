@@ -7,7 +7,7 @@ const LoadingLine = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingWidth((prevWidth) => prevWidth + 10)
-    }, 500)
+    }, 250)
 
     if (loadingWidth === 100) {
       clearTimeout(timer)
