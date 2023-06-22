@@ -7,9 +7,7 @@ const useTokenPriceFeed = (tokenAddresses) => {
   const { chain } = useNetwork()
 
   // TODO: remove indexPrice
-  const {
-    data: indexPrice,
-  } = useContractRead({
+  const { data: indexPrice } = useContractRead({
     address: Constants.Addresses[chain?.id]?.PriceFeed,
     abi: FastPriceFeedABI.abi,
     functionName: "getPrice",
@@ -45,6 +43,22 @@ const useTokenPriceFeed = (tokenAddresses) => {
   }, [data, tokenAddresses])
 
   return { indexPrice, prices }
+}
+
+export const useTokenPrice = (tokenAddress) => {
+  const { chain } = useNetwork()
+
+  const { data: price } = useContractRead({
+    address: Constants.Addresses[chain?.id]?.PriceFeed,
+    abi: FastPriceFeedABI.abi,
+    functionName: "getPrice",
+    args: [tokenAddress, true],
+    onError: (error) => {
+      console.error(error)
+    }
+  })
+
+  return price
 }
 
 export default useTokenPriceFeed

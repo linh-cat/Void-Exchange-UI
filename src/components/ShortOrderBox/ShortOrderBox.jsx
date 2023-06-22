@@ -37,7 +37,7 @@ const ShortOrderBox = () => {
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed([selectedToken])
+  const { prices } = useTokenPriceFeed([indexToken, selectedToken])
 
   const { allowance, approve, isApproving } = useAllowance({
     token: selectedToken,
@@ -64,13 +64,13 @@ const ShortOrderBox = () => {
     if (payAmount) {
       return Position.getPositionSizeInUsd(
         parseUnits(payAmount?.toString(), balance?.decimals),
-        indexPrice,
+        prices[selectedToken],
         Number(leverage),
         balance?.decimals
       )
     }
     return 0
-  }, [balance, indexPrice, leverage, payAmount])
+  }, [balance, selectedToken, prices, leverage, payAmount])
 
   useEffect(() => {
     if (!collateralModal) {
@@ -92,14 +92,14 @@ const ShortOrderBox = () => {
       indexToken,
       side: Side.SHORT,
       isIncrease: true,
-      price: indexPrice,
+      price: prices[indexToken],
       purchaseToken: selectedToken,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
 
     setPayAmount("")
-  }, [placeOrder, orderType, indexPrice, indexToken, selectedToken, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, prices, indexToken, selectedToken, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
@@ -147,7 +147,9 @@ const ShortOrderBox = () => {
           <div className="">
             <InputCustom
               label="Price"
-              placeHolder={indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : "0.0"}
+              placeHolder={
+                prices[indexToken] ? formatValue(prices[indexToken], Constants.ORACLE_PRICE_DECIMALS) : "0.0"
+              }
               classNameInput="px-1 py-2"
               disabled={orderType === OrderType.MARKET}
             />
@@ -161,7 +163,7 @@ const ShortOrderBox = () => {
 
           <InputWithToken
             tokenOptions={[{ label: "USDC", value: Constants.Addresses[chain?.id]?.StableCoins?.USDC, icon: USDC }]}
-            tokenValue={selectedToken}
+            token={selectedToken}
             onSelectToken={(token) => {
               setSelectedToken(token)
             }}

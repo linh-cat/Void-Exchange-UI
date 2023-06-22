@@ -7,6 +7,9 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 
 import { useAccount, useBalance } from "wagmi"
+import { formatValue } from "src/lib/formatter"
+import { Constants } from "@void-0x/void-sdk"
+import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 
 const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
 
@@ -20,27 +23,28 @@ const decimalCount = (numb) => {
 
 const InputWithToken = ({
   tokenOptions,
-  tokenValue,
+  token,
   onSelectToken,
   inputValue,
   onChangeInput,
   type = "number",
   disabled
 }) => {
+  const [isShowDropdownToken, setIsShowDropdownToken] = useState(false)
+
   const { address } = useAccount()
   const { data: balance } = useBalance({
     address: address,
-    token: tokenValue,
+    token,
     watch: true
   })
-
-  const [isShowDropdownToken, setIsShowDropdownToken] = useState(false)
+  const price = useTokenPrice(token)
 
   const renderLabel = useMemo(() => {
-    const index = tokenOptions?.findIndex((item) => item.value === tokenValue)
+    const index = tokenOptions?.findIndex((item) => item.value === token)
 
     return { label: tokenOptions[index]?.label, icon: tokenOptions[index]?.icon }
-  }, [tokenValue, tokenOptions])
+  }, [token, tokenOptions])
 
   const onShowOptionToken = () => {
     setIsShowDropdownToken(!isShowDropdownToken)
@@ -123,6 +127,13 @@ const InputWithToken = ({
 
   const refOutside = useOutsideDetect(handleClickOutside)
 
+  const tokenValueInUSD = useMemo(() => {
+    if (balance?.value && price) {
+      const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
+      return formatValue(balance?.value * price, valueDecimals)
+    }
+  }, [balance, price])
+
   return (
     <div className="input-custom border px-2 py-2 flex flex-col gap-2 input-shadow">
       <div className="top flex items-center flex-row-reverse justify-between">
@@ -200,7 +211,7 @@ const InputWithToken = ({
             Max
           </div>
         </div>
-        <div className="text-slate-500 text-sm">$41,915</div>
+        <div className="text-slate-500 text-sm">{tokenValueInUSD}</div>
       </div>
       <div className="infor flex flex-col gap-1">
         <div
