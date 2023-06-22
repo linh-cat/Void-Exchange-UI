@@ -23,7 +23,7 @@ import { isEthereumAddress } from "src/types"
 
 const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
   const [tab, setTab] = useState("deposit")
-  const [amount, setAmount] = useState(localStorage.getItem("allowance") || "")
+  const [amount, setAmount] = useState("")
 
   const { address } = useAccount()
 
@@ -53,12 +53,10 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
   const onDeposit = React.useCallback(async () => {
     await deposit(amount, address, address)
     setAmount("")
-    localStorage.removeItem("allowance")
   }, [address, amount, deposit])
 
   const onApprove = React.useCallback(() => {
     approve(amount)
-    localStorage.setItem("allowance", amount)
   }, [amount, approve])
 
   const onDebounceApprove = useDebounce(onApprove, 1000)

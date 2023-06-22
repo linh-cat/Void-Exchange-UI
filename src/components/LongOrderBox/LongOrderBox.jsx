@@ -22,7 +22,7 @@ import { formatValue } from "src/lib/formatter"
 const LongOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
-  const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
+  const [payAmount, setPayAmount] = useState("")
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
@@ -48,7 +48,6 @@ const LongOrderBox = () => {
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
-    localStorage.setItem("allowance", payAmount)
   }, [payAmount, approve])
 
   const onDebounceApprove = useDebounce(onApprove, 1000)
@@ -99,13 +98,10 @@ const LongOrderBox = () => {
       leverage: Number(leverage)
     })
     setPayAmount("")
-    localStorage.removeItem("allowance")
   }, [placeOrder, orderType, token, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
 
-  console.log({ token, tokenSelected })
-
   const renderButton = useCallback(() => {
-    if (allowance >= payAmount) {
+    if (+allowance >= +payAmount) {
       return (
         <Button
           className="w-full"
