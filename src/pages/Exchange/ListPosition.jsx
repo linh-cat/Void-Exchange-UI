@@ -3,7 +3,7 @@ import CollateralPopup from "@components/common/CollateralPopup"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 
-import { useAccount, useToken, useNetwork } from "wagmi"
+import { useAccount, useNetwork } from "wagmi"
 import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
@@ -17,7 +17,7 @@ const ListPosition = () => {
   const [positions, setPositions] = useState([])
   const { address } = useAccount()
   const { chain } = useNetwork()
-  const { exchange, getPositions, closeOrder } = useExchangeContext()
+  const { getPositions, closeOrder, isClosingOrder } = useExchangeContext()
   const { prices } = useTokenPriceFeed([
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
@@ -30,7 +30,7 @@ const ListPosition = () => {
     }
 
     get()
-  }, [exchange, address, chain])
+  }, [getPositions, address, chain])
 
   const formattedPositions = useMemo(() => {
     if (!chain || !prices) {
@@ -187,7 +187,14 @@ const ListPosition = () => {
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
         return (
-          <Button text="close" isDefault={false} className="border px-2 py-1" onClick={() => handleCloseOrder(cell)} />
+          <Button
+            text="close"
+            isDefault={false}
+            isLoading={isClosingOrder}
+            disabled={isClosingOrder}
+            className="border px-2 py-1"
+            onClick={() => handleCloseOrder(cell)}
+          />
         )
       }
     }
