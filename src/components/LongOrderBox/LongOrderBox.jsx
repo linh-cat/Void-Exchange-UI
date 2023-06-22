@@ -61,7 +61,7 @@ const LongOrderBox = () => {
   }
 
   const positionSize = useMemo(() => {
-    if (payAmount && payAmount > 0 && payAmount !== "") {
+    if (payAmount) {
       return Position.getPositionSizeInUsd(
         parseUnits(payAmount?.toString(), balance?.decimals),
         indexPrice,
