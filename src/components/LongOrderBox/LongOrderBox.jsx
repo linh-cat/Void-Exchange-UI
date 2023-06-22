@@ -20,7 +20,6 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
-import LoadingLine from "@components/common/LoadingLine/LoadingLine"
 
 const LongOrderBox = () => {
   // UI state
@@ -171,6 +170,7 @@ const LongOrderBox = () => {
           }
           onClose={closeNoticePopup}
           duration={4000}
+          position="bottom-left"
         />
       )}
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />

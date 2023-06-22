@@ -3,7 +3,7 @@ import cx from "classnames"
 import "./NoticePopup.css"
 import LoadingLine from "../LoadingLine/LoadingLine"
 
-const NoticePopup = ({ body, duration, onClose }) => {
+const NoticePopup = ({ body, duration, onClose, position = "center" }) => {
   const [showPopup, setShowPopup] = useState(true)
 
   useEffect(() => {
@@ -22,7 +22,13 @@ const NoticePopup = ({ body, duration, onClose }) => {
   return (
     <div
       className={cx(
-        "card shadow border absolute top-0 left-1/2 -translate-x-1/2 w-96 rounded p-3 py-5 flex flex-col gap-3 text-sm transition-opacity z-50"
+        "card shadow border absolute w-96 rounded p-3 py-5 flex flex-col gap-3 text-sm transition-opacity z-50",
+        {
+          "top-0 left-1/2 -translate-x-1/2": position === "center",
+          "bottom-0 right-0": position === "bottom-right",
+          "top-0 left-0": position === "top-left",
+          "bottom-0 left-0": position === "bottom-left"
+        }
       )}
     >
       {body}
