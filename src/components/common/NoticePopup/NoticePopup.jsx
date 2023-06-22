@@ -22,7 +22,7 @@ const NoticePopup = ({ body, duration, onClose }) => {
   return (
     <div
       className={cx(
-        "card shadow border absolute bottom-0 left-0 w-96 rounded p-3 flex flex-col gap-3 text-sm transition-opacity"
+        "card shadow border absolute top-0 left-1/2 -translate-x-1/2 w-96 rounded p-3 py-5 flex flex-col gap-3 text-sm transition-opacity z-50"
       )}
     >
       {body}
