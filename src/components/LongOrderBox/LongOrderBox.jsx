@@ -212,7 +212,7 @@ const LongOrderBox = () => {
               { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
               { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
             ]}
-            tokenValue={selectedToken}
+            token={selectedToken}
             onSelectToken={(token) => {
               setSelectedToken(token)
             }}
