@@ -20,27 +20,30 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 
 const LongOrderBox = () => {
-  const [leverage, setLeverage] = useState(10)
-  const [toggle, setToggle] = useState(false)
-  const [payAmount, setPayAmount] = useState("")
-  const [orderType, setOrderType] = useState(OrderType.MARKET)
+  // UI state
+  const [isToggled, setIsToggled] = useState(false)
   const [collateralModal, setCollateralModal] = useState(false)
-  const { chain } = useNetwork()
-  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
-  const [tokenSelected, setTokenSelected] = useState()
+  const [selectedToken, setSelectedToken] = useState()
 
+  // Order state
+  const [payAmount, setPayAmount] = useState("")
+  const [leverage, setLeverage] = useState(10)
+  const [orderType, setOrderType] = useState(OrderType.MARKET)
+
+  const { chain } = useNetwork()
   const { address } = useAccount()
+  const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
 
   const { data: balance } = useBalance({
     address: address,
-    token: tokenSelected,
+    token: selectedToken,
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed([token])
+  const { indexPrice } = useTokenPriceFeed([indexToken])
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: tokenSelected,
+    token: selectedToken,
     account: address,
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
@@ -53,7 +56,7 @@ const LongOrderBox = () => {
   const onDebounceApprove = useDebounce(onApprove, 1000)
 
   const onChangeToggle = () => {
-    setToggle(!toggle)
+    setIsToggled(!isToggled)
   }
 
   const changeOrderType = (order) => {
@@ -74,31 +77,31 @@ const LongOrderBox = () => {
 
   useEffect(() => {
     if (!collateralModal) {
-      setToggle(false)
+      setIsToggled(false)
     }
   }, [collateralModal])
 
   useEffect(() => {
-    setCollateralModal(toggle)
-  }, [toggle])
+    setCollateralModal(isToggled)
+  }, [isToggled])
 
   useEffect(() => {
-    if (token) setTokenSelected(token)
-  }, [token])
+    if (indexToken) setSelectedToken(indexToken)
+  }, [indexToken])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
-      indexToken: token,
+      indexToken: indexToken,
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: tokenSelected,
+      purchaseToken: selectedToken,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
     setPayAmount("")
-  }, [placeOrder, orderType, token, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, indexToken, indexPrice, selectedToken, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
@@ -155,7 +158,7 @@ const LongOrderBox = () => {
         <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <label className="text-sm">Pay</label>
-            <SwitchButton onChange={onChangeToggle} value={toggle} />
+            <SwitchButton onChange={onChangeToggle} value={isToggled} />
           </div>
 
           <InputWithToken
@@ -163,9 +166,9 @@ const LongOrderBox = () => {
               { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
               { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
             ]}
-            tokenValue={tokenSelected}
+            tokenValue={selectedToken}
             onSelectToken={(token) => {
-              setTokenSelected(token)
+              setSelectedToken(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
