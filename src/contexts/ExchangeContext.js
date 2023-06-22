@@ -13,6 +13,7 @@ const pairToSymbolMap = {
 
 export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+  const [isClosingOrder, setIsClosingOrder] = useState(false)
   // market is the address of the base token of a pair
 
   // index token
@@ -89,11 +90,11 @@ export function ExchangeContextProvider({ children }) {
       return
     }
 
-    setIsPlacingOrder(true)
+    setIsClosingOrder(true)
     const hash = await exchange.closeOrder(params)
     await publicClient.waitForTransactionReceipt({ hash })
 
-    setIsPlacingOrder(false)
+    setIsClosingOrder(false)
     toast.success("Successfully deposited!")
   }
 
@@ -106,14 +107,35 @@ export function ExchangeContextProvider({ children }) {
         setPair,
         isPlacingOrder,
         placeOrder,
-        getPositions,
-        closeOrder
+        isClosingOrder,
+        closeOrder,
+        getPositions
       }}
     >
       {children}
     </ExchangeContext.Provider>
   )
 }
+/**
+ * The Exchange context object.
+ * @typedef {Object} ExchangeContextType
+ * @property {string} indexToken - The index token.
+ * @property {function} setIndexToken - The function to set the index token.
+ * @property {string} pair - The combination of base/quote. Eg: BTC/USD
+ * @property {function} setPair - The function to set the pair.
+ * @property {boolean} isPlacingOrder - A boolean indicating if an order is being placed.
+ * @property {function} placeOrder - The function to place an order.
+ * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.
+ * @property {function} closeOrder - The function to close an order.
+ * @property {function} getPositions - The function to get positions.
+ */
+
+/**
+ * A hook to return the Exchange context object.
+ * @function useExchangeContext
+ * @returns {ExchangeContextType} - The Exchange context object.
+ * @throws {Error} - Throws if context is undefined.
+ */
 
 export function useExchangeContext() {
   const context = useContext(ExchangeContext)
