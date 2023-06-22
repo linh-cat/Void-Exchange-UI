@@ -22,7 +22,7 @@ import { formatValue } from "src/lib/formatter"
 const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [toggle, setToggle] = useState(false)
-  const [payAmount, setPayAmount] = useState(localStorage.getItem("allowance") || "")
+  const [payAmount, setPayAmount] = useState("")
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
@@ -39,7 +39,6 @@ const ShortOrderBox = () => {
 
   const { indexPrice } = useTokenPriceFeed([tokenSelected])
 
-  console.log({ tokenSelected, address })
   const { allowance, approve, isApproving } = useAllowance({
     token: tokenSelected,
     account: address,
@@ -49,7 +48,7 @@ const ShortOrderBox = () => {
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
-    localStorage.setItem("allowance", payAmount)
+    localStorage.setItem("allowance.short", payAmount)
   }, [payAmount, approve])
 
   const onDebounceApprove = useDebounce(onApprove, 1000)
@@ -73,6 +72,10 @@ const ShortOrderBox = () => {
     }
     return 0
   }, [balance, indexPrice, leverage, payAmount])
+
+  const placeHolder = useMemo(() => {
+    return localStorage.getItem("allowance.short")
+  }, [])
 
   useEffect(() => {
     if (!collateralModal) {
@@ -100,11 +103,10 @@ const ShortOrderBox = () => {
       leverage: Number(leverage)
     })
     setPayAmount("")
-    localStorage.removeItem("allowance")
-  }, [placeOrder, orderType, indexPrice, token, payAmount, balance?.decimals, leverage])
+    localStorage.removeItem("allowance.short")
+  }, [placeOrder, orderType, indexPrice, token, payAmount, balance?.decimals, leverage, tokenSelected])
 
   const renderButton = useCallback(() => {
-    console.log({ allowance, payAmount })
     if (allowance >= payAmount) {
       return (
         <Button
@@ -127,6 +129,7 @@ const ShortOrderBox = () => {
       />
     )
   }, [allowance, payAmount, onDebounceApprove, isApproving, onPlaceOrder, isPlacingOrder])
+  console.log({ allowance })
 
   return (
     <>
@@ -171,6 +174,7 @@ const ShortOrderBox = () => {
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
             disabled={isApproving || isPlacingOrder}
+            placeholder={placeHolder}
           />
         </div>
         <div className="mt-3 2xl:mt-5">

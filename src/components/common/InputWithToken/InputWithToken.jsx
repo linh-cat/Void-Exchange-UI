@@ -25,7 +25,8 @@ const InputWithToken = ({
   inputValue,
   onChangeInput,
   type = "number",
-  disabled
+  disabled,
+  placeholder
 }) => {
   const { address } = useAccount()
   const { data: balance } = useBalance({
@@ -177,7 +178,7 @@ const InputWithToken = ({
           <input
             type="text"
             className="py-1 px-0 w-full text-sm"
-            placeholder="0.0"
+            placeholder={placeholder || "0.0"}
             onChange={(e) => onHandleChangeInput(e.target.value)}
             value={inputValue}
             disabled={disabled}
