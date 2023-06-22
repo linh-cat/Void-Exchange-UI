@@ -20,12 +20,14 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
+import LoadingLine from "@components/common/LoadingLine/LoadingLine"
 
 const LongOrderBox = () => {
   // UI state
   const [isToggled, setIsToggled] = useState(false)
   const [collateralModal, setCollateralModal] = useState(false)
   const [selectedToken, setSelectedToken] = useState()
+  const [isNoticed, setIsNoticed] = useState(false)
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -59,6 +61,14 @@ const LongOrderBox = () => {
 
   const onChangeToggle = () => {
     setIsToggled(!isToggled)
+  }
+
+  const openPopup = () => {
+    setIsNoticed(true)
+  }
+
+  const closeNoticePopup = () => {
+    setIsNoticed(false)
   }
 
   const changeOrderType = (order) => {
@@ -131,35 +141,42 @@ const LongOrderBox = () => {
 
   return (
     <>
-      <NoticePopup
-        body={
-          <>
-            <div className="flex justify-between">
-              <div className="flex items-center gap-2">
-                <img src={ETH} alt="token" className="w-6 h-6" />
-
+      {isNoticed && (
+        <NoticePopup
+          body={
+            <>
+              <div className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="text-sm font-bold">Close Position</div>
-                  <Badge text="Long" type="long" />
+                  <img src={ETH} alt="token" className="w-6 h-6" />
+
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-bold">Close Position</div>
+                    <Badge text="Long" type="long" />
+                  </div>
+                </div>
+                <div>
+                  <div className="green-up">Filled</div>
+                  <div className="text-pending">Pending</div>
                 </div>
               </div>
-              <div>
-                <div className="green-up">Filled</div>
+              <div className="flex justify-between">
+                <div className="text-slate-500">Price</div>
+                <div>Market Order</div>
               </div>
-            </div>
-            <div className="flex justify-between">
-              <div className="text-slate-500">Price</div>
-              <div>Market Order</div>
-            </div>
-            <div className="flex justify-between">
-              <div>Size</div>
-              <div>0.0261 ETH ($43.34)</div>
-            </div>
-          </>
-        }
-      />
+              <div className="flex justify-between">
+                <div className="text-slate-500">Size</div>
+                <div>0.0261 ETH ($43.34)</div>
+              </div>
+            </>
+          }
+          onClose={closeNoticePopup}
+          duration={4000}
+        />
+      )}
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
+        <div onClick={openPopup}>Test Show popup</div>
+
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom

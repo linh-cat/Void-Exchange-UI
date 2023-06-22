@@ -117,6 +117,14 @@ body {
     background-color: rgba(15, 198, 121, .3);
 }
 
+.bg-pending {
+    background-color: rgba(181, 159, 31, 0.3);
+}
+
+.text-pending {
+    color: var(--main-yellow);
+}
+
 #bg .bg div {
     position: absolute;
     top: -40px;
