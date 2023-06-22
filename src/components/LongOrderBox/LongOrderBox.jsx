@@ -18,6 +18,8 @@ import useDebounce from "src/hooks/useDebounce"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
+import NoticePopup from "@components/common/NoticePopup/NoticePopup"
+import Badge from "@components/common/Badge"
 
 const LongOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
@@ -126,6 +128,33 @@ const LongOrderBox = () => {
 
   return (
     <>
+      <NoticePopup
+        body={
+          <>
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2">
+                <img src={ETH} alt="token" className="w-6 h-6" />
+
+                <div className="flex items-center gap-2">
+                  <div className="text-sm font-bold">Close Position</div>
+                  <Badge text="Long" type="long" />
+                </div>
+              </div>
+              <div>
+                <div className="green-up">Filled</div>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div className="text-slate-500">Price</div>
+              <div>Market Order</div>
+            </div>
+            <div className="flex justify-between">
+              <div>Size</div>
+              <div>0.0261 ETH ($43.34)</div>
+            </div>
+          </>
+        }
+      />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
         <div className="grid grid-cols-2 gap-2">
