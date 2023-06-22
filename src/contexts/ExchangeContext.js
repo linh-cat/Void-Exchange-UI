@@ -15,8 +15,8 @@ export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   // market is the address of the base token of a pair
 
-  // token of pair
-  const [token, setToken] = useState()
+  // index token
+  const [indexToken, setIndexToken] = useState()
   // pair is the combination of base/quote
   // E.g: BTC/USD
   const [pair, setPair] = useState("")
@@ -37,24 +37,24 @@ export function ExchangeContextProvider({ children }) {
   }, [publicClient, walletClient, chain])
 
   /**
-   * Set default token and pair for the market
+   * Set default indexToken and pair for the market
    */
   useEffect(() => {
     console.log({ chain })
     if (chain) {
-      // set default token
+      // set default indexToken
       const token = Constants.Addresses[chain.id]?.IndexTokens?.WBTC
-      setToken(token)
+      setIndexToken(token)
     }
   }, [chain])
 
   /**
-   * Update token when the pair changes
+   * Update indexToken when the pair changes
    */
   useEffect(() => {
     if (chain && pair) {
       const symbol = pairToSymbolMap[pair]
-      setToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
+      setIndexToken(Constants.Addresses[chain.id]?.IndexTokens?.[symbol])
     }
   }, [chain, pair])
 
@@ -100,8 +100,8 @@ export function ExchangeContextProvider({ children }) {
   return (
     <ExchangeContext.Provider
       value={{
-        token,
-        setToken,
+        indexToken,
+        setIndexToken,
         pair,
         setPair,
         isPlacingOrder,

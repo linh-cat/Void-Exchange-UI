@@ -26,7 +26,7 @@ const ShortOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
   const [tokenSelected, setTokenSelected] = useState()
 
   const { address } = useAccount()
@@ -89,7 +89,7 @@ const ShortOrderBox = () => {
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
-      indexToken: token,
+      indexToken,
       side: Side.SHORT,
       isIncrease: true,
       price: indexPrice,
@@ -99,7 +99,7 @@ const ShortOrderBox = () => {
     })
 
     setPayAmount("")
-  }, [placeOrder, orderType, indexPrice, token, tokenSelected, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, indexPrice, indexToken, tokenSelected, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {

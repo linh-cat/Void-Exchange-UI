@@ -32,7 +32,7 @@ const LongOrderBox = () => {
 
   const { chain } = useNetwork()
   const { address } = useAccount()
-  const { token, placeOrder, isPlacingOrder } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
 
   const { data: balance } = useBalance({
     address: address,
@@ -40,7 +40,7 @@ const LongOrderBox = () => {
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed([token])
+  const { indexPrice } = useTokenPriceFeed([indexToken])
 
   const { allowance, approve, isApproving } = useAllowance({
     token: tokenSelected,
@@ -86,13 +86,13 @@ const LongOrderBox = () => {
   }, [isToggled])
 
   useEffect(() => {
-    if (token) setTokenSelected(token)
-  }, [token])
+    if (indexToken) setTokenSelected(indexToken)
+  }, [indexToken])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
-      indexToken: token,
+      indexToken: indexToken,
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
@@ -101,7 +101,7 @@ const LongOrderBox = () => {
       leverage: Number(leverage)
     })
     setPayAmount("")
-  }, [placeOrder, orderType, token, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, indexToken, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
