@@ -23,7 +23,7 @@ const LongOrderBox = () => {
   // UI state
   const [isToggled, setIsToggled] = useState(false)
   const [collateralModal, setCollateralModal] = useState(false)
-  const [tokenSelected, setTokenSelected] = useState()
+  const [selectedToken, setSelectedToken] = useState()
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -36,14 +36,14 @@ const LongOrderBox = () => {
 
   const { data: balance } = useBalance({
     address: address,
-    token: tokenSelected,
+    token: selectedToken,
     watch: true
   })
 
   const { indexPrice } = useTokenPriceFeed([indexToken])
 
   const { allowance, approve, isApproving } = useAllowance({
-    token: tokenSelected,
+    token: selectedToken,
     account: address,
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
@@ -86,7 +86,7 @@ const LongOrderBox = () => {
   }, [isToggled])
 
   useEffect(() => {
-    if (indexToken) setTokenSelected(indexToken)
+    if (indexToken) setSelectedToken(indexToken)
   }, [indexToken])
 
   const onPlaceOrder = useCallback(async () => {
@@ -96,12 +96,12 @@ const LongOrderBox = () => {
       side: Side.LONG,
       isIncrease: true,
       price: indexPrice,
-      purchaseToken: tokenSelected,
+      purchaseToken: selectedToken,
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
     setPayAmount("")
-  }, [placeOrder, orderType, indexToken, indexPrice, tokenSelected, payAmount, balance?.decimals, leverage])
+  }, [placeOrder, orderType, indexToken, indexPrice, selectedToken, payAmount, balance?.decimals, leverage])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
@@ -166,9 +166,9 @@ const LongOrderBox = () => {
               { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
               { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
             ]}
-            tokenValue={tokenSelected}
+            tokenValue={selectedToken}
             onSelectToken={(token) => {
-              setTokenSelected(token)
+              setSelectedToken(token)
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
