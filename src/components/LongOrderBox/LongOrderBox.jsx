@@ -15,7 +15,7 @@ import { BTC, CAKE, ETH } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
-import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
+import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
@@ -44,7 +44,7 @@ const LongOrderBox = () => {
     watch: true
   })
 
-  const { indexPrice } = useTokenPriceFeed([indexToken])
+  const indexPrice = useTokenPrice(indexToken)
 
   const { allowance, approve, isApproving } = useAllowance({
     token: selectedToken,
