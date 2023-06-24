@@ -228,7 +228,7 @@ const FaucetPage = () => {
                 <img src={VoidIcon} alt="eth" className="h-10 w-10" />
                 <h1 className="text-2xl">Void Exchange Faucet</h1>
               </div>
-              <div className="text-zinc-500 text-sm">
+              <div className="text-slate-500 text-sm">
                 With testnet Faucet you can get free assets to test the Void Protocol. Make sure to switch your wallet
                 provider to the appropriate testnet network, select desired asset, and click ‘Faucet’ to get tokens
                 transferred to your wallet. The assets on a testnet are not “real,” meaning they have no monetary value.

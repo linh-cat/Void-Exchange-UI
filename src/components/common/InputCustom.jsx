@@ -115,7 +115,7 @@ const InputCustom = ({
       })}
     >
       <div className="title flex items-center gap-x-1">
-        <label className="text-sm">{label}</label>
+        <label className="text-sm text-slate-500">{label}</label>
         {label && (
           <div className="group-tooltip">
             <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />
@@ -126,7 +126,7 @@ const InputCustom = ({
         {/* {showUsd && values && (
           <div
             className="text-xs 
-           text-zinc-500 usd"
+           text-slate-500 usd"
           >
             ~$27.000
           </div>
@@ -171,7 +171,7 @@ const InputCustom = ({
       </div>
 
       {showBalance && (
-        <label className="text-xs lg:text-sm text-zinc-500 balance">
+        <label className="text-xs lg:text-sm text-slate-500 balance">
           {balance?.formatted} {balance?.symbol}
         </label>
       )}

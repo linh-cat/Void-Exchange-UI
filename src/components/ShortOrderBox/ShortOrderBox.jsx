@@ -157,7 +157,7 @@ const ShortOrderBox = () => {
         </div>
         <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <label className="text-sm">Pay</label>
+            <label className="text-sm text-slate-500">Pay</label>
             <SwitchButton onChange={onChangeToggle} value={toggle} />
           </div>
 
@@ -216,32 +216,32 @@ const ShortOrderBox = () => {
         </div>
         <div className="mt-3 2xl:mt-5">
           <div className="collateral-asset flex justify-between text-base lg:text-sm">
-            <label>Collateral Asset</label>
+            <label className="text-slate-500">Collateral Asset</label>
             <div className="flex items-center gap-1">
               <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
               <span>Cake</span>
             </div>
           </div>
           <div className="collateral-value flex justify-between mt-2 text-base lg:text-sm">
-            <label>Collateral Value</label>
+            <label className="text-slate-500">Collateral Value</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
           <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
-            <label>Leverage</label>
+            <label className="text-slate-500">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
           <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">
-            <label>Entry Price</label>
+            <label className="text-slate-500">Entry Price</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
           <div className="liquidation flex justify-between mt-2 text-base lg:text-sm">
-            <label>Liquidation</label>
+            <label className="text-slate-500">Liquidation</label>
             <div className="">
               <span>-</span>
             </div>
@@ -250,12 +250,12 @@ const ShortOrderBox = () => {
           <div className="mt-3 2xl:mt-5">
             <title>Market Infor</title>
             <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label>Borrow Fee</label>
+              <label className="text-slate-500">Borrow Fee</label>
               <span>0.00086% per hour</span>
             </div>
             <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="">Available Liquidity</label>
-              <span className="text-zinc-500">17,050 Cake ~ $57</span>
+              <label className="text-slate-500">Available Liquidity</label>
+              <span>17,050 Cake ~ $57</span>
             </div>
           </div>
         </div>

@@ -17,41 +17,41 @@ const InforBarChar = () => {
       <div className="group-infor">
         <div className="grid grid-cols-4 sm:grid-cols-8 text-center">
           <div className="flex flex-col items-center justify-center">
-            <label className="text-zinc-500 font-very-small">24h Change %</label>
+            <label className="text-slate-500 font-very-small">24h Change %</label>
             <div className="flex items-center gap-x-1">
               <img src={Up} alt="up" />
               <span className="inline green-up font-small">0.34%</span>
             </div>
           </div>
           <div className="">
-            <label className="text-zinc-500 font-very-small">24h Change</label>
+            <label className="text-slate-500 font-very-small">24h Change</label>
             <div className="green-up font-small">$163.72</div>
           </div>
           <div className="">
-            <label className="text-zinc-500 font-very-small">24h High</label>
+            <label className="text-slate-500 font-very-small">24h High</label>
             <div className="font-small">$27,567.32 </div>
           </div>
           <div className="">
-            <label className=" text-zinc-500 font-very-small">24h Low</label>
+            <label className=" text-slate-500 font-very-small">24h Low</label>
             <div className="font-small">$27,033.61</div>
           </div>
           <div className="">
-            <label className="text-zinc-500 font-very-small">Volume</label>
+            <label className="text-slate-500 font-very-small">Volume</label>
             <div className="font-small flex justify-center items-center gap-1">
               <div>55.003</div>
               <Badge text="BTC" />
             </div>
           </div>
           <div className="">
-            <label className="text-zinc-500 font-very-small">Volume</label>
+            <label className="text-slate-500 font-very-small">Volume</label>
             <div className="font-small">$1,505,660</div>
           </div>
           <div className="">
-            <label className="text-zinc-500 font-very-small">Next Fund Rate</label>
+            <label className="text-slate-500 font-very-small">Next Fund Rate</label>
             <div className="red-down font-small">-0.00013%</div>
           </div>
           <div className="">
-            <label className=" text-zinc-500 font-very-small">Countdown</label>
+            <label className=" text-slate-500 font-very-small">Countdown</label>
             <div className="font-small">00:46:00</div>
           </div>
         </div>

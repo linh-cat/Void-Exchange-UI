@@ -116,7 +116,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
     <div className="w-full h-full slider-custom flex flex-col gap-y-5">
       <div className="flex items-center justify-between">
         <div className="title flex items-center gap-x-1">
-          <label className="text-sm">{label}</label>
+          <label className="text-sm text-slate-500">{label}</label>
           <div className="group-tooltip">
             <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />
             <div className="tooltip p-3 rounded">{tooltip}</div>
@@ -127,7 +127,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
             classNameInput="p-0"
             value={value}
             onChange={changeLeverage}
-            rightAction={<label className="absolute right-1 text-zinc-500">x</label>}
+            rightAction={<label className="absolute right-1 text-slate-500">x</label>}
             type="number"
             min={2}
             max={50}

@@ -36,7 +36,7 @@ const SelectCustom = ({ options, label, tooltip, className, classNameInput, clas
       )}
     >
       <div className="flex items-center gap-1">
-        <label className="text-sm">{label}</label>
+        <label className="text-sm text-slate-500">{label}</label>
         {tooltip && (
           <div className="group-tooltip">
             <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />

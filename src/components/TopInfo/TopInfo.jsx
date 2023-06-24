@@ -13,11 +13,11 @@ const TopInfo = () => {
         </div>
         <div className="tooltip-market absolute top-5 -left-1/2 z-50 w-64 p-3 rounded-sm text-xs flex flex-col gap-y-1">
           <div className="flex justify-between">
-            <label className="text-zinc-500">Index</label>
+            <label className="text-slate-500">Index</label>
             <div className="green-color">60</div>
           </div>
           <div className="flex justify-between">
-            <label className="text-zinc-500">Next update</label>
+            <label className="text-slate-500">Next update</label>
             <div>in 10 hour</div>
           </div>
           <div className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author">
@@ -31,15 +31,15 @@ const TopInfo = () => {
         <div className="purple-color">131 Gwei</div>
         <div className="tooltip-gas absolute top-5 -left-1/4 z-50 w-40 p-3 rounded-sm text-xs flex flex-col gap-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-zinc-500">Safe</label>
+            <label className="text-slate-500">Safe</label>
             <div>128 Gwei</div>
           </div>
           <div className="flex justify-between items-center">
-            <label className="text-zinc-500">Standard</label>
+            <label className="text-slate-500">Standard</label>
             <div>128 Gwei</div>
           </div>
           <div className="flex justify-between items-center">
-            <label className="text-zinc-500">Fast</label>
+            <label className="text-slate-500">Fast</label>
             <div>128 Gwei</div>
           </div>
           <div className="flex justify-between items-center p-1 mt-3 bg-violet-600 rounded-sm data-from">
@@ -50,15 +50,15 @@ const TopInfo = () => {
       </div>
       <div className="flex items-center gap-2">
         <label>Network: </label>
-        <div className="text-zinc-500">Ethereum</div>
+        <div className="text-slate-500">Ethereum</div>
       </div>
       <div className="flex items-center gap-2">
         <label>BTC Dominance: </label>
-        <div className="text-zinc-500">{47}%</div>
+        <div className="text-slate-500">{47}%</div>
       </div>
       <div className="flex items-center gap-2">
         <label>ETH Dominance: </label>
-        <div className="text-zinc-500">{19.3}%</div>
+        <div className="text-slate-500">{19.3}%</div>
       </div>
     </div>
   )

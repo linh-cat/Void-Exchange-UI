@@ -37,8 +37,8 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
           {/* input */}
           <div className="collateral-input p-3 flex flex-col gap-y-3">
             <div className="top flex justify-between">
-              <label className="text-zinc-500">Add</label>
-              <div className="text-zinc-500">Max: 5.29</div>
+              <label className="text-slate-500">Add</label>
+              <div className="text-slate-500">Max: 5.29</div>
             </div>
             <div className="middle flex justify-between">
               <input placeholder="0.01" />
@@ -62,31 +62,31 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
           {/* infor */}
           <div className="collateral-infor mt-3 flex flex-col gap-y-2">
             <div className="flex justify-between">
-              <label className="text-zinc-500">Position Size</label>
+              <label className="text-slate-500">Position Size</label>
               <label>
-                0.0261 <span className="text-zinc-500">($49.2)</span>
+                0.0261 <span className="text-slate-500">($49.2)</span>
               </label>
             </div>
             <div className="flex justify-between">
-              <label className="text-zinc-500">Collateral(USDT)</label>
+              <label className="text-slate-500">Collateral(USDT)</label>
               <label>
-                4.96$ - <span className="text-zinc-500">$9.2</span>
+                4.96$ - <span className="text-slate-500">$9.2</span>
               </label>
             </div>
             <div className="flex justify-between">
-              <label className="text-zinc-500">Leverage</label>
+              <label className="text-slate-500">Leverage</label>
               <label>
-                10.0X - <span className="text-zinc-500">7.9X</span>
+                10.0X - <span className="text-slate-500">7.9X</span>
               </label>
             </div>
             <div className="flex justify-between">
-              <label className="text-zinc-500">Index Price</label>
+              <label className="text-slate-500">Index Price</label>
               <label>$1.1119.0</label>
             </div>
             <div className="flex justify-between">
-              <label className="text-zinc-500">Liq.Price</label>
+              <label className="text-slate-500">Liq.Price</label>
               <label>
-                $2,079.0 - <span className="text-zinc-500">$ 2,123.2</span>
+                $2,079.0 - <span className="text-slate-500">$ 2,123.2</span>
               </label>
             </div>
           </div>

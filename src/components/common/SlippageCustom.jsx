@@ -37,7 +37,7 @@ const SlippageCustom = ({ label, options, tooltip, defaultValue }) => {
     <div className="slippage-custom">
       <div className="slippage-custom-label flex justify-between items-center">
         <div className="flex gap-1 items-center">
-          <label>{label}</label>
+          <label className="text-sm text-slate-500">{label}</label>
           <div className="group-tooltip">
             <QuestionMarkCircleIcon className="w-4 h-4 question text-slate-500" />
             <div className="tooltip p-3 rounded">{tooltip}</div>
