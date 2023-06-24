@@ -122,7 +122,7 @@ const FaucetPage = () => {
     {
       field: "asset",
       headerName: "Asset",
-      headerClassName: "text-sm text-left",
+      headerClassName: "text-sm text-left px-3",
       className: "text-left text-xs lg:text-sm",
       cellRenderer: (cell) => {
         return (
@@ -176,7 +176,7 @@ const FaucetPage = () => {
   ]
 
   return (
-    <div className="p-5 xl:p-0">
+    <div className="px-10 2xl:px-0">
       <Modal
         open={openModal}
         setOpen={setOpenModal}

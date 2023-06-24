@@ -5,7 +5,7 @@ import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from
 
 const DocumentPage = () => {
   return (
-    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5">
+    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 px-10 2xl:px-0">
       <h2 className="font-medium text-4xl">Developers</h2>
       <div className="bg-banner relative shadow border rounded vh-40">
         <div className="absolute top-1/2 left-0 flex flex-col gap-3 px-6">

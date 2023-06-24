@@ -1,8 +1,4 @@
 import Card from "@components/Card/Card"
-import React, { useState } from "react"
-import cx from "classnames"
-
-import Mobo from "@img/morpho.png"
 import { DBIcon, VoidIcon } from "@icons/index"
 import { InputCustom } from "@components/common"
 import Button from "@components/Button/Button"
@@ -14,7 +10,7 @@ const StakingPage = () => {
   return (
     <div className="">
       <div className="bg vh-full-screen fixed"></div>
-      <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 bg-transparent">
+      <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 bg-transparent px-10 2xl:px-0">
         <Card className="w-full p-5 relative" hasShadow={true}>
           <div className="flex flex-col gap-3">
             <div className="title flex items-center gap-3">

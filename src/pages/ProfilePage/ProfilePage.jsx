@@ -4,13 +4,13 @@ import React from "react"
 import DogeCoin from "@img/dogecoin.png"
 import { CopyIcon, VoidIcon } from "@icons/index"
 import APE from "@img/ape.png"
-import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
 
 const columnDef = [
   {
     field: "account",
     headerName: "Account",
+    headerClassName: "text-left px-3",
     cellRenderer: (cell) => {
       return (
         <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ const columnDef = [
 
 const ProfilePage = () => {
   return (
-    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 ">
+    <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 px-10 2xl:px-0 ">
       <h3 className="text-xl font-medium">Profile Overview</h3>
       <Card className={"p-5"}>
         <div className="flex justify-between flex-col md:flex-row ">
@@ -120,7 +120,7 @@ const ProfilePage = () => {
           <TableCustom
             columnDef={columnDef}
             data={[{ account: "11e324e...121231", date: "13 May 2023", avt: "" }]}
-            cellStyle="p-3 "
+            cellStyle="p-3"
           />
         </div>
       </div>

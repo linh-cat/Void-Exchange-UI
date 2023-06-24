@@ -83,7 +83,7 @@ const MarketPage = () => {
         open={isShowModal}
         setOpen={setIsShowModal}
       />
-      <div className="container mx-auto max-w-4xl py-10 flex flex-col gap-5 bg-transparent">
+      <div className="container mx-auto max-w-4xl py-10 flex flex-col gap-5 bg-transparent px-10 2xl:px-0">
         <Card
           header={
             <div className="title flex items-center gap-3 p-3">
