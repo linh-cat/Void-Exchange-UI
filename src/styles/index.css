@@ -6,7 +6,6 @@
 
 @layer utilities {
     @variants responsive {
-
         /* Hide scrollbar for Chrome, Safari and Opera */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -35,11 +34,11 @@ body {
 :root {
     --main-bg-color: #0c0f13;
     --main-card-color: #1b2028;
-    --bg-card: #050B1B;
+    --bg-card: #050b1b;
     --input-bg-color: #071223;
     --main-long: #16be76;
     --main-short: #e43e53;
-    --main-yellow: #DBE765;
+    --main-yellow: #dbe765;
     --text-color-green: #84cc16;
     --text-color-purple: #a78bfa;
     --main-card-color-secondary: #32435e;
@@ -110,11 +109,11 @@ body {
 }
 
 .bg-errorLight {
-    background-color: rgba(255, 82, 82, .1);
+    background-color: rgba(255, 82, 82, 0.1);
 }
 
 .bg-successLight {
-    background-color: rgba(15, 198, 121, .3);
+    background-color: rgba(15, 198, 121, 0.3);
 }
 
 .bg-pending {
@@ -147,7 +146,6 @@ body {
     background: #fff;
     left: calc(50% - 200px);
 }
-
 
 .shadow {
     box-shadow: rgba(113, 113, 166, 0.2) 0px 7px 29px 0px;
@@ -189,7 +187,6 @@ body {
     z-index: 1;
 }
 
-
 .close-dropdown {
     opacity: 0;
     transform: scaleY(0);
@@ -226,31 +223,31 @@ body {
 }
 
 .btc-color {
-    color: #F79D2F !important;
+    color: #f79d2f !important;
 }
 
 .border-binance {
-    border: 1px solid #FFD42D !important;
+    border: 1px solid #ffd42d !important;
 }
 
 .bg-binance {
-    background-color: #FFD42D;
+    background-color: #ffd42d;
 }
 
 .active-kucoin {
-    border: 1px solid #20A287 !important;
+    border: 1px solid #20a287 !important;
 }
 
 .active-coinbase {
-    border: 1px solid #0145D4 !important;
+    border: 1px solid #0145d4 !important;
 }
 
 .active-bybit {
-    border: 1px solid #F7A600 !important;
+    border: 1px solid #f7a600 !important;
 }
 
 .active-binance {
-    border: 1px solid #FFD42D !important;
+    border: 1px solid #ffd42d !important;
 }
 
 .active-okx {
@@ -270,11 +267,11 @@ body {
 }
 
 .btc-border {
-    border-color: #F79D2F !important;
+    border-color: #f79d2f !important;
 }
 
 .hover-opacity:hover {
-    opacity: .6 !important;
+    opacity: 0.6 !important;
 }
 
 .font-small {
@@ -470,7 +467,6 @@ button {
 
 .active-chain {
     color: var(--arbitrum-blue);
-
 }
 
 a.plain {
