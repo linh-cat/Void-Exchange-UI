@@ -18,6 +18,7 @@ import SearchIcon from "./Search.svg"
 import DiscordIcon from "./discord.png"
 import TwitterIcon from "./twitter.png"
 import ArrowTopRight from "./ArrowTopRight.svg"
+import CoinbaseIcon from "./coinbase.svg"
 
 export {
   LimitIcon,
@@ -39,5 +40,6 @@ export {
   SearchIcon,
   DiscordIcon,
   TwitterIcon,
-  ArrowTopRight
+  ArrowTopRight,
+  CoinbaseIcon
 }

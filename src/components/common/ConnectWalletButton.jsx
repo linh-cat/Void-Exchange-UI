@@ -5,14 +5,13 @@ import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitc
 import cx from "classnames"
 import Modal from "@components/Modal/Modal"
 import { decialNumber } from "src/common/fomatter"
-import { ArrowTopRight, CopyIcon, DownIcon, Metamask } from "@icons/index"
+import { ArrowTopRight, CoinbaseIcon, CopyIcon, DownIcon, Metamask } from "@icons/index"
 import Button from "@components/Button/Button"
 
 import "./ConnectWalletButton.css"
 import { Popover } from "@headlessui/react"
 import { Arbitrum, Base, EthereumChain } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
-import { useNavigate } from "react-router-dom"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -30,18 +29,22 @@ const iconForMapping = {
   5: Base,
   42161: Arbitrum
 }
+const connectorIcon = {
+  metaMask: Metamask,
+  coinbaseWallet: CoinbaseIcon
+}
+
 const ConnectWalletButton = ({ imgSrc }) => {
   const [connectModal, setConnectModal] = useState(false)
+
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
-  const { address, isConnected } = useAccount()
+  const { address, isConnected, connector } = useAccount()
   const { switchNetwork } = useSwitchNetwork()
   const { chain: currentChain, chains } = useNetwork()
   const { data: balance } = useBalance({ address })
-  const navigate = useNavigate()
 
   const headerConnectModal = <div>Connect Wallet</div>
-
   const bodyConnectModal = (
     <div className="flex flex-col gap-3">
       {connectors.map((connector) => {
@@ -55,7 +58,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
             }}
             isDefault={false}
             className="border p-3"
-            icon={connector.id === "metaMask" && <img src={Metamask} alt="metamask" className="h-4 w-4" />}
+            icon={<img src={connectorIcon[connector.id]} alt="icon" className="h-4 w-4" />}
             key={connector.id}
           />
         )
@@ -210,7 +213,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <label className="text-slate-400">Connect with metamask</label>
+                      <label className="text-slate-400">Connect with {connector?.name}</label>
                       <div>
                         <div onClick={() => disconnect()} className="link-color cursor-pointer">
                           Disconnect

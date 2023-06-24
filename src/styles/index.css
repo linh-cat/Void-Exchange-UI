@@ -35,7 +35,7 @@ body {
 :root {
     --main-bg-color: #0c0f13;
     --main-card-color: #1b2028;
-    --bg-card: #1a1e23;
+    --bg-card: #050B1B;
     --input-bg-color: #071223;
     --main-long: #16be76;
     --main-short: #e43e53;
@@ -65,7 +65,7 @@ body {
 }
 
 .card {
-    background-color: #050B1B;
+    background-color: var(--bg-card);
 }
 
 .bg-red {
@@ -295,10 +295,6 @@ body {
 
 .bg-input {
     background: var(--input-bg-color);
-}
-
-.bg-card {
-    background-color: var(--main-card-color);
 }
 
 .input-shadow {

@@ -158,7 +158,7 @@ const InputWithToken = ({
           </div>
           <div
             className={cx({
-              "token-list absolute right-0 bg-card rounded overflow-hidden p-2 z-50 w-48": true,
+              "token-list absolute right-0 card rounded overflow-hidden p-2 z-50 w-48": true,
               "close-dropdown": !isShowDropdownToken,
               "open-dropdown": isShowDropdownToken
             })}

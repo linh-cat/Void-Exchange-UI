@@ -10,11 +10,13 @@ import FaucetPage from "./pages/FaucetPage/FaucetPage"
 import { Toaster } from "react-hot-toast"
 
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
-import { sepolia, goerli, baseGoerli, arbitrum, mainnet } from "wagmi/chains"
+import { sepolia, baseGoerli, arbitrum, mainnet } from "wagmi/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet"
+
 import StakingPage from "./pages/StakingPage/StakingPage"
 import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
@@ -55,13 +57,14 @@ const config = createConfig({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains, options: { name: "MetaMask" } }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Injected",
-        shimDisconnect: true
-      }
-    })
+    // new InjectedConnector({
+    //   chains,
+    //   options: {
+    //     name: "Injected",
+    //     shimDisconnect: true
+    //   }
+    // }),
+    new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
   ],
   publicClient
 })
@@ -150,7 +153,7 @@ function App() {
       <FullApp />
       <Toaster
         toastOptions={{
-          className: "bg-card shadow",
+          className: "card shadow",
           style: {
             background: "#1B2028",
             color: "#fff",

@@ -34,7 +34,7 @@ const Modal = ({ open, setOpen, body, footer, header, disabled }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded border p-6 align-middle shadow-xl transition-all bg-card">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded border p-6 align-middle shadow-xl transition-all card">
                   <div className="text-left">{header}</div>
                   <div className="mt-2">{body}</div>
                   <div className="mt-4">{footer}</div>
