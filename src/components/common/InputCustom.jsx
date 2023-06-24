@@ -143,7 +143,7 @@ const InputCustom = ({
           className={cx(
             {
               "rounded w-full h-full text-xs lg:text-sm": true,
-              disable: disabled
+              disabled: disabled
             },
             classNameInput
           )}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitchNetwork } from "wagmi"
 
@@ -12,6 +12,8 @@ import "./ConnectWalletButton.css"
 import { Popover } from "@headlessui/react"
 import { Arbitrum, Base, EthereumChain } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
+import Spinner from "@components/Spinner/Spinner"
+import useOutsideDetect from "src/hooks/useOutsideDetect"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -36,13 +38,22 @@ const connectorIcon = {
 
 const ConnectWalletButton = ({ imgSrc }) => {
   const [connectModal, setConnectModal] = useState(false)
+  const [isOpened, setIsOpened] = useState(false)
 
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
   const { address, isConnected, connector } = useAccount()
-  const { switchNetwork } = useSwitchNetwork()
+  const { switchNetwork, isLoading: isLoadingSwitchNetwork, pendingChainId } = useSwitchNetwork()
   const { chain: currentChain, chains } = useNetwork()
   const { data: balance } = useBalance({ address })
+
+  const toggleMenu = () => {
+    setIsOpened((open) => !open)
+  }
+  const handleClickOutside = () => {
+    setIsOpened(false)
+  }
+  const refOutside = useOutsideDetect(handleClickOutside)
 
   const headerConnectModal = <div>Connect Wallet</div>
   const bodyConnectModal = (
@@ -71,6 +82,10 @@ const ConnectWalletButton = ({ imgSrc }) => {
     icon: iconForMapping[l.id]
   }))
 
+  useEffect(() => {
+    setIsOpened(false) // Close the popover when the network chain changes
+  }, [currentChain])
+
   return (
     <div>
       <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
@@ -92,11 +107,11 @@ const ConnectWalletButton = ({ imgSrc }) => {
             <div className="flex items-center gap-5">
               <Popover className="relative">
                 <Popover.Button className="flex items-center border h-11 px-5 rounded gap-3">
-                  <span className="">{listChainNotSupport[currentChain.id] || "Not support"} </span>
+                  <span className="">{listChainNotSupport[currentChain.id] || "Wrong network"} </span>
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
-                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 bg-dropdown rounded flex flex-col">
+                <Popover.Panel className="absolute left-1/2 -translate-x-1/2 z-10 w-40 card rounded flex flex-col">
                   {listChains?.map((c) => (
                     <span
                       className={cx({
@@ -117,7 +132,6 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   ))}
                 </Popover.Panel>
               </Popover>
-              <Button text="Wrong Network" isDefault={false} className="border py-3 px-3" />
               <Button
                 text="Disconnect"
                 onClick={() => {
@@ -131,8 +145,11 @@ const ConnectWalletButton = ({ imgSrc }) => {
         return (
           <div className="flex flex-col md:flex-row gap-3">
             <>
-              <Popover className="relative">
-                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4 ">
+              <Popover className="relative" ref={refOutside}>
+                <Popover.Button
+                  className="flex justify-center items-center border h-11 px-2 rounded gap-4"
+                  onClick={toggleMenu}
+                >
                   <div className="flex items-center gap-2">
                     <img src={iconForMapping[currentChain.id]} alt="icon" className="w-5 h-5" />
                     <span className="">{currentChain.name}</span>
@@ -140,25 +157,36 @@ const ConnectWalletButton = ({ imgSrc }) => {
                   <img src={DownIcon} alt="down-icon" />
                 </Popover.Button>
 
-                <Popover.Panel className="absolute right-0 z-10 w-52 rounded flex flex-col shadow border card">
-                  {listChains?.map((c) => (
-                    <span
-                      className={cx({
-                        "cursor-pointer px-3 bg-hover h-12 flex items-center justify-between hover:bg-slate-800 gap-2": true
-                      })}
-                      key={c.id}
-                      onClick={() => switchNetwork(c.id)}
-                    >
-                      <div className="flex items-center gap-2">
-                        <img src={c.icon} alt="icon" className="w-5 h-5" />
-                        <label l className="cursor-pointer">
-                          {c.name}
-                        </label>
-                      </div>
-                      {c.id === currentChain.id && <CheckIcon className="w-5 h-5" />}
-                    </span>
-                  ))}
-                </Popover.Panel>
+                {isOpened && (
+                  <Popover.Panel
+                    className={cx({
+                      "absolute right-0 z-10 w-52 rounded flex flex-col shadow border card": true
+                    })}
+                    static
+                  >
+                    {listChains?.map((c) => (
+                      <span
+                        className={cx({
+                          "cursor-pointer px-3 bg-hover h-12 flex items-center justify-between hover:bg-slate-800 gap-2": true,
+                          disabled: !switchNetwork || c.id === currentChain?.id
+                        })}
+                        key={c.id}
+                        onClick={() => {
+                          switchNetwork(c.id)
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <img src={c.icon} alt="icon" className="w-5 h-5" />
+                          <label l className="cursor-pointer">
+                            {c.name}
+                          </label>
+                        </div>
+                        {c.id === currentChain.id && !isLoadingSwitchNetwork && <CheckIcon className="w-5 h-5" />}
+                        {c.id === pendingChainId && isLoadingSwitchNetwork && <Spinner />}
+                      </span>
+                    ))}
+                  </Popover.Panel>
+                )}
               </Popover>
 
               <Popover className="relative">

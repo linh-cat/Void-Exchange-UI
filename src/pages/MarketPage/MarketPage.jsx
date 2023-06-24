@@ -8,7 +8,6 @@ import Button from "@components/Button/Button"
 import SelectTokenModal from "@components/SelectTokenModal/SelectTokenModal"
 import TableCustom from "@components/Table/TableCustom"
 import Modal from "@components/Modal/Modal"
-import LineLoading from "@components/common/LineLoading/LineLoading"
 import ComboBoxList from "@components/ComboBoxList/ComboBoxList"
 
 import { VoidIcon } from "@icons/index"
@@ -255,9 +254,6 @@ const MarketPage = () => {
               </div>
               <div>
                 <Button text="Approve" />
-              </div>
-              <div>
-                <LineLoading isLoading={false} />
               </div>
             </div>
           </Card>

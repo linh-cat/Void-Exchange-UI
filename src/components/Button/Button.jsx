@@ -10,7 +10,7 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type, isLoad
         "text-center btn text-sm flex items-center justify-center gap-2 cursor-pointer rounded overflow-hidden": true,
         "default-btn ": isDefault,
         secondary: type === "secondary",
-        disable: isLoading || disabled
+        disabled: isLoading || disabled
       })}
       onClick={onClick}
     >

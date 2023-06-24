@@ -69,7 +69,7 @@ const SelectCustom = ({ options, label, tooltip, className, classNameInput, clas
               <div
                 className={cx({
                   "dd-list-item p-3 cursor-pointer text-sm 2xl:text-base flex items-center gap-2": true,
-                  disable: op.disabled
+                  disabled: op.disabled
                 })}
                 onClick={() => handleChangeOptions(op.value)}
               >

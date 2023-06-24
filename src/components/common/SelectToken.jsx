@@ -49,7 +49,7 @@ const SelectToken = ({ options, onChange, values }) => {
           <div
             className={cx({
               "dd-token-item flex items-center justify-between w-full p-3": true,
-              disable: item.disabled
+              disabled: item.disabled
             })}
             onClick={() => handleChange(item.value)}
             key={idx}

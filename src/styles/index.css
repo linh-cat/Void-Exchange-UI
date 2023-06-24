@@ -438,7 +438,7 @@ button {
     cursor: pointer;
 }
 
-.disable {
+.disabled {
     pointer-events: none !important;
 }
 

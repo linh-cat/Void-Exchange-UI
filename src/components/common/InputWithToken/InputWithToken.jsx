@@ -167,7 +167,7 @@ const InputWithToken = ({
               <div
                 className={cx({
                   "flex items-center justify-between py-2 px-1 cursor-pointer bg-hover ": true,
-                  disable: item?.disabled
+                  disabled: item?.disabled
                 })}
                 onClick={() => onChangeToken(item?.value)}
               >
@@ -204,7 +204,7 @@ const InputWithToken = ({
           <div
             className={cx({
               "border px-1 py-1 rounded bg-input cursor-pointer text-xs": true,
-              disable: disabled
+              disabled: disabled
             })}
             onClick={() => onChangeInput(balance?.formatted)}
           >
