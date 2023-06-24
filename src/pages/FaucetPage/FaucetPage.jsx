@@ -123,7 +123,7 @@ const FaucetPage = () => {
     {
       field: "asset",
       headerName: "Asset",
-      headerClassName: "text-sm text-left px-3",
+      headerClassName: "text-sm text-left px-3 py-3",
       className: "text-left text-xs lg:text-sm",
       cellRenderer: (cell) => {
         return (
@@ -143,7 +143,7 @@ const FaucetPage = () => {
         return formatUnits(balances[token.symbol], token.decimals)
       },
       className: "text-xs lg:text-sm",
-      headerClassName: "text-sm"
+      headerClassName: "text-sm py-3"
     },
     {
       field: "action",
