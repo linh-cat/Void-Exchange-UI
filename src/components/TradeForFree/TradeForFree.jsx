@@ -25,11 +25,11 @@ const TradeForFree = () => {
               <Button text="Learn More" className="inline-block" type="secondary" />
             </div>
           </div>
-          <div className="right-side relative col-span-2">
+          <div className="right-side relative col-span-2 px-20 xl:px-0 overflow-hidden">
             <img
               src={TradingIMG}
               alt="trading img"
-              className="w-full h-full border rounded-md absolute top-0 -right-24 object-cover"
+              className="w-full h-full border rounded-md absolute top-0 right-0 xl:-right-24 object-cover"
             />
           </div>
         </div>
