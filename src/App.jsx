@@ -75,15 +75,7 @@ const FullApp = () => {
       <BgApp />
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <Dashboard />
-              <Footer />
-            </div>
-          }
-        />
+        <Route path="/" element={<Dashboard />} />
         <Route
           path="trade"
           element={
@@ -94,51 +86,12 @@ const FullApp = () => {
             </div>
           }
         />
-        <Route
-          path="document"
-          element={
-            <div>
-              <DocumentPage />
-              <Footer />
-            </div>
-          }
-        />
+        <Route path="document" element={<DocumentPage />} />
         <Route path="profile" element={<ProfilePage />} />
-        <Route
-          path="faucet"
-          element={
-            <div>
-              <FaucetPage />
-              <Footer />
-            </div>
-          }
-        />
-        <Route
-          path="staking"
-          element={
-            <div>
-              <StakingPage />
-              <Footer />
-            </div>
-          }
-        />
-        <Route
-          path="market"
-          element={
-            <div>
-              <MarketPage />
-              <Footer />
-            </div>
-          }
-        />
-        <Route
-          path="vault"
-          element={
-            <div>
-              <VaultPage />
-            </div>
-          }
-        >
+        <Route path="faucet" element={<FaucetPage />} />
+        <Route path="staking" element={<StakingPage />} />
+        <Route path="market" element={<MarketPage />} />
+        <Route path="vault" element={<VaultPage />}>
           <Route path="list" element={<ListVault />} />
           <Route path=":id" element={<DetailVaultPage />} />
         </Route>

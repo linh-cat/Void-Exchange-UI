@@ -6,13 +6,13 @@ import Button from "@components/Button/Button"
 const TradeForFree = () => {
   return (
     <div className="relative">
-      <section className="trade-for-free">
+      <section className="trade-for-free flex flex-col gap-3">
         <div className="top text-center flex flex-col gap-3">
           <p className="text-slate-500 uppercase font-medium text-sm tracking-wider">Now Live</p>
           <h3 className="font-medium text-2xl">Start Trading</h3>
           <p className="text-sm">We are continuously launching new Perpetual Contract markets.</p>
         </div>
-        <div className="xl:grid xl:grid-flow-col xl:grid-cols-3 xl:mt-10 xl:px-20 overflow-hidden">
+        <div className="xl:grid xl:grid-flow-col xl:grid-cols-3 overflow-hidden">
           <div className="left-side p-20 col-span-1">
             <h1 className="font-medium text-3xl">What is Decentralized Trading?</h1>
             <p className=" mt-5 text-slate-200">

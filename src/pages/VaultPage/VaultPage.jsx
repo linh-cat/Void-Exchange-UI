@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 
 const VaultPage = () => {
   return (
-    <div className="">
+    <div className="flex flex-col gap-20">
       <Outlet />
       <Footer />
     </div>

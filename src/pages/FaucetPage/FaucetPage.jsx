@@ -15,6 +15,7 @@ import { Metamask } from "@icons/index"
 import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
 import { toast } from "react-hot-toast"
 import RequireConnectionMask from "@components/RequireConnectionMask/RequireConnectionMask"
+import Footer from "@components/Footer/Footer"
 
 const tokens = [
   {
@@ -176,70 +177,75 @@ const FaucetPage = () => {
   ]
 
   return (
-    <div className="px-10 2xl:px-0">
-      <Modal
-        open={openModal}
-        setOpen={setOpenModal}
-        header={
-          <div className="flex justify-between">
-            <div className="flex items-center gap-2">
-              <h3>Faucet {selectedToken?.symbol}</h3>
-              <img src={selectedToken?.img} alt="dai" className="h-5 w-5" />
+    <div className="flex flex-col gap-20">
+      <div className="px-10 2xl:px-0">
+        <Modal
+          open={openModal}
+          setOpen={setOpenModal}
+          header={
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2">
+                <h3>Faucet {selectedToken?.symbol}</h3>
+                <img src={selectedToken?.img} alt="dai" className="h-5 w-5" />
+              </div>
+              <div>
+                <label className="text-sm text-slate-500">Max: {selectedToken?.max}</label>
+              </div>
             </div>
+          }
+          footer={
+            <Button text="Faucet" onClick={onMint} isLoading={isMinting} disabled={amount > selectedToken?.max} />
+          }
+          body={
             <div>
-              <label className="text-sm text-slate-500">Max: {selectedToken?.max}</label>
+              <InputCustom
+                placeHolder="Amount"
+                classNameInput="py-3 px-2"
+                rightAction={
+                  <div className="cursor-pointer mr-2" onClick={() => setAmount(selectedToken?.max)}>
+                    Max
+                  </div>
+                }
+                value={amount}
+                onChange={(val) => setAmount(val)}
+                disabled={isMinting}
+              />
+              {amount > selectedToken?.max && (
+                <div className="text-sm text-yellow-500 text-left"> Mint amount must be less than max value </div>
+              )}
             </div>
-          </div>
-        }
-        footer={<Button text="Faucet" onClick={onMint} isLoading={isMinting} disabled={amount > selectedToken?.max} />}
-        body={
-          <div>
-            <InputCustom
-              placeHolder="Amount"
-              classNameInput="py-3 px-2"
-              rightAction={
-                <div className="cursor-pointer mr-2" onClick={() => setAmount(selectedToken?.max)}>
-                  Max
-                </div>
-              }
-              value={amount}
-              onChange={(val) => setAmount(val)}
-              disabled={isMinting}
-            />
-            {amount > selectedToken?.max && (
-              <div className="text-sm text-yellow-500 text-left"> Mint amount must be less than max value </div>
-            )}
-          </div>
-        }
-        disabled={isMinting}
-      />
-      <div
-        className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
-        style={{ backgroundImage: `url(${Mobo})` }}
-      ></div>
-      <div className="faucet-banner mx-auto max-w-7xl py-10 ">
-        <Card className="w-full p-5" hasShadow={true}>
-          <div className="flex flex-col gap-3 ">
-            <div className="title flex items-center gap-3">
-              <img src={VoidIcon} alt="eth" className="h-10 w-10" />
-              <h1 className="text-2xl">Void Exchange Faucet</h1>
+          }
+          disabled={isMinting}
+        />
+        <div
+          className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
+          style={{ backgroundImage: `url(${Mobo})` }}
+        ></div>
+        <div className="faucet-banner mx-auto max-w-7xl py-10 ">
+          <Card className="w-full p-5" hasShadow={true}>
+            <div className="flex flex-col gap-3 ">
+              <div className="title flex items-center gap-3">
+                <img src={VoidIcon} alt="eth" className="h-10 w-10" />
+                <h1 className="text-2xl">Void Exchange Faucet</h1>
+              </div>
+              <div className="text-zinc-500 text-sm">
+                With testnet Faucet you can get free assets to test the Void Protocol. Make sure to switch your wallet
+                provider to the appropriate testnet network, select desired asset, and click ‘Faucet’ to get tokens
+                transferred to your wallet. The assets on a testnet are not “real,” meaning they have no monetary value.
+              </div>
             </div>
-            <div className="text-zinc-500 text-sm">
-              With testnet Faucet you can get free assets to test the Void Protocol. Make sure to switch your wallet
-              provider to the appropriate testnet network, select desired asset, and click ‘Faucet’ to get tokens
-              transferred to your wallet. The assets on a testnet are not “real,” meaning they have no monetary value.
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
+        <div className="faucet-list mx-auto max-w-7xl">
+          <h4 className="mb-3">Test Assets</h4>
+          <Card>
+            <RequireConnectionMask>
+              <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
+            </RequireConnectionMask>
+          </Card>
+        </div>
       </div>
-      <div className="faucet-list mx-auto max-w-7xl">
-        <h4 className="mb-3">Test Assets</h4>
-        <Card>
-          <RequireConnectionMask>
-            <TableCustom columnDef={columnDef} data={tokens} cellStyle="py-3 px-3" />
-          </RequireConnectionMask>
-        </Card>
-      </div>
+      <Footer />
     </div>
   )
 }

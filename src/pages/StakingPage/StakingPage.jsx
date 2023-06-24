@@ -5,10 +5,11 @@ import Button from "@components/Button/Button"
 import { BTC, ETH } from "@img/token"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import { Rewards } from "@img/logo"
+import Footer from "@components/Footer/Footer"
 
 const StakingPage = () => {
   return (
-    <div className="">
+    <div className=" flex flex-col gap-20">
       <div className="bg vh-full-screen fixed"></div>
       <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 bg-transparent px-10 2xl:px-0">
         <Card className="w-full p-5 relative" hasShadow={true}>
@@ -170,6 +171,7 @@ const StakingPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
