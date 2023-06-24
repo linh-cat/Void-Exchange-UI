@@ -26,3 +26,26 @@ export const formatValue = (value, decimals) => {
 export const descaleValue = (value, decimals) => {
   return value / BigInt(10 ** decimals)
 }
+
+/**
+ *
+ * @param {Number} num
+ */ export const isInt = (num) => {
+  if (typeof x == "number" && !isNaN(num)) {
+    if (Number.isInteger(num)) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
+/**
+ *
+ * @param {String} num
+ * @param {number} decimals
+ */
+export const decimalsFormatter = (num, decimals = 2) => {
+  return num === "0" ? 0 : !isInt(num) ? parseFloat(num).toFixed(decimals) : num
+}

@@ -7,7 +7,7 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 
 import { useAccount, useBalance } from "wagmi"
-import { formatValue } from "src/lib/formatter"
+import { decimalsFormatter, formatValue } from "src/lib/formatter"
 import { Constants } from "@void-0x/void-sdk"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 
@@ -199,7 +199,7 @@ const InputWithToken = ({
         <div className="flex gap-2 items-center">
           <div className="flex items-center gap-2">
             <label className="text-slate-500 text-sm">Balance:</label>
-            <div className="text-slate-500 text-sm">{balance?.formatted}</div>
+            <div className="text-slate-500 text-sm">{decimalsFormatter(Number(balance?.formatted), 4)}</div>
           </div>
           <div
             className={cx({

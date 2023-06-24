@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitchNetwork } from "wagmi"
 
 import cx from "classnames"
 import Modal from "@components/Modal/Modal"
-import { decialNumber } from "src/common/fomatter"
 import { ArrowTopRight, CoinbaseIcon, CopyIcon, DownIcon, Metamask } from "@icons/index"
 import Button from "@components/Button/Button"
 
@@ -14,6 +13,7 @@ import { Arbitrum, Base, EthereumChain } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
 import Spinner from "@components/Spinner/Spinner"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
+import { decimalsFormatter, isInt } from "src/lib/formatter"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -193,7 +193,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
                   <div className="flex items-center gap-3">
                     <div>
-                      {decialNumber(balance?.formatted, 4)} {balance?.symbol}
+                      {decimalsFormatter(balance?.formatted, 2)} {balance?.symbol}
                     </div>
                     <Button
                       text={<div>{truncate(address, 5)}</div>}
