@@ -4,7 +4,7 @@ import { vaultLists } from "./config"
 
 const ListVault = () => {
   return (
-    <div className="vailt-list grid grid-cols-1 sm:grid-cols-2 gap-1 md:grid-cols-2 md:gap-2 xl:grid-cols-4 xl:gap-4 2xl:gap-6 p-3 md:p-0 container-vault container max-w-7xl mx-auto mt-10">
+    <div className="vailt-list px-10 2xl:px-0 grid grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 container-vault container max-w-7xl mx-auto mt-10">
       {vaultLists.map((item) => (
         <VaultCard title={item.title} bg={item.bg} hoverBg={item.hoverBg} icon={item.icon} id={item.id} />
       ))}
