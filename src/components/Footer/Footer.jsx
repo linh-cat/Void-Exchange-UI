@@ -47,8 +47,8 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className="border-t pt-3">
-        <div>
+      <div className="border-t pt-2">
+        <div className="max-w-sm px-5">
           <div className="text-slate-500 text-xs">© 2023 Void Exchange, Inc.</div>
         </div>
       </div>

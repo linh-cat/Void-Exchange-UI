@@ -21,7 +21,7 @@ const TradeForFree = () => {
               control over their funds. As the world becomes more decentralized, decentralized trading is poised to
               become the norm, and it offers an exciting future for the cryptocurrency industry.
             </p>
-            <div className="w-1/2 mt-3">
+            <div className="mx-auto mt-5 lg:w-1/2 xl:w-full">
               <Button text="Learn More" className="inline-block" type="secondary" />
             </div>
           </div>

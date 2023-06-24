@@ -48,7 +48,7 @@
 
     .header .show {
         padding: 10px 0px;
-        height: 550px;
+        height: 100vh;
         transition: all 0.7s ease;
         text-align: center;
     }
