@@ -6,17 +6,6 @@ import { Constants } from "@void-0x/void-sdk"
 const useTokenPriceFeed = (tokenAddresses) => {
   const { chain } = useNetwork()
 
-  // TODO: remove indexPrice
-  const { data: indexPrice } = useContractRead({
-    address: Constants.Addresses[chain?.id]?.PriceFeed,
-    abi: FastPriceFeedABI.abi,
-    functionName: "getPrice",
-    args: [tokenAddresses[0], true],
-    onError: (error) => {
-      console.error(error)
-    }
-  })
-
   const { data } = useContractReads({
     contracts: tokenAddresses.map((tokenAddress) => ({
       address: Constants.Addresses[chain?.id]?.PriceFeed,
@@ -42,7 +31,7 @@ const useTokenPriceFeed = (tokenAddresses) => {
     return result
   }, [data, tokenAddresses])
 
-  return { indexPrice, prices }
+  return { prices }
 }
 
 export const useTokenPrice = (tokenAddress) => {
