@@ -1,21 +1,24 @@
 import React, { useState, useCallback } from "react"
+
+import { toast } from "react-hot-toast"
+import { Faucet, Constants } from "@void-0x/void-sdk"
+import { useWalletClient, useNetwork, useContractReads } from "wagmi"
+import { formatUnits } from "viem"
+
+import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
+
 import Card from "@components/Card/Card"
-import Mobo from "@img/morpho.png"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 import Modal from "@components/Modal/Modal"
 import { InputCustom } from "@components/common"
-import { useWalletClient, useNetwork, useContractReads } from "wagmi"
-import { formatUnits } from "viem"
-import { Faucet, Constants } from "@void-0x/void-sdk"
 import useMintFaucet from "src/hooks/useMintFaucet"
-import { BTC, ETH, USDC } from "@img/token"
-import { VoidIcon } from "@img/icons"
-import { Metamask } from "@icons/index"
-import useAddTokenToMetamask from "src/hooks/useAddTokenToMetamask"
-import { toast } from "react-hot-toast"
 import RequireConnectionMask from "@components/RequireConnectionMask/RequireConnectionMask"
 import Footer from "@components/Footer/Footer"
+
+import { BTC, ETH, USDC } from "@img/token"
+import { Metamask, Void } from "@img/logo"
+import { MorphoBG } from "@img/bg"
 
 const tokens = [
   {
@@ -219,13 +222,13 @@ const FaucetPage = () => {
         />
         <div
           className="bg-cover blur-3xl bg-center w-full h-6 absolute top-40 right-28"
-          style={{ backgroundImage: `url(${Mobo})` }}
+          style={{ backgroundImage: `url(${MorphoBG})` }}
         ></div>
         <div className="faucet-banner mx-auto max-w-7xl py-10 ">
           <Card className="w-full p-5" hasShadow={true}>
             <div className="flex flex-col gap-3 ">
               <div className="title flex items-center gap-3">
-                <img src={VoidIcon} alt="eth" className="h-10 w-10" />
+                <img src={Void} alt="eth" className="h-10 w-10" />
                 <h1 className="text-2xl">Void Exchange Faucet</h1>
               </div>
               <div className="text-slate-500 text-sm">

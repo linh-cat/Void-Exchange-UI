@@ -10,11 +10,10 @@ import TableCustom from "@components/Table/TableCustom"
 import Modal from "@components/Modal/Modal"
 import ComboBoxList from "@components/ComboBoxList/ComboBoxList"
 
-import { VoidIcon } from "@icons/index"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
 import Editor from "@monaco-editor/react"
 import { Tab } from "@headlessui/react"
-import { Binance, Bybit, ChainLink, Coinbase, Kucoin, OKX } from "@img/logo"
+import { Binance, Bybit, ChainLink, Coinbase, Kucoin, OKX, Void } from "@img/logo"
 import Footer from "@components/Footer/Footer"
 
 const providers = [
@@ -88,7 +87,7 @@ const MarketPage = () => {
           <Card
             header={
               <div className="title flex items-center gap-3 p-3">
-                <img src={VoidIcon} alt="eth" className="h-10 w-10" />
+                <img src={Void} alt="eth" className="h-10 w-10" />
                 <h1 className="text-2xl">Create Market</h1>
               </div>
             }

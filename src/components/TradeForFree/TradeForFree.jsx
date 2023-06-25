@@ -1,7 +1,8 @@
 import React from "react"
-import "./TradeForFree.css"
-import TradingIMG from "@img/trade-img.png"
 import Button from "@components/Button/Button"
+
+import "./TradeForFree.css"
+import { TradingImageBG } from "@img/bg"
 
 const TradeForFree = () => {
   return (
@@ -27,7 +28,7 @@ const TradeForFree = () => {
           </div>
           <div className="right-side relative col-span-2 px-20 xl:px-0 overflow-hidden">
             <img
-              src={TradingIMG}
+              src={TradingImageBG}
               alt="trading img"
               className="w-full h-full border rounded-md absolute top-0 right-0 xl:-right-24 object-cover"
             />

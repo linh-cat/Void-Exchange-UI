@@ -1,4 +1,4 @@
-import { DiscordIcon, GithubMarkIcon, TwitterIcon, VoidIcon } from "@icons/index"
+import { Discord, Github, Twitter, Void } from "@img/logo"
 import React from "react"
 import { Link } from "react-router-dom"
 
@@ -31,20 +31,20 @@ const Footer = () => {
           <div className="flex flex-col gap-2 items-center">
             <h3>Governance</h3>
             <Link className="text-slate-500 text-sm hover flex items-center gap-3">
-              <img src={GithubMarkIcon} alt="github" className="w-4 h-4" /> <div>Github</div>
+              <img src={Github} alt="github" className="w-4 h-4" /> <div>Github</div>
             </Link>
             <Link className="text-slate-500 text-sm hover flex items-center gap-3">
-              <img src={DiscordIcon} alt="discord" className="w-4 h-4 bg-white rounded" /> <div>Discord</div>
+              <img src={Discord} alt="discord" className="w-4 h-4 bg-white rounded" /> <div>Discord</div>
             </Link>
             <Link className="text-slate-500 text-sm hover flex items-center gap-3">
-              <img src={TwitterIcon} alt="twitter" className="w-4 h-4 bg-white rounded" /> <div>Twitter</div>
+              <img src={Twitter} alt="twitter" className="w-4 h-4 bg-white rounded" /> <div>Twitter</div>
             </Link>
           </div>
         </div>
       </div>
       <div className="border-t pt-2 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center gap-1">
-          <img src={VoidIcon} alt="void icon" className="w-7 h-7" />
+          <img src={Void} alt="void icon" className="w-7 h-7" />
           <h1>Void Exchange</h1>
         </div>
         <div className="text-slate-500 text-xs">© 2023 Void Exchange, Inc.</div>

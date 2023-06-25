@@ -1,7 +1,7 @@
+import Badge from "@components/common/Badge"
+import SelectCoupleToken from "@components/common/SelectCoupleToken"
+import { GreenUpIcon } from "@icons/index"
 import React from "react"
-import SelectCoupleToken from "../../components/common/SelectCoupleToken"
-import Up from "../../img/up.svg"
-import Badge from "../../components/common/Badge"
 
 const InforBarChar = () => {
   return (
@@ -19,7 +19,7 @@ const InforBarChar = () => {
           <div className="flex flex-col items-center justify-center">
             <label className="text-slate-500 font-very-small">24h Change %</label>
             <div className="flex items-center gap-x-1">
-              <img src={Up} alt="up" />
+              <img src={GreenUpIcon} alt="up" />
               <span className="inline green-up font-small">0.34%</span>
             </div>
           </div>

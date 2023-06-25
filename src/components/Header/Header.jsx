@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react"
-import "./Header.css"
-import ConnectWalletButton from "../common/ConnectWalletButton"
-import connectWalletImg from "../../img/ic_wallet_24.svg"
-import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
-import cx from "classnames"
+
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import cx from "classnames"
+
+import ConnectWalletButton from "../common/ConnectWalletButton"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 import useUserWindow from "src/hooks/useUserWindow"
+
+import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
+
+import "./Header.css"
+import { WalletIcon } from "@icons/index"
 
 const Header = () => {
   const location = useLocation()
@@ -128,13 +132,13 @@ const Header = () => {
                   Market
                 </Link>
               </li>
-              {width <= 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
+              {width <= 1024 && <ConnectWalletButton imgSrc={WalletIcon} />}
             </ul>
           </div>
         </div>
 
         <div className="flex">
-          {width > 1024 && <ConnectWalletButton imgSrc={connectWalletImg} />}
+          {width > 1024 && <ConnectWalletButton imgSrc={WalletIcon} />}
           <button type="button" onClick={showMenu} className="hamburgur-icon ml-3">
             <svg
               className="w-6 h-6"

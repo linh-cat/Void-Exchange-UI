@@ -3,14 +3,18 @@ import OKX from "./okx.png"
 import ChainLink from "./chainlink.svg"
 import Binance from "./Binance.svg"
 import Kucoin from "./kucoin.svg"
-import Coinbase from "./coinbase.svg"
+import Coinbase from "./coinbaseWallet.png"
 import Bybit from "./bybit.svg"
-import Ethereum from "./Ethereum.svg"
 import Bitcoin from "./Bitcoin.svg"
-import USDC from "./USDC.svg"
 import Base from "./base.svg"
 import EthereumChain from "./ethereum-chain.png"
 import Arbitrum from "./Arbitrum.svg"
+import Metamask from "./metamask.png"
+import Discord from "./discord.png"
+import Void from "./void.png"
+import Twitter from "./twitter.png"
+import Github from "./github-mark.svg"
+
 export {
   Rewards,
   OKX,
@@ -19,10 +23,13 @@ export {
   Kucoin,
   Coinbase,
   Bybit,
-  Ethereum,
   Bitcoin,
-  USDC,
   Base,
   EthereumChain,
-  Arbitrum
+  Arbitrum,
+  Discord,
+  Metamask,
+  Void,
+  Twitter,
+  Github
 }

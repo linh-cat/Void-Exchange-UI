@@ -1,8 +1,9 @@
 import React from "react"
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
-import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon, GithubMarkIcon } from "@icons/index"
+import { ArrowRight, BracketIcon, CloudIcon, ComputerIcon } from "@icons/index"
 import Footer from "@components/Footer/Footer"
+import { Github } from "@img/logo"
 
 const DocumentPage = () => {
   return (
@@ -58,7 +59,7 @@ const DocumentPage = () => {
             text={"Github"}
             isDefault={false}
             className={"border border-white px-5 rounded btn-github py-2"}
-            icon={<img src={GithubMarkIcon} alt="github" className="w-5 h-5" />}
+            icon={<img src={Github} alt="github" className="w-5 h-5" />}
           />
           <Button
             text={"Feedback"}

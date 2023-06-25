@@ -1,10 +1,10 @@
 import React from "react"
-import DogeCoin from "@img/dogecoin.png"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import Card from "@components/Card/Card"
 import TableCustom from "@components/Table/TableCustom"
 import cx from "classnames"
 import { BTC, ETH, POLYGON, SOLANA } from "@img/token"
+import { DogeBG } from "@img/bg"
 
 const columnDef = [
   {
@@ -117,7 +117,7 @@ const dataForTable = [
   },
   {
     id: 3,
-    img: DogeCoin,
+    img: DogeBG,
     asset: "Dogecoin",
     acronym: "Doge",
     price: 1,

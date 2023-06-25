@@ -1,11 +1,11 @@
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
-import React from "react"
-import DogeCoin from "@img/dogecoin.png"
-import { CopyIcon, VoidIcon } from "@icons/index"
-import APE from "@img/ape.png"
 import TableCustom from "@components/Table/TableCustom"
 import Footer from "@components/Footer/Footer"
+
+import { Void } from "@img/logo"
+import { CopyIcon } from "@icons/index"
+import { ApeBG, DogeBG } from "@img/bg"
 
 const columnDef = [
   {
@@ -15,7 +15,7 @@ const columnDef = [
     cellRenderer: (cell) => {
       return (
         <div className="flex items-center gap-3">
-          <img src={APE} alt="ape" className="w-10 h-10 rounded" />
+          <img src={ApeBG} alt="ape" className="w-10 h-10 rounded" />
           <div>{cell?.account}</div>
         </div>
       )
@@ -35,7 +35,7 @@ const ProfilePage = () => {
         <Card className={"p-5"}>
           <div className="flex justify-between flex-col md:flex-row ">
             <div className="flex flex-col items-center w-full xl:w-96 bg-none">
-              <img className="w-20 h-20 rounded-full" src={APE} alt="Extra large avatar" />
+              <img className="w-20 h-20 rounded-full" src={ApeBG} alt="Extra large avatar" />
               <div className="address text-slate-500">
                 0xe6e6ee66e....5d01232{" "}
                 <span className="inline-block cursor-pointer">
@@ -48,7 +48,7 @@ const ProfilePage = () => {
               <div className="ballance-wallet flex flex-col gap-3">
                 <label className="text-slate-500 text-lg">Wallet Ballance</label>
                 <div className="flex items-center gap-2">
-                  <img src={DogeCoin} className="h5 w-5" alt="otoken" />
+                  <img src={DogeBG} className="h5 w-5" alt="otoken" />
                   <span className="text-lg font-medium">0.00</span>
                 </div>
                 <Button text="Deposit Crypto" isDefault={false} className={"border py-2"} />
@@ -73,7 +73,7 @@ const ProfilePage = () => {
         <Card className="p-5" hasShadow={true}>
           <div className="flex justify-between items-center flex-col md:flex-row gap-5">
             <div className="flex items-center gap-5">
-              <img src={VoidIcon} alt="bsca" className="w-10 h-10" />
+              <img src={Void} alt="bsca" className="w-10 h-10" />
               <div>
                 <div>Invite your friends to use Void Exchange</div>
                 <div className="text-sm text-slate-500">Earn up to a 40% commission on trading fees</div>

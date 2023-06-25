@@ -7,18 +7,15 @@ import ArrowRight from "./ArrowRight.svg"
 import BracketIcon from "./Bracket.svg"
 import CloudIcon from "./Cloud.svg"
 import ComputerIcon from "./Computer.svg"
-import GithubMarkIcon from "./github-mark.svg"
 import CopyIcon from "./Copy.svg"
 import CancelIcon from "./Cancel.svg"
-import Metamask from "./metamask.png"
-import VoidIcon from "./void.png"
 import BaseIcon from "./base.png"
 import DBIcon from "./db.png"
 import SearchIcon from "./Search.svg"
-import DiscordIcon from "./discord.png"
-import TwitterIcon from "./twitter.png"
 import ArrowTopRight from "./ArrowTopRight.svg"
 import CoinbaseIcon from "./coinbase.svg"
+import GreenUpIcon from "./up.svg"
+import WalletIcon from "./ic_wallet_24.svg"
 
 export {
   LimitIcon,
@@ -30,16 +27,13 @@ export {
   BracketIcon,
   ComputerIcon,
   CloudIcon,
-  GithubMarkIcon,
   CopyIcon,
   CancelIcon,
-  Metamask,
-  VoidIcon,
   BaseIcon,
   DBIcon,
   SearchIcon,
-  DiscordIcon,
-  TwitterIcon,
   ArrowTopRight,
-  CoinbaseIcon
+  CoinbaseIcon,
+  GreenUpIcon,
+  WalletIcon
 }

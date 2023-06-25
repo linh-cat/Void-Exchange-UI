@@ -4,16 +4,16 @@ import { useAccount, useNetwork, useConnect, useBalance, useDisconnect, useSwitc
 
 import cx from "classnames"
 import Modal from "@components/Modal/Modal"
-import { ArrowTopRight, CoinbaseIcon, CopyIcon, DownIcon, Metamask } from "@icons/index"
+import { ArrowTopRight, CoinbaseIcon, CopyIcon, DownIcon } from "@icons/index"
 import Button from "@components/Button/Button"
 
 import "./ConnectWalletButton.css"
 import { Popover } from "@headlessui/react"
-import { Arbitrum, Base, EthereumChain } from "@img/logo"
+import { Arbitrum, Base, EthereumChain, Metamask } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
 import Spinner from "@components/Spinner/Spinner"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
-import { decimalsFormatter, isInt } from "src/lib/formatter"
+import { decimalsFormatter } from "src/lib/formatter"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {

@@ -1,10 +1,10 @@
 import Card from "@components/Card/Card"
-import { DBIcon, VoidIcon } from "@icons/index"
+import { DBIcon } from "@icons/index"
 import { InputCustom } from "@components/common"
 import Button from "@components/Button/Button"
 import { BTC, ETH } from "@img/token"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid"
-import { Rewards } from "@img/logo"
+import { Rewards, Void } from "@img/logo"
 import Footer from "@components/Footer/Footer"
 
 const StakingPage = () => {
@@ -15,7 +15,7 @@ const StakingPage = () => {
         <Card className="w-full p-5 relative" hasShadow={true}>
           <div className="flex flex-col gap-3">
             <div className="title flex items-center gap-3">
-              <img src={VoidIcon} alt="eth" className="h-10 w-10" />
+              <img src={Void} alt="eth" className="h-10 w-10" />
               <h1 className="text-2xl">Void Exchange Staking</h1>
             </div>
             <div className="text-sm text-slate-300">

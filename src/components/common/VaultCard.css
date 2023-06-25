@@ -11,35 +11,35 @@
 }
 
 .bg-eth {
-    background-image: url("../../img/etherium-bg.jpg");
+    background-image: url("../../img/bg/etherium-bg.jpg");
     background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-btc {
-    background-image: url("../../img/btc-bg.jpg");
+    background-image: url("../../img/bg/btc-bg.jpg");
     background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-doge {
-    background-image: url("../../img/doge-bg.jpg");
+    background-image: url("../../img/bg/doge-bg.jpg");
     background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-usdc {
-    background-image: url("../../img/usdc-bg.jpg");
+    background-image: url("../../img/bg/usdc-bg.jpg");
     background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-pepe {
-    background-image: url("../../img/pepe-bg.jpg");
+    background-image: url("../../img/bg/pepe-bg.jpg");
     background-size: cover;
     animation: animationBg 20s ease-in-out infinite;
     -webkit-animation: animationBg 20s ease infinite;
