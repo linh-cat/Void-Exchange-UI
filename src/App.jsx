@@ -22,7 +22,6 @@ import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
 import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 import BgApp from "@components/BgApp/BgApp"
-import Footer from "@components/Footer/Footer"
 
 const baseGoerliExtended = {
   ...baseGoerli,
@@ -57,14 +56,14 @@ const config = createConfig({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains, options: { name: "MetaMask" } }),
-    // new InjectedConnector({
-    //   chains,
-    //   options: {
-    //     name: "Injected",
-    //     shimDisconnect: true
-    //   }
-    // }),
-    new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected",
+        shimDisconnect: true
+      }
+    })
+    // new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
   ],
   publicClient
 })
