@@ -66,6 +66,10 @@ body {
     border-radius: 3px;
 }
 
+.dotted-underline {
+    border-bottom: 1px dotted;
+}
+
 #bg {
     position: fixed;
     height: 100vh;

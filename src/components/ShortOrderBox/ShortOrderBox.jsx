@@ -216,45 +216,44 @@ const ShortOrderBox = () => {
         </div>
         <div className="mt-3 2xl:mt-5">
           <div className="collateral-asset flex justify-between text-base lg:text-sm">
-            <label className="text-slate-500">Collateral Asset</label>
+            <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
               <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
               <span>Cake</span>
             </div>
           </div>
           <div className="collateral-value flex justify-between mt-2 text-base lg:text-sm">
-            <label className="text-slate-500">Collateral Value</label>
+            <label className="text-slate-500 dotted-underline">Collateral Value</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
           <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
-            <label className="text-slate-500">Leverage</label>
+            <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
           <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">
-            <label className="text-slate-500">Entry Price</label>
+            <label className="text-slate-500 dotted-underline">Entry Price</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
           <div className="liquidation flex justify-between mt-2 text-base lg:text-sm">
-            <label className="text-slate-500">Liquidation</label>
+            <label className="text-slate-500 dotted-underline">Liquidation</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="w-full h-1 bg-slate-400 mt-3"></div>
-          <div className="mt-3 2xl:mt-5">
+          <div className="">
             <title>Market Infor</title>
             <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500">Borrow Fee</label>
+              <label className="text-slate-500 dotted-underline">Borrow Fee</label>
               <span>0.00086% per hour</span>
             </div>
             <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500">Available Liquidity</label>
+              <label className="text-slate-500 dotted-underline">Available Liquidity</label>
               <span>17,050 Cake ~ $57</span>
             </div>
           </div>
