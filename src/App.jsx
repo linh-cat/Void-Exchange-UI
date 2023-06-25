@@ -62,8 +62,8 @@ const config = createConfig({
         name: "Injected",
         shimDisconnect: true
       }
-    })
-    // new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
+    }),
+    new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
   ],
   publicClient
 })
