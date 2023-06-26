@@ -101,6 +101,7 @@ const ListPosition = () => {
       orderType: OrderType.MARKET,
       indexToken: position.indexToken,
       size: position.size,
+      collateralDelta: position.collateralValue,
       side: position.isLong ? Side.LONG : Side.SHORT,
       price: prices[position.indexToken]
     })
