@@ -14,14 +14,14 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
     <>
       <div className={cx({ "collateral-container": true, "z-10 opacity-60": open, "-z-10": !open })}></div>
       <div
-        className={cx({ "collateral-popup text-xs p-3 font-medium ": true, block: open, hidden: !open })}
+        className={cx({ "collateral-popup text-xs p-3 font-medium card": true, block: open, hidden: !open })}
         ref={refOutside}
       >
         <div className="collateral-header">
           <label className="font-medium">
             Change Collateral - <span className="red-down">Short ETH</span>
           </label>
-          <div className="colateral-tab font-medium mt-3">
+          <div className="colateral-tab font-medium mt-3 bg-slate-900">
             <button className={cx({ active: collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
               Add
             </button>
@@ -35,7 +35,7 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
         </div>
         <div className="collateral-content mt-3">
           {/* input */}
-          <div className="collateral-input p-3 flex flex-col gap-y-3">
+          <div className="collateral-input p-3 flex flex-col gap-y-3 bg-slate-900">
             <div className="top flex justify-between">
               <label className="text-slate-500">Add</label>
               <div className="text-slate-500">Max: 5.29</div>
@@ -47,16 +47,16 @@ const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab }) => 
             <div className="bottom flex justify-between gap-3">
               <button
                 className={cx({
-                  "bg-zinc-700 w-1/4 py-1": true,
+                  "bg-slate-800 w-1/4 py-1": true,
                   active: true,
                   "bg-orange": collateralTab === "remove"
                 })}
               >
                 25%
               </button>
-              <button className="bg-zinc-700 w-1/4 py-1">50%</button>
-              <button className="bg-zinc-700 w-1/4 py-1">75%</button>
-              <button className="bg-zinc-700 w-1/4 py-1">100%</button>
+              <button className="bg-slate-800 w-1/4 py-1">50%</button>
+              <button className="bg-slate-800 w-1/4 py-1">75%</button>
+              <button className="bg-slate-800 w-1/4 py-1">100%</button>
             </div>
           </div>
           {/* infor */}

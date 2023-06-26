@@ -13,7 +13,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 21rem;
-    background: var(--main-card-color);
     border-radius: 5px;
     overflow: hidden;
     z-index: 1001;
@@ -21,7 +20,6 @@
 
 .collateral-popup .colateral-tab {
     width: 100%;
-    background: var(--main-bg-color);
     border-radius: 5px;
 }
 
@@ -35,7 +33,6 @@
 }
 
 .collateral-popup .collateral-content .collateral-input {
-    background: var(--main-bg-color);
     border-radius: 5px;
 }
 

@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 
 const Modal = ({ open, setOpen, body, footer, header, disabled }) => {
-  function closeModal() {
+  const closeModal = () => {
     setOpen(false)
   }
 

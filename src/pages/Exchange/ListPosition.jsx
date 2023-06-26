@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react"
-import CollateralPopup from "@components/common/CollateralPopup"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 
@@ -10,11 +9,15 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
 import { formatValue, descaleValue } from "src/lib/formatter"
 import cx from "classnames"
+import CLosingModal from "./CLosingModal"
+import CollateralPopup from "./CollateralPopup"
 
 const ListPosition = () => {
-  const [collateral, setCollateral] = useState(false)
+  const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
   const [collateralTab, setCollateralTab] = useState("add")
   const [positions, setPositions] = useState([])
+  const [isCloseOrdered, setIsCloseOrdered] = useState(true)
+
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { getPositions, closeOrder, isClosingOrder } = useExchangeContext()
@@ -90,13 +93,6 @@ const ListPosition = () => {
   const handleCloseOrder = async (cell) => {
     const position = cell.raw
 
-    console.log("closeOrder", {
-      orderType: OrderType.MARKET,
-      indexToken: position.indexToken,
-      size: position.size,
-      side: position.isLong ? Side.LONG : Side.SHORT,
-      price: prices[position.indexToken]
-    })
     await closeOrder({
       orderType: OrderType.MARKET,
       indexToken: position.indexToken,
@@ -108,7 +104,7 @@ const ListPosition = () => {
   }
 
   const toggleCollateral = () => {
-    setCollateral(!collateral)
+    setIsOpenedCollatoral(!isOpenedCollatoral)
   }
 
   const columnDef = [
@@ -203,9 +199,10 @@ const ListPosition = () => {
 
   return (
     <>
+      <CLosingModal open={isCloseOrdered} setOpen={setIsCloseOrdered} />
       <CollateralPopup
-        open={collateral}
-        setOpen={setCollateral}
+        open={isOpenedCollatoral}
+        setOpen={setIsOpenedCollatoral}
         collateralTab={collateralTab}
         setCollateralTab={setCollateralTab}
       />

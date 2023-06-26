@@ -4,8 +4,8 @@ import React, { useMemo, useState } from "react"
 import "./TabExchange.css"
 import cx from "classnames"
 import { Side } from "@void-0x/void-sdk"
-import LongOrderBox from "@components/LongOrderBox/LongOrderBox"
-import ShortOrderBox from "@components/ShortOrderBox/ShortOrderBox"
+import LongOrderBox from "src/pages/Exchange/LongOrderBox"
+import ShortOrderBox from "src/pages/Exchange/ShortOrderBox"
 
 const tabData = [
   {
