@@ -20,6 +20,7 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
+import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 
 const LongOrderBox = () => {
   // UI state
@@ -302,7 +303,11 @@ const LongOrderBox = () => {
               <span>0.00086% per hour</span>
             </div>
             <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500 dotted-underline">Available Liquidity</label>
+              <TextWithTooltip
+                text="Available Liquidity"
+                tooltip={<div>Test tooltip</div>}
+                classNameTooltip="border-green w-32 -top-12"
+              />
               <span>17,050 Cake ~ $57</span>
             </div>
           </div>

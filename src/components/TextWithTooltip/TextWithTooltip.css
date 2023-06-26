@@ -1,0 +1,9 @@
+.text-with-tooltip .tooltip {
+    opacity: 0;
+    display: none;
+}
+
+.text-with-tooltip:hover .tooltip {
+    opacity: 1;
+    display: block;
+}

@@ -438,6 +438,18 @@ button {
     pointer-events: none !important;
 }
 
+.border-green {
+    border: 1px solid var(--main-long);
+}
+
+.border-red {
+    border: 1px solid var(--main-short);
+}
+
+.border-yellow {
+    border: 1px solid var(--main-yellow);
+}
+
 .border {
     border: 1px solid rgba(163, 165, 196, 0.2);
 }
@@ -488,10 +500,10 @@ a.plain {
     }
 }
 
-.show {
+.block {
     display: block;
 }
 
-.notShow {
+.hidden {
     display: none;
 }
