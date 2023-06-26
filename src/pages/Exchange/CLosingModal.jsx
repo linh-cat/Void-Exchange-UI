@@ -3,7 +3,7 @@ import Modal from "@components/Modal/Modal"
 import { BTC } from "@img/token"
 import Button from "@components/Button/Button"
 
-const CLosingModal = ({ open, setOpen }) => {
+const CLosingModal = ({ open, setOpen, disabled }) => {
   return (
     <Modal
       open={open}
@@ -108,9 +108,12 @@ const CLosingModal = ({ open, setOpen }) => {
             <h5>You will receive</h5>
             <div className="dotted-underline cursor-pointer">0.0028 BTC</div>
           </div>
-          <div>
-            <Button text="Close" />
-          </div>
+        </div>
+      }
+      disabled={disabled}
+      footer={
+        <div>
+          <Button text="Close" />
         </div>
       }
     />
