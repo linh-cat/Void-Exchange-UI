@@ -18,6 +18,7 @@ const ListPosition = () => {
   const [positions, setPositions] = useState([])
   const [isCloseOrdered, setIsCloseOrdered] = useState(false)
   const [confirmOrder, setConfimOrder] = useState()
+  const [closeAmount, setCloseAmmount] = useState()
 
   const { address } = useAccount()
   const { chain } = useNetwork()
@@ -26,6 +27,8 @@ const ListPosition = () => {
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
   ])
+
+  console.log({ closeAmount })
 
   useEffect(() => {
     const get = async () => {
@@ -93,9 +96,10 @@ const ListPosition = () => {
 
   const handleConfirmOrder = (cell) => {
     setIsCloseOrdered(true)
+    setCloseAmmount(cell?.raw?.collateralValue)
     setConfimOrder(cell)
   }
-
+  console.log({ confirmOrder })
   const handleCloseOrder = useCallback(async () => {
     const position = confirmOrder?.raw
     await closeOrder({
@@ -108,8 +112,9 @@ const ListPosition = () => {
     })
 
     if (!isClosingOrder) {
-      setConfimOrder()
       setIsCloseOrdered(false)
+      setConfimOrder()
+      setCloseAmmount()
     }
   }, [closeOrder, confirmOrder?.raw, isClosingOrder, prices])
 
@@ -133,35 +138,44 @@ const ListPosition = () => {
   }, [confirmOrder])
 
   const bodyModalInfor = useMemo(() => {
+    const collateralToken = confirmOrder?.raw?.collateralToken
+    const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[collateralToken]
+    const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
+
     return confirmOrder ? (
       <div className="flex flex-col gap-5 ">
         <div className="grid grid-cols-2 gap-3">
           <div className="border py-2 px-2 rounded text-left ">
             <h5 className="text-slate-500 text-sm">Market Price</h5>
-            <div>$30,144</div>
+            <div className="text-sm">{confirmOrder?.indexPrice}</div>
           </div>
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Order Type</h5>
-            <div>Market</div>
+            <div className="text-sm">Market</div>
           </div>
         </div>
         <div className="border p-2 flex flex-col gap-3">
           <div className="flex justify-between">
             <h5 className="text-sm text-slate-500">Close Amount</h5>
-            <div className="text-slate-500 text-sm">Max: 0.00019</div>
+            <div className="text-slate-500 text-sm">Max: {confirmOrder?.collateralValue}</div>
           </div>
           <div className="flex justify-between">
-            <div>123</div>
-            <div className="flex items-center gap-1">
-              <img src={confirmOrder?.icon} alt="icon" className="w-5 h-5" />
-              <div>{confirmOrder?.token}</div>
-            </div>
+            <div className="text-sm">{formatValue(closeAmount, valueDecimals)}</div>
+            <div className="text-sm">{confirmOrder?.token}</div>
           </div>
-          <div className="grid grid-cols-4 gap-3">
-            <div className="active rounded py-1 cursor-pointer">25%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">50%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">75%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">100%</div>
+          <div className="grid grid-cols-4 gap-3 text-sm">
+            <div className={cx("bg-slate-900 py-1 rounded cursor-pointer")} onClick={() => closeAmount * 0.25}>
+              25%
+            </div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 0.5}>
+              50%
+            </div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 0.75}>
+              75%
+            </div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 1}>
+              100%
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -218,7 +232,14 @@ const ListPosition = () => {
               </div>
             </div>
           </div>
+          <div>
+            <div className="text-sm flex items-center justify-between">
+              <h5 className="text-slate-500 ">Net Value</h5>
+              <div className="dotted-underline">{confirmOrder?.netValue}</div>
+            </div>
+          </div>
         </div>
+
         <div className="w-full h-1 bg-slate-800"></div>
         {/* <div>
           <div className="text-sm flex items-center justify-between">
@@ -226,12 +247,7 @@ const ListPosition = () => {
             <div>$0.36</div>
           </div>
         </div> */}
-        <div>
-          <div className="text-sm flex items-center justify-between">
-            <h5 className="text-slate-500 ">Net Value</h5>
-            <div className="dotted-underline">{confirmOrder?.netValue}</div>
-          </div>
-        </div>
+
         {/* <div className="flex items-center justify-between text-sm">
           <h5>You will receive</h5>
           <div className="dotted-underline cursor-pointer">0.0028 BTC</div>
@@ -240,7 +256,7 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [confirmOrder])
+  }, [chain, closeAmount, confirmOrder])
 
   const footerModalInfor = useMemo(() => {
     return (
