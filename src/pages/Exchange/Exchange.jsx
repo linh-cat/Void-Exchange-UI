@@ -47,7 +47,7 @@ const Exchange = () => {
   return (
     <>
       <TopInfo />
-      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border">
+      <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border overflow-y-auto">
         {/* left side chart and infor bar */}
         <div
           className={cx({

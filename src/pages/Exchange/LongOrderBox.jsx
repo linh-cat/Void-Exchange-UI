@@ -171,7 +171,7 @@ const LongOrderBox = () => {
         />
       )}
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box vh-75 2xl:vh-80 overflow-y-scroll no-scrollbar overflow-hidden">
+      <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
