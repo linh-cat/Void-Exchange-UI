@@ -320,6 +320,10 @@ body {
     height: 70vh;
 }
 
+.vh-75 {
+    height: 75vh;
+}
+
 .vh-80 {
     height: 80vh;
 }
