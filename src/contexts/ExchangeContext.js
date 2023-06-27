@@ -39,7 +39,7 @@ export function ExchangeContextProvider({ children }) {
   }, [publicClient, walletClient, chain])
 
   useContractEvent({
-    address: Constants.Addresses[chain.id].Exchange,
+    address: Constants.Addresses[chain?.id]?.Exchange,
     abi: Exchange.getABI(),
     eventName: "OrderExecuted",
     listener(log) {
