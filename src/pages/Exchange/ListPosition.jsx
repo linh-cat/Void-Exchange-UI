@@ -11,6 +11,7 @@ import { formatValue, descaleValue } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
+import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -300,7 +301,7 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [chain, closeAmount, confirmOrderInfo])
+  }, [calculateCloseAmount, chain?.id, closeAmount, confirmOrderInfo])
 
   const footerModal = useMemo(() => {
     return (
@@ -373,7 +374,21 @@ const ListPosition = () => {
       headerName: "Pnl & ROE",
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
-        return <div className={cell.isProfitable ? "green-up" : "red-down"}>{cell?.pnlRoe}</div>
+        return (
+          <div>
+            <TextWithTooltip
+              text={cell?.pnlRoe}
+              className={cx(cell.isProfitable ? "green-up" : "red-down", "inline-block")}
+              tooltip={
+                <div className="flex items-center justify-center gap-1 px-1 py-1">
+                  <h3>Net PNL:</h3>
+                  <div> +$7.86</div>
+                </div>
+              }
+              classNameTooltip="-top-20 right-0 border-green z-50 w-52"
+            />
+          </div>
+        )
       }
     },
     {
