@@ -17,8 +17,10 @@ const ListPosition = () => {
   const [collateralTab, setCollateralTab] = useState("add")
   const [positions, setPositions] = useState([])
   const [isCloseOrdered, setIsCloseOrdered] = useState(false)
-  const [confirmOrder, setConfimOrder] = useState()
+  const [confirmOrderInfo, setConfimOrderInfo] = useState()
   const [closeAmount, setCloseAmmount] = useState()
+
+  console.log({ closeAmount })
 
   const { address } = useAccount()
   const { chain } = useNetwork()
@@ -27,8 +29,6 @@ const ListPosition = () => {
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
   ])
-
-  console.log({ closeAmount })
 
   useEffect(() => {
     const get = async () => {
@@ -97,11 +97,11 @@ const ListPosition = () => {
   const handleConfirmOrder = (cell) => {
     setIsCloseOrdered(true)
     setCloseAmmount(cell?.raw?.collateralValue)
-    setConfimOrder(cell)
+    setConfimOrderInfo(cell)
   }
-  console.log({ confirmOrder })
+
   const handleCloseOrder = useCallback(async () => {
-    const position = confirmOrder?.raw
+    const position = confirmOrderInfo?.raw
     await closeOrder({
       orderType: OrderType.MARKET,
       indexToken: position.indexToken,
@@ -113,41 +113,46 @@ const ListPosition = () => {
 
     if (!isClosingOrder) {
       setIsCloseOrdered(false)
-      setConfimOrder()
+      setConfimOrderInfo()
       setCloseAmmount()
     }
-  }, [closeOrder, confirmOrder?.raw, isClosingOrder, prices])
+  }, [closeOrder, confirmOrderInfo?.raw, isClosingOrder, prices])
 
   const toggleCollateral = () => {
     setIsOpenedCollatoral(!isOpenedCollatoral)
   }
 
-  const headerOrderInfor = useMemo(() => {
-    return confirmOrder ? (
+  const headerModal = useMemo(() => {
+    return confirmOrderInfo ? (
       <div>
         <div className="flex gap-3">
-          <div>Close {confirmOrder?.token} Position -</div>
-          <div className="green-up">
-            {confirmOrder?.type} {confirmOrder?.leverage}
+          <div>Close {confirmOrderInfo?.token} Position -</div>
+          <div
+            className={cx(
+              { "green-up": confirmOrderInfo?.type === "long", "red-down": confirmOrderInfo?.type === "short" },
+              "capitalize"
+            )}
+          >
+            {confirmOrderInfo?.type} {confirmOrderInfo?.leverage}
           </div>
         </div>
       </div>
     ) : (
       <div></div>
     )
-  }, [confirmOrder])
+  }, [confirmOrderInfo])
 
-  const bodyModalInfor = useMemo(() => {
-    const collateralToken = confirmOrder?.raw?.collateralToken
+  const bodyModal = useMemo(() => {
+    const collateralToken = confirmOrderInfo?.raw?.collateralToken
     const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[collateralToken]
     const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
 
-    return confirmOrder ? (
+    return confirmOrderInfo ? (
       <div className="flex flex-col gap-5 ">
         <div className="grid grid-cols-2 gap-3">
           <div className="border py-2 px-2 rounded text-left ">
             <h5 className="text-slate-500 text-sm">Market Price</h5>
-            <div className="text-sm">{confirmOrder?.indexPrice}</div>
+            <div className="text-sm">{confirmOrderInfo?.indexPrice}</div>
           </div>
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Order Type</h5>
@@ -157,85 +162,77 @@ const ListPosition = () => {
         <div className="border p-2 flex flex-col gap-3">
           <div className="flex justify-between">
             <h5 className="text-sm text-slate-500">Close Amount</h5>
-            <div className="text-slate-500 text-sm">Max: {confirmOrder?.collateralValue}</div>
+            <div className="text-slate-500 text-sm">Max: {confirmOrderInfo?.collateralValue}</div>
           </div>
           <div className="flex justify-between">
             <div className="text-sm">{formatValue(closeAmount, valueDecimals)}</div>
-            <div className="text-sm">{confirmOrder?.token}</div>
+            <div className="text-sm">{confirmOrderInfo?.token}</div>
           </div>
           <div className="grid grid-cols-4 gap-3 text-sm">
-            <div className={cx("bg-slate-900 py-1 rounded cursor-pointer")} onClick={() => closeAmount * 0.25}>
-              25%
-            </div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 0.5}>
-              50%
-            </div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 0.75}>
-              75%
-            </div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer" onClick={() => closeAmount * 1}>
-              100%
-            </div>
+            <div className={cx("bg-slate-900 py-1 rounded cursor-pointer")}>25%</div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer">50%</div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer">75%</div>
+            <div className="bg-slate-900 py-1 rounded cursor-pointer">100%</div>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <h5 className="text-slate-500 text-sm">Profits In</h5>
           <div className="flex items-center gap-1">
-            <img src={confirmOrder?.icon} className="w-4 h-4" alt="token" />
-            <div className="text-sm">{confirmOrder?.token}</div>
+            <img src={confirmOrderInfo?.icon} className="w-4 h-4" alt="token" />
+            <div className="text-sm">{confirmOrderInfo?.token}</div>
           </div>
         </div>
         <div className="w-full h-1 bg-slate-800"></div>
         <div className="flex flex-col gap-2">
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Entry & Index Price</h5>
-            <div className="text-sm">{confirmOrder?.entryPrice}</div>
+            <div className="text-sm">{confirmOrderInfo?.entryPrice}</div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Market</h5>
-            <div className="text-sm">{confirmOrder?.market}</div>
+            <div className="text-sm">{confirmOrderInfo?.market}</div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Size</h5>
             <div className="text-sm">
-              <div className="">{confirmOrder?.size}</div>
+              <div className="">{confirmOrderInfo?.size}</div>
             </div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Leverage</h5>
             <div className="text-sm flex items-center gap-1">
-              <div className="">{confirmOrder?.leverage}</div>
+              <div className="">{confirmOrderInfo?.leverage}</div>
             </div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Liq. Price</h5>
             <div className="text-sm">
-              <div>{confirmOrder?.liquidationPrice}</div>
+              <div>{confirmOrderInfo?.liquidationPrice}</div>
             </div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Collateral</h5>
             <div className="text-sm">
-              <div>{confirmOrder?.collateralValue}</div>
+              <div>{confirmOrderInfo?.collateralValue}</div>
             </div>
           </div>
           <div className="flex text-sm items-center justify-between">
-            <h5 className="text-slate-500">Current Total PNL</h5>
+            <h5 className="text-slate-500">Pnl & Roe</h5>
             <div className="text-sm flex items-center gap-1">
               <div
                 className={cx({
-                  "green-up": confirmOrder?.isProfitable,
-                  "red-down": !confirmOrder?.isProfitable
+                  "green-up": confirmOrderInfo?.isProfitable,
+                  "red-down": !confirmOrderInfo?.isProfitable
                 })}
               >
-                {confirmOrder?.pnlRoe}
+                {confirmOrderInfo?.pnlRoe}
               </div>
             </div>
           </div>
           <div>
             <div className="text-sm flex items-center justify-between">
               <h5 className="text-slate-500 ">Net Value</h5>
-              <div className="dotted-underline">{confirmOrder?.netValue}</div>
+              <div className="dotted-underline">{confirmOrderInfo?.netValue}</div>
             </div>
           </div>
         </div>
@@ -256,9 +253,9 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [chain, closeAmount, confirmOrder])
+  }, [chain, closeAmount, confirmOrderInfo])
 
-  const footerModalInfor = useMemo(() => {
+  const footerModal = useMemo(() => {
     return (
       <div>
         <Button text="Close" onClick={handleCloseOrder} disabled={isClosingOrder} isLoading={isClosingOrder} />
@@ -276,7 +273,7 @@ const ListPosition = () => {
         return (
           <div className="flex items-center gap-2">
             <img src={cell?.icon} className="h-6 w-6" alt="eth" />
-            <div>
+            <div className="text-left">
               <label>{cell?.market}</label>
               <div
                 className={cx("text-xs", {
@@ -344,9 +341,8 @@ const ListPosition = () => {
       cellRenderer: (cell) => {
         return (
           <Button
-            text="close"
+            text="Close"
             isDefault={false}
-            isLoading={isClosingOrder}
             disabled={isClosingOrder}
             className="border px-2 py-1"
             onClick={() => handleConfirmOrder(cell)}
@@ -361,9 +357,9 @@ const ListPosition = () => {
       <CLosingModal
         open={isCloseOrdered}
         setOpen={setIsCloseOrdered}
-        header={headerOrderInfor}
-        body={bodyModalInfor}
-        footer={footerModalInfor}
+        header={headerModal}
+        body={bodyModal}
+        footer={footerModal}
         disabled={isClosingOrder}
       />
       <CollateralPopup

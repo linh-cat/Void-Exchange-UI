@@ -69,7 +69,7 @@ export function ExchangeContextProvider({ children }) {
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsPlacingOrder(false)
-    toast.success("Successfully deposited!")
+    toast.success("Successfully ordered!")
   }
 
   const getPositions = async (address) => {
@@ -95,7 +95,7 @@ export function ExchangeContextProvider({ children }) {
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsClosingOrder(false)
-    toast.success("Successfully deposited!")
+    toast.success("Successfully closed!")
   }
 
   return (
