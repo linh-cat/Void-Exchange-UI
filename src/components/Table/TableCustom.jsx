@@ -46,7 +46,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
   return (
     <div
       className={cx({
-        "w-full overflow-hidden rounded": true,
+        "w-full rounded": true,
         shadow: isShadow
       })}
     >

@@ -11,7 +11,6 @@ import { formatValue, descaleValue } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
-import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -59,8 +58,40 @@ const ListPosition = () => {
       const symbol = AddressToSymbolMap[chain.id][indexToken]
       const token = Tokens[chain.id][symbol]
 
+      const liquidationPrice = formatValue(
+        Position.getLiquidationPrice(
+          position,
+          BigInt(Constants.POSITION_FEE),
+          /* global BigInt */
+          // TODO: fetch current funding rate from exchange
+          BigInt(0),
+          indexPrice,
+          BigInt(Constants.MIN_MARGIN_RATIO_BPS)
+        ),
+        Constants.ORACLE_PRICE_DECIMALS
+      )
+      const netValue = formatValue(
+        Position.getNetValue(position, indexPrice, tokenDecimals),
+        Constants.ORACLE_PRICE_DECIMALS
+      )
+
+      const rawValue = {
+        ...position,
+        pnl,
+        indexPrice,
+        liquidationPrice: Position.getLiquidationPrice(
+          position,
+          BigInt(Constants.POSITION_FEE),
+          /* global BigInt */
+          // TODO: fetch current funding rate from exchange
+          BigInt(0),
+          indexPrice,
+          BigInt(Constants.MIN_MARGIN_RATIO_BPS)
+        ),
+        netValue: Position.getNetValue(position, indexPrice, tokenDecimals)
+      }
       return {
-        raw: position,
+        raw: rawValue,
         market: `${token.name}/USD`,
         collateralValue: formatValue(position.collateralValue, valueDecimals),
         size: formatValue(position.size, valueDecimals),
@@ -71,22 +102,8 @@ const ListPosition = () => {
         pnlRoe: formatValue(pnl, Constants.ORACLE_PRICE_DECIMALS),
         type: position.isLong ? "long" : "short",
         token: symbol,
-        netValue: formatValue(
-          Position.getNetValue(position, indexPrice, tokenDecimals),
-          Constants.ORACLE_PRICE_DECIMALS
-        ),
-        liquidationPrice: formatValue(
-          Position.getLiquidationPrice(
-            position,
-            BigInt(Constants.POSITION_FEE),
-            /* global BigInt */
-            // TODO: fetch current funding rate from exchange
-            BigInt(0),
-            indexPrice,
-            BigInt(Constants.MIN_MARGIN_RATIO_BPS)
-          ),
-          Constants.ORACLE_PRICE_DECIMALS
-        ),
+        netValue,
+        liquidationPrice,
         icon: token.icon
       }
     })
@@ -177,50 +194,20 @@ const ListPosition = () => {
             <div className="text-sm">{confirmOrderInfo?.token}</div>
           </div>
           <div className="grid grid-cols-4 gap-3 text-sm">
-            <div
-              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
-                active: closeAmount === calculateCloseAmount(25)
-              })}
-              onClick={() => {
-                const amount = calculateCloseAmount(25)
-                setCloseAmmount(amount)
-              }}
-            >
-              25%
-            </div>
-            <div
-              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
-                active: closeAmount === calculateCloseAmount(50)
-              })}
-              onClick={() => {
-                const amount = calculateCloseAmount(50)
-                setCloseAmmount(amount)
-              }}
-            >
-              50%
-            </div>
-            <div
-              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
-                active: closeAmount === calculateCloseAmount(75)
-              })}
-              onClick={() => {
-                const amount = calculateCloseAmount(75)
-                setCloseAmmount(amount)
-              }}
-            >
-              75%
-            </div>
-            <div
-              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
-                active: closeAmount === calculateCloseAmount(100)
-              })}
-              onClick={() => {
-                const amount = calculateCloseAmount(100)
-                setCloseAmmount(amount)
-              }}
-            >
-              100%
-            </div>
+            {[25, 50, 75, 100].map((i, idx) => (
+              <div
+                className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
+                  active: closeAmount === calculateCloseAmount(i)
+                })}
+                onClick={() => {
+                  const amount = calculateCloseAmount(i)
+                  setCloseAmmount(amount)
+                }}
+                key={idx}
+              >
+                {i} %
+              </div>
+            ))}
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -374,19 +361,16 @@ const ListPosition = () => {
       headerName: "Pnl & ROE",
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
+        const rawValue = cell?.raw
+        const percentPNL = (rawValue?.pnl / rawValue?.collateralValue) * BigInt(100)
+
+        console.log({ percentPNL, pnl: rawValue?.pnl, col: rawValue?.collateralValue, pe: BigInt(100) })
         return (
-          <div>
-            <TextWithTooltip
-              text={cell?.pnlRoe}
-              className={cx(cell.isProfitable ? "green-up" : "red-down", "inline-block")}
-              tooltip={
-                <div className="flex items-center justify-center gap-1 px-1 py-1">
-                  <h3>Net PNL:</h3>
-                  <div> +$7.86</div>
-                </div>
-              }
-              classNameTooltip="-top-20 right-0 border-green z-50 w-52"
-            />
+          <div className="flex flex-col items-start gap-1">
+            <h3 className={cx(cell.isProfitable ? "green-up" : "red-down", "inline-block dotted-underline")}>
+              {cell?.pnlRoe}
+            </h3>
+            <div className="text-slate-500 font-medium">{percentPNL || 0} %</div>
           </div>
         )
       }
