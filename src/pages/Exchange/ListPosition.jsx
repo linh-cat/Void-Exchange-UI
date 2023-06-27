@@ -88,7 +88,8 @@ const ListPosition = () => {
           indexPrice,
           BigInt(Constants.MIN_MARGIN_RATIO_BPS)
         ),
-        netValue: Position.getNetValue(position, indexPrice, tokenDecimals)
+        netValue: Position.getNetValue(position, indexPrice, tokenDecimals),
+        valueDecimals
       }
       return {
         raw: rawValue,
@@ -362,11 +363,9 @@ const ListPosition = () => {
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
         const rawValue = cell?.raw
-        const bigIntPnl = (rawValue?.pnl * BigInt(1e18)) / rawValue?.collateralValue
-
-        const percentPNL = parseInt(bigIntPnl) / 1e18
-
-        console.log({ bigIntPnl })
+        const descaledPnl = descaleValue(rawValue.pnl, Constants.ORACLE_PRICE_DECIMALS)
+        const descaledCollateralValue = descaleValue(rawValue.collateralValue, rawValue.valueDecimals)
+        const percentPNL = (parseFloat(descaledPnl) / parseFloat(descaledCollateralValue)) * 100
 
         return (
           <div className="flex flex-col items-start gap-1">
