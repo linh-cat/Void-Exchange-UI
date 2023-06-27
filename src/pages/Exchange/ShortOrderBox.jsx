@@ -34,6 +34,7 @@ const ShortOrderBox = () => {
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
+    staleTime: 2_000,
     watch: true
   })
 

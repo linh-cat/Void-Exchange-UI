@@ -4,6 +4,7 @@ import Button from "@components/Button/Button"
 
 import { useAccount, useNetwork } from "wagmi"
 import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
+
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
@@ -20,7 +21,7 @@ const ListPosition = () => {
 
   const { address } = useAccount()
   const { chain } = useNetwork()
-  const { getPositions, closeOrder, isClosingOrder } = useExchangeContext()
+  const { getPositions, closeOrder, isClosingOrder, shouldRefreshPositions } = useExchangeContext()
   const { prices } = useTokenPriceFeed([
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
@@ -33,7 +34,7 @@ const ListPosition = () => {
     }
 
     get()
-  }, [getPositions, address, chain])
+  }, [getPositions, address, chain, shouldRefreshPositions])
 
   const formattedPositions = useMemo(() => {
     if (!chain || !prices) {

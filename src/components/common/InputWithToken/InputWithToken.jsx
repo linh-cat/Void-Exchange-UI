@@ -36,7 +36,8 @@ const InputWithToken = ({
   const { data: balance } = useBalance({
     address: address,
     token,
-    watch: true
+    watch: true,
+    staleTime: 2_000
   })
   const price = useTokenPrice(token)
 

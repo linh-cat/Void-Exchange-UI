@@ -48,7 +48,8 @@ const InputCustom = ({
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
-    watch: true
+    watch: true,
+    staleTime: 2_000
   })
 
   const onChangeToken = (token) => {

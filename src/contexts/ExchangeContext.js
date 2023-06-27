@@ -1,5 +1,5 @@
 import { useContext, useState, createContext, useMemo, useEffect } from "react"
-import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
+import { usePublicClient, useWalletClient, useNetwork, useContractEvent } from "wagmi"
 import { Exchange, Constants } from "@void-0x/void-sdk"
 import { toast } from "react-hot-toast"
 import { isChainSupported } from "src/lib/chains"
@@ -14,6 +14,7 @@ const pairToSymbolMap = {
 export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [isClosingOrder, setIsClosingOrder] = useState(false)
+  const [shouldRefreshPositions, setShouldRefreshPositions] = useState(false)
   // market is the address of the base token of a pair
 
   // index token
@@ -36,6 +37,16 @@ export function ExchangeContextProvider({ children }) {
       )
     }
   }, [publicClient, walletClient, chain])
+
+  useContractEvent({
+    address: Constants.Addresses[chain.id].Exchange,
+    abi: Exchange.getABI(),
+    eventName: "OrderExecuted",
+    listener(log) {
+      // TODO: filter logs by account
+      setShouldRefreshPositions(true)
+    }
+  })
 
   /**
    * Set default indexToken and pair for the market
@@ -78,10 +89,12 @@ export function ExchangeContextProvider({ children }) {
     }
 
     const positions = await exchange.getPositions(address, chain.id)
+    setShouldRefreshPositions(false)
 
     if (positions.length) {
       return positions.filter((position) => position.size > 0)
     }
+
     return []
   }
 
@@ -109,7 +122,8 @@ export function ExchangeContextProvider({ children }) {
         placeOrder,
         isClosingOrder,
         closeOrder,
-        getPositions
+        getPositions,
+        shouldRefreshPositions
       }}
     >
       {children}
@@ -124,6 +138,7 @@ export function ExchangeContextProvider({ children }) {
  * @property {string} pair - The combination of base/quote. Eg: BTC/USD
  * @property {function} setPair - The function to set the pair.
  * @property {boolean} isPlacingOrder - A boolean indicating if an order is being placed.
+ * @property {boolean} shouldRefreshPositions - A boolean indicating if the positions should be refreshed.
  * @property {function} placeOrder - The function to place an order.
  * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.
  * @property {function} closeOrder - The function to close an order.
