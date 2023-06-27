@@ -7,7 +7,7 @@ import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
-import { formatValue, descaleValue } from "src/lib/formatter"
+import { formatValue, descaleValue, percentateFormatter } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
@@ -362,15 +362,18 @@ const ListPosition = () => {
       headerClassName: "text-xs",
       cellRenderer: (cell) => {
         const rawValue = cell?.raw
-        const percentPNL = (rawValue?.pnl / rawValue?.collateralValue) * BigInt(100)
+        const bigIntPnl = (rawValue?.pnl * BigInt(1e18)) / rawValue?.collateralValue
 
-        console.log({ percentPNL, pnl: rawValue?.pnl, col: rawValue?.collateralValue, pe: BigInt(100) })
+        const percentPNL = parseInt(bigIntPnl) / 1e18
+
+        console.log({ bigIntPnl })
+
         return (
           <div className="flex flex-col items-start gap-1">
             <h3 className={cx(cell.isProfitable ? "green-up" : "red-down", "inline-block dotted-underline")}>
               {cell?.pnlRoe}
             </h3>
-            <div className="text-slate-500 font-medium">{percentPNL || 0} %</div>
+            <div className="text-slate-500 font-medium">{percentateFormatter(percentPNL) || 0}</div>
           </div>
         )
       }
