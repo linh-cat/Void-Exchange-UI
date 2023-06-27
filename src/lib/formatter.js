@@ -31,7 +31,7 @@ export const descaleValue = (value, decimals) => {
  *
  * @param {Number} num
  */ export const isInt = (num) => {
-  if (typeof x == "number" && !isNaN(num)) {
+  if (typeof num == "number" && !isNaN(num)) {
     if (Number.isInteger(num)) {
       return true
     } else {
