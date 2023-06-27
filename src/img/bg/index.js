@@ -8,6 +8,4 @@ import TradingImageBG from "./trade-img.png"
 import UsdcBG from "./usdc-bg.jpg"
 import MorphoBG from "./morpho.png"
 
-export {
-    HeaderBG, ApeBG, BtcBG, DogeBG, EthereumBG, PepeBG, TradingImageBG, UsdcBG, MorphoBG
-}
+export { HeaderBG, ApeBG, BtcBG, DogeBG, EthereumBG, PepeBG, TradingImageBG, UsdcBG, MorphoBG }

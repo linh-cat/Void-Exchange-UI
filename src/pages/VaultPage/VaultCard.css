@@ -13,36 +13,26 @@
 .bg-eth {
     background-image: url("../../img/bg/etherium-bg.jpg");
     background-size: cover;
-    animation: animationBg 20s ease-in-out infinite;
-    -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-btc {
     background-image: url("../../img/bg/btc-bg.jpg");
     background-size: cover;
-    animation: animationBg 20s ease-in-out infinite;
-    -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-doge {
     background-image: url("../../img/bg/doge-bg.jpg");
     background-size: cover;
-    animation: animationBg 20s ease-in-out infinite;
-    -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-usdc {
     background-image: url("../../img/bg/usdc-bg.jpg");
     background-size: cover;
-    animation: animationBg 20s ease-in-out infinite;
-    -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-pepe {
     background-image: url("../../img/bg/pepe-bg.jpg");
     background-size: cover;
-    animation: animationBg 20s ease-in-out infinite;
-    -webkit-animation: animationBg 20s ease infinite;
 }
 
 .bg-hover-btc {
@@ -80,32 +70,4 @@
 .bg-hover-pepe:hover {
     border: 1px solid #025236;
     box-shadow: #025236 0px 13px 27px -5px, #025236 0px 8px 16px -8px;
-}
-
-@keyframes animationBg {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@-webkit-keyframes animationBg {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
 }
