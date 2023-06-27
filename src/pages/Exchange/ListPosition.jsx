@@ -20,8 +20,6 @@ const ListPosition = () => {
   const [confirmOrderInfo, setConfimOrderInfo] = useState()
   const [closeAmount, setCloseAmmount] = useState()
 
-  console.log({ closeAmount })
-
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { getPositions, closeOrder, isClosingOrder } = useExchangeContext()
@@ -118,6 +116,15 @@ const ListPosition = () => {
     }
   }, [closeOrder, confirmOrderInfo?.raw, isClosingOrder, prices])
 
+  const calculateCloseAmount = useCallback(
+    (percent) => {
+      const position = confirmOrderInfo?.raw
+
+      return (position?.collateralValue * BigInt(percent)) / BigInt(100)
+    },
+    [confirmOrderInfo]
+  )
+
   const toggleCollateral = () => {
     setIsOpenedCollatoral(!isOpenedCollatoral)
   }
@@ -169,10 +176,50 @@ const ListPosition = () => {
             <div className="text-sm">{confirmOrderInfo?.token}</div>
           </div>
           <div className="grid grid-cols-4 gap-3 text-sm">
-            <div className={cx("bg-slate-900 py-1 rounded cursor-pointer")}>25%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">50%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">75%</div>
-            <div className="bg-slate-900 py-1 rounded cursor-pointer">100%</div>
+            <div
+              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
+                active: closeAmount === calculateCloseAmount(25)
+              })}
+              onClick={() => {
+                const amount = calculateCloseAmount(25)
+                setCloseAmmount(amount)
+              }}
+            >
+              25%
+            </div>
+            <div
+              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
+                active: closeAmount === calculateCloseAmount(50)
+              })}
+              onClick={() => {
+                const amount = calculateCloseAmount(50)
+                setCloseAmmount(amount)
+              }}
+            >
+              50%
+            </div>
+            <div
+              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
+                active: closeAmount === calculateCloseAmount(75)
+              })}
+              onClick={() => {
+                const amount = calculateCloseAmount(75)
+                setCloseAmmount(amount)
+              }}
+            >
+              75%
+            </div>
+            <div
+              className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
+                active: closeAmount === calculateCloseAmount(100)
+              })}
+              onClick={() => {
+                const amount = calculateCloseAmount(100)
+                setCloseAmmount(amount)
+              }}
+            >
+              100%
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center">
