@@ -56,13 +56,6 @@ const config = createConfig({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains, options: { name: "MetaMask" } }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Injected",
-        shimDisconnect: true
-      }
-    }),
     new CoinbaseWalletConnector({ chains, options: { appName: "Coin Base" } })
   ],
   publicClient
