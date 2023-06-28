@@ -64,10 +64,6 @@ const LongOrderBox = () => {
     setIsToggled(!isToggled)
   }
 
-  const openPopup = () => {
-    setIsNoticed(true)
-  }
-
   const closeNoticePopup = () => {
     setIsNoticed(false)
   }
@@ -176,9 +172,7 @@ const LongOrderBox = () => {
         />
       )}
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
-        <div onClick={openPopup}>Test Show popup</div>
-
+      <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom

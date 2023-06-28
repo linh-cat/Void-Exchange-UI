@@ -7,6 +7,11 @@ export const numberFormatter = new Intl.NumberFormat("en-US", {
   roundingIncrement: 5
 })
 
+export const percentateFormatter = (value) => {
+  if (!value) return "0"
+  return `${parseFloat(value).toFixed(2)} %`
+}
+
 /**
  * formatValue: Format a BigInt value to a human readable string
  *
