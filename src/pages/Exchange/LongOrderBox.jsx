@@ -172,7 +172,7 @@ const LongOrderBox = () => {
         />
       )}
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden">
+      <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
@@ -197,7 +197,7 @@ const LongOrderBox = () => {
             />
           </div>
         </div>
-        <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
+        <div className="relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <label className="text-sm text-slate-500">Pay</label>
             <SwitchButton onChange={onChangeToggle} value={isToggled} />
@@ -217,29 +217,7 @@ const LongOrderBox = () => {
             disabled={isApproving || isPlacingOrder}
           />
         </div>
-        <div className="mt-3 2xl:mt-5">
-          <InputCustom
-            label="Position Size"
-            allowSelectToken={true}
-            tokenOptions={[
-              { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
-              {
-                label: "ETH",
-                value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH,
-                icon: ETH,
-                disabled: true
-              }
-            ]}
-            classNameInput="pl-1 py-4"
-            value={positionSize}
-            defaultToken={Constants.Addresses[chain?.id]?.IndexTokens?.WBTC}
-            placeHolder={"0.0"}
-            showBalance={true}
-            showUsd={true}
-            disabled={true}
-          />
-        </div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="">
           <SliderLeverage
             label="Leverage"
             defaultValue={20}
@@ -247,8 +225,8 @@ const LongOrderBox = () => {
             value={leverage}
           />
         </div>
-        <div className="mt-10 w-full">{renderButton()}</div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="w-full mt-5">{renderButton()}</div>
+        <div className="mt-3">
           <SlippageCustom
             label="Slippage"
             options={[
@@ -259,7 +237,11 @@ const LongOrderBox = () => {
             defaultValue={0.1}
           />
         </div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="flex flex-col gap-3">
+          <div className="flex justify-between items-center">
+            <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
+            <div className="text-sm">{positionSize}</div>
+          </div>
           <div className="collateral-asset flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
@@ -267,44 +249,41 @@ const LongOrderBox = () => {
               <span>Cake</span>
             </div>
           </div>
-          <div className="collateral-value flex justify-between mt-2 text-base lg:text-sm">
+          <div className="collateral-value flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
+          <div className="collateral-leverage flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
-          <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">
+          <div className="entry-price flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Entry Price</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="liquidation flex justify-between mt-2 text-base lg:text-sm">
+          <div className="liquidation flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Liquidation</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="">
-            <title>Market Infor</title>
-            <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500 dotted-underline">Borrow Fee</label>
-              <span>0.00086% per hour</span>
-            </div>
-            <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
-              <TextWithTooltip
-                text="Available Liquidity"
-                tooltip={<div>Test tooltip</div>}
-                classNameTooltip="border-green w-32 -top-12"
-              />
-              <span>17,050 Cake ~ $57</span>
-            </div>
+          <div className="borrow-fee flex justify-between items-center text-base lg:text-sm">
+            <label className="text-slate-500 dotted-underline">Borrow Fee</label>
+            <span>0.00086% per hour</span>
+          </div>
+          <div className="available-liquidity flex justify-between items-center text-base lg:text-sm">
+            <TextWithTooltip
+              text="Available Liquidity"
+              tooltip={<div>Test tooltip</div>}
+              classNameTooltip="border-green w-32 -top-12"
+            />
+            <span>17,050 Cake ~ $57</span>
           </div>
         </div>
       </div>

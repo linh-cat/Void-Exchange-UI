@@ -2,8 +2,6 @@ import React from "react"
 import "./CollateralPopup.css"
 import cx from "classnames"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
-import Button from "@components/Button/Button"
-
 const CollateralPopup = ({ open, setOpen, collateralTab, setCollateralTab, header, body, footer }) => {
   const handleClickOutside = () => {
     setOpen(false)
