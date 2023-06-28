@@ -92,6 +92,7 @@ const ListPosition = () => {
         netValue: Position.getNetValue(position, indexPrice, tokenDecimals),
         valueDecimals
       }
+
       return {
         raw: rawValue,
         market: `${token.name}/USD`,
@@ -114,20 +115,13 @@ const ListPosition = () => {
 
   const handleConfirmOrder = (cell) => {
     setIsCloseOrdered(true)
-    setCloseAmmount(cell?.raw?.collateralValue)
+    setCloseAmmount(cell?.raw?.size)
     setConfimOrderInfo(cell)
   }
 
   const handleCloseOrder = useCallback(async () => {
     const position = confirmOrderInfo?.raw
-    console.log("close params", {
-      orderType: OrderType.MARKET,
-      indexToken: position.indexToken,
-      size: closeAmount,
-      collateralDelta: BigInt(0),
-      side: position.isLong ? Side.LONG : Side.SHORT,
-      price: prices[position.indexToken]
-    })
+
     await closeOrder({
       orderType: OrderType.MARKET,
       indexToken: position.indexToken,
@@ -178,10 +172,6 @@ const ListPosition = () => {
   }, [confirmOrderInfo])
 
   const bodyModal = useMemo(() => {
-    const collateralToken = confirmOrderInfo?.raw?.collateralToken
-    const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[collateralToken]
-    const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
-
     return confirmOrderInfo ? (
       <div className="flex flex-col gap-5 ">
         <div className="grid grid-cols-2 gap-3">
@@ -197,10 +187,10 @@ const ListPosition = () => {
         <div className="border p-2 flex flex-col gap-3">
           <div className="flex justify-between">
             <h5 className="text-sm text-slate-500">Close Amount</h5>
-            <div className="text-slate-500 text-sm">Max: {confirmOrderInfo?.collateralValue}</div>
+            <div className="text-slate-500 text-sm">Max: {confirmOrderInfo?.size}</div>
           </div>
           <div className="flex justify-between">
-            <div className="text-sm">{formatValue(closeAmount, valueDecimals)}</div>
+            <div className="text-sm">{formatValue(closeAmount, confirmOrderInfo?.raw?.valueDecimals)}</div>
             <div className="text-sm">{confirmOrderInfo?.token}</div>
           </div>
           <div className="grid grid-cols-4 gap-3 text-sm">
@@ -377,10 +367,8 @@ const ListPosition = () => {
         const percentPNL = (parseFloat(descaledPnl) / parseFloat(descaledCollateralValue)) * 100
 
         return (
-          <div className="flex flex-col items-start gap-1">
-            <h3 className={cx(cell.isProfitable ? "green-up" : "red-down", "inline-block dotted-underline")}>
-              {cell?.pnlRoe}
-            </h3>
+          <div className="flex flex-col gap-1">
+            <h3 className={cx(cell.isProfitable ? "green-up" : "red-down")}>{cell?.pnlRoe}</h3>
             <div className="text-slate-500 font-medium">{percentateFormatter(percentPNL) || 0}</div>
           </div>
         )
