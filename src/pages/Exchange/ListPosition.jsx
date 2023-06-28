@@ -120,11 +120,19 @@ const ListPosition = () => {
 
   const handleCloseOrder = useCallback(async () => {
     const position = confirmOrderInfo?.raw
+    console.log("close params", {
+      orderType: OrderType.MARKET,
+      indexToken: position.indexToken,
+      size: closeAmount,
+      collateralDelta: BigInt(0),
+      side: position.isLong ? Side.LONG : Side.SHORT,
+      price: prices[position.indexToken]
+    })
     await closeOrder({
       orderType: OrderType.MARKET,
       indexToken: position.indexToken,
-      size: position.size,
-      collateralDelta: position.collateralValue,
+      size: closeAmount,
+      collateralDelta: BigInt(0),
       side: position.isLong ? Side.LONG : Side.SHORT,
       price: prices[position.indexToken]
     })
@@ -134,13 +142,13 @@ const ListPosition = () => {
       setConfimOrderInfo()
       setCloseAmmount()
     }
-  }, [closeOrder, confirmOrderInfo?.raw, isClosingOrder, prices])
+  }, [closeOrder, confirmOrderInfo?.raw, isClosingOrder, prices, closeAmount])
 
   const calculateCloseAmount = useCallback(
     (percent) => {
       const position = confirmOrderInfo?.raw
 
-      return (position?.collateralValue * BigInt(percent)) / BigInt(100)
+      return (position?.size * BigInt(percent)) / BigInt(100)
     },
     [confirmOrderInfo]
   )
