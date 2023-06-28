@@ -136,7 +136,7 @@ const InputWithToken = ({
   }, [balance, price])
 
   return (
-    <div className="input-custom border px-2 py-2 flex flex-col gap-2 input-shadow">
+    <div className="input-custom border px-2 py-2 flex flex-col gap-2 input-shadow rounded">
       <div className="top flex items-center flex-row-reverse justify-between">
         <div
           className={cx({

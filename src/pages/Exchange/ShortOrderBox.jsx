@@ -18,6 +18,7 @@ import useDebounce from "src/hooks/useDebounce"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
+import PlaceOrderModal from "./PlaceOrderModal"
 
 const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
@@ -28,6 +29,7 @@ const ShortOrderBox = () => {
   const { chain } = useNetwork()
   const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
   const [selectedToken, setSelectedToken] = useState()
+  const [orderConfirmModal, setOrderConfirmModal] = useState(false)
 
   const { address } = useAccount()
 
@@ -46,6 +48,10 @@ const ShortOrderBox = () => {
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
   })
+
+  const tokenOptions = useMemo(() => {
+    return [{ label: "USDC", value: Constants.Addresses[chain?.id]?.StableCoins?.USDC, icon: USDC }]
+  }, [chain])
 
   const onApprove = React.useCallback(() => {
     approve(payAmount)
@@ -87,6 +93,10 @@ const ShortOrderBox = () => {
     setSelectedToken(Constants.Addresses[chain?.id]?.StableCoins?.USDC)
   }, [chain?.id])
 
+  const handleConfirmOrder = () => {
+    setOrderConfirmModal(true)
+  }
+
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
@@ -100,17 +110,20 @@ const ShortOrderBox = () => {
     })
 
     setPayAmount("")
-  }, [placeOrder, orderType, prices, indexToken, selectedToken, payAmount, balance?.decimals, leverage])
+    if (!isPlacingOrder) {
+      setOrderConfirmModal(false)
+    }
+  }, [placeOrder, orderType, prices, indexToken, selectedToken, payAmount, balance, leverage, isPlacingOrder])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
       return (
         <Button
-          className="w-full"
-          text="Place Order"
-          onClick={onPlaceOrder}
-          isLoading={isPlacingOrder}
+          className="w-full bg-red py-3"
+          text="Short"
+          onClick={handleConfirmOrder}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}
+          isDefault={false}
         />
       )
     }
@@ -124,10 +137,82 @@ const ShortOrderBox = () => {
         disabled={isApproving}
       />
     )
-  }, [allowance, payAmount, onDebounceApprove, isApproving, onPlaceOrder, isPlacingOrder])
+  }, [allowance, payAmount, onDebounceApprove, isApproving, isPlacingOrder])
+
+  const headerConfirmOrder = useMemo(() => {
+    return (
+      <div className="flex items-center gap-1">
+        <h2>Confirm Make Order -</h2>
+        <div className="red-down">Short {leverage}x</div>
+      </div>
+    )
+  }, [leverage])
+
+  const bodyConfirmOrder = useMemo(() => {
+    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
+
+    return (
+      <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="border py-2 px-2 rounded text-left ">
+            <h5 className="text-slate-500 text-sm">Price</h5>
+            {/* <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div> */}
+          </div>
+          <div className="border py-2 px-2 rounded text-left">
+            <h5 className="text-slate-500 text-sm">Order Type</h5>
+            <div className="text-sm">Market</div>
+          </div>
+        </div>
+        <div className="border p-2 rounded">
+          <h3 className="text-sm text-slate-500 text-left">Pay Amount</h3>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1">
+              <span>{payAmount} </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src={purchaseInfo?.icon} alt="token" className="w-4 h-4" />{" "}
+              <span className="text-sm">{purchaseInfo?.label}</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-1 bg-slate-800"></div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between text-sm">
+            <h3 className=" text-slate-500 dotted-underline">Leverage</h3>
+            <div>{leverage}x</div>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <h3 className="text-slate-500 dotted-underline">Position</h3>
+            <div>{positionSize}</div>
+          </div>
+        </div>
+      </div>
+    )
+  }, [tokenOptions, payAmount, leverage, positionSize, selectedToken])
+
+  const footerConfirmOrder = useMemo(() => {
+    return (
+      <Button
+        text="Place Order"
+        onClick={onPlaceOrder}
+        isLoading={isPlacingOrder}
+        disabled={isPlacingOrder}
+        isDefault={false}
+        className="bg-red py-2"
+      />
+    )
+  }, [isPlacingOrder, onPlaceOrder])
 
   return (
     <>
+      <PlaceOrderModal
+        open={orderConfirmModal}
+        setOpen={setOrderConfirmModal}
+        header={headerConfirmOrder}
+        body={bodyConfirmOrder}
+        footer={footerConfirmOrder}
+        disabled={isPlacingOrder}
+      />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
         <div className="grid grid-cols-2 gap-2">
@@ -173,29 +258,7 @@ const ShortOrderBox = () => {
             disabled={isApproving || isPlacingOrder}
           />
         </div>
-        <div className="mt-3 2xl:mt-5">
-          <InputCustom
-            label="Position Size"
-            allowSelectToken={false}
-            // tokenOptions={[
-            //   { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
-            //   {
-            //     label: "ETH",
-            //     value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH,
-            //     icon: ETH,
-            //     disabled: true
-            //   }
-            // ]}
-            classNameInput="pl-1 py-4"
-            value={positionSize}
-            // defaultToken={Constants.Addresses[chain?.id]?.IndexTokens?.WBTC}
-            placeHolder={"0.0"}
-            showBalance={false}
-            showUsd={true}
-            disabled={true}
-          />
-        </div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="mt-3 2xl:mt-5 border px-2 pt-2 pb-7">
           <SliderLeverage
             label="Leverage"
             defaultValue={20}
@@ -215,7 +278,11 @@ const ShortOrderBox = () => {
             defaultValue={0.1}
           />
         </div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="mt-3 2xl:mt-5 flex flex-col gap-2">
+          <div className="collateral-value flex justify-between text-base lg:text-sm">
+            <label className="text-slate-500 dotted-underline">Position</label>
+            <div className="">{positionSize}x</div>
+          </div>
           <div className="collateral-asset flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
@@ -223,40 +290,37 @@ const ShortOrderBox = () => {
               <span>Cake</span>
             </div>
           </div>
-          <div className="collateral-value flex justify-between mt-2 text-base lg:text-sm">
+          <div className="collateral-value flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="collateral-leverage flex justify-between mt-2 text-base lg:text-sm">
+          <div className="collateral-leverage flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
-          <div className="entry-price flex justify-between mt-2 text-base lg:text-sm">
+          <div className="entry-price flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Entry Price</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="liquidation flex justify-between mt-2 text-base lg:text-sm">
+          <div className="liquidation flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Liquidation</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="">
-            <title>Market Infor</title>
-            <div className="borrow-fee mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500 dotted-underline">Borrow Fee</label>
-              <span>0.00086% per hour</span>
-            </div>
-            <div className="available-liquidity mt-2 flex justify-between items-center text-base lg:text-sm">
-              <label className="text-slate-500 dotted-underline">Available Liquidity</label>
-              <span>17,050 Cake ~ $57</span>
-            </div>
+          <div className="borrow-fee flex justify-between items-center text-base lg:text-sm">
+            <label className="text-slate-500 dotted-underline">Borrow Fee</label>
+            <span>0.00086% per hour</span>
+          </div>
+          <div className="available-liquidity flex justify-between items-center text-base lg:text-sm">
+            <label className="text-slate-500 dotted-underline">Available Liquidity</label>
+            <span>17,050 Cake ~ $57</span>
           </div>
         </div>
       </div>

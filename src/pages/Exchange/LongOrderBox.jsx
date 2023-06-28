@@ -143,7 +143,7 @@ const LongOrderBox = () => {
       return (
         <Button
           className="w-full"
-          text="Make Order"
+          text="Long"
           onClick={handleConfirmOrder}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}
         />
@@ -302,7 +302,7 @@ const LongOrderBox = () => {
             disabled={isApproving || isPlacingOrder}
           />
         </div>
-        <div className="border rounded p-2">
+        <div className="border rounded px-2 pt-2 pb-7">
           <SliderLeverage
             label="Leverage"
             defaultValue={20}
