@@ -329,10 +329,7 @@ const ListPosition = () => {
           <button className={cx({ active: collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
             Add
           </button>
-          <button
-            className={cx({ active: collateralTab === "remove", "bg-orange": collateralTab === "remove" })}
-            onClick={() => setCollateralTab("remove")}
-          >
+          <button className={cx({ active: collateralTab === "remove" })} onClick={() => setCollateralTab("remove")}>
             Remove
           </button>
         </div>
@@ -360,8 +357,7 @@ const ListPosition = () => {
               <button
                 className={cx({
                   "bg-slate-800 w-1/4 py-1": true,
-                  active: collateralAmount === calculatePosition(c, "collateral"),
-                  "bg-orange": collateralTab === "remove"
+                  active: collateralAmount === calculatePosition(c, "collateral")
                 })}
                 key={idx}
                 onClick={() => {
@@ -401,7 +397,7 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [changeCollateralInfo, collateralAmount, calculatePosition, collateralTab])
+  }, [changeCollateralInfo, collateralAmount, calculatePosition])
 
   const columnDef = [
     {
@@ -526,11 +522,7 @@ const ListPosition = () => {
         body={bodyCollateralModal}
         footer={
           <div className="collateral-footer mt-3">
-            {collateralTab === "add" ? (
-              <Button text="Add Collateral" />
-            ) : (
-              <Button text="Remove Collateral" className="bg-orange" isDefault={false} />
-            )}
+            {collateralTab === "add" ? <Button text="Add Collateral" /> : <Button text="Remove Collateral" />}
           </div>
         }
       />
