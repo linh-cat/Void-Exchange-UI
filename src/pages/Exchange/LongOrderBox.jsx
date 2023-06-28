@@ -21,6 +21,7 @@ import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
+import PlaceOrderModal from "./PlaceOrderModal"
 
 const LongOrderBox = () => {
   // UI state
@@ -28,6 +29,7 @@ const LongOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
   const [selectedToken, setSelectedToken] = useState()
   const [isNoticed, setIsNoticed] = useState(false)
+  const [orderConfirmModal, setOrderConfirmModal] = useState(false)
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -37,6 +39,13 @@ const LongOrderBox = () => {
   const { chain } = useNetwork()
   const { address } = useAccount()
   const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
+
+  const tokenOptions = useMemo(() => {
+    return [
+      { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
+      { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
+    ]
+  }, [chain])
 
   const { data: balance } = useBalance({
     address: address,
@@ -98,6 +107,10 @@ const LongOrderBox = () => {
     if (indexToken) setSelectedToken(indexToken)
   }, [indexToken])
 
+  const handleConfirmOrder = () => {
+    setOrderConfirmModal(true)
+  }
+
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
       orderType: orderType,
@@ -110,16 +123,28 @@ const LongOrderBox = () => {
       leverage: Number(leverage)
     })
     setPayAmount("")
-  }, [placeOrder, orderType, indexToken, indexPrice, selectedToken, payAmount, balance?.decimals, leverage])
+    if (!isPlacingOrder) {
+      setOrderConfirmModal(false)
+    }
+  }, [
+    placeOrder,
+    orderType,
+    indexToken,
+    indexPrice,
+    selectedToken,
+    payAmount,
+    balance?.decimals,
+    leverage,
+    isPlacingOrder
+  ])
 
   const renderButton = useCallback(() => {
     if (+allowance >= +payAmount) {
       return (
         <Button
           className="w-full"
-          text="Place Order"
-          onClick={onPlaceOrder}
-          isLoading={isPlacingOrder}
+          text="Make Order"
+          onClick={handleConfirmOrder}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}
         />
       )
@@ -134,7 +159,62 @@ const LongOrderBox = () => {
         disabled={isApproving}
       />
     )
-  }, [allowance, payAmount, onDebounceApprove, isApproving, onPlaceOrder, isPlacingOrder])
+  }, [allowance, payAmount, onDebounceApprove, isApproving, isPlacingOrder])
+
+  const headerConfirmOrder = useMemo(() => {
+    return (
+      <div className="flex items-center gap-1">
+        <h2>Confirm Make Order -</h2>
+        <div className="green-up">Long {leverage}x</div>
+      </div>
+    )
+  }, [leverage])
+
+  const bodyConfirmOrder = useMemo(() => {
+    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
+
+    return (
+      <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="border py-2 px-2 rounded text-left ">
+            <h5 className="text-slate-500 text-sm">Market Price</h5>
+            <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
+          </div>
+          <div className="border py-2 px-2 rounded text-left">
+            <h5 className="text-slate-500 text-sm">Order Type</h5>
+            <div className="text-sm">Market</div>
+          </div>
+        </div>
+        <div className="border p-2 rounded">
+          <h3 className="text-sm text-slate-500 text-left">Pay Amount</h3>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1">
+              <span>{payAmount} </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src={purchaseInfo?.icon} alt="token" className="w-4 h-4" />{" "}
+              <span className="text-sm">{purchaseInfo?.label}</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-1 bg-slate-800"></div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between text-sm">
+            <h3 className=" text-slate-500 dotted-underline">Leverage</h3>
+            <div>{leverage}x</div>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <h3 className="text-slate-500 dotted-underline">Position</h3>
+            <div>{positionSize}</div>
+          </div>
+        </div>
+      </div>
+    )
+  }, [tokenOptions, indexPrice, payAmount, leverage, positionSize, selectedToken])
+
+  const footerConfirmOrder = useMemo(() => {
+    return <Button text="Place Order" onClick={onPlaceOrder} isLoading={isPlacingOrder} disabled={isPlacingOrder} />
+  }, [isPlacingOrder, onPlaceOrder])
 
   return (
     <>
@@ -171,6 +251,14 @@ const LongOrderBox = () => {
           position="center"
         />
       )}
+      <PlaceOrderModal
+        open={orderConfirmModal}
+        setOpen={setOrderConfirmModal}
+        header={headerConfirmOrder}
+        body={bodyConfirmOrder}
+        footer={footerConfirmOrder}
+        disabled={isPlacingOrder}
+      />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
       <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
@@ -204,10 +292,7 @@ const LongOrderBox = () => {
           </div>
 
           <InputWithToken
-            tokenOptions={[
-              { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
-              { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
-            ]}
+            tokenOptions={tokenOptions}
             token={selectedToken}
             onSelectToken={(token) => {
               setSelectedToken(token)
@@ -217,7 +302,7 @@ const LongOrderBox = () => {
             disabled={isApproving || isPlacingOrder}
           />
         </div>
-        <div className="">
+        <div className="border rounded p-2">
           <SliderLeverage
             label="Leverage"
             defaultValue={20}
@@ -275,7 +360,7 @@ const LongOrderBox = () => {
           </div>
           <div className="borrow-fee flex justify-between items-center text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Borrow Fee</label>
-            <span>0.00086% per hour</span>
+            <span>-</span>
           </div>
           <div className="available-liquidity flex justify-between items-center text-base lg:text-sm">
             <TextWithTooltip
@@ -283,7 +368,7 @@ const LongOrderBox = () => {
               tooltip={<div>Test tooltip</div>}
               classNameTooltip="border-green w-32 -top-12"
             />
-            <span>17,050 Cake ~ $57</span>
+            <span>-</span>
           </div>
         </div>
       </div>
