@@ -62,12 +62,12 @@ const VaultCard = ({ title, bg, hoverBg, icon, id }) => {
 
         <div className="weekly-strike flex justify-between">
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Weekly Strike Price</label>
-            <p className="text-sm">$1,950.00</p>
+            <label className="text-xs text-slate-500">Utilization</label>
+            <p className="text-sm">40%</p>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Current Price</label>
-            <p className="text-sm">$1,814.58</p>
+            <label className="text-xs text-slate-500">Total deposits</label>
+            <p className="text-sm">4,155.41 ETH</p>
           </div>
         </div>
         <div className="relative">
@@ -76,12 +76,12 @@ const VaultCard = ({ title, bg, hoverBg, icon, id }) => {
         </div>
         <div className="deposit-cap flex justify-between">
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Current Deposit</label>
-            <p className="text-sm">4,155.41 ETH</p>
+            <label className="text-xs text-slate-500">Open Interest</label>
+            <p className="text-sm">$3,259,618.00</p>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Max Capacity</label>
-            <p className="text-sm">20K ETH</p>
+            <label className="text-xs text-slate-500">Total Reserve</label>
+            <p className="text-sm">$8,256,721.00</p>
           </div>
         </div>
       </div>
