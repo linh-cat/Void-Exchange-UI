@@ -10,7 +10,7 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id }) => {
+const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon }) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -28,9 +28,15 @@ const VaultCard = ({ title, bg, hoverBg, icon, id }) => {
         <img src={icon} alt={icon} className="w-12 h-12 absolute left-5 -bottom-6" />
       </div>
       <div className="vault-card-bottom pt-10 px-5 flex flex-col justify-between flex-1 pb-5">
-        <h3 className="vault-card-title font-medium text-2xl">{title}</h3>
+        <div className="flex items-end justify-between gap-2">
+          <div className="font-medium text-2xl">{title}</div>
+          <div className="flex items-center gap-1 mb-1">
+            <span className="text-slate-500 text-xs">Backed by</span>
+            <img src={backedByIcon ?? icon} alt="icon" className="w-5 h-5" />
+          </div>
+        </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ">
           <div className="flex flex-col gap-2 project-yeild ">
             <label className="text-xs text-slate-500">Total Yield (APY)</label>
             <p className="font-medium text-2xl">57.39%</p>

@@ -6,7 +6,7 @@ export const vaultLists = [
     title: "ETH",
     bg: "bg-eth",
     hoverBg: "bg-hover-eth",
-    icon: ETH
+    icon: ETH,
   },
   {
     id: 2,
@@ -20,20 +20,23 @@ export const vaultLists = [
     title: "PEPE",
     bg: "bg-pepe",
     hoverBg: "bg-hover-pepe",
-    icon: PEPE
+    icon: PEPE,
+    backedByIcon: USDC
   },
   {
     id: 4,
     title: "USDC",
     bg: "bg-usdc",
     hoverBg: "bg-hover-usdc",
-    icon: USDC
+    icon: USDC,
+    backedByIcon: USDC
   },
   {
     id: 5,
     title: "Doge",
     bg: "bg-doge",
     hoverBg: "bg-hover-doge",
-    icon: DOGE
+    icon: DOGE,
+    backedByIcon: USDC
   }
 ]
