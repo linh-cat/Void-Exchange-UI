@@ -3,6 +3,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import Chart, { CategoryScale } from "chart.js/auto"
 import PropTypes from "prop-types"
+import cx from "classnames"
 
 import LineChart from "@components/LineChart/LineChart"
 
@@ -10,7 +11,7 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon }) => {
+const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk }) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -38,9 +39,10 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon }) => {
 
         <div className="flex justify-between items-center ">
           <div className="flex flex-col gap-2 project-yeild ">
-            <label className="text-xs text-slate-500">Total Yield (APY)</label>
+            <h3 className="text-xs text-slate-500">Total Yield (APY)</h3>
             <p className="font-medium text-2xl">57.39%</p>
           </div>
+
           <div className="w-20">
             <LineChart
               showGrid={false}
@@ -65,14 +67,29 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon }) => {
             />
           </div>
         </div>
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm">Risk</h3>
+          <div
+            className={cx(
+              {
+                "bg-successLight text-green green-up": risk === "low",
+                "bg-errorLight text-green red-down": risk === "high",
+                "bg-pending text-pending": risk === "medium"
+              },
+              "py-1 px-2 rounded capitalize text-sm"
+            )}
+          >
+            {risk}
+          </div>
+        </div>
 
         <div className="weekly-strike flex justify-between">
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Utilization</label>
+            <h3 className="text-xs text-slate-500">Utilization</h3>
             <p className="text-sm">40%</p>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Total deposits</label>
+            <h3 className="text-xs text-slate-500">Total deposits</h3>
             <p className="text-sm">4,155.41 ETH</p>
           </div>
         </div>
@@ -82,11 +99,11 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon }) => {
         </div>
         <div className="deposit-cap flex justify-between">
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Open Interest</label>
+            <h3 className="text-xs text-slate-500">Open Interest</h3>
             <p className="text-sm">$3,259,618.00</p>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-xs text-slate-500">Total Reserve</label>
+            <h3 className="text-xs text-slate-500">Total Reserve</h3>
             <p className="text-sm">$8,256,721.00</p>
           </div>
         </div>
