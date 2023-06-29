@@ -140,14 +140,15 @@ const LongOrderBox = () => {
 
   const renderButton = useCallback(() => {
     if (payAmount === "") {
-      return <Button text="Enter amount" className="cursor-not-allowed" />
+      return <Button text="Enter amount" className="cursor-not-allowed bg-green py-2" isDefault={false} />
     }
     if (+allowance >= +payAmount) {
       return (
         <Button
-          className="w-full"
+          className="w-full bg-green py-2"
           text="Long"
           onClick={handleConfirmOrder}
+          isDefault={false}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}
         />
       )
