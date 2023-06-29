@@ -8,6 +8,7 @@ import { Constants } from "@void-0x/void-sdk"
 import { useNetwork } from "wagmi"
 import VaultDeposit from "./VaultDeposit"
 import useVaultInfoToken from "src/hooks/useVaultInfoToken"
+import VaultStrategy from "./VaultStrategy"
 
 const Index = () => {
   let { id: vaultId } = useParams()
@@ -46,6 +47,7 @@ const Index = () => {
         icon={vaultItemInfo?.icon}
         title={vaultItemInfo?.title}
       />
+      <VaultStrategy />
       <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />
       <SectionVaultStats />
     </div>

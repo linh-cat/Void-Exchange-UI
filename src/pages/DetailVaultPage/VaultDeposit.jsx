@@ -168,108 +168,106 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
             />
           </Card>
           <div className="flex flex-col gap-3">
-            <Card>
-              <div className="deposit-card p-5 w-full border rounded flex flex-col gap-3">
-                <div className="btn-group flex border rounded overflow-hidden w-full">
-                  <div
-                    className={cx({
-                      "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                      "active-tab": tab === "deposit"
-                    })}
-                    onClick={() => onChangeTab("deposit")}
-                  >
-                    Deposit
-                  </div>
-                  <div
-                    className={cx({
-                      "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                      "active-tab": tab === "withdraw"
-                    })}
-                    onClick={() => onChangeTab("withdraw")}
-                  >
-                    Withdraw
-                  </div>
+            <div className="deposit-card w-full flex flex-col gap-3">
+              <div className="btn-group flex border rounded overflow-hidden w-full">
+                <div
+                  className={cx({
+                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                    "active-tab": tab === "deposit"
+                  })}
+                  onClick={() => onChangeTab("deposit")}
+                >
+                  Deposit
                 </div>
-                {tab === "deposit" && (
-                  <>
-                    <div className="flex flex-col gap-3 border p-3 rounded">
-                      <div className="flex justify-between items-center">
-                        <label className="text-sm">Currency</label>
-                        <div className="flex gap-3">
-                          <div
-                            className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(balance?.formatted / 2)}
-                          >
-                            50%
-                          </div>
-                          <div
-                            className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
-                            onClick={() => setAmount(balance?.formatted)}
-                          >
-                            MAX
-                          </div>
-                        </div>
-                      </div>
-                      <div className="token border rounded py-2 pl-2">
-                        <InputCustom
-                          type="number"
-                          classNameInput="p-0"
-                          onChange={onChangeAmount}
-                          placeHolder="0.0"
-                          value={amount}
-                          isBorder={false}
-                          rightAction={
-                            <div className="flex gap-2 mr-1 items-center">
-                              <img src={imgToken} alt="token" className="w-6 h-5" />
-                            </div>
-                          }
-                          disabled={isApproving || isDepositing}
-                        />
-                      </div>
-                      <div className="ballance flex items-center gap-2">
-                        <label className="text-sm">Balance:</label>
-                        <div>{decimalsFormatter(balance?.formatted, 4)}</div>
-                      </div>
-                    </div>
-                    {renderButton()}
-                  </>
-                )}
-                {tab === "withdraw" && (
-                  <>
-                    <div className="flex flex-col gap-3 border p-3 rounded">
-                      <div className="flex justify-between items-center">
-                        <label className="text-sm">Currency</label>
-                        <div className="flex gap-3">
-                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">50%</div>
-                          <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
-                        </div>
-                      </div>
-                      <div className="token border rounded py-2 pl-2">
-                        <InputCustom
-                          type="number"
-                          classNameInput="p-0"
-                          onChange={onChangeAmount}
-                          placeHolder="0.0"
-                          value={amount}
-                          isBorder={false}
-                          rightAction={
-                            <div className="flex gap-2 mr-1 items-center">
-                              <img src={imgToken} alt="token" className="w-6 h-5" />
-                            </div>
-                          }
-                          disabled={isApproving || isDepositing}
-                        />
-                      </div>
-                      <div className="ballance flex items-center gap-2">
-                        <label className="text-sm">Balance:</label>
-                        <div>{decimalsFormatter(balance?.formatted, 4)}</div>
-                      </div>
-                    </div>
-                    <Button className="py-2 tracking-wider rounded" text="Withdraw" />
-                  </>
-                )}
+                <div
+                  className={cx({
+                    "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
+                    "active-tab": tab === "withdraw"
+                  })}
+                  onClick={() => onChangeTab("withdraw")}
+                >
+                  Withdraw
+                </div>
               </div>
-            </Card>
+              {tab === "deposit" && (
+                <>
+                  <div className="flex flex-col gap-3 border p-3 rounded">
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">Currency</label>
+                      <div className="flex gap-3">
+                        <div
+                          className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
+                          onClick={() => setAmount(balance?.formatted / 2)}
+                        >
+                          50%
+                        </div>
+                        <div
+                          className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer"
+                          onClick={() => setAmount(balance?.formatted)}
+                        >
+                          MAX
+                        </div>
+                      </div>
+                    </div>
+                    <div className="token border rounded py-2 pl-2">
+                      <InputCustom
+                        type="number"
+                        classNameInput="p-0"
+                        onChange={onChangeAmount}
+                        placeHolder="0.0"
+                        value={amount}
+                        isBorder={false}
+                        rightAction={
+                          <div className="flex gap-2 mr-1 items-center">
+                            <img src={imgToken} alt="token" className="w-6 h-5" />
+                          </div>
+                        }
+                        disabled={isApproving || isDepositing}
+                      />
+                    </div>
+                    <div className="ballance flex items-center gap-2">
+                      <label className="text-sm">Balance:</label>
+                      <div>{decimalsFormatter(balance?.formatted, 4)}</div>
+                    </div>
+                  </div>
+                  {renderButton()}
+                </>
+              )}
+              {tab === "withdraw" && (
+                <>
+                  <div className="flex flex-col gap-3 border p-3 rounded">
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">Currency</label>
+                      <div className="flex gap-3">
+                        <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">50%</div>
+                        <div className="text-xs bg-slate-500 text-center px-2 py-1 rounded cursor-pointer">MAX</div>
+                      </div>
+                    </div>
+                    <div className="token border rounded py-2 pl-2">
+                      <InputCustom
+                        type="number"
+                        classNameInput="p-0"
+                        onChange={onChangeAmount}
+                        placeHolder="0.0"
+                        value={amount}
+                        isBorder={false}
+                        rightAction={
+                          <div className="flex gap-2 mr-1 items-center">
+                            <img src={imgToken} alt="token" className="w-6 h-5" />
+                          </div>
+                        }
+                        disabled={isApproving || isDepositing}
+                      />
+                    </div>
+                    <div className="ballance flex items-center gap-2">
+                      <label className="text-sm">Balance:</label>
+                      <div>{decimalsFormatter(balance?.formatted, 4)}</div>
+                    </div>
+                  </div>
+                  <Button className="py-2 tracking-wider rounded" text="Withdraw" />
+                </>
+              )}
+            </div>
             {/* my positions */}
             <Card className="my-position p-3">
               <div className="flex flex-col gap-3">
