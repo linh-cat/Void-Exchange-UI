@@ -36,7 +36,7 @@ const Index = () => {
     }
   }, [chain?.id, vaultId])
 
-  const { vaultItemInfo } = useVaultInfoToken({ vaultId: vaultId })
+  const { vaultItemInfo } = useVaultInfoToken({ vaultId })
 
   return (
     <div className="vault-detail">
