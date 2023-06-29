@@ -492,18 +492,6 @@ a.plain {
     background-color: green;
 }
 
-@media (min-width: 768px) {
-    .default-btn {
-        padding: 3px 7px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .default-btn {
-        padding: 5px 15px;
-    }
-}
-
 .block {
     display: block;
 }

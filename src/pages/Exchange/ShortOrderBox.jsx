@@ -119,7 +119,7 @@ const ShortOrderBox = () => {
     if (+allowance >= +payAmount) {
       return (
         <Button
-          className="w-full bg-red py-3"
+          className="w-full bg-red py-2"
           text="Short"
           onClick={handleConfirmOrder}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}
@@ -214,7 +214,7 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box vh-80 overflow-y-scroll no-scrollbar">
+      <div className="order-box overflow-y-scroll no-scrollbar flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
@@ -229,7 +229,6 @@ const ShortOrderBox = () => {
               onChange={changeOrderType}
             />
           </div>
-
           <div className="">
             <InputCustom
               label="Price"
@@ -241,7 +240,7 @@ const ShortOrderBox = () => {
             />
           </div>
         </div>
-        <div className="mt-3 2xl:mt-5 relative flex flex-col gap-1">
+        <div className="relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <label className="text-sm text-slate-500">Pay</label>
             <SwitchButton onChange={onChangeToggle} value={toggle} />
@@ -258,7 +257,7 @@ const ShortOrderBox = () => {
             disabled={isApproving || isPlacingOrder}
           />
         </div>
-        <div className="mt-3 2xl:mt-5 border px-2 pt-2 pb-7">
+        <div className="border px-2 pt-2 pb-7">
           <SliderLeverage
             label="Leverage"
             defaultValue={20}
@@ -266,8 +265,8 @@ const ShortOrderBox = () => {
             value={leverage}
           />
         </div>
-        <div className="mt-10 w-full">{renderButton()}</div>
-        <div className="mt-3 2xl:mt-5">
+        <div className="mt-5 w-full">{renderButton()}</div>
+        <div className="mt-3">
           <SlippageCustom
             label="Slippage"
             options={[
@@ -278,7 +277,7 @@ const ShortOrderBox = () => {
             defaultValue={0.1}
           />
         </div>
-        <div className="mt-3 2xl:mt-5 flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <div className="collateral-value flex justify-between text-base lg:text-sm">
             <label className="text-slate-500 dotted-underline">Position</label>
             <div className="">{positionSize}x</div>

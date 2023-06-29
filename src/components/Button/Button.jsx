@@ -7,8 +7,8 @@ const Button = ({ text, className, isDefault = true, icon, onClick, type, isLoad
   return (
     <div
       className={cx(className, {
-        "text-center btn text-sm flex items-center justify-center gap-2 cursor-pointer rounded overflow-hidden": true,
-        "default-btn ": isDefault,
+        "text-center btn text-sm flex items-center justify-center gap-2 cursor-pointer rounded ": true,
+        "default-btn py-2": isDefault,
         secondary: type === "secondary",
         disabled: isLoading || disabled
       })}
