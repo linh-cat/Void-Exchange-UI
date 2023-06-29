@@ -6,15 +6,15 @@ export const vaultLists = [
     title: "ETH",
     bg: "bg-eth",
     hoverBg: "bg-hover-eth",
-    risk: 'high',
-    icon: ETH,
+    risk: "high",
+    icon: ETH
   },
   {
     id: 2,
     title: "BTC",
     bg: "bg-btc",
     hoverBg: "bg-hover-btc",
-    risk: 'low',
+    risk: "low",
     icon: BTC
   },
   {
@@ -23,7 +23,7 @@ export const vaultLists = [
     bg: "bg-pepe",
     hoverBg: "bg-hover-pepe",
     icon: PEPE,
-    risk: 'medium',
+    risk: "medium",
     backedByIcon: USDC
   },
   {
@@ -32,7 +32,7 @@ export const vaultLists = [
     bg: "bg-usdc",
     hoverBg: "bg-hover-usdc",
     icon: USDC,
-    risk: 'high',
+    risk: "high",
     backedByIcon: USDC
   },
   {
@@ -41,7 +41,7 @@ export const vaultLists = [
     bg: "bg-doge",
     hoverBg: "bg-hover-doge",
     icon: DOGE,
-    risk: 'low',
+    risk: "low",
     backedByIcon: USDC
   }
 ]

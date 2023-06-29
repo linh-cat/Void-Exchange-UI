@@ -1,4 +1,3 @@
-
 export const defaultChartProps = {
   theme: "Dark",
   locale: "en",
