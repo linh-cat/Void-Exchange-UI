@@ -44,7 +44,12 @@ const handleCustomTooltip = (props) => {
 
   return (
     <SliderTooltip prefixCls="rc-slider-tooltip" overlay={title} visible={false} key={index} showArrow={false}>
-      <Handle value={value} {...restProps} />
+      <Handle
+        value={value}
+        {...restProps}
+        ariaLabel={title()}
+        ariaValueTextFormatter={(val) => <div style={{ fontSize: "10px" }}> {val}</div>}
+      />
     </SliderTooltip>
   )
 }
@@ -69,15 +74,6 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
     },
     [onChangeLeverage]
   )
-  const title = useMemo(() => {
-    if (value > 1 && value <= 20) {
-      return "Safe"
-    } else if (value > 20 && value <= 40) {
-      return "Risky"
-    } else {
-      return "Danger"
-    }
-  }, [value])
 
   const background = useMemo(() => {
     if (value > 1 && value <= 20) {
@@ -99,19 +95,9 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
     }
   }, [value])
 
-  // const alertContent = useMemo(() => {
-  //   if (value > 20 && value <= 40) {
-  //     return "Leverage is risky."
-  //   } else if (value > 40) {
-  //     return "Leverage is too danger."
-  //   }
-  //   return null
-  // }, [value])
-
   const width = useMemo(() => {
-    return value > 40 ? "65px" : "55px"
+    return value > 40 ? "55px" : "40px"
   }, [value])
-
   return (
     <div className="w-full h-full slider-custom flex flex-col gap-y-5">
       <div className="flex items-center justify-between">
@@ -149,27 +135,14 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
             background: background,
             color: color,
             width: width,
-            height: "24px",
+            height: "20px",
             borderRadius: 5,
-            marginTop: -10
+            marginTop: -9
           }}
           onBeforeChange={onBeforeChange}
           onChange={changeLeverage}
-          ariaLabelForHandle={title}
         />
       </div>
-      {/* {alertContent && (
-        <div
-          className={cx({
-            "px-4 py-3 rounded relative mt-5 border text-white alert-badge flex items-center gap-3": true
-          })}
-        >
-          <strong>
-            <img src={InforIcon} alt="info" className="w-5" />
-          </strong>
-          <span className="block sm:inline">{alertContent}</span>
-        </div>
-      )} */}
     </div>
   )
 }

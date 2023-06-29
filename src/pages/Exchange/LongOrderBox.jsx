@@ -260,7 +260,7 @@ const LongOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box overflow-y-scroll no-scrollbar overflow-hidden flex flex-col gap-3">
+      <div className="order-box overflow-y-auto no-scrollbar flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
@@ -327,42 +327,42 @@ const LongOrderBox = () => {
             <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
             <div className="text-sm">{positionSize}</div>
           </div>
-          <div className="collateral-asset flex justify-between text-base lg:text-sm">
+          <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
               <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
               <span>Cake</span>
             </div>
           </div>
-          <div className="collateral-value flex justify-between text-base lg:text-sm">
+          <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="collateral-leverage flex justify-between text-base lg:text-sm">
+          <div className="collateral-leverage flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
-          <div className="entry-price flex justify-between text-base lg:text-sm">
+          <div className="entry-price flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Entry Price</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="liquidation flex justify-between text-base lg:text-sm">
+          <div className="liquidation flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Liquidation</label>
             <div className="">
               <span>-</span>
             </div>
           </div>
-          <div className="borrow-fee flex justify-between items-center text-base lg:text-sm">
+          <div className="borrow-fee flex justify-between items-center text-sm">
             <label className="text-slate-500 dotted-underline">Borrow Fee</label>
             <span>-</span>
           </div>
-          <div className="available-liquidity flex justify-between items-center text-base lg:text-sm">
+          <div className="available-liquidity flex justify-between items-center text-sm">
             <TextWithTooltip
               text="Available Liquidity"
               tooltip={<div>Test tooltip</div>}
