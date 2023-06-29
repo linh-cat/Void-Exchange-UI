@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 import { Constants } from "@void-0x/void-sdk"
 import { useNetwork } from "wagmi"
 import VaultDeposit from "./VaultDeposit"
-import useVaultInforToken from "src/hooks/useVaultInforToken"
+import useVaultInfoToken from "src/hooks/useVaultInfoToken"
 
 const Index = () => {
   let { id: vaultId } = useParams()
@@ -35,7 +35,7 @@ const Index = () => {
     }
   }, [chain?.id, vaultId])
 
-  const { vaultItemInfo } = useVaultInforToken({ vaultId: vaultId })
+  const { vaultItemInfo } = useVaultInfoToken({ vaultId: vaultId })
 
   return (
     <div className="vault-detail">

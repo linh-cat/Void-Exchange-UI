@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { BTC, ETH, USDC } from "@img/token"
 
-const useVaultInforToken = ({ vaultId }) => {
+const useVaultInfoToken = ({ vaultId }) => {
   const dataForMapping = useMemo(
     () => [
       {
@@ -37,4 +37,4 @@ const useVaultInforToken = ({ vaultId }) => {
   return { vaultItemInfo }
 }
 
-export default useVaultInforToken
+export default useVaultInfoToken
