@@ -417,7 +417,7 @@ const ListPosition = () => {
                   "red-down": cell?.type === "short"
                 })}
               >
-                {cell?.type} {cell?.leverage}
+                {cell?.type === "long" ? "Long" : "Short"} {cell?.leverage}
               </div>
             </div>
           </div>
