@@ -6,7 +6,7 @@ import { ETH } from "@img/token"
 
 const VaultStrategy = () => {
   return (
-    <div className="container mx-auto max-w-7xl mt-10">
+    <div className="container mx-auto max-w-7xl mt-10 px-3 xl:px-0">
       <Card
         className="shadow"
         header={

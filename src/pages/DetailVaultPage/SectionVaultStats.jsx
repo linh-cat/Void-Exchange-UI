@@ -4,10 +4,10 @@ import React from "react"
 
 const SectionVaultStats = () => {
   return (
-    <div className="container mx-auto max-w-7xl mt-10">
+    <div className="container mx-auto max-w-7xl mt-10 px-3 xl:px-0">
       <div className="card-deposit-vault grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         <Card className="xl:col-span-2 relative p-3">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <Card className="liquidity p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Liquidity</label>
               <div className="">$11.06m</div>

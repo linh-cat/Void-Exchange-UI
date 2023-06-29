@@ -3,7 +3,7 @@ import cx from "classnames"
 const Banner = ({ bg, currentVault, capacity, icon, title }) => {
   return (
     <div className={cx({ banner: true }, bg)}>
-      <div className="container mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center">
+      <div className="container mx-auto max-w-7xl flex flex-col md:flex-row gap-5 justify-between items-center">
         <div className="flex flex-col gap-5 col-span-2 w-96">
           <h1 className="font-medium text-3xl">{title}</h1>
           <div className="capacity flex flex-col">

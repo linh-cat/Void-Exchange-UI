@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="border-t pt-2 flex justify-between items-center max-w-7xl mx-auto">
+      <div className="border-t pt-2 flex justify-between items-center max-w-7xl mx-auto px-3 xl:px-0">
         <div className="flex items-center gap-1">
           <img src={Void} alt="void icon" className="w-7 h-7" />
           <h1>Void Exchange</h1>
