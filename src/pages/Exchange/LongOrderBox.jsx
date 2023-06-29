@@ -139,6 +139,9 @@ const LongOrderBox = () => {
   ])
 
   const renderButton = useCallback(() => {
+    if (payAmount === "") {
+      return <Button text="Enter amount" className="cursor-not-allowed" />
+    }
     if (+allowance >= +payAmount) {
       return (
         <Button
@@ -176,7 +179,7 @@ const LongOrderBox = () => {
     return (
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-2 gap-3">
-          <div className="border py-2 px-2 rounded text-left ">
+          <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Market Price</h5>
             <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
           </div>

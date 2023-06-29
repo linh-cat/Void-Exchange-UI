@@ -15,7 +15,7 @@ import { CAKE, USDC } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
-import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
+import useTokenPriceFeed, { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import PlaceOrderModal from "./PlaceOrderModal"
@@ -41,6 +41,7 @@ const ShortOrderBox = () => {
   })
 
   const { prices } = useTokenPriceFeed([indexToken, selectedToken])
+  const indexPrice = useTokenPrice(indexToken)
 
   const { allowance, approve, isApproving } = useAllowance({
     token: selectedToken,
@@ -116,6 +117,9 @@ const ShortOrderBox = () => {
   }, [placeOrder, orderType, prices, indexToken, selectedToken, payAmount, balance, leverage, isPlacingOrder])
 
   const renderButton = useCallback(() => {
+    if (payAmount === "") {
+      return <Button text="Enter amount" className="w-full bg-red py-2 cursor-not-allowed" isDefault={false} />
+    }
     if (+allowance >= +payAmount) {
       return (
         <Button
@@ -155,8 +159,8 @@ const ShortOrderBox = () => {
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-2 gap-3">
           <div className="border py-2 px-2 rounded text-left ">
-            <h5 className="text-slate-500 text-sm">Price</h5>
-            {/* <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div> */}
+            <h5 className="text-slate-500 text-sm">Market Price</h5>
+            <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
           </div>
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Order Type</h5>
