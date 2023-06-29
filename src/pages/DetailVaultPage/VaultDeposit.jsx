@@ -112,8 +112,8 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
         header={
           <div className="card-header grid grid-cols-2 md:grid-cols-4 px-5 py-3 ">
             <div className="currency">
-              <label>USDT</label>
-              <div className="text-slate-500">$1.00</div>
+              <label>TVL</label>
+              <div className="text-slate-500">$3,000,000</div>
             </div>
             <div className="current-apy">
               <div>4.96%</div>
@@ -273,27 +273,33 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
             <Card className="my-position p-3">
               <div className="flex flex-col gap-3">
                 <div>
-                  <label className="text-xs text-slate-500">Portfolio Value</label>
-                  <div>$7243.13</div>
+                  <label className="text-xs text-slate-500">Total Deposit</label>
+                  <div>100 ETH</div>
                 </div>
                 <div className="flex justify-between">
                   <div>
-                    <label className="text-xs text-slate-500">Collateral</label>
-                    <div>$3000</div>
+                    <label className="text-xs text-slate-500">Value</label>
+                    <div>$183,228.00</div>
                   </div>
-                  <div>
-                    <label className="text-xs text-slate-500">Leverage</label>
-                    <div>0.5x</div>
-                  </div>
+                  {/* <div> */}
+                  {/*   <label className="text-xs text-slate-500">Leverage</label> */}
+                  {/*   <div>0.5x</div> */}
+                  {/* </div> */}
                 </div>
                 <div className="flex justify-between">
                   <div>
-                    <label className="text-xs text-slate-500">Total Unrealized P&L</label>
+                    <label className="text-xs text-slate-500">Estimated Profit Next Epoch</label>
                     <div className="green-up">+21.04</div>
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500">Total Realized P&L</label>
-                    <div className="green-up">+320</div>
+                    <label className="text-xs text-slate-500">Estimated Loss</label>
+                    <div className="red-down">-320</div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <div>
+                    <label className="text-xs text-slate-500">Total estimated unrealized P&L</label>
+                    <div className="green-up">+$4,222</div>
                   </div>
                 </div>
               </div>
