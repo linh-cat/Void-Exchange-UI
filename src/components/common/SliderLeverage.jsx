@@ -121,7 +121,7 @@ const SliderLeverage = ({ label, tooltip, onChangeLeverage, value, onAfterChange
         </div>
       </div>
 
-      <div className="px-5">
+      <div>
         <Slider
           value={value}
           min={2}
