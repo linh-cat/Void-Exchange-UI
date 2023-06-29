@@ -76,7 +76,7 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk }) => {
                 "bg-errorLight text-green red-down": risk === "high",
                 "bg-pending text-pending": risk === "medium"
               },
-              "py-1 px-2 rounded capitalize text-sm"
+              "py-1 px-2 rounded capitalize text-xs"
             )}
           >
             {risk}
