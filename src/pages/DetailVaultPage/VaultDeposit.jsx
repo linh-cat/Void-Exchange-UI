@@ -12,6 +12,7 @@ import useVault from "src/hooks/useVault"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
+import { decimalsFormatter } from "src/lib/formatter"
 
 /**
  * SectionVaultDeposit.
@@ -227,7 +228,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{balance?.formatted}</div>
+                        <div>{decimalsFormatter(balance?.formatted, 4)}</div>
                       </div>
                     </div>
                     {renderButton()}
@@ -261,7 +262,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                       </div>
                       <div className="ballance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
-                        <div>{balance?.formatted}</div>
+                        <div>{decimalsFormatter(balance?.formatted, 4)}</div>
                       </div>
                     </div>
                     <Button className="py-2 tracking-wider rounded" text="Withdraw" />
