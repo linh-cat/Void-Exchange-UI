@@ -5,7 +5,7 @@ import { parseUnits } from "viem"
 import { useAccount, useBalance, useNetwork } from "wagmi"
 
 import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
-import { LimitIcon, MarketIcon } from "@icons/index"
+import { CancelIcon, LimitIcon, MarketIcon } from "@icons/index"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
@@ -22,6 +22,7 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 import PlaceOrderModal from "./PlaceOrderModal"
+import CancelTransactionPopup from "@components/common/CancelTransactionPopup/CancelTransactionPopup"
 
 const LongOrderBox = () => {
   // UI state
@@ -30,6 +31,7 @@ const LongOrderBox = () => {
   const [selectedToken, setSelectedToken] = useState()
   const [isNoticed, setIsNoticed] = useState(false)
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
+  const [isCancelTransaction, setIsCancelTransaction] = useState(false)
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -75,6 +77,10 @@ const LongOrderBox = () => {
 
   const closeNoticePopup = () => {
     setIsNoticed(false)
+  }
+
+  const closeTransactionPopup = () => {
+    setIsCancelTransaction(false)
   }
 
   const changeOrderType = (order) => {
@@ -255,6 +261,20 @@ const LongOrderBox = () => {
           position="center"
         />
       )}
+      {isCancelTransaction && (
+        <CancelTransactionPopup
+          body={
+            <div className="p-3">
+              <h3 className="text-base">Transaction Cancelled</h3>
+              <p className="text-slate-500 text-sm mt-2">You have cancelled the transaction</p>
+            </div>
+          }
+          position="bottom-right"
+          onClose={closeTransactionPopup}
+          duration={3000}
+          isCancelIcon={true}
+        />
+      )}
       <PlaceOrderModal
         open={orderConfirmModal}
         setOpen={setOrderConfirmModal}
@@ -289,6 +309,7 @@ const LongOrderBox = () => {
             />
           </div>
         </div>
+        <div onClick={() => setIsCancelTransaction(true)}>test transaction</div>
         <div className="relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <label className="text-sm text-slate-500">Pay</label>
