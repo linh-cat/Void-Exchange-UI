@@ -1,6 +1,6 @@
 import cx from "classnames"
 
-const Banner = ({ bg, currentVault, capacity, icon, title }) => {
+const Banner = ({ id, bg, currentVault, capacity, icon, title }) => {
   return (
     <div className={cx({ banner: true }, bg)}>
       <div className="container mx-auto max-w-7xl flex flex-col md:flex-row gap-5 justify-between items-center">
@@ -20,14 +20,36 @@ const Banner = ({ bg, currentVault, capacity, icon, title }) => {
               <div>{capacity}</div>
             </div>
           </div>
-          <div className="flex items-center justify-between border rounded p-2 shadow">
+          <div
+            className={cx("flex items-center justify-between border rounded p-2 shadow", {
+              "eth-border": id === 1,
+              "btc-border": id === 2,
+              "usdc-border": id === 4
+            })}
+          >
             <div>
-              <h3 className="text-slate-500">Rewards</h3>
-              <div>2 ETH</div>
+              <h3
+                className={cx("text-slate-500", {
+                  "eth-color": id === 1,
+                  "btc-color": id === 2,
+                  "usdc-color": id === 4
+                })}
+              >
+                Rewards
+              </h3>
+              <div className="text-sm">2 ETH</div>
             </div>
             <div>
-              <h3 className="text-slate-500">ENDS</h3>
-              <div>17D 15H 13M</div>
+              <h3
+                className={cx("text-slate-500", {
+                  "eth-color": id === 1,
+                  "btc-color": id === 2,
+                  "usdc-color": id === 4
+                })}
+              >
+                ENDS
+              </h3>
+              <div className="text-sm">17D 15H 13M</div>
             </div>
           </div>
         </div>

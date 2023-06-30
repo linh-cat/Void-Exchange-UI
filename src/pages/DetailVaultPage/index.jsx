@@ -46,6 +46,7 @@ const Index = () => {
         capacity={vaultItemInfo?.capacity}
         icon={vaultItemInfo?.icon}
         title={vaultItemInfo?.title}
+        id={vaultItemInfo?.id}
       />
       <VaultStrategy />
       <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />

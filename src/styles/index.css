@@ -225,6 +225,18 @@ body {
     color: #f79d2f !important;
 }
 
+.btc-border {
+    border-color: #f79d2f !important;
+}
+
+.usdc-color {
+    color: #2775CA !important;
+}
+
+.usdc-border {
+    border-color: #2775CA !important;
+}
+
 .border-binance {
     border: 1px solid #ffd42d !important;
 }
