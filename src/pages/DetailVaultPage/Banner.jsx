@@ -26,7 +26,7 @@ const Banner = ({ id, bg, currentVault, capacity, icon, title }) => {
               className={cx("w-1/2 xl:w-1/3 flex items-center justify-between rounded px-2 py-3", {
                 "eth-linear": id === 1,
                 "btc-linear": id === 2,
-                "usdc-border": id === 4
+                "usdc-linear": id === 4
               })}
             >
               <div>

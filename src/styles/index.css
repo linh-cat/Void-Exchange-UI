@@ -225,6 +225,10 @@ body {
     background-image: linear-gradient(120deg, #53596d, #e3a150) !important;
 }
 
+.usdc-linear {
+    background-image: linear-gradient(120deg, #53596d, #2775CA) !important;
+}
+
 .yellow {
     color: var(--main-yellow) !important;
 }
