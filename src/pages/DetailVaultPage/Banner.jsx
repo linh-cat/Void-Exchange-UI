@@ -7,8 +7,7 @@ const Banner = ({ id, bg, currentVault, capacity, icon, title, blurBg }) => {
         <div className="lg:col-span-3">
           <h1 className="font-medium text-3xl mb-3">{title}</h1>
           <div className="flex flex-col xl:flex-row items-center gap-10 px-3 lg:px-0">
-            <div className="capacity flex flex-col w-full md:w-1/2 2xl:w-2/5 border py-3 px-3 rounded shadow relative overflow-hidden">
-              <img src={blurBg} className="blur" alt="icon" />
+            <div className="capacity flex flex-col w-full md:w-1/2 2xl:w-2/5  py-3 px-3 rounded relative overflow-hidden">
               <div className="current-deposit flex justify-between">
                 <h3 className="text-slate-500 whitespace-nowrap">Current Vault Deposits</h3>
                 <div className="whitespace-nowrap">{currentVault}</div>
@@ -23,7 +22,7 @@ const Banner = ({ id, bg, currentVault, capacity, icon, title, blurBg }) => {
               </div>
             </div>
             {/* right */}
-            <div className="w-full md:w-1/2 2xl:w-1/3 border rounded p-3 flex flex-col gap-3 shadow relative overflow-hidden">
+            <div className="w-full md:w-1/2 2xl:w-1/3  rounded p-3 flex flex-col gap-3 shadow relative overflow-hidden">
               <img src={blurBg} className="blur" alt="icon" />
               <h3>Reward Distribution</h3>
 
