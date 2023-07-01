@@ -52,7 +52,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   return (
     <div className="couple-token ">
       <div
-        className="dd-couple-token-header flex gap-2 items-center text-white py-5 cursor-pointer"
+        className="dd-couple-token-header flex gap-2 items-center text-white cursor-pointer"
         ref={refOutside}
         onClick={toggleOpen}
       >

@@ -2,10 +2,6 @@
     font-family: "Roboto", sans-serif;
 }
 
-.top-chart .top-chart-price {
-    color: var(--arbitrum-blue);
-}
-
 @media only screen and (max-width: 640px) {
     .latest-trade {
         height: 20rem;

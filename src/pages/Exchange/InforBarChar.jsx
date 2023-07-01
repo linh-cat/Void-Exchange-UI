@@ -4,7 +4,7 @@ import React from "react"
 
 const InforBarChar = () => {
   return (
-    <div className="top-chart w-full flex flex-col lg:flex-row lg:items-center">
+    <div className="top-chart w-full flex flex-col gap-3 2xl:gap-0 lg:flex-row lg:items-center py-3">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
           <SelectCoupleToken />
