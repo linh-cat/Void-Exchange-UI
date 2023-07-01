@@ -45,7 +45,7 @@ const InputWithToken = ({
     const index = tokenOptions?.findIndex((item) => item.value === token)
 
     return { label: tokenOptions[index]?.label, icon: tokenOptions[index]?.icon }
-  }, [token, tokenOptions])
+  }, [tokenOptions, token])
 
   const onShowOptionToken = () => {
     setIsShowDropdownToken(!isShowDropdownToken)
@@ -146,9 +146,11 @@ const InputWithToken = ({
           onClick={onShowOptionToken}
           ref={refOutside}
         >
-          <div className="flex items-center justify-between px-2 py-2 cursor-pointer border rounded gap-3">
-            <img className="w-6 h-6" alt="token" src={renderLabel?.icon} />
-            <label className="text-sm">{renderLabel?.label}</label>
+          <div className="flex items-center justify-between cursor-pointer border rounded gap-3 h-10 w-30px px-1">
+            <div className="flex justify-center items-center gap-1">
+              {renderLabel?.icon && <img className="w-6 h-6" alt="token" src={renderLabel?.icon} />}
+              {renderLabel?.label && <label className="text-sm">{renderLabel?.label}</label>}
+            </div>
             <img
               src={DownIcon}
               alt="down"

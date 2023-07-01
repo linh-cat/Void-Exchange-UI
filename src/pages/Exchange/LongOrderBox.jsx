@@ -5,7 +5,7 @@ import { parseUnits } from "viem"
 import { useAccount, useBalance, useNetwork } from "wagmi"
 
 import { SelectCustom, InputCustom, SliderLeverage, SlippageCustom } from "@components/common"
-import { CancelIcon, LimitIcon, MarketIcon } from "@icons/index"
+import { LimitIcon, MarketIcon } from "@icons/index"
 import CollateralModal from "@components/CollateralModal/CollateralModal"
 import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"

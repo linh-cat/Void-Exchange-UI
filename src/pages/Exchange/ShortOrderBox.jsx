@@ -192,7 +192,7 @@ const ShortOrderBox = () => {
         </div>
       </div>
     )
-  }, [tokenOptions, payAmount, leverage, positionSize, selectedToken])
+  }, [tokenOptions, indexPrice, payAmount, leverage, positionSize, selectedToken])
 
   const footerConfirmOrder = useMemo(() => {
     return (
