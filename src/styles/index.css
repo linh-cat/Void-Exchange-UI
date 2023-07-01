@@ -235,6 +235,10 @@ body {
     user-select: none;
 }
 
+.w-1px {
+    width: 1px !important;
+}
+
 .eth-linear {
     background-image: linear-gradient(120deg, #575b69, #a8b9f6) !important;
 }

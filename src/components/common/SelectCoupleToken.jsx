@@ -50,7 +50,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   }, [values])
 
   return (
-    <div className="couple-token">
+    <div className="couple-token ">
       <div
         className="dd-couple-token-header flex gap-2 items-center text-white py-5 cursor-pointer"
         ref={refOutside}
@@ -60,7 +60,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
         <label className="cursor-pointer text-lg label font-bold">{label}</label>
         <img src={DownIcon} className={`${openList ? "rotate180" : ""} w-3`} alt="downicon" />
       </div>
-      <div className={`${openList ? "open" : "close"} dd-couple-token-list overflow-x-auto rounded`}>
+      <div className={`${openList ? "open" : "close"} dd-couple-token-list card overflow-x-auto rounded`}>
         <table className="w-full text-sm text-left">
           <thead className="text-xs uppercase ">
             <tr>

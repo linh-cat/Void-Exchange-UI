@@ -64,10 +64,10 @@ const Exchange = () => {
             >
               <div className="relative">
                 <InforBarChar />
-                <div className="flex items-center absolute top-1/3 right-2">
+                {/* <div className="flex items-center absolute top-1/3 right-2">
                   <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
                   <label className="text-xs">Show History</label>
-                </div>
+                </div> */}
               </div>
               <div className="flex-1">
                 <TradingViewChart />

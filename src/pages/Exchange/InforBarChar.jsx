@@ -1,59 +1,82 @@
-import Badge from "@components/common/Badge"
 import SelectCoupleToken from "@components/common/SelectCoupleToken"
 import { GreenUpIcon } from "@icons/index"
 import React from "react"
 
 const InforBarChar = () => {
   return (
-    <div className="top-chart w-full flex flex-col lg:flex-row md:gap-5 lg:items-center">
+    <div className="top-chart w-full flex flex-col lg:flex-row lg:items-center">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
           <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
-          <label className="text-xl green-up">$27,382.31</label>
+          <label className="text-xl green-up font-bold">27,382.31</label>
         </div>
       </div>
-      <div className="group-infor">
-        <div className="grid grid-cols-4 sm:grid-cols-8 text-center">
-          <div className="flex flex-col items-center justify-center">
-            <label className="text-slate-500 font-very-small">24h Change %</label>
-            <div className="flex items-center gap-x-1">
-              <img src={GreenUpIcon} alt="up" />
-              <span className="inline green-up font-small">0.34%</span>
-            </div>
+      <div className="group-infor px-3 py-1 xl:py-0 xl:px-0 flex gap-3 2xl:gap-5 overflow-x-auto no-scrollbar">
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Mark</h3>
+          <div className="text-xs mt-auto">28,650.00</div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Index</h3>
+          <div className="text-xs mt-auto">28,650.00</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">24h Change(%)</h3>
+          <div className="text-xs mt-auto flex items-center gap-1 green-up">
+            <span> 0.34% </span>
+            <img src={GreenUpIcon} className="w-3 h-3" alt="greenup" />
           </div>
-          <div className="">
-            <label className="text-slate-500 font-very-small">24h Change</label>
-            <div className="green-up font-small">$163.72</div>
-          </div>
-          <div className="">
-            <label className="text-slate-500 font-very-small">24h High</label>
-            <div className="font-small">$27,567.32 </div>
-          </div>
-          <div className="">
-            <label className=" text-slate-500 font-very-small">24h Low</label>
-            <div className="font-small">$27,033.61</div>
-          </div>
-          <div className="">
-            <label className="text-slate-500 font-very-small">Volume</label>
-            <div className="font-small flex justify-center items-center gap-1">
-              <div>55.003</div>
-              <Badge text="BTC" />
-            </div>
-          </div>
-          <div className="">
-            <label className="text-slate-500 font-very-small">Volume</label>
-            <div className="font-small">$1,505,660</div>
-          </div>
-          <div className="">
-            <label className="text-slate-500 font-very-small">Next Fund Rate</label>
-            <div className="red-down font-small">-0.00013%</div>
-          </div>
-          <div className="">
-            <label className=" text-slate-500 font-very-small">Countdown</label>
-            <div className="font-small">00:46:00</div>
-          </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">24h Change</h3>
+          <div className="text-xs mt-auto green-up">163.72</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">24h High</h3>
+          <div className="text-xs mt-auto">28,888.32</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">24h Low</h3>
+          <div className="text-xs mt-auto">27,033.61</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Volume</h3>
+          <div className="text-xs mt-auto">1,505.660</div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Volume</h3>
+          <div className="text-xs mt-auto">55.003</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Next Fund Rate</h3>
+          <div className="text-xs mt-auto red-down">-0.00013%</div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="h-full w-1px bg-slate-700"></div>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-xs text-slate-500">Countdown</h3>
+          <div className="text-xs mt-auto">00:46:00</div>
         </div>
       </div>
     </div>

@@ -12,7 +12,6 @@
     left: 0;
     height: auto;
     width: auto;
-    background: var(--bg-dropdown-list);
     z-index: 9999999999;
     transition: all 0.3s ease-in-out;
 }
