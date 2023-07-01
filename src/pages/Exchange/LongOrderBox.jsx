@@ -309,7 +309,6 @@ const LongOrderBox = () => {
             />
           </div>
         </div>
-        <div onClick={() => setIsCancelTransaction(true)}>test transaction</div>
         <div className="relative flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <label className="text-sm text-slate-500">Pay</label>
