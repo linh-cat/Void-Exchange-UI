@@ -61,7 +61,7 @@ const InforBarChar = () => {
           <div className="text-xs mt-auto">1,505.660</div>
         </div>
         <div className="flex flex-col">
-          <h3 className="text-xs text-slate-500">Volume</h3>
+          <h3 className="text-xs text-slate-500">Volume(BTC)</h3>
           <div className="text-xs mt-auto">55.003</div>
         </div>
         <div className="flex justify-center items-center">

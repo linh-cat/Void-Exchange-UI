@@ -3,12 +3,10 @@
 }
 
 .top-info .tooltip-market {
-    background-color: var(--main-card-color);
     display: none;
 }
 
 .top-info .tooltip-gas {
-    background-color: var(--main-card-color);
     display: none;
 }
 
