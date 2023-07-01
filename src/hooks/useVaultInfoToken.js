@@ -16,7 +16,7 @@ const useVaultInfoToken = ({ vaultId }) => {
       {
         id: 2,
         title: "BTC Void",
-        currentDeposit: "100.000.000 BTC",
+        currentDeposit: "100.000 BTC",
         capacity: "750.000.000 BTC",
         bg: "bg-btc-banner",
         icon: BTC,
@@ -25,7 +25,7 @@ const useVaultInfoToken = ({ vaultId }) => {
       {
         id: 4,
         title: "USDC Void",
-        currentDeposit: "1.000.000.000 USDC",
+        currentDeposit: "1.000.000 USDC",
         capacity: "7.000.000.000 USDC",
         bg: "bg-usdc-banner",
         icon: USDC,
