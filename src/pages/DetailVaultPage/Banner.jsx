@@ -1,6 +1,6 @@
 import cx from "classnames"
 
-const Banner = ({ id, bg, currentVault, capacity, icon, title }) => {
+const Banner = ({ id, bg, currentVault, capacity, icon, title, blurBg }) => {
   return (
     <div className={cx({ banner: true }, bg)}>
       <div className="container mx-auto max-w-7xl grid grid-cols-1 xl:grid-cols-4 gap-5 justify-between items-center">
@@ -22,20 +22,19 @@ const Banner = ({ id, bg, currentVault, capacity, icon, title }) => {
               </div>
             </div>
             {/* right */}
-            <div
-              className={cx("w-1/2 xl:w-1/3 flex items-center justify-between rounded px-2 py-3", {
-                "eth-linear": id === 1,
-                "btc-linear": id === 2,
-                "usdc-linear": id === 4
-              })}
-            >
-              <div>
-                <h3 className={cx("text-white", {})}>Rewards</h3>
-                <div className="text-sm">2 ETH</div>
-              </div>
-              <div>
-                <h3 className={cx("text-white", {})}>ENDS</h3>
-                <div className="text-sm">17D 15H 13M</div>
+            <div className="w-1/2 xl:w-1/3 border rounded p-3 flex flex-col gap-3 shadow relative overflow-hidden">
+              <img src={blurBg} className="blur" alt="icon" />
+              <h3>Reward Distribution</h3>
+
+              <div className={cx("flex items-center justify-between rounded px-2 py-3 text-sm border ", {})}>
+                <div>
+                  <h3 className={cx("text-white", {})}>Rewards</h3>
+                  <div className="text-sm">2 ETH</div>
+                </div>
+                <div>
+                  <h3 className={cx("text-white", {})}>ENDS</h3>
+                  <div className="text-sm text-slate-300">17D 15H 13M</div>
+                </div>
               </div>
             </div>
           </div>

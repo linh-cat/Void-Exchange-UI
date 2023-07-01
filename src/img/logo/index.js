@@ -14,6 +14,8 @@ import Discord from "./discord.png"
 import Void from "./void.png"
 import Twitter from "./twitter.png"
 import Github from "./github-mark.svg"
+import Zapper from "./zapper.svg"
+import Debank from "./DeBank.svg"
 
 export {
   Rewards,
@@ -31,5 +33,7 @@ export {
   Metamask,
   Void,
   Twitter,
-  Github
+  Github,
+  Zapper,
+  Debank
 }

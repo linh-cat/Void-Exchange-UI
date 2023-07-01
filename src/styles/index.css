@@ -217,8 +217,26 @@ body {
     border-color: var(--text-color-purple) !important;
 }
 
+.blur {
+    position: absolute;
+    width: 100px;
+    height: 90px;
+    left: 0;
+    top: -60px;
+    filter: blur(85px);
+    -webkit-filter: blur(85px);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    z-index: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
 .eth-linear {
-    background-image: linear-gradient(120deg, #53596d, #8CA2F0) !important;
+    background-image: linear-gradient(120deg, #575b69, #a8b9f6) !important;
 }
 
 .btc-linear {

@@ -7,7 +7,7 @@ export const vaultLists = [
     bg: "bg-eth",
     hoverBg: "bg-hover-eth",
     risk: "high",
-    icon: ETH
+    icon: ETH,
   },
   {
     id: 2,
