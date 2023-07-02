@@ -38,7 +38,7 @@ const VaultStrategy = () => {
             Aldus PageMaker including versions of Lorem Ipsum.
           </p>
           <div className="flex gap-10">
-            <div className="w-1/3 rounded p-3 flex flex-col gap-3 shadow border relative overflow-hidden">
+            <div className="w-full lg:w-1/2 xl:w-1/3  rounded p-3 flex flex-col gap-3 shadow border relative overflow-hidden">
               <img src={ETH} className="blur-img" alt="icon" />
               <h3 className="text-title-section">Reward Distribution</h3>
 
