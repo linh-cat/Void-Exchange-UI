@@ -21,10 +21,10 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
     functionName: "approve"
   })
 
-  const { isLoading: isWaitTransaction } = useWaitForTransaction({
-    hash: data?.hash
+  const { isLoading: isWaitTransaction, status } = useWaitForTransaction({
+    hash: data?.hash,
   })
-
+  console.log({ status })
   const isApproving = useMemo(() => {
     return isLoadingWrite || isWaitTransaction
   }, [isLoadingWrite, isWaitTransaction])

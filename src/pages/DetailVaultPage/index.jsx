@@ -47,7 +47,6 @@ const Index = () => {
         icon={vaultItemInfo?.icon}
         title={vaultItemInfo?.title}
         id={vaultItemInfo?.id}
-        blurBg={vaultItemInfo?.blurBg}
       />
       <VaultStrategy />
       <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />

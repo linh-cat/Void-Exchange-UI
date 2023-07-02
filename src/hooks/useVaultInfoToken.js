@@ -11,7 +11,6 @@ const useVaultInfoToken = ({ vaultId }) => {
         capacity: "750.000 ETH",
         bg: "bg-eth-banner",
         icon: ETH,
-        blurBg: ETH
       },
       {
         id: 2,
@@ -20,7 +19,6 @@ const useVaultInfoToken = ({ vaultId }) => {
         capacity: "750.000.000 BTC",
         bg: "bg-btc-banner",
         icon: BTC,
-        blurBg: BTC
       },
       {
         id: 4,
@@ -29,7 +27,6 @@ const useVaultInfoToken = ({ vaultId }) => {
         capacity: "7.000.000.000 USDC",
         bg: "bg-usdc-banner",
         icon: USDC,
-        blurBg: USDC
       }
     ],
     []

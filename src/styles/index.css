@@ -217,9 +217,9 @@ body {
     border-color: var(--text-color-purple) !important;
 }
 
-.blur {
+.blur-img {
     position: absolute;
-    width: 100px;
+    width: 120px;
     height: 90px;
     left: 0;
     top: -60px;
@@ -253,6 +253,22 @@ body {
 
 .usdc-linear {
     background-image: linear-gradient(120deg, #53596d, #2775CA) !important;
+}
+
+.text-title-section {
+    display: inline-flex;
+    background-image: linear-gradient(150deg,
+            #323943,
+            #4f7d89 15%,
+            #2193a7 25%,
+            #189fd9,
+            #1e84df 50%,
+            #232374 85%,
+            #181c27 100%);
+    font-weight: 500;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .yellow {
