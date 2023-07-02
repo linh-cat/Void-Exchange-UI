@@ -12,7 +12,7 @@ const VaultStrategy = () => {
       <Card
         className="shadow"
         header={
-          <div className="flex items-center justify-between p-3">
+          <div className="flex flex-col sm:flex-row items-center justify-between p-3">
             <div className="">
               <h2 className="">Description</h2>
             </div>
