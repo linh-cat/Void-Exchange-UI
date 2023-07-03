@@ -1,7 +1,10 @@
+import React, { useMemo } from "react"
+
+import cx from "classnames"
+
 import SelectCoupleToken from "@components/common/SelectCoupleToken"
 import { GreenUpIcon } from "@icons/index"
 import { Constants } from "@void-0x/void-sdk"
-import React, { useMemo } from "react"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import usePriceInforbarChart from "src/hooks/usePriceInforbarChart"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
@@ -45,38 +48,50 @@ const InforBarChar = () => {
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Change(%)</h3>
           <div className="text-xs mt-auto flex items-center gap-1 green-up">
-            <span>{percentateFormatter(dataForMapping?.priceChangePercent)} </span>
+            <span className={cx({ "red-down": Number(dataForMapping?.priceChangePercent) < 0 })}>
+              {percentateFormatter(dataForMapping?.priceChangePercent)}
+            </span>
             <img src={GreenUpIcon} className="w-3 h-3" alt="greenup" />
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Change</h3>
-          <div className="text-xs mt-auto green-up">{dollarFormatter(dataForMapping?.priceChange)}</div>
+          <div
+            className={cx(
+              {
+                "red-down": Number(dataForMapping?.priceChange) < 0,
+                "green-up": Number(dataForMapping?.priceChange) > 0
+              },
+              "text-xs mt-auto "
+            )}
+          >
+            {dollarFormatter(dataForMapping?.priceChange)}
+          </div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h High</h3>
           <div className="text-xs mt-auto">{dollarFormatter(dataForMapping?.priceHigh24h)}</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Low</h3>
           <div className="text-xs mt-auto">{dollarFormatter(dataForMapping?.priceLow24h)}</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Volume</h3>
@@ -87,14 +102,14 @@ const InforBarChar = () => {
           <div className="text-xs mt-auto">55.003</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Next Fund Rate</h3>
           <div className="text-xs mt-auto red-down">-0.00013%</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="h-full w-1px bg-slate-700"></div>
+          <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Countdown</h3>
