@@ -5,17 +5,17 @@ import cx from "classnames"
 import SelectCoupleToken from "@components/common/SelectCoupleToken"
 import { Constants } from "@void-0x/void-sdk"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
-import usePriceInforbarChart from "src/hooks/usePriceInforbarChart"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { dollarFormatter, formatValue, percentateFormatter } from "src/lib/formatter"
-import usePriceMarket from "src/hooks/usePriceMarket"
 import { DownIconGreen, DownIconRed } from "@icons/index"
+import usePriceInfobarChart from "src/hooks/usePriceInfobarChart"
+import useMarketPrice from "src/hooks/usePriceMarket"
 
-const InforBarChar = () => {
+const InfoBarChar = () => {
   const { pair, indexToken } = useExchangeContext()
-  const { data } = usePriceInforbarChart()
+  const { data } = usePriceInfobarChart()
   const indexPrice = useTokenPrice(indexToken)
-  const { price: marketPrice } = usePriceMarket()
+  const { price: marketPrice } = useMarketPrice()
 
   const dataForMapping = useMemo(() => {
     switch (pair) {
@@ -27,8 +27,6 @@ const InforBarChar = () => {
         return data?.BTC
     }
   }, [data, pair])
-
-  console.log({ dataForMapping })
 
   return (
     <div className="top-chart w-full flex flex-col gap-3 2xl:gap-0 lg:flex-row lg:items-center py-3">
@@ -129,4 +127,4 @@ const InforBarChar = () => {
   )
 }
 
-export default InforBarChar
+export default InfoBarChar

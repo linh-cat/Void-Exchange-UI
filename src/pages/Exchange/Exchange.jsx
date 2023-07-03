@@ -3,13 +3,13 @@ import cx from "classnames"
 import { LIST_SECTIONS, optionLabels } from "./constant"
 import TopInfo from "@components/TopInfo/TopInfo"
 import TradingViewChart from "./TradingViewChart"
-import InforBarChar from "./InforBarChar"
 import LatestTrade from "./LatestTrade"
 import Tab from "@components/Tab/Tab"
 import { POSITIONS } from "./constant"
 import ListPosition from "./ListPosition"
 import TabExchange from "../../components/TabExchange/TabExchange"
 import "./Exchange.css"
+import InfoBarChar from "./InfoBarChar"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
@@ -55,7 +55,7 @@ const Exchange = () => {
               })}
             >
               <div className="relative">
-                <InforBarChar />
+                <InfoBarChar />
                 {/* <div className="flex items-center absolute top-1/3 right-2"> */}
                 {/*   <input type="checkbox" checked={showHistory} onChange={onChangeHistory} /> */}
                 {/*   <label className="text-xs">Show History</label> */}

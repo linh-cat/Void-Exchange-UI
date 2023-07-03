@@ -10,7 +10,7 @@ const useVaultInfoToken = ({ vaultId }) => {
         currentDeposit: "100.000 ETH",
         capacity: "750.000 ETH",
         bg: "bg-eth-banner",
-        icon: ETH,
+        icon: ETH
       },
       {
         id: 2,
@@ -18,7 +18,7 @@ const useVaultInfoToken = ({ vaultId }) => {
         currentDeposit: "100.000 BTC",
         capacity: "750.000.000 BTC",
         bg: "bg-btc-banner",
-        icon: BTC,
+        icon: BTC
       },
       {
         id: 4,
@@ -26,7 +26,7 @@ const useVaultInfoToken = ({ vaultId }) => {
         currentDeposit: "1.000.000 USDC",
         capacity: "7.000.000.000 USDC",
         bg: "bg-usdc-banner",
-        icon: USDC,
+        icon: USDC
       }
     ],
     []
