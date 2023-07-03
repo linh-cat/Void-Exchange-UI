@@ -29,7 +29,7 @@ const usePriceInforbarChart = () => {
         return () => clearInterval(interval);
     }, []); // Empty dependency array ensures the effect runs only once
     return {
-        data
+        data,
     }
 }
 

@@ -9,11 +9,13 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import usePriceInforbarChart from "src/hooks/usePriceInforbarChart"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { dollarFormatter, formatValue, percentateFormatter } from "src/lib/formatter"
+import usePriceMarket from "src/hooks/usePriceMarket"
 
-const InforBarChar = ({ price }) => {
+const InforBarChar = () => {
   const { pair, indexToken } = useExchangeContext()
   const { data } = usePriceInforbarChart()
   const indexPrice = useTokenPrice(indexToken)
+  const { price: marketPrice } = usePriceMarket()
 
   const dataForMapping = useMemo(() => {
     switch (pair) {
@@ -26,6 +28,8 @@ const InforBarChar = ({ price }) => {
     }
   }, [data, pair])
 
+  console.log({ dataForMapping })
+
   return (
     <div className="top-chart w-full flex flex-col gap-3 2xl:gap-0 lg:flex-row lg:items-center py-3">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
@@ -33,18 +37,18 @@ const InforBarChar = ({ price }) => {
           <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
-          <label className="text-xl green-up font-bold">{price}</label>
+          <label className="text-xl green-up font-bold">{marketPrice && marketPrice}</label>
         </div>
       </div>
       <div className="group-infor px-3 py-1 xl:py-0 xl:px-0 flex gap-3 2xl:gap-5 overflow-x-auto no-scrollbar">
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Mark</h3>
-          <div className="text-xs mt-auto">0</div>
+          <div className="text-xs mt-auto">{marketPrice && marketPrice}</div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Index</h3>
           <div className="text-xs mt-auto">
-            {indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}
+            {indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : ""}
           </div>
         </div>
         <div className="flex justify-center items-center">
@@ -54,9 +58,9 @@ const InforBarChar = ({ price }) => {
           <h3 className="text-xs text-slate-500">24h Change(%)</h3>
           <div className="text-xs mt-auto flex items-center gap-1 green-up">
             <span className={cx({ "red-down": Number(dataForMapping?.priceChangePercent) < 0 })}>
-              {percentateFormatter(dataForMapping?.priceChangePercent)}
+              {dataForMapping && percentateFormatter(dataForMapping?.priceChangePercent)}
             </span>
-            <img src={GreenUpIcon} className="w-3 h-3" alt="greenup" />
+            {dataForMapping && <img src={GreenUpIcon} className="w-3 h-3" alt="greenup" />}
           </div>
         </div>
         <div className="flex justify-center items-center">
@@ -73,7 +77,7 @@ const InforBarChar = ({ price }) => {
               "text-xs mt-auto "
             )}
           >
-            {dollarFormatter(dataForMapping?.priceChange)}
+            {dataForMapping && dollarFormatter(dataForMapping?.priceChange)}
           </div>
         </div>
         <div className="flex justify-center items-center">
@@ -81,14 +85,14 @@ const InforBarChar = ({ price }) => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h High</h3>
-          <div className="text-xs mt-auto">{dollarFormatter(dataForMapping?.priceHigh24h)}</div>
+          <div className="text-xs mt-auto">{dataForMapping && dollarFormatter(dataForMapping?.priceHigh24h)}</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Low</h3>
-          <div className="text-xs mt-auto">{dollarFormatter(dataForMapping?.priceLow24h)}</div>
+          <div className="text-xs mt-auto">{dataForMapping && dollarFormatter(dataForMapping?.priceLow24h)}</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="h-3/5 w-1px bg-slate-700"></div>
