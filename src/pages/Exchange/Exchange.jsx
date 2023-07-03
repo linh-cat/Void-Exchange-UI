@@ -1,32 +1,67 @@
-import React, { useState } from "react"
-
-import "./Exchange.css"
-import TabExchange from "../../components/TabExchange/TabExchange"
+import React, { useEffect, useState, useMemo } from "react"
+import useWebSocket, { ReadyState } from "react-use-websocket"
+import cx from "classnames"
+import { formatUnits } from "viem"
+import { LIST_SECTIONS, optionLabels } from "./constant"
+import TopInfo from "@components/TopInfo/TopInfo"
 import TradingViewChart from "./TradingViewChart"
 import InforBarChar from "./InforBarChar"
 import LatestTrade from "./LatestTrade"
 import Tab from "@components/Tab/Tab"
-import { LIST_SECTIONS, optionLabels } from "./constant"
 import { POSITIONS } from "./constant"
 import ListPosition from "./ListPosition"
-import cx from "classnames"
-import TopInfo from "@components/TopInfo/TopInfo"
+import TabExchange from "../../components/TabExchange/TabExchange"
+import "./Exchange.css"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
 
+  const { sendMessage, lastMessage, readyState } = useWebSocket("wss://api.void.exchange")
+
   const onChangeTabSection = (val) => {
     setTabSection(val)
-  }
-  const onChangeHistory = () => {
-    setShowHistory(!showHistory)
   }
 
   /**
    *
    * @param {[]Object} options
    */
+  const price = useMemo(() => {
+    if (lastMessage?.data) {
+      try {
+        const data = JSON.parse(lastMessage.data)
+        if (data.p) {
+          console.info("formatUnits(data.p, 18)", formatUnits(data.p, 18))
+          return formatUnits(data.p, 18).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })
+        }
+      } catch (err) {
+        console.error(err)
+      }
+
+      return "0"
+    }
+  }, [lastMessage])
+
+  useEffect(() => {
+    if (readyState === ReadyState.OPEN) {
+      sendMessage(JSON.stringify({ type: "subscribe", channels: ["BTC"] }))
+    }
+  }, [readyState, sendMessage])
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated"
+  }[readyState]
+
+  console.log("connectionStatus", connectionStatus)
+
   const renderListSections = () => {
     return (
       <div className={cx({ "p-3 section-list": true })}>
@@ -63,11 +98,11 @@ const Exchange = () => {
               })}
             >
               <div className="relative">
-                <InforBarChar />
-                {/* <div className="flex items-center absolute top-1/3 right-2">
-                  <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
-                  <label className="text-xs">Show History</label>
-                </div> */}
+                <InforBarChar price={price} />
+                {/* <div className="flex items-center absolute top-1/3 right-2"> */}
+                {/*   <input type="checkbox" checked={showHistory} onChange={onChangeHistory} /> */}
+                {/*   <label className="text-xs">Show History</label> */}
+                {/* </div> */}
               </div>
               <div className="flex-1">
                 <TradingViewChart />

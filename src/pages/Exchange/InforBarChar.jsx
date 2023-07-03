@@ -10,7 +10,7 @@ import usePriceInforbarChart from "src/hooks/usePriceInforbarChart"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { dollarFormatter, formatValue, percentateFormatter } from "src/lib/formatter"
 
-const InforBarChar = () => {
+const InforBarChar = ({ price }) => {
   const { pair, indexToken } = useExchangeContext()
   const { data } = usePriceInforbarChart()
   const indexPrice = useTokenPrice(indexToken)
@@ -33,7 +33,7 @@ const InforBarChar = () => {
           <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
-          <label className="text-xl green-up font-bold">0</label>
+          <label className="text-xl green-up font-bold">{price}</label>
         </div>
       </div>
       <div className="group-infor px-3 py-1 xl:py-0 xl:px-0 flex gap-3 2xl:gap-5 overflow-x-auto no-scrollbar">
