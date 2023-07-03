@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { dataApiUrl } from "src/lib/baseURLs"
 
-const usePriceInfobarChart = () => {
+const usePriceInfoBar = () => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const usePriceInfobarChart = () => {
   }
 }
 
-export default usePriceInfobarChart
+export default usePriceInfoBar
