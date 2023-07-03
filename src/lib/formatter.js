@@ -46,11 +46,12 @@ export const descaleValue = (value, decimals) => {
     return false
   }
 }
+
 /**
  *
  * @param {String} num
  * @param {number} decimals
  */
 export const decimalsFormatter = (num, decimals = 2) => {
-  return num === "0" ? 0 : !isInt(num) ? parseFloat(num).toFixed(decimals) : num
+  return num === "0" || isNaN(num) ? 0 : !isInt(num) ? parseFloat(num).toFixed(decimals) : num
 }
