@@ -3,13 +3,13 @@ import React, { useMemo } from "react"
 import cx from "classnames"
 
 import SelectCoupleToken from "@components/common/SelectCoupleToken"
-import { GreenUpIcon } from "@icons/index"
 import { Constants } from "@void-0x/void-sdk"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import usePriceInforbarChart from "src/hooks/usePriceInforbarChart"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { dollarFormatter, formatValue, percentateFormatter } from "src/lib/formatter"
 import usePriceMarket from "src/hooks/usePriceMarket"
+import { DownIconGreen, DownIconRed } from "@icons/index"
 
 const InforBarChar = () => {
   const { pair, indexToken } = useExchangeContext()
@@ -60,7 +60,12 @@ const InforBarChar = () => {
             <span className={cx({ "red-down": Number(dataForMapping?.priceChangePercent) < 0 })}>
               {dataForMapping && percentateFormatter(dataForMapping?.priceChangePercent)}
             </span>
-            {dataForMapping && <img src={GreenUpIcon} className="w-3 h-3" alt="greenup" />}
+            {dataForMapping && Number(dataForMapping?.priceChangePercent) > 0 && (
+              <img src={DownIconGreen} className="w-2 h-2 rotate-180" alt="up" />
+            )}
+            {dataForMapping && Number(dataForMapping?.priceChangePercent) < 0 && (
+              <img src={DownIconRed} className="w-2 h-2" alt="down" />
+            )}
           </div>
         </div>
         <div className="flex justify-center items-center">
