@@ -1,5 +1,3 @@
-const dataApiUrl = 'https://api.void.exchange/api/v1'
+const dataApiUrl = "https://api.void.exchange/api/v1"
 
-export {
-    dataApiUrl
-}
+export { dataApiUrl }

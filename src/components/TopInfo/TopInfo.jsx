@@ -20,6 +20,7 @@ const TopInfo = () => {
   useEffect(() => {
     fetchData()
   }, [])
+
   return (
     <div className="w-full top-info text-sm flex sm:justify-center items-center py-1 px-2 md:px-0 gap-5 overflow-x-auto no-scrollbar relative sm:overflow-visible">
       <div className="relative flex gap-2 cursor-pointer flex-col md:flex-row market">
@@ -37,10 +38,15 @@ const TopInfo = () => {
             <label className="text-slate-500">Next update</label>
             <div>In {decimalsFormatter(Number(data?.greedAndFear?.timeUntilUpdate) / 3600, 2)} Hours</div>
           </div>
-          <div className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author">
+          <a
+            className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author"
+            href="https://alternative.me/crypto/fear-and-greed-index/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <label>Data From</label>
             <div>{data?.greedAndFear?.name}</div>
-          </div>
+          </a>
         </div>
       </div>
       {/*  */}
@@ -71,12 +77,12 @@ const TopInfo = () => {
         <div className="text-slate-500 mt-auto">Ethereum</div>
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
-        <label className="whitespace-nowrap">BTC Dominance</label>
-        <div className="text-slate-500 mt-auto">{percentateFormatter(data?.marketMetric?.btcDominance)}</div>
+        <label className="whitespace-nowrap ">BTC Dominance</label>
+        <div className="text-slate-500 mt-auto link-color">{percentateFormatter(data?.marketMetric?.btcDominance)}</div>
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
         <label className="whitespace-nowrap">ETH Dominance</label>
-        <div className="text-slate-500 mt-auto">{percentateFormatter(data?.marketMetric?.ethDominance)}</div>
+        <div className="text-slate-500 mt-auto link-color">{percentateFormatter(data?.marketMetric?.ethDominance)}</div>
       </div>
     </div>
   )
