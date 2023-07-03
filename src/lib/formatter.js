@@ -18,8 +18,12 @@ export const percentateFormatter = (value) => {
  * @param {bigint} value
  * @param {number} decimals
  */
+
 export const formatValue = (value, decimals) => {
   return numberFormatter.format(descaleValue(value, decimals)).toString()
+}
+export const dollarFormatter = (value) => {
+  return numberFormatter.format(value)
 }
 
 /**
