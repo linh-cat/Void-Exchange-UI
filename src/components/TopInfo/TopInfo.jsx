@@ -38,10 +38,15 @@ const TopInfo = () => {
             <label className="text-slate-500">Next update</label>
             <div>In {decimalsFormatter(Number(data?.greedAndFear?.timeUntilUpdate) / 3600, 2)} Hours</div>
           </div>
-          <div className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author">
+          <a
+            className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author"
+            href="https://alternative.me/crypto/fear-and-greed-index/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <label>Data From</label>
             <div>{data?.greedAndFear?.name}</div>
-          </div>
+          </a>
         </div>
       </div>
       {/*  */}
