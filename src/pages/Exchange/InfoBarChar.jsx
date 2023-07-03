@@ -9,7 +9,7 @@ import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { dollarFormatter, formatValue, percentateFormatter } from "src/lib/formatter"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import usePriceInfobarChart from "src/hooks/usePriceInfobarChart"
-import useMarketPrice from "src/hooks/usePriceMarket"
+import useMarketPrice from "src/hooks/useMarketPrice"
 
 const InfoBarChar = () => {
   const { pair, indexToken } = useExchangeContext()
