@@ -10,7 +10,7 @@ const InforBarChar = ({ price }) => {
           <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
-          <label className="text-xl green-up font-bold">27,382.31</label>
+          <label className="text-xl green-up font-bold">{price}</label>
         </div>
       </div>
       <div className="group-infor px-3 py-1 xl:py-0 xl:px-0 flex gap-3 2xl:gap-5 overflow-x-auto no-scrollbar">

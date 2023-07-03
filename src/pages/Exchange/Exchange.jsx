@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useMemo } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import cx from "classnames"
@@ -17,16 +16,11 @@ import "./Exchange.css"
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
-  const [messageHistory, setMessageHistory] = useState([])
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8000")
+  const { sendMessage, lastMessage, readyState } = useWebSocket("wss://api.void.exchange")
 
   const onChangeTabSection = (val) => {
     setTabSection(val)
-  }
-
-  const onChangeHistory = () => {
-    setShowHistory(!showHistory)
   }
 
   /**
@@ -37,11 +31,11 @@ const Exchange = () => {
     if (lastMessage?.data) {
       try {
         const data = JSON.parse(lastMessage.data)
-        console.log("data", data)
         if (data.p) {
+          console.info("formatUnits(data.p, 18)", formatUnits(data.p, 18))
           return formatUnits(data.p, 18).toLocaleString("en-US", {
-            minimumFractionDigits: 3,
-            maximumFractionDigits: 3
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
           })
         }
       } catch (err) {
@@ -104,11 +98,11 @@ const Exchange = () => {
               })}
             >
               <div className="relative">
-                <InforBarChar />
-                {/* <div className="flex items-center absolute top-1/3 right-2">
-                  <input type="checkbox" checked={showHistory} onChange={onChangeHistory} />
-                  <label className="text-xs">Show History</label>
-                </div> */}
+                <InforBarChar price={price} />
+                {/* <div className="flex items-center absolute top-1/3 right-2"> */}
+                {/*   <input type="checkbox" checked={showHistory} onChange={onChangeHistory} /> */}
+                {/*   <label className="text-xs">Show History</label> */}
+                {/* </div> */}
               </div>
               <div className="flex-1">
                 <TradingViewChart />
