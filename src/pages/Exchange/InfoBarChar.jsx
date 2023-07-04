@@ -46,7 +46,7 @@ const InfoBarChar = () => {
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Index</h3>
           <div className="text-xs mt-auto">
-            {indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : ""}
+            {indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS, false) : ""}
           </div>
         </div>
         <div className="flex justify-center items-center">
