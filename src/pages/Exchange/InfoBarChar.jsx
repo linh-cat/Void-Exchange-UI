@@ -38,7 +38,7 @@ const InfoBarChar = () => {
           <label
             className={cx("text-xl font-bold", {
               "red-down": status === -1,
-              "green-up": status === 1 || status === 0
+              "green-up": status === 1
             })}
           >
             {marketPrice && marketPrice}

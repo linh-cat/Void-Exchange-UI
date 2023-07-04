@@ -14,17 +14,12 @@ const priceFormatter = new Intl.NumberFormat("en-US", {
 })
 
 const useMarketPrice = () => {
-  const [rawPrice, setRawPrice] = useState()
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [previousPrice, setPreviousPrice] = useState(0);
+  const [priceChange, setPriceChange] = useState(0);
+
   const { pair } = useExchangeContext()
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket("wss://api.void.exchange")
-
-
-  const previousPriceRef = useRef(0);
-
-  useEffect(() => {
-    // Update the previous price whenever the current price changes
-    previousPriceRef.current = rawPrice;
-  }, [rawPrice]);
 
   useEffect(() => {
     const option = pair === "" ? "BTC" : marketPriceToken[pair]
@@ -38,13 +33,14 @@ const useMarketPrice = () => {
     }
   }, [getWebSocket, pair, readyState, sendMessage])
 
-  const price = useMemo(() => {
+  useEffect(() => {
     if (lastMessage) {
       try {
         const data = JSON.parse(lastMessage?.data)
-        if (data.p) {
-          setRawPrice(formatUnits(data.p, 18))
-          return priceFormatter.format(formatUnits(data.p, 18).toLocaleString())
+        if (Number(formatUnits(data.p, 18)) !== Number(currentPrice)) {
+          setPriceChange(formatUnits(data.p, 18) - Number(currentPrice));
+          setPreviousPrice(Number(currentPrice));
+          setCurrentPrice(formatUnits(data.p, 18));
         }
       } catch (err) {
         console.error(err)
@@ -52,14 +48,13 @@ const useMarketPrice = () => {
 
       return undefined
     }
-  }, [lastMessage])
+  }, [currentPrice, lastMessage, priceChange])
 
+  const status = useMemo(() => {
+    return priceChange < 0 ? -1 : 1
+  }, [priceChange])
 
-  const previousPrice = previousPriceRef.current;
-  const priceChange = Number(rawPrice) - Number(previousPrice);
-  const priceStatus = priceChange > 0 ? 1 : priceChange < 0 ? -1 : 0;
-
-  return { price, status: priceStatus }
+  return { price: priceFormatter.format(currentPrice.toLocaleString()), status }
 }
 
 export default useMarketPrice
