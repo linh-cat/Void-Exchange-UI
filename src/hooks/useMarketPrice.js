@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
@@ -14,9 +14,17 @@ const priceFormatter = new Intl.NumberFormat("en-US", {
 })
 
 const useMarketPrice = () => {
+  const [rawPrice, setRawPrice] = useState()
   const { pair } = useExchangeContext()
-
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket("wss://api.void.exchange")
+
+
+  const previousPriceRef = useRef(0);
+
+  useEffect(() => {
+    // Update the previous price whenever the current price changes
+    previousPriceRef.current = rawPrice;
+  }, [rawPrice]);
 
   useEffect(() => {
     const option = pair === "" ? "BTC" : marketPriceToken[pair]
@@ -31,10 +39,11 @@ const useMarketPrice = () => {
   }, [getWebSocket, pair, readyState, sendMessage])
 
   const price = useMemo(() => {
-    if (lastMessage?.data) {
+    if (lastMessage) {
       try {
-        const data = JSON.parse(lastMessage.data)
+        const data = JSON.parse(lastMessage?.data)
         if (data.p) {
+          setRawPrice(formatUnits(data.p, 18))
           return priceFormatter.format(formatUnits(data.p, 18).toLocaleString())
         }
       } catch (err) {
@@ -44,7 +53,13 @@ const useMarketPrice = () => {
       return undefined
     }
   }, [lastMessage])
-  return { price }
+
+
+  const previousPrice = previousPriceRef.current;
+  const priceChange = Number(rawPrice) - Number(previousPrice);
+  const priceStatus = priceChange > 0 ? 1 : priceChange < 0 ? -1 : 0;
+
+  return { price, status: priceStatus }
 }
 
 export default useMarketPrice

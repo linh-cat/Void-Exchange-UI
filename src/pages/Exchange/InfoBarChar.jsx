@@ -15,7 +15,7 @@ const InfoBarChar = () => {
   const { pair, indexToken } = useExchangeContext()
   const { data } = usePriceInfoBar()
   const indexPrice = useTokenPrice(indexToken)
-  const { price: marketPrice } = useMarketPrice()
+  const { price: marketPrice, status } = useMarketPrice()
 
   const dataForMapping = useMemo(() => {
     switch (pair) {
@@ -35,13 +35,20 @@ const InfoBarChar = () => {
           <SelectCoupleToken />
         </div>
         <div className="top-chart-price">
-          <label className="text-xl green-up font-bold">{marketPrice && marketPrice}</label>
+          <label
+            className={cx("text-xl font-bold", {
+              "red-down": status === -1,
+              "green-up": status === 1
+            })}
+          >
+            {marketPrice && marketPrice}
+          </label>
         </div>
       </div>
       <div className="group-infor px-3 py-1 xl:py-0 xl:px-0 flex gap-3 2xl:gap-5 overflow-x-auto no-scrollbar">
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Mark</h3>
-          <div className="text-xs mt-auto">{marketPrice && marketPrice}</div>
+          <div className={cx("text-xs mt-auto")}>{marketPrice && marketPrice}</div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Index</h3>
