@@ -116,7 +116,7 @@ const ListPosition = () => {
     })
     return formatteds
   }, [positions, prices, chain])
-  console.log({ formattedPositions })
+
   const handleConfirmOrder = (cell) => {
     setSizeAmmount(cell?.raw?.size)
     setConfimInfo(cell)
