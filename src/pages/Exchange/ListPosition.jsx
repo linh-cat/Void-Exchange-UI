@@ -8,7 +8,7 @@ import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
-import { formatValue, descaleValue, percentateFormatter } from "src/lib/formatter"
+import { formatValue, descaleValue, formatPercentage } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
@@ -476,7 +476,7 @@ const ListPosition = () => {
         return (
           <div className="flex flex-col gap-1">
             <h3 className={cx(cell.isProfitable ? "green-up" : "red-down")}>{cell?.pnlRoe}</h3>
-            <div className="text-slate-500 font-medium">{percentateFormatter(percentPNL) || 0}</div>
+            <div className="text-slate-500 font-medium">{formatPercentage(percentPNL) || 0}</div>
           </div>
         )
       }

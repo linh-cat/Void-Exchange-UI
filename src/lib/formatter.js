@@ -7,7 +7,7 @@ export const numberFormatter = new Intl.NumberFormat("en-US", {
   roundingIncrement: 5
 })
 
-export const percentateFormatter = (value) => {
+export const formatPercentage = (value) => {
   if (!value) return "0"
   return `${parseFloat(value).toFixed(2)} %`
 }

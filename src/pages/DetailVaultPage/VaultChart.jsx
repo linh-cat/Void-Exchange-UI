@@ -1,12 +1,71 @@
 import BarChart from "@components/BarChart/BarChart"
 import Card from "@components/Card/Card"
+import TableCustom from "@components/Table/TableCustom"
 import React from "react"
 
-const SectionVaultStats = () => {
+const columnDef = [
+  {
+    field: "address",
+    headerName: "Address",
+    headerClassName: "text-sm"
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+    headerClassName: "text-sm"
+  },
+  {
+    field: "value",
+    headerName: "Value",
+    headerClassName: "text-sm"
+  },
+  {
+    field: "time",
+    headerName: "Time",
+    headerClassName: "text-sm"
+  },
+  {
+    field: "expanlink",
+    headerName: "Expand Link",
+    headerClassName: "text-sm",
+    cellRenderer: () => {
+      return (
+        <a href="#" target="_blank" className="link-color">
+          Etherscan
+        </a>
+      )
+    }
+  },
+  {
+    headerName: "Active",
+    headerClassName: "text-sm",
+    cellRenderer: () => {
+      return (
+        <div className="flex items-center justify-center gap-1">
+          <div className="link-color cursor-pointer">Deposit</div>
+          <div className="bg-slate-500 w-1 h-full"></div>
+          <div className="link-color cursor-pointer">Withdraw</div>
+        </div>
+      )
+    }
+  }
+]
+
+const data = [
+  {
+    address: "0x42...D78aD",
+    amount: "0.1ETH",
+    value: "$2000",
+    time: "1 hour ago",
+    expanlink: "Etherscan"
+  }
+]
+
+const VaultChart = () => {
   return (
     <div className="container mx-auto max-w-7xl mt-10 px-3 xl:px-0">
-      <div className="card-deposit-vault grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-        <Card className="xl:col-span-2 relative p-3">
+      <div className="card-deposit-vault grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Card className="xl:col-span-1 relative p-3">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <Card className="liquidity p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Liquidity</label>
@@ -44,10 +103,13 @@ const SectionVaultStats = () => {
             </div>
           </div>
         </Card>
-        <div className="gr-info border p-5 gap-5 rounded"></div>
+        <div className="gr-info border p-5 gap-5 rounded">
+          <h3>Vault Activities</h3>
+          <TableCustom columnDef={columnDef} data={data} cellStyle="text-sm py-1" />
+        </div>
       </div>
     </div>
   )
 }
 
-export default SectionVaultStats
+export default VaultChart

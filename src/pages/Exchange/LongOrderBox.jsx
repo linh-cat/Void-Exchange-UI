@@ -151,7 +151,7 @@ const LongOrderBox = () => {
     if (+allowance >= +payAmount) {
       return (
         <Button
-          className="w-full bg-green py-2"
+          className="w-full bg-green py-2 cursor-pointer"
           text="Long"
           onClick={handleConfirmOrder}
           isDefault={false}

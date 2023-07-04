@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./TopInfo.css"
 import { DownIcon } from "@img/icons/index"
-import { decimalsFormatter, percentateFormatter } from "src/lib/formatter"
+import { decimalsFormatter, formatPercentage } from "src/lib/formatter"
 import { dataApiUrl } from "src/lib/baseURLs"
 
 const TopInfo = () => {
@@ -72,11 +72,11 @@ const TopInfo = () => {
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
         <label className="whitespace-nowrap">BTC Dominance</label>
-        <div className="text-slate-500 mt-auto">{percentateFormatter(data?.marketMetric?.btcDominance)}</div>
+        <div className="text-slate-500 mt-auto">{formatPercentage(data?.marketMetric?.btcDominance)}</div>
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
         <label className="whitespace-nowrap">ETH Dominance</label>
-        <div className="text-slate-500 mt-auto">{percentateFormatter(data?.marketMetric?.ethDominance)}</div>
+        <div className="text-slate-500 mt-auto">{formatPercentage(data?.marketMetric?.ethDominance)}</div>
       </div>
     </div>
   )

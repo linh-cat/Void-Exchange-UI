@@ -123,7 +123,7 @@ const ShortOrderBox = () => {
     if (+allowance >= +payAmount) {
       return (
         <Button
-          className="w-full bg-red py-2"
+          className="w-full bg-red py-2 cursor-pointer"
           text="Short"
           onClick={handleConfirmOrder}
           disabled={payAmount === "" || payAmount === 0 || isPlacingOrder}

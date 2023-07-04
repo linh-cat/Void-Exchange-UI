@@ -50,7 +50,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
         shadow: isShadow
       })}
     >
-      <div className="w-full overflow-x-auto">
+      <div className="w-full overflow-x-auto no-scrollbar">
         <table className="w-full">
           <thead>
             <tr className="tracking-wide border-b text-slate-500">

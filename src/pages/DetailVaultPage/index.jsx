@@ -1,14 +1,16 @@
 import React, { useMemo } from "react"
-import "./index.css"
-import Banner from "./Banner"
-import SectionVaultStats from "./SectionVaultStats"
+
+import { useNetwork } from "wagmi"
+import { Constants } from "@void-0x/void-sdk"
 import { useParams } from "react-router-dom"
 
-import { Constants } from "@void-0x/void-sdk"
-import { useNetwork } from "wagmi"
+import Banner from "./Banner"
 import VaultDeposit from "./VaultDeposit"
 import useVaultInfoToken from "src/hooks/useVaultInfoToken"
 import VaultStrategy from "./VaultStrategy"
+import VaultChart from "./VaultChart"
+
+import "./index.css"
 
 const Index = () => {
   let { id: vaultId } = useParams()
@@ -50,7 +52,7 @@ const Index = () => {
       />
       <VaultStrategy />
       <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />
-      <SectionVaultStats />
+      <VaultChart />
     </div>
   )
 }
