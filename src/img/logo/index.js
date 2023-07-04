@@ -16,6 +16,7 @@ import Twitter from "./twitter.png"
 import Github from "./github-mark.svg"
 import Zapper from "./zapper.svg"
 import Debank from "./DeBank.svg"
+import EtherscanLight from "./etherscan-circle-light.png"
 
 export {
   Rewards,
@@ -35,5 +36,6 @@ export {
   Twitter,
   Github,
   Zapper,
-  Debank
+  Debank,
+  EtherscanLight
 }

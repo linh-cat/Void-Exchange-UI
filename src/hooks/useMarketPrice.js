@@ -14,9 +14,9 @@ const priceFormatter = new Intl.NumberFormat("en-US", {
 })
 
 const useMarketPrice = () => {
-  const [currentPrice, setCurrentPrice] = useState(0);
-  const [previousPrice, setPreviousPrice] = useState(0);
-  const [priceChange, setPriceChange] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState(0)
+  const [previousPrice, setPreviousPrice] = useState(0)
+  const [priceChange, setPriceChange] = useState(0)
 
   const { pair } = useExchangeContext()
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket("wss://api.void.exchange")
@@ -38,9 +38,9 @@ const useMarketPrice = () => {
       try {
         const data = JSON.parse(lastMessage?.data)
         if (Number(formatUnits(data.p, 18)) !== Number(currentPrice)) {
-          setPriceChange(Number(formatUnits(data.p, 18)) - Number(currentPrice));
-          setPreviousPrice(Number(currentPrice));
-          setCurrentPrice(formatUnits(data.p, 18));
+          setPriceChange(Number(formatUnits(data.p, 18)) - Number(currentPrice))
+          setPreviousPrice(Number(currentPrice))
+          setCurrentPrice(formatUnits(data.p, 18))
         }
       } catch (err) {
         console.error(err)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./TopInfo.css"
 import { DownIcon } from "@img/icons/index"
-import { decimalsFormatter, formatPercentage } from "src/lib/formatter"
+import { formatDecimals, formatPercentage } from "src/lib/formatter"
 import { dataApiUrl } from "src/lib/baseURLs"
 
 const TopInfo = () => {
@@ -36,7 +36,7 @@ const TopInfo = () => {
           </div>
           <div className="flex justify-between">
             <label className="text-slate-500">Next update</label>
-            <div>In {decimalsFormatter(Number(data?.greedAndFear?.timeUntilUpdate) / 3600, 2)} Hours</div>
+            <div>In {formatDecimals(Number(data?.greedAndFear?.timeUntilUpdate) / 3600, 2)} Hours</div>
           </div>
           <a
             className="flex justify-between bg-green-400 mt-3 rounded-sm p-1 author"

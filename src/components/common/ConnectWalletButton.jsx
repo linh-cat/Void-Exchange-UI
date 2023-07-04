@@ -13,7 +13,7 @@ import { Arbitrum, Base, EthereumChain, Metamask } from "@img/logo"
 import { CheckIcon } from "@heroicons/react/24/solid"
 import Spinner from "@components/Spinner/Spinner"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
-import { decimalsFormatter } from "src/lib/formatter"
+import { formatDecimals } from "src/lib/formatter"
 
 const truncate = (string, limit) => {
   if (string.length <= limit) {
@@ -193,7 +193,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                 <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
                   <div className="flex items-center gap-3">
                     <div>
-                      {decimalsFormatter(balance?.formatted, 2)} {balance?.symbol}
+                      {formatDecimals(balance?.formatted, 2)} {balance?.symbol}
                     </div>
                     <Button
                       text={<div>{truncate(address, 5)}</div>}

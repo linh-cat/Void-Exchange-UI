@@ -2,6 +2,7 @@ import BarChart from "@components/BarChart/BarChart"
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import TableCustom from "@components/Table/TableCustom"
+import { EtherscanLight } from "@img/logo"
 import React from "react"
 
 const columnDef = [
@@ -26,29 +27,26 @@ const columnDef = [
     headerClassName: "text-sm"
   },
   {
-    field: "expanlink",
-    headerName: "Expand Link",
-    headerClassName: "text-sm",
-    cellRenderer: () => {
-      return (
-        <a href="/cac" target="_blank" className="link-color dotted-underline">
-          Etherscan
-        </a>
-      )
-    }
-  },
-  {
     headerName: "Action",
     headerClassName: "text-sm",
     cellRenderer: () => {
       return (
         <div className="flex items-center justify-center gap-1">
-          <Button text="Deposit" isDefault={false} className="cursor-pointer border px-2 py-1 usdc-border link-color" />
-          <Button
-            text="Withdraw"
-            isDefault={false}
-            className=" cursor-pointer border px-2 py-1 usdc-border link-color"
-          />
+          <div className="cursor-pointer link-color dotted-underline">Deposit</div>
+          <div className="link-color">|</div>
+          <div className="cursor-pointer link-color dotted-underline">Withdraw</div>
+        </div>
+      )
+    }
+  },
+  {
+    field: "expanlink",
+    headerName: "Expand Link",
+    headerClassName: "text-sm",
+    cellRenderer: () => {
+      return (
+        <div className="flex justify-center cursor-pointer">
+          <img src={EtherscanLight} className="w-6 h-6" alt="etherscan" />
         </div>
       )
     }
@@ -60,8 +58,7 @@ const data = [
     address: "0x42...D78aD",
     amount: "0.1ETH",
     value: "$2000",
-    time: "1 hour ago",
-    expanlink: "Etherscan"
+    time: "1 hour ago"
   }
 ]
 

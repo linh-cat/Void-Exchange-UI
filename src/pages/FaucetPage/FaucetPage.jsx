@@ -19,6 +19,7 @@ import Footer from "@components/Footer/Footer"
 import { BTC, ETH, USDC } from "@img/token"
 import { Metamask, Void } from "@img/logo"
 import { MorphoBG } from "@img/bg"
+import { formatDecimals } from "src/lib/formatter"
 
 const tokens = [
   {
@@ -143,7 +144,7 @@ const FaucetPage = () => {
     {
       headerName: "Wallet Balance",
       cellRenderer: (token) => {
-        return formatUnits(balances[token.symbol], token.decimals)
+        return formatDecimals(formatUnits(balances[token.symbol], token.decimals), 4)
       },
       className: "text-xs lg:text-sm",
       headerClassName: "text-sm py-3"
