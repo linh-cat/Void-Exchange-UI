@@ -24,7 +24,7 @@ export const formatValue = (value, decimals, withDollarSign = true) => {
   return numberFormatter
     .format(descaleValue(value, decimals))
     .toString()
-    .replace("$", withDollarSign ? "$ " : "")
+    .replace("$", withDollarSign ? "$" : "")
 }
 
 export const dollarFormatter = (value) => {
