@@ -270,19 +270,21 @@ body {
 }
 
 .usdc-linear {
-    background-image: linear-gradient(120deg, #53596d, #2775CA) !important;
+    background-image: linear-gradient(120deg, #53596d, #2775ca) !important;
 }
 
 .text-title-section {
     display: inline-flex;
-    background-image: linear-gradient(150deg,
-            #323943,
-            #4f7d89 15%,
-            #2193a7 25%,
-            #189fd9,
-            #1e84df 50%,
-            #232374 85%,
-            #181c27 100%);
+    background-image: linear-gradient(
+        150deg,
+        #323943,
+        #4f7d89 15%,
+        #2193a7 25%,
+        #189fd9,
+        #1e84df 50%,
+        #232374 85%,
+        #181c27 100%
+    );
     font-weight: 500;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -302,11 +304,11 @@ body {
 }
 
 .usdc-color {
-    color: #2775CA !important;
+    color: #2775ca !important;
 }
 
 .usdc-border {
-    border-color: #2775CA !important;
+    border-color: #2775ca !important;
 }
 
 .border-binance {

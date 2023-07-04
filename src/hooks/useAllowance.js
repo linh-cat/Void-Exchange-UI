@@ -22,7 +22,7 @@ const useAllowance = ({ token, tokenDecimals, account, spender }) => {
   })
 
   const { isLoading: isWaitTransaction } = useWaitForTransaction({
-    hash: data?.hash,
+    hash: data?.hash
   })
   const isApproving = useMemo(() => {
     return isLoadingWrite || isWaitTransaction

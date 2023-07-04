@@ -17,9 +17,18 @@ export const formatPercentage = (value) => {
  *
  * @param {bigint} value
  * @param {number} decimals
+ * @param {bool} withDollarSign
  */
-export const formatValue = (value, decimals) => {
-  return numberFormatter.format(descaleValue(value, decimals)).toString()
+
+export const formatValue = (value, decimals, withDollarSign = true) => {
+  return numberFormatter
+    .format(descaleValue(value, decimals))
+    .toString()
+    .replace("$", withDollarSign ? "$ " : "")
+}
+
+export const dollarFormatter = (value) => {
+  return numberFormatter.format(value)
 }
 
 /**
