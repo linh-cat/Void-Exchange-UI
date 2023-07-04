@@ -108,7 +108,7 @@ const VaultChart = () => {
           </div>
         </Card>
         <div className="gr-info border p-5 gap-5 rounded">
-          <h2 className="text-title-section text-lg">Vault Activities</h2>
+          <h2 className="text-lg">Vault Activities</h2>
           <TableCustom columnDef={columnDef} data={data} cellStyle="text-sm py-2" />
         </div>
       </div>

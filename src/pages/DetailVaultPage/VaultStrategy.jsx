@@ -14,7 +14,7 @@ const VaultStrategy = () => {
         header={
           <div className="flex flex-col sm:flex-row items-center justify-between p-3">
             <div className="">
-              <h2 className="text-title-section text-lg">Description</h2>
+              <h2 className="text-lg">Description</h2>
             </div>
             <div className="flex items-center gap-3">
               <Button
@@ -45,7 +45,7 @@ const VaultStrategy = () => {
       <Card
         header={
           <div className="py-4 px-3 flex justify-between items-center">
-            <h3 className="text-title-section text-lg">Reward Distribution</h3>
+            <h3 className="text-lg">Reward Distribution</h3>
             <Button
               text="Earn SD"
               icon={<img src={Void} className="w-5 h-5" alt="token" />}
