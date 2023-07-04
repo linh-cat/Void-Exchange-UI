@@ -202,7 +202,7 @@ const ShortOrderBox = () => {
         isLoading={isPlacingOrder}
         disabled={isPlacingOrder}
         isDefault={false}
-        className="bg-red py-2"
+        className="bg-red py-2 cursor-pointer"
       />
     )
   }, [isPlacingOrder, onPlaceOrder])
@@ -284,7 +284,7 @@ const ShortOrderBox = () => {
         <div className="flex flex-col gap-3">
           <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Position</label>
-            <div className="">{positionSize}x</div>
+            <div className="">{positionSize}</div>
           </div>
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>

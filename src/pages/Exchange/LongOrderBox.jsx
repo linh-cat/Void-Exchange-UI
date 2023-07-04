@@ -223,7 +223,16 @@ const LongOrderBox = () => {
   }, [tokenOptions, indexPrice, payAmount, leverage, positionSize, selectedToken])
 
   const footerConfirmOrder = useMemo(() => {
-    return <Button text="Place Order" onClick={onPlaceOrder} isLoading={isPlacingOrder} disabled={isPlacingOrder} />
+    return (
+      <Button
+        text="Place Order"
+        onClick={onPlaceOrder}
+        isLoading={isPlacingOrder}
+        isDefault={false}
+        disabled={isPlacingOrder}
+        className="cursor-pointer bg-green py-2"
+      />
+    )
   }, [isPlacingOrder, onPlaceOrder])
 
   return (
