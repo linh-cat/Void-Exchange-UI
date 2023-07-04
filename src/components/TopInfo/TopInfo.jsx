@@ -78,11 +78,11 @@ const TopInfo = () => {
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
         <label className="whitespace-nowrap">BTC Dominance</label>
-        <div className="usdc-color mt-auto">{formatPercentage(data?.marketMetric?.btcDominance)}</div>
+        <div className="dominance-color mt-auto">{formatPercentage(data?.marketMetric?.btcDominance)}</div>
       </div>
       <div className="flex gap-2 flex-col md:flex-row">
         <label className="whitespace-nowrap">ETH Dominance</label>
-        <div className="usdc-color mt-auto">{formatPercentage(data?.marketMetric?.ethDominance)}</div>
+        <div className="dominance-color mt-auto">{formatPercentage(data?.marketMetric?.ethDominance)}</div>
       </div>
     </div>
   )
