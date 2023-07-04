@@ -275,17 +275,15 @@ body {
 
 .text-title-section {
     display: inline-flex;
-    background-image: linear-gradient(
-        150deg,
-        #323943,
-        #4f7d89 15%,
-        #2193a7 25%,
-        #189fd9,
-        #1e84df 50%,
-        #232374 85%,
-        #181c27 100%
-    );
-    font-weight: 500;
+    background-image: linear-gradient(150deg,
+            #323943,
+            #4f7d89 15%,
+            #2193a7 25%,
+            #189fd9,
+            #1e84df 50%,
+            #232374 85%,
+            #181c27 100%);
+    font-weight: 600;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;

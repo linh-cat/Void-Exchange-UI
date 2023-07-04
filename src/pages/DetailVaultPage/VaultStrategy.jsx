@@ -8,13 +8,13 @@ import cx from "classnames"
 
 const VaultStrategy = () => {
   return (
-    <div className="container mx-auto max-w-7xl mt-10 px-3 xl:px-0 grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <div className="container mx-auto max-w-7xl mt-10 px-3 xl:px-0 grid grid-cols-1 lg:grid-cols-3 gap-y-5 lg:gap-5 lg:gap-y-0">
       <Card
-        className="shadow"
+        className="shadow col-span-2"
         header={
           <div className="flex flex-col sm:flex-row items-center justify-between p-3">
             <div className="">
-              <h2 className="text-title-section">Description</h2>
+              <h2 className="text-title-section text-lg">Description</h2>
             </div>
             <div className="flex items-center gap-3">
               <Button
@@ -45,7 +45,7 @@ const VaultStrategy = () => {
       <Card
         header={
           <div className="py-4 px-3 flex justify-between items-center">
-            <h3 className="text-title-section">Reward Distribution</h3>
+            <h3 className="text-title-section text-lg">Reward Distribution</h3>
             <Button
               text="Earn SD"
               icon={<img src={Void} className="w-5 h-5" alt="token" />}

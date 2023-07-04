@@ -1,4 +1,5 @@
 import BarChart from "@components/BarChart/BarChart"
+import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import TableCustom from "@components/Table/TableCustom"
 import React from "react"
@@ -30,21 +31,24 @@ const columnDef = [
     headerClassName: "text-sm",
     cellRenderer: () => {
       return (
-        <a href="#" target="_blank" className="link-color">
+        <a href="/cac" target="_blank" className="link-color dotted-underline">
           Etherscan
         </a>
       )
     }
   },
   {
-    headerName: "Active",
+    headerName: "Action",
     headerClassName: "text-sm",
     cellRenderer: () => {
       return (
         <div className="flex items-center justify-center gap-1">
-          <div className="link-color cursor-pointer">Deposit</div>
-          <div className="bg-slate-500 w-1 h-full"></div>
-          <div className="link-color cursor-pointer">Withdraw</div>
+          <Button text="Deposit" isDefault={false} className="cursor-pointer border px-2 py-1 usdc-border link-color" />
+          <Button
+            text="Withdraw"
+            isDefault={false}
+            className=" cursor-pointer border px-2 py-1 usdc-border link-color"
+          />
         </div>
       )
     }
@@ -104,8 +108,8 @@ const VaultChart = () => {
           </div>
         </Card>
         <div className="gr-info border p-5 gap-5 rounded">
-          <h3>Vault Activities</h3>
-          <TableCustom columnDef={columnDef} data={data} cellStyle="text-sm py-1" />
+          <h2 className="text-title-section text-lg">Vault Activities</h2>
+          <TableCustom columnDef={columnDef} data={data} cellStyle="text-sm py-2" />
         </div>
       </div>
     </div>
