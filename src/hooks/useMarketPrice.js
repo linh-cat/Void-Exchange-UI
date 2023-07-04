@@ -8,6 +8,10 @@ const marketPriceToken = {
   "BTC/USD": "BTC",
   "ETH/USD": "ETH"
 }
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})
 
 const useMarketPrice = () => {
   const { pair } = useExchangeContext()
@@ -31,7 +35,7 @@ const useMarketPrice = () => {
       try {
         const data = JSON.parse(lastMessage.data)
         if (data.p) {
-          return formatUnits(data.p, 18).toLocaleString()
+          return priceFormatter.format(formatUnits(data.p, 18).toLocaleString())
         }
       } catch (err) {
         console.error(err)
