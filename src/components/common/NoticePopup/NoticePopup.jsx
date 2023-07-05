@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import cx from "classnames"
 
 import LoadingLine from "../LoadingLine/LoadingLine"
 
 import "./NoticePopup.css"
 
-const NoticePopup = ({ body, duration, onClose, position = "center" }) => {
-  const [showPopup, setShowPopup] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowPopup(false)
-      onClose()
-    }, duration)
-
-    return () => clearTimeout(timer)
-  }, [onClose, duration])
-
-  if (!showPopup) {
-    return null // Do not render the popup if showPopup is false
-  }
-
+const NoticePopup = ({ body, position = "center" }) => {
+  const [percent, setPercent] = useState(0)
   return (
     <div
       className={cx(
@@ -33,8 +19,14 @@ const NoticePopup = ({ body, duration, onClose, position = "center" }) => {
         }
       )}
     >
+      <div className="absolute right-2 top-3">
+        <div className={cx({ "text-pending": percent <= 100, "green-up": percent >= 100 })}>
+          {percent <= 100 ? "Pending" : "Executing"} ({percent <= 100 ? percent : "100"}%)
+        </div>
+      </div>
+
       {body}
-      <LoadingLine />
+      <LoadingLine loadingWidth={percent} setLoadingWidth={setPercent} />
     </div>
   )
 }

@@ -11,7 +11,7 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { Constants } from "@void-0x/void-sdk"
 
-import { CAKE, USDC } from "@img/token"
+import { CAKE, ETH, USDC } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -20,6 +20,8 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
+import NoticePopup from "@components/common/NoticePopup/NoticePopup"
+import Badge from "@components/common/Badge"
 
 const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
@@ -28,7 +30,8 @@ const ShortOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopup } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
+    useExchangeContext()
   const [selectedToken, setSelectedToken] = useState()
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
 
@@ -208,6 +211,36 @@ const ShortOrderBox = () => {
     )
   }, [isPlacingOrder, onPlaceOrder])
 
+  const bodyPlaceOrderPopup = useMemo(() => {
+    const info = tokenOptions.find((i) => i.value === indexToken)
+    return (
+      <>
+        <div className="flex justify-between">
+          <div className="flex items-center gap-2">
+            <img src={info?.icon} alt="token" className="w-6 h-6" />
+
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-bold">Place Order</div>
+              <Badge text="Short" type="short" />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Type</div>
+          <div className="text-slate-500">Market</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Price</div>
+          <div>{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Leverage</div>
+          <div>{leverage}x</div>
+        </div>
+      </>
+    )
+  }, [indexPrice, indexToken, leverage, tokenOptions])
+
   return (
     <>
       <PlaceOrderModal
@@ -219,7 +252,8 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      {shouldShowPopup && (
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="center" />}
+      {shouldShowPopupExecute && (
         <TransactionPopup
           body={
             <div className="p-3">

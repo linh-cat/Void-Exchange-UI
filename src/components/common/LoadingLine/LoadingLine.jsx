@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
+import cx from "classnames"
 import "./LoadingLine.css"
 
-const LoadingLine = () => {
-  const [loadingWidth, setLoadingWidth] = useState(0)
-
+const LoadingLine = ({ loadingWidth, setLoadingWidth }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoadingWidth((prevWidth) => prevWidth + 10)
+      setLoadingWidth((prevWidth) => prevWidth + 3)
     }, 250)
 
-    if (loadingWidth === 100) {
+    if (loadingWidth > 100) {
       clearTimeout(timer)
     }
 
     return () => clearTimeout(timer)
-  }, [loadingWidth])
+  }, [loadingWidth, setLoadingWidth])
 
   return (
     <div>
       <div
         style={{
           width: `${loadingWidth}%`,
-          transition: "width 0.5s ease"
+          transition: "all 0.5s ease-in-out"
         }}
-        className="bg-green rounded h-1"
+        className={cx("rounded h-1", { "bg-green": loadingWidth >= 100, "bg-yellow": loadingWidth < 100 })}
       />
     </div>
   )

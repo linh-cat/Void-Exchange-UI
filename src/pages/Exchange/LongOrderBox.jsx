@@ -29,9 +29,7 @@ const LongOrderBox = () => {
   const [isToggled, setIsToggled] = useState(false)
   const [collateralModal, setCollateralModal] = useState(false)
   const [selectedToken, setSelectedToken] = useState()
-  const [isNoticed, setIsNoticed] = useState(false)
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
-  // const [shouldShowPopup, setShouldShowPopup] = useState(false)
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -40,17 +38,8 @@ const LongOrderBox = () => {
 
   const { chain } = useNetwork()
   const { address } = useAccount()
-  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopup } = useExchangeContext()
-
-  // console.log({ shouldShowPopup, isPlacingOrder })
-
-  // useEffect(() => {
-  //   if (showPopup) {
-  //     setShouldShowPopup(showPopup)
-  //   } else {
-  //     setShouldShowPopup(!showPopup)
-  //   }
-  // }, [showPopup])
+  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
+    useExchangeContext()
 
   const tokenOptions = useMemo(() => {
     return [
@@ -58,9 +47,7 @@ const LongOrderBox = () => {
       { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
     ]
   }, [chain])
-  // const closePopup = () => {
-  //   setShouldShowPopup(false)
-  // }
+
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
@@ -85,10 +72,6 @@ const LongOrderBox = () => {
 
   const onChangeToggle = () => {
     setIsToggled(!isToggled)
-  }
-
-  const closeNoticePopup = () => {
-    setIsNoticed(false)
   }
 
   const changeOrderType = (order) => {
@@ -243,42 +226,40 @@ const LongOrderBox = () => {
     )
   }, [isPlacingOrder, onPlaceOrder])
 
+  const bodyPlaceOrderPopup = useMemo(() => {
+    const info = tokenOptions.find((i) => i.value === indexToken)
+    return (
+      <>
+        <div className="flex justify-between">
+          <div className="flex items-center gap-2">
+            <img src={info?.icon} alt="token" className="w-6 h-6" />
+
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-bold">Place Order</div>
+              <Badge text="Long" type="long" />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Type</div>
+          <div className="text-slate-500">Market</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Price</div>
+          <div>{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Leverage</div>
+          <div>{leverage}x</div>
+        </div>
+      </>
+    )
+  }, [indexPrice, indexToken, leverage, tokenOptions])
+
   return (
     <>
-      {isNoticed && (
-        <NoticePopup
-          body={
-            <>
-              <div className="flex justify-between">
-                <div className="flex items-center gap-2">
-                  <img src={ETH} alt="token" className="w-6 h-6" />
-
-                  <div className="flex items-center gap-2">
-                    <div className="text-sm font-bold">Close Position</div>
-                    <Badge text="Long" type="long" />
-                  </div>
-                </div>
-                <div>
-                  <div className="green-up">Filled</div>
-                  <div className="text-pending">Pending</div>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <div className="text-slate-500">Price</div>
-                <div>Market Order</div>
-              </div>
-              <div className="flex justify-between">
-                <div className="text-slate-500">Size</div>
-                <div>0.0261 ETH ($43.34)</div>
-              </div>
-            </>
-          }
-          onClose={closeNoticePopup}
-          duration={4000}
-          position="center"
-        />
-      )}
-      {shouldShowPopup && (
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="center" />}
+      {shouldShowPopupExecute && (
         <TransactionPopup
           body={
             <div className="p-3">

@@ -1,7 +1,6 @@
 import { useContext, useState, createContext, useMemo, useEffect } from "react"
 import { usePublicClient, useWalletClient, useNetwork, useContractEvent } from "wagmi"
 import { Exchange, Constants } from "@void-0x/void-sdk"
-import { toast } from "react-hot-toast"
 import { isChainSupported } from "src/lib/chains"
 import { decodeEventLog, parseAbi } from "viem"
 import useLocalStorage from "src/hooks/useLocalStorage"
@@ -18,7 +17,8 @@ export function ExchangeContextProvider({ children }) {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [isClosingOrder, setIsClosingOrder] = useState(false)
   const [shouldRefreshPositions, setShouldRefreshPositions] = useState(false)
-  const [shouldShowPopup, setShouldShowPopup] = useState(false)
+  const [shouldShowPopupExecute, setShouldShowPopupExecute] = useState(false)
+  const [shouldShowPlaceOrderPopup, setShouldShowPlaceOrderPopup] = useState(false)
 
   // index token
   const [indexToken, setIndexToken] = useState()
@@ -46,17 +46,18 @@ export function ExchangeContextProvider({ children }) {
     abi: Exchange.getABI(),
     eventName: "OrderExecuted",
     listener(log) {
+      setShouldRefreshPositions(true)
       const orderId = log[0].args.orderId
       const listOrders = orders()
       if (listOrders === Number(orderId)) {
-        setShouldShowPopup(true)
+        setShouldShowPlaceOrderPopup(false)
+        setShouldShowPopupExecute(true)
       }
 
       setTimeout(() => {
-        setShouldShowPopup(false)
+        setShouldShowPopupExecute(false)
         clearLocalStorage()
       }, 3000)
-      setShouldRefreshPositions(true)
     }
   })
 
@@ -85,7 +86,6 @@ export function ExchangeContextProvider({ children }) {
     if (!exchange) {
       return
     }
-
     setIsPlacingOrder(true)
     const hash = await exchange.placeOrder(params)
     const receipt = await publicClient.waitForTransactionReceipt({ hash })
@@ -105,7 +105,7 @@ export function ExchangeContextProvider({ children }) {
     }
 
     setIsPlacingOrder(false)
-    toast.success("Successfully ordered!")
+    setShouldShowPlaceOrderPopup(true)
   }
   const getPositions = async (address) => {
     if (!exchange) {
@@ -131,7 +131,6 @@ export function ExchangeContextProvider({ children }) {
     const hash = await exchange.closeOrder(params)
     await publicClient.waitForTransactionReceipt({ hash })
     setIsClosingOrder(false)
-    toast.success("Successfully closed!")
   }
 
   return (
@@ -147,7 +146,8 @@ export function ExchangeContextProvider({ children }) {
         closeOrder,
         getPositions,
         shouldRefreshPositions,
-        shouldShowPopup
+        shouldShowPopupExecute,
+        shouldShowPlaceOrderPopup
       }}
     >
       {children}
@@ -163,7 +163,8 @@ export function ExchangeContextProvider({ children }) {
  * @property {function} setPair - The function to set the pair.
  * @property {boolean} isPlacingOrder - A boolean indicating if an order is being placed.
  * @property {boolean} shouldRefreshPositions - A boolean indicating if the positions should be refreshed.
- * @property {boolean} shouldShowPopup - A boolean indicating if the have order id.
+ * @property {boolean} shouldShowPopupExecute - A boolean indicating if the have order id.
+ * @property {boolean} shouldShowPlaceOrderPopup - A boolean indicating when place ordered.
  * @property {function} placeOrder - The function to place an order.
  * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.
  * @property {function} closeOrder - The function to close an order.
