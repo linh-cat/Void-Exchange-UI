@@ -19,6 +19,7 @@ import useTokenPriceFeed, { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import PlaceOrderModal from "./PlaceOrderModal"
+import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 
 const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
@@ -27,7 +28,7 @@ const ShortOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
   const { chain } = useNetwork()
-  const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopup } = useExchangeContext()
   const [selectedToken, setSelectedToken] = useState()
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
 
@@ -218,6 +219,20 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
+      {shouldShowPopup && (
+        <TransactionPopup
+          body={
+            <div className="p-3">
+              <h3 className="text-base">Order Executed</h3>
+              <p className="text-slate-500 text-sm mt-2">You have success the transaction</p>
+            </div>
+          }
+          position="bottom-right"
+          // onClose={closePopup}
+          duration={3000}
+          isCancelIcon={true}
+        />
+      )}
       <div className="order-box overflow-y-auto no-scrollbar flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
           <div className="">

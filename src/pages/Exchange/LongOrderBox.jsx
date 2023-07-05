@@ -22,7 +22,7 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 import PlaceOrderModal from "./PlaceOrderModal"
-import CancelTransactionPopup from "@components/common/CancelTransactionPopup/CancelTransactionPopup"
+import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 
 const LongOrderBox = () => {
   // UI state
@@ -31,7 +31,7 @@ const LongOrderBox = () => {
   const [selectedToken, setSelectedToken] = useState()
   const [isNoticed, setIsNoticed] = useState(false)
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
-  const [isCancelTransaction, setIsCancelTransaction] = useState(false)
+  // const [shouldShowPopup, setShouldShowPopup] = useState(false)
 
   // Order state
   const [payAmount, setPayAmount] = useState("")
@@ -40,7 +40,17 @@ const LongOrderBox = () => {
 
   const { chain } = useNetwork()
   const { address } = useAccount()
-  const { indexToken, placeOrder, isPlacingOrder } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopup } = useExchangeContext()
+
+  // console.log({ shouldShowPopup, isPlacingOrder })
+
+  // useEffect(() => {
+  //   if (showPopup) {
+  //     setShouldShowPopup(showPopup)
+  //   } else {
+  //     setShouldShowPopup(!showPopup)
+  //   }
+  // }, [showPopup])
 
   const tokenOptions = useMemo(() => {
     return [
@@ -48,7 +58,9 @@ const LongOrderBox = () => {
       { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
     ]
   }, [chain])
-
+  // const closePopup = () => {
+  //   setShouldShowPopup(false)
+  // }
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
@@ -77,10 +89,6 @@ const LongOrderBox = () => {
 
   const closeNoticePopup = () => {
     setIsNoticed(false)
-  }
-
-  const closeTransactionPopup = () => {
-    setIsCancelTransaction(false)
   }
 
   const changeOrderType = (order) => {
@@ -270,16 +278,16 @@ const LongOrderBox = () => {
           position="center"
         />
       )}
-      {isCancelTransaction && (
-        <CancelTransactionPopup
+      {shouldShowPopup && (
+        <TransactionPopup
           body={
             <div className="p-3">
-              <h3 className="text-base">Transaction Cancelled</h3>
-              <p className="text-slate-500 text-sm mt-2">You have cancelled the transaction</p>
+              <h3 className="text-base">Order Executed</h3>
+              <p className="text-slate-500 text-sm mt-2">You have success the transaction</p>
             </div>
           }
           position="bottom-right"
-          onClose={closeTransactionPopup}
+          // onClose={closePopup}
           duration={3000}
           isCancelIcon={true}
         />

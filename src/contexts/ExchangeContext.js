@@ -4,6 +4,7 @@ import { Exchange, Constants } from "@void-0x/void-sdk"
 import { toast } from "react-hot-toast"
 import { isChainSupported } from "src/lib/chains"
 import { decodeEventLog, parseAbi } from "viem"
+import useLocalStorage from "src/hooks/useLocalStorage"
 
 const ExchangeContext = createContext()
 
@@ -13,10 +14,11 @@ const pairToSymbolMap = {
 }
 
 export function ExchangeContextProvider({ children }) {
+  const [orders, setSavedOrders, clearLocalStorage] = useLocalStorage('orderId')
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [isClosingOrder, setIsClosingOrder] = useState(false)
   const [shouldRefreshPositions, setShouldRefreshPositions] = useState(false)
-  // market is the address of the base token of a pair
+  const [shouldShowPopup, setShouldShowPopup] = useState(false)
 
   // index token
   const [indexToken, setIndexToken] = useState()
@@ -44,11 +46,16 @@ export function ExchangeContextProvider({ children }) {
     abi: Exchange.getABI(),
     eventName: "OrderExecuted",
     listener(log) {
-      // TODO:
-      // 1. get order Id from log
-      // 2.  check if orderId exsits in state
-      // 3. if it exists, set the FILLED popup progres to 100% and close it
-      // 4. remove the orderId from state
+      const orderId = log[0].args.orderId
+      const listOrders = orders()
+      if (listOrders === Number(orderId)) {
+        setShouldShowPopup(true)
+      }
+
+      setTimeout(() => {
+        setShouldShowPopup(false)
+        clearLocalStorage()
+      }, 3000)
       setShouldRefreshPositions(true)
     }
   })
@@ -91,20 +98,15 @@ export function ExchangeContextProvider({ children }) {
         topics: log.topics
       })
 
-      console.log("event", event)
-
       const orderId = event.args?.orderId
-      // TODO: store orderId in a state or reducer
+      setSavedOrders(Number(orderId))
     } catch (err) {
       console.error(err)
     }
 
-    // TODO: show FILLED popup
-
     setIsPlacingOrder(false)
     toast.success("Successfully ordered!")
   }
-
   const getPositions = async (address) => {
     if (!exchange) {
       return []
@@ -128,7 +130,6 @@ export function ExchangeContextProvider({ children }) {
     setIsClosingOrder(true)
     const hash = await exchange.closeOrder(params)
     await publicClient.waitForTransactionReceipt({ hash })
-
     setIsClosingOrder(false)
     toast.success("Successfully closed!")
   }
@@ -145,7 +146,8 @@ export function ExchangeContextProvider({ children }) {
         isClosingOrder,
         closeOrder,
         getPositions,
-        shouldRefreshPositions
+        shouldRefreshPositions,
+        shouldShowPopup
       }}
     >
       {children}
@@ -161,6 +163,7 @@ export function ExchangeContextProvider({ children }) {
  * @property {function} setPair - The function to set the pair.
  * @property {boolean} isPlacingOrder - A boolean indicating if an order is being placed.
  * @property {boolean} shouldRefreshPositions - A boolean indicating if the positions should be refreshed.
+ * @property {boolean} shouldShowPopup - A boolean indicating if the have order id.
  * @property {function} placeOrder - The function to place an order.
  * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.
  * @property {function} closeOrder - The function to close an order.
