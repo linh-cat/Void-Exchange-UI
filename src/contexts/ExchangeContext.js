@@ -3,6 +3,7 @@ import { usePublicClient, useWalletClient, useNetwork, useContractEvent } from "
 import { Exchange, Constants } from "@void-0x/void-sdk"
 import { toast } from "react-hot-toast"
 import { isChainSupported } from "src/lib/chains"
+import { decodeEventLog, parseAbi } from "viem"
 
 const ExchangeContext = createContext()
 
@@ -43,7 +44,11 @@ export function ExchangeContextProvider({ children }) {
     abi: Exchange.getABI(),
     eventName: "OrderExecuted",
     listener(log) {
-      // TODO: filter logs by account
+      // TODO:
+      // 1. get order Id from log
+      // 2.  check if orderId exsits in state
+      // 3. if it exists, set the FILLED popup progres to 100% and close it
+      // 4. remove the orderId from state
       setShouldRefreshPositions(true)
     }
   })
@@ -76,7 +81,25 @@ export function ExchangeContextProvider({ children }) {
 
     setIsPlacingOrder(true)
     const hash = await exchange.placeOrder(params)
-    await publicClient.waitForTransactionReceipt({ hash })
+    const receipt = await publicClient.waitForTransactionReceipt({ hash })
+    try {
+      const log = receipt.logs[2]
+
+      const event = decodeEventLog({
+        abi: parseAbi(["event OrderPlaced(uint256 indexed orderId)"]),
+        data: log.data,
+        topics: log.topics
+      })
+
+      console.log("event", event)
+
+      const orderId = event.args?.orderId
+      // TODO: store orderId in a state or reducer
+    } catch (err) {
+      console.error(err)
+    }
+
+    // TODO: show FILLED popup
 
     setIsPlacingOrder(false)
     toast.success("Successfully ordered!")
