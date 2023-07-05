@@ -144,7 +144,7 @@ const Banner = () => {
                   </div>
 
                   <div className="text-sm ">
-                    <label className="">SOL</label>
+                    <label className="">Doge</label>
                     <div className="flex items-center gap-3 mt-1">
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
