@@ -5,7 +5,7 @@ import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import { BaseIcon } from "@img/icons"
-import { BTC, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
+import { BTC, DOGE, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
 
 const Banner = () => {
   const navigate = useNavigate()
@@ -53,7 +53,7 @@ const Banner = () => {
           />
         </div>
 
-        <Card className="p-8 mt-20 w-full lg:w-3/4 mx-auto" hasShadow={true}>
+        <Card className="p-8 mt-20 w-full mx-auto" hasShadow={true}>
           <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
             <div className="overflow-x-auto no-scrollbar">
@@ -125,6 +125,22 @@ const Banner = () => {
                 <div className="item flex justify-center items-center gap-3">
                   <div className=" flex justify-center items-center">
                     <img src={SOLANA} alt="BTC" className="w-10 h-10 border rounded-full" />
+                  </div>
+
+                  <div className="text-sm ">
+                    <label className="">SOL</label>
+                    <div className="flex items-center gap-3 mt-1">
+                      <div>$1</div>
+                      <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
+                        <img src={DownIconRed} alt="down" className="" />
+                        <label className="red-down">-0.01</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item flex justify-center items-center gap-3">
+                  <div className=" flex justify-center items-center">
+                    <img src={DOGE} alt="BTC" className="w-10 h-10 border rounded-full" />
                   </div>
 
                   <div className="text-sm ">
