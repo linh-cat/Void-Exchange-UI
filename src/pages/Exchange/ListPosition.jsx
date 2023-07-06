@@ -444,7 +444,7 @@ const ListPosition = () => {
             <label>{cell?.collateralValue}</label>
             <Button
               text="+"
-              className="px-2 border inline-block"
+              className="px-2 border inline-block cursor-pointer"
               isDefault={false}
               onClick={() => handleConfirmCollateral(cell)}
             />
@@ -495,7 +495,7 @@ const ListPosition = () => {
             text="Close"
             isDefault={false}
             disabled={isClosingOrder}
-            className="border px-2 py-1"
+            className="border px-2 py-1 cursor-pointer"
             onClick={() => handleConfirmOrder(cell)}
           />
         )
