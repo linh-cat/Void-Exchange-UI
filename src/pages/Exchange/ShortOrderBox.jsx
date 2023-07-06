@@ -280,12 +280,6 @@ const ShortOrderBox = () => {
     )
   }, [indexPrice, indexToken, collateralInfo, leverage])
 
-  useEffect(() => {
-    return () => {
-      removeLocal()
-    }
-  }, [removeLocal])
-
   return (
     <>
       <PlaceOrderModal

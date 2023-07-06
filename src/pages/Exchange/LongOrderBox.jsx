@@ -283,12 +283,6 @@ const LongOrderBox = () => {
     )
   }, [indexPrice, indexToken, leverage, tokenOptions])
 
-  useEffect(() => {
-    return () => {
-      removeLocal()
-    }
-  }, [removeLocal])
-
   return (
     <>
       {shouldShowPlaceOrderPopup && <NoticePopup body={showBodyPlaceOrder} duration={5000} position="bottom-right" />}
