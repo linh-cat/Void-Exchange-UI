@@ -52,16 +52,19 @@ const LongOrderBox = () => {
   }, [chain])
 
   const collateralInfo = useMemo(() => {
-    return {
-      [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: {
-        src: BTC,
-        label: "BTC"
-      },
-      [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: {
-        src: ETH,
-        label: "ETH"
+    if (chain) {
+      return {
+        [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: {
+          src: BTC,
+          label: "BTC"
+        },
+        [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: {
+          src: ETH,
+          label: "ETH"
+        }
       }
     }
+    return {}
   }, [chain])
 
   const { data: balance } = useBalance({
