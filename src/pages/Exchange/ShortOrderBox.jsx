@@ -11,7 +11,7 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { Constants } from "@void-0x/void-sdk"
 
-import { BTC, CAKE, ETH, USDC } from "@img/token"
+import { BTC, ETH, USDC } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -22,6 +22,7 @@ import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
+import useLocalStorage from "src/hooks/useLocalStorage"
 
 const ShortOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
@@ -35,7 +36,7 @@ const ShortOrderBox = () => {
 
   const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
     useExchangeContext()
-
+  const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.short")
   const { chain } = useNetwork()
   const { address } = useAccount()
   const { data: balance } = useBalance({
@@ -55,10 +56,28 @@ const ShortOrderBox = () => {
     tokenDecimals: balance?.decimals || 0
   })
 
-  const indexTokenImg = useMemo(() => {
+  const positionSize = useMemo(() => {
+    if (payAmount) {
+      return Position.getPositionSizeInUsd(
+        parseUnits(payAmount?.toString(), balance?.decimals),
+        prices[selectedToken],
+        Number(leverage),
+        balance?.decimals
+      )
+    }
+    return 0
+  }, [balance, selectedToken, prices, leverage, payAmount])
+
+  const collateralInfo = useMemo(() => {
     return {
-      [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: BTC,
-      [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: ETH
+      [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: {
+        src: BTC,
+        label: "BTC"
+      },
+      [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: {
+        src: ETH,
+        label: "ETH"
+      }
     }
   }, [chain])
 
@@ -80,18 +99,6 @@ const ShortOrderBox = () => {
     setOrderType(order)
   }
 
-  const positionSize = useMemo(() => {
-    if (payAmount) {
-      return Position.getPositionSizeInUsd(
-        parseUnits(payAmount?.toString(), balance?.decimals),
-        prices[selectedToken],
-        Number(leverage),
-        balance?.decimals
-      )
-    }
-    return 0
-  }, [balance, selectedToken, prices, leverage, payAmount])
-
   useEffect(() => {
     if (!collateralModal) {
       setToggle(false)
@@ -106,9 +113,21 @@ const ShortOrderBox = () => {
     setSelectedToken(Constants.Addresses[chain?.id]?.StableCoins?.USDC)
   }, [chain?.id])
 
-  const handleConfirmOrder = () => {
+  const handleConfirmOrder = useCallback(() => {
+    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
+
+    setLocal({
+      orderType: "Market",
+      indexPrice: indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0,
+      payAmount: payAmount,
+      purchaseIcon: purchaseInfo?.icon,
+      purchaseLabel: purchaseInfo?.label,
+      leverage: leverage,
+      positionSize: positionSize
+    })
+
     setOrderConfirmModal(true)
-  }
+  }, [indexPrice, leverage, payAmount, positionSize, selectedToken, setLocal, tokenOptions])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
@@ -121,12 +140,23 @@ const ShortOrderBox = () => {
       purchaseAmount: parseUnits(payAmount?.toString(), balance?.decimals),
       leverage: Number(leverage)
     })
-
     setPayAmount("")
     if (!isPlacingOrder) {
       setOrderConfirmModal(false)
+      removeLocal()
     }
-  }, [placeOrder, orderType, prices, indexToken, selectedToken, payAmount, balance, leverage, isPlacingOrder])
+  }, [
+    placeOrder,
+    orderType,
+    indexToken,
+    prices,
+    selectedToken,
+    payAmount,
+    balance?.decimals,
+    leverage,
+    isPlacingOrder,
+    removeLocal
+  ])
 
   const renderButton = useCallback(() => {
     if (payAmount === "") {
@@ -153,26 +183,27 @@ const ShortOrderBox = () => {
         disabled={isApproving}
       />
     )
-  }, [allowance, payAmount, onDebounceApprove, isApproving, isPlacingOrder])
+  }, [payAmount, allowance, onDebounceApprove, isApproving, handleConfirmOrder, isPlacingOrder])
 
-  const headerConfirmOrder = useMemo(() => {
+  const showHeaderConfirmOrder = useMemo(() => {
+    const orderInfo = getLocal()
     return (
       <div className="flex items-center gap-1">
         <h2>Confirm Make Order -</h2>
-        <div className="red-down">Short {leverage}x</div>
+        <div className="red-down">Short {orderInfo?.leverage}x</div>
       </div>
     )
-  }, [leverage])
+  }, [getLocal])
 
-  const bodyConfirmOrder = useMemo(() => {
-    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
+  const showBodyConfirmOrder = useMemo(() => {
+    const orderInfo = getLocal()
 
     return (
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-2 gap-3">
           <div className="border py-2 px-2 rounded text-left ">
             <h5 className="text-slate-500 text-sm">Market Price</h5>
-            <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
+            <div className="text-sm">{orderInfo?.indexPrice}</div>
           </div>
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Order Type</h5>
@@ -186,8 +217,8 @@ const ShortOrderBox = () => {
               <span>{payAmount} </span>
             </div>
             <div className="flex items-center gap-1">
-              <img src={purchaseInfo?.icon} alt="token" className="w-4 h-4" />{" "}
-              <span className="text-sm">{purchaseInfo?.label}</span>
+              <img src={orderInfo?.purchaseIcon} alt="token" className="w-4 h-4" />{" "}
+              <span className="text-sm">{orderInfo?.purchaseLabel}</span>
             </div>
           </div>
         </div>
@@ -195,18 +226,18 @@ const ShortOrderBox = () => {
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between text-sm">
             <h3 className=" text-slate-500 dotted-underline">Leverage</h3>
-            <div>{leverage}x</div>
+            <div>{orderInfo?.leverage}x</div>
           </div>
           <div className="flex items-center justify-between text-sm">
             <h3 className="text-slate-500 dotted-underline">Position</h3>
-            <div>{positionSize}</div>
+            <div>{orderInfo?.positionSize}</div>
           </div>
         </div>
       </div>
     )
-  }, [tokenOptions, indexPrice, payAmount, leverage, positionSize, selectedToken])
+  }, [getLocal, payAmount])
 
-  const footerConfirmOrder = useMemo(() => {
+  const showFooterConfirmOrder = useMemo(() => {
     return (
       <Button
         text="Place Order"
@@ -219,13 +250,13 @@ const ShortOrderBox = () => {
     )
   }, [isPlacingOrder, onPlaceOrder])
 
-  const bodyPlaceOrderPopup = useMemo(() => {
-    const indexImage = indexTokenImg[indexToken]
+  const showBodyPlaceOrderSuccess = useMemo(() => {
+    const indexInfo = collateralInfo[indexToken]?.src
     return (
       <>
         <div className="flex justify-between">
           <div className="flex items-center gap-2">
-            <img src={indexImage} alt="token" className="w-6 h-6" />
+            <img src={indexInfo} alt="token" className="w-6 h-6" />
 
             <div className="flex items-center gap-2">
               <div className="text-sm font-bold">Place Order</div>
@@ -247,20 +278,28 @@ const ShortOrderBox = () => {
         </div>
       </>
     )
-  }, [indexPrice, indexToken, indexTokenImg, leverage])
+  }, [indexPrice, indexToken, collateralInfo, leverage])
+
+  useEffect(() => {
+    return () => {
+      removeLocal()
+    }
+  }, [removeLocal])
 
   return (
     <>
       <PlaceOrderModal
         open={orderConfirmModal}
         setOpen={setOrderConfirmModal}
-        header={headerConfirmOrder}
-        body={bodyConfirmOrder}
-        footer={footerConfirmOrder}
+        header={showHeaderConfirmOrder}
+        body={showBodyConfirmOrder}
+        footer={showFooterConfirmOrder}
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="bottom-right" />}
+      {shouldShowPlaceOrderPopup && (
+        <NoticePopup body={showBodyPlaceOrderSuccess} duration={5000} position="bottom-right" />
+      )}
       {shouldShowPopupExecute && (
         <TransactionPopup
           body={
@@ -339,22 +378,28 @@ const ShortOrderBox = () => {
           />
         </div>
         <div className="flex flex-col gap-3">
-          <div className="collateral-value flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Position</label>
-            <div className="">{positionSize}</div>
+          <div className="entry-price flex justify-between text-sm">
+            <label className="text-slate-500 dotted-underline">Entry Price</label>
+            <div className="">
+              <span>
+                {prices[indexToken] ? formatValue(prices[indexToken], Constants.ORACLE_PRICE_DECIMALS) : "0.0"}
+              </span>
+            </div>
           </div>
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
-              <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
-              <span>Cake</span>
+              <img src={collateralInfo[indexToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
+              <span>{collateralInfo[indexToken]?.label}</span>
             </div>
           </div>
           <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
-            <div className="">
-              <span>-</span>
-            </div>
+            <span>-</span>
+          </div>
+          <div className="collateral-value flex justify-between text-sm">
+            <label className="text-slate-500 dotted-underline">Position</label>
+            <div className="">{positionSize}</div>
           </div>
           <div className="collateral-leverage flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
@@ -362,26 +407,19 @@ const ShortOrderBox = () => {
               <span>{leverage} x</span>
             </div>
           </div>
-          <div className="entry-price flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Entry Price</label>
-            <div className="">
-              <span>-</span>
-            </div>
-          </div>
+
           <div className="liquidation flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Liquidation</label>
-            <div className="">
-              <span>-</span>
-            </div>
+            <label className="text-slate-500 dotted-underline">Liq.Price</label>
+            <span>-</span>
           </div>
-          <div className="borrow-fee flex justify-between items-center text-sm">
+          {/* <div className="borrow-fee flex justify-between items-center text-sm">
             <label className="text-slate-500 dotted-underline">Borrow Fee</label>
             <span>0.00086% per hour</span>
           </div>
           <div className="available-liquidity flex justify-between items-center text-sm">
             <label className="text-slate-500 dotted-underline">Available Liquidity</label>
             <span>17,050 Cake ~ $57</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

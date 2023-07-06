@@ -60,7 +60,6 @@ const ListPosition = () => {
 
       const symbol = AddressToSymbolMap[chain.id][indexToken]
       const token = Tokens[chain.id][symbol]
-
       const liquidationPrice = formatValue(
         Position.getLiquidationPrice(
           position,

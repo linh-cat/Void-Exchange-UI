@@ -23,6 +23,7 @@ import Badge from "@components/common/Badge"
 import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
+import useLocalStorage from "src/hooks/useLocalStorage"
 
 const LongOrderBox = () => {
   // UI state
@@ -41,11 +42,26 @@ const LongOrderBox = () => {
   const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
     useExchangeContext()
 
+  const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.long")
+
   const tokenOptions = useMemo(() => {
     return [
       { label: "BTC", value: Constants.Addresses[chain?.id]?.IndexTokens?.WBTC, icon: BTC },
       { label: "ETH", value: Constants.Addresses[chain?.id]?.IndexTokens?.WETH, icon: ETH }
     ]
+  }, [chain])
+
+  const collateralInfo = useMemo(() => {
+    return {
+      [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: {
+        src: BTC,
+        label: "BTC"
+      },
+      [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: {
+        src: ETH,
+        label: "ETH"
+      }
+    }
   }, [chain])
 
   const { data: balance } = useBalance({
@@ -104,9 +120,19 @@ const LongOrderBox = () => {
     if (indexToken) setSelectedToken(indexToken)
   }, [indexToken])
 
-  const handleConfirmOrder = () => {
+  const handleConfirmOrder = useCallback(() => {
+    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
+    setLocal({
+      orderType: "Market",
+      indexPrice: indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0,
+      payAmount: payAmount,
+      purchaseIcon: purchaseInfo?.icon,
+      purchaseLabel: purchaseInfo?.label,
+      leverage: leverage,
+      positionSize: positionSize
+    })
     setOrderConfirmModal(true)
-  }
+  }, [indexPrice, leverage, payAmount, positionSize, selectedToken, setLocal, tokenOptions])
 
   const onPlaceOrder = useCallback(async () => {
     await placeOrder({
@@ -122,6 +148,7 @@ const LongOrderBox = () => {
     setPayAmount("")
     if (!isPlacingOrder) {
       setOrderConfirmModal(false)
+      removeLocal()
     }
   }, [
     placeOrder,
@@ -132,7 +159,8 @@ const LongOrderBox = () => {
     payAmount,
     balance?.decimals,
     leverage,
-    isPlacingOrder
+    isPlacingOrder,
+    removeLocal
   ])
 
   const renderButton = useCallback(() => {
@@ -160,9 +188,9 @@ const LongOrderBox = () => {
         disabled={isApproving}
       />
     )
-  }, [allowance, payAmount, onDebounceApprove, isApproving, isPlacingOrder])
+  }, [payAmount, allowance, onDebounceApprove, isApproving, handleConfirmOrder, isPlacingOrder])
 
-  const headerConfirmOrder = useMemo(() => {
+  const showHeaderConfirmOrder = useMemo(() => {
     return (
       <div className="flex items-center gap-1">
         <h2>Confirm Make Order -</h2>
@@ -171,15 +199,14 @@ const LongOrderBox = () => {
     )
   }, [leverage])
 
-  const bodyConfirmOrder = useMemo(() => {
-    const purchaseInfo = tokenOptions.find((t) => t.value === selectedToken)
-
+  const showBodyConfirmOrder = useMemo(() => {
+    const orderInfo = getLocal()
     return (
       <div className="flex flex-col gap-5">
         <div className="grid grid-cols-2 gap-3">
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Market Price</h5>
-            <div className="text-sm">{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : 0}</div>
+            <div className="text-sm">{orderInfo?.indexPrice}</div>
           </div>
           <div className="border py-2 px-2 rounded text-left">
             <h5 className="text-slate-500 text-sm">Order Type</h5>
@@ -193,8 +220,8 @@ const LongOrderBox = () => {
               <span>{payAmount} </span>
             </div>
             <div className="flex items-center gap-1">
-              <img src={purchaseInfo?.icon} alt="token" className="w-4 h-4" />{" "}
-              <span className="text-sm">{purchaseInfo?.label}</span>
+              <img src={orderInfo?.purchaseIcon} alt="token" className="w-4 h-4" />{" "}
+              <span className="text-sm">{orderInfo?.purchaseLabel}</span>
             </div>
           </div>
         </div>
@@ -202,18 +229,18 @@ const LongOrderBox = () => {
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between text-sm">
             <h3 className=" text-slate-500 dotted-underline">Leverage</h3>
-            <div>{leverage}x</div>
+            <div>{orderInfo?.leverage}x</div>
           </div>
           <div className="flex items-center justify-between text-sm">
             <h3 className="text-slate-500 dotted-underline">Position</h3>
-            <div>{positionSize}</div>
+            <div>{orderInfo?.positionSize}</div>
           </div>
         </div>
       </div>
     )
-  }, [tokenOptions, indexPrice, payAmount, leverage, positionSize, selectedToken])
+  }, [getLocal, payAmount])
 
-  const footerConfirmOrder = useMemo(() => {
+  const showFooterConfirmOrder = useMemo(() => {
     return (
       <Button
         text="Place Order"
@@ -226,7 +253,7 @@ const LongOrderBox = () => {
     )
   }, [isPlacingOrder, onPlaceOrder])
 
-  const bodyPlaceOrderPopup = useMemo(() => {
+  const showBodyPlaceOrder = useMemo(() => {
     const info = tokenOptions.find((i) => i.value === indexToken)
     return (
       <>
@@ -256,9 +283,15 @@ const LongOrderBox = () => {
     )
   }, [indexPrice, indexToken, leverage, tokenOptions])
 
+  useEffect(() => {
+    return () => {
+      removeLocal()
+    }
+  }, [removeLocal])
+
   return (
     <>
-      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="bottom-right" />}
+      {shouldShowPlaceOrderPopup && <NoticePopup body={showBodyPlaceOrder} duration={5000} position="bottom-right" />}
       {shouldShowPopupExecute && (
         <TransactionPopup
           body={
@@ -276,9 +309,9 @@ const LongOrderBox = () => {
       <PlaceOrderModal
         open={orderConfirmModal}
         setOpen={setOrderConfirmModal}
-        header={headerConfirmOrder}
-        body={bodyConfirmOrder}
-        footer={footerConfirmOrder}
+        header={showHeaderConfirmOrder}
+        body={showBodyConfirmOrder}
+        footer={showFooterConfirmOrder}
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
@@ -345,15 +378,15 @@ const LongOrderBox = () => {
           />
         </div>
         <div className="flex flex-col gap-3">
-          <div className="flex justify-between items-center">
-            <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
-            <div className="text-sm">{positionSize}</div>
+          <div className="entry-price flex justify-between text-sm">
+            <label className="text-slate-500 dotted-underline">Entry Price</label>
+            <span>{indexPrice ? formatValue(indexPrice, Constants.ORACLE_PRICE_DECIMALS) : "0.0"}</span>
           </div>
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
-              <img src={CAKE} className="rounded-full w-5 h-5" alt="icon" />
-              <span>Cake</span>
+              <img src={collateralInfo[indexToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
+              <span>{collateralInfo[indexToken]?.label}</span>
             </div>
           </div>
           <div className="collateral-value flex justify-between text-sm">
@@ -362,36 +395,26 @@ const LongOrderBox = () => {
               <span>-</span>
             </div>
           </div>
+          <div className="flex justify-between items-center">
+            <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
+            <div className="text-sm">{positionSize}</div>
+          </div>
+
           <div className="collateral-leverage flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
               <span>{leverage} x</span>
             </div>
           </div>
-          <div className="entry-price flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Entry Price</label>
-            <div className="">
-              <span>-</span>
-            </div>
-          </div>
+
           <div className="liquidation flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Liquidation</label>
-            <div className="">
-              <span>-</span>
-            </div>
+            <label className="text-slate-500 dotted-underline">Liq.Price</label>
+            <span>-</span>
           </div>
-          <div className="borrow-fee flex justify-between items-center text-sm">
+          {/* <div className="borrow-fee flex justify-between items-center text-sm">
             <label className="text-slate-500 dotted-underline">Borrow Fee</label>
             <span>-</span>
-          </div>
-          <div className="available-liquidity flex justify-between items-center text-sm">
-            <TextWithTooltip
-              text="Available Liquidity"
-              tooltip={<div>Test tooltip</div>}
-              classNameTooltip="border-green w-32 -top-12"
-            />
-            <span>-</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
