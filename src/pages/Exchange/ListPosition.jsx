@@ -504,7 +504,7 @@ const ListPosition = () => {
   ]
 
   return (
-    <>
+    <div className="vh-20 overflow-y-auto no-scrollbar">
       <CLosingModal
         open={isCloseOrdered}
         setOpen={setIsCloseOrdered}
@@ -527,7 +527,7 @@ const ListPosition = () => {
         }
       />
       <TableCustom columnDef={columnDef} data={formattedPositions} cellStyle="p-3 text-xs" />
-    </>
+    </div>
   )
 }
 

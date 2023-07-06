@@ -312,7 +312,7 @@ const LongOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box overflow-y-auto no-scrollbar flex flex-col gap-3">
+      <div className="order-box flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom
@@ -408,10 +408,6 @@ const LongOrderBox = () => {
             <label className="text-slate-500 dotted-underline">Liq.Price</label>
             <span>-</span>
           </div>
-          {/* <div className="borrow-fee flex justify-between items-center text-sm">
-            <label className="text-slate-500 dotted-underline">Borrow Fee</label>
-            <span>-</span>
-          </div> */}
         </div>
       </div>
     </>

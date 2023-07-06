@@ -64,7 +64,7 @@ const TabExchange = ({ defaultValue }) => {
         </ul>
       </div>
 
-      <div className="tab-content py-3 px-3 overflow-y-auto no-scrollbar">{tabContent}</div>
+      <div className="tab-content p-3 overflow-y-auto no-scrollbar">{tabContent}</div>
     </div>
   )
 }

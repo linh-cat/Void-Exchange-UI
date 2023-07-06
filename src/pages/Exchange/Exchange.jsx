@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import cx from "classnames"
 import { LIST_SECTIONS, optionLabels } from "./constant"
 import TopInfo from "@components/TopInfo/TopInfo"
@@ -14,20 +14,19 @@ import InfoBarChar from "./InfoBarChar"
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
   const [showHistory, setShowHistory] = useState(false)
-
   const onChangeTabSection = (val) => {
     setTabSection(val)
   }
 
   const renderListSections = () => {
     return (
-      <div className={cx({ "p-3 section-list": true })}>
+      <div className={cx({ "pt-3 px-3 section-list": true })}>
         <Tab
           optionLabels={optionLabels}
           options={LIST_SECTIONS}
           option={tabSection}
           setOption={onChangeTabSection}
-          className={"mb-3"}
+          className={"mb-3 sticky"}
         />
         {tabSection === POSITIONS && <ListPosition />}
         {/* {tabSection === ORDERS && <OrderHistory />} */}

@@ -95,7 +95,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
           <tbody>
             {listOptions.map((item, idx) => (
               <tr
-                className="cursor-pointer dd-couple-token-item hover:bg-slate-700"
+                className="cursor-pointer dd-couple-token-item hover:bg-slate-900"
                 key={idx}
                 onClick={() => onChangeValue(item.value)}
               >

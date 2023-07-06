@@ -16,7 +16,7 @@ body {
 :root {
     --main-bg-color: #0c0f13;
     --main-card-color: #1b2028;
-    --bg-card: #050b1b;
+    --bg-card: #04091A;
     --input-bg-color: #071223;
     --main-long: #16be76;
     --main-short: #e43e53;
@@ -275,16 +275,14 @@ body {
 
 .text-title-section {
     display: inline-flex;
-    background-image: linear-gradient(
-        150deg,
-        #4f7d89,
-        #4f7d89 15%,
-        #2193a7 25%,
-        #189fd9,
-        #292986 50%,
-        #1e84df 80%,
-        #1e84df 100%
-    );
+    background-image: linear-gradient(150deg,
+            #4f7d89,
+            #4f7d89 15%,
+            #2193a7 25%,
+            #189fd9,
+            #292986 50%,
+            #1e84df 80%,
+            #1e84df 100%);
     font-weight: 600;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -416,6 +414,10 @@ body {
 
 .vh-80 {
     height: 80vh;
+}
+
+.vh-20 {
+    height: 20vh;
 }
 
 .vh-65 {
