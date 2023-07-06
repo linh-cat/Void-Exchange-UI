@@ -9,7 +9,7 @@ export const numberFormatter = new Intl.NumberFormat("en-US", {
 
 export const formatPercentage = (value) => {
   if (!value) return "0"
-  return `${parseFloat(value).toFixed(2)} %`
+  return `${parseFloat(value).toFixed(2)}%`
 }
 
 /**
@@ -27,7 +27,7 @@ export const formatValue = (value, decimals, withDollarSign = true) => {
     .replace("$", withDollarSign ? "$" : "")
 }
 
-export const dollarFormatter = (value) => {
+export const formatDollar = (value) => {
   return numberFormatter.format(value)
 }
 

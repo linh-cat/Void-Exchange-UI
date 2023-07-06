@@ -1,32 +1,49 @@
-import React, { useState } from "react"
-import "./SelectCoupleToken.css"
+import React, { useState, useMemo } from "react"
+
+import cx from "classnames"
+
+import { useExchangeContext } from "src/contexts/ExchangeContext"
+import usePriceInfoBar from "src/hooks/usePriceInfoBar"
 import useOutsideDetect from "../../hooks/useOutsideDetect"
-import { useMemo } from "react"
+
+import { formatDollar, formatPercentage } from "src/lib/formatter"
+
 import { DownIcon } from "@icons/index"
 import { BTC, ETH } from "@img/token"
-import { useExchangeContext } from "src/contexts/ExchangeContext"
 
-const options = [
-  {
-    label: "BTC/USD",
-    value: "BTC/USD",
-    icon: BTC,
-    price: "$27.000",
-    dayChange: "0.18%"
-  },
-  {
-    label: "ETH/USD",
-    value: "ETH/USD",
-    icon: ETH,
-    price: "$1.000",
-    dayChange: "0.1%"
-  }
-]
+import "./SelectCoupleToken.css"
 
+const mappingLabel = {
+  BTC: "BTC/USD",
+  ETH: "ETH/USD",
+  LINK: "LINK/USD"
+}
+const mappingIcon = {
+  BTC: BTC,
+  ETH: ETH
+}
 const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
-  const [openList, setOpenList] = useState(false)
   const [values, setValues] = useState(defaultValue)
+
+  const [openList, setOpenList] = useState(false)
+
   const { setPair } = useExchangeContext()
+  const { data: listPrice } = usePriceInfoBar()
+
+  const listOptions = useMemo(() => {
+    if (listPrice) {
+      delete listPrice.LINK
+
+      return Object.keys(listPrice).map((item) => ({
+        label: mappingLabel?.[item],
+        value: mappingLabel?.[item],
+        icon: mappingIcon?.[item],
+        price: listPrice?.[item]?.priceChange,
+        dayChange: listPrice?.[item]?.priceChangePercent
+      }))
+    }
+    return []
+  }, [listPrice])
 
   const toggleOpen = () => {
     setOpenList(!openList)
@@ -45,9 +62,9 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   const refOutside = useOutsideDetect(handleClickOutside)
 
   const { label, icon } = useMemo(() => {
-    const index = options.findIndex((item) => item.value === values)
-    return { label: options[index]?.label, icon: options[index]?.icon }
-  }, [values])
+    const index = listOptions.findIndex((item) => item.value === values)
+    return { label: listOptions[index]?.label, icon: listOptions[index]?.icon }
+  }, [listOptions, values])
 
   return (
     <div className="couple-token ">
@@ -76,14 +93,32 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
             </tr>
           </thead>
           <tbody>
-            {options.map((item, idx) => (
-              <tr className="cursor-pointer dd-couple-token-item" key={idx} onClick={() => onChangeValue(item.value)}>
+            {listOptions.map((item, idx) => (
+              <tr
+                className="cursor-pointer dd-couple-token-item hover:bg-slate-700"
+                key={idx}
+                onClick={() => onChangeValue(item.value)}
+              >
                 <th scope="row" className="px-8 py-4 font-medium whitespace-nowrap flex items-center">
                   <img src={item.icon} alt="icon" className="rounded-full w-5 h-5 mr-1" />
                   <label>{item.label}</label>
                 </th>
-                <td className="px-8 py-4 red-down">{item.price}</td>
-                <td className="px-8 py-4 green-up">{item.dayChange}</td>
+                <td
+                  className={cx("px-8 py-4", {
+                    "green-up": Number(item.dayChange) > 0,
+                    "red-down": Number(item.dayChange) < 0
+                  })}
+                >
+                  {formatDollar(item.price)}
+                </td>
+                <td
+                  className={cx("px-8 py-4", {
+                    "green-up": Number(item.dayChange) > 0,
+                    "red-down": Number(item.dayChange) < 0
+                  })}
+                >
+                  {formatPercentage(item.dayChange)}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -6,7 +6,7 @@ import SelectCoupleToken from "@components/common/SelectCoupleToken"
 import { Constants } from "@void-0x/void-sdk"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
-import { dollarFormatter, formatPercentage, formatValue } from "src/lib/formatter"
+import { formatDollar, formatPercentage, formatValue } from "src/lib/formatter"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import usePriceInfoBar from "src/hooks/usePriceInfoBar"
 import useMarketPrice from "src/hooks/useMarketPrice"
@@ -87,7 +87,7 @@ const InfoBarChar = () => {
               "text-xs mt-auto "
             )}
           >
-            {dataForMapping && dollarFormatter(dataForMapping?.priceChange)}
+            {dataForMapping && formatDollar(dataForMapping?.priceChange)}
           </div>
         </div>
         <div className="flex justify-center items-center">
@@ -95,14 +95,14 @@ const InfoBarChar = () => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h High</h3>
-          <div className="text-xs mt-auto">{dataForMapping && dollarFormatter(dataForMapping?.priceHigh24h)}</div>
+          <div className="text-xs mt-auto">{dataForMapping && formatDollar(dataForMapping?.priceHigh24h)}</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="h-3/5 w-1px bg-slate-700"></div>
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Low</h3>
-          <div className="text-xs mt-auto">{dataForMapping && dollarFormatter(dataForMapping?.priceLow24h)}</div>
+          <div className="text-xs mt-auto">{dataForMapping && formatDollar(dataForMapping?.priceLow24h)}</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="h-3/5 w-1px bg-slate-700"></div>

@@ -8,7 +8,7 @@
 
 .couple-token .dd-couple-token-list {
     position: absolute;
-    top: 3.5rem;
+    top: 2.5rem;
     left: 0;
     height: auto;
     width: auto;
@@ -32,7 +32,6 @@
 }
 
 .couple-token .dd-couple-token-item:hover {
-    background: var(--main-card-color);
     color: var(--arbitrum-blue);
 }
 
