@@ -258,7 +258,7 @@ const LongOrderBox = () => {
 
   return (
     <>
-      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="center" />}
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="bottom-right" />}
       {shouldShowPopupExecute && (
         <TransactionPopup
           body={

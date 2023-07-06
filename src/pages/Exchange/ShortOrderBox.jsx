@@ -11,7 +11,7 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { Constants } from "@void-0x/void-sdk"
 
-import { CAKE, ETH, USDC } from "@img/token"
+import { BTC, CAKE, ETH, USDC } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -24,19 +24,20 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 
 const ShortOrderBox = () => {
-  const [leverage, setLeverage] = useState(10)
-  const [toggle, setToggle] = useState(false)
-  const [payAmount, setPayAmount] = useState("")
-  const [orderType, setOrderType] = useState(OrderType.MARKET)
   const [collateralModal, setCollateralModal] = useState(false)
-  const { chain } = useNetwork()
-  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
-    useExchangeContext()
-  const [selectedToken, setSelectedToken] = useState()
+  const [toggle, setToggle] = useState(false)
   const [orderConfirmModal, setOrderConfirmModal] = useState(false)
 
-  const { address } = useAccount()
+  const [selectedToken, setSelectedToken] = useState()
+  const [payAmount, setPayAmount] = useState("")
+  const [leverage, setLeverage] = useState(10)
+  const [orderType, setOrderType] = useState(OrderType.MARKET)
 
+  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
+    useExchangeContext()
+
+  const { chain } = useNetwork()
+  const { address } = useAccount()
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
@@ -53,6 +54,13 @@ const ShortOrderBox = () => {
     spender: Constants.Addresses[chain?.id]?.Exchange,
     tokenDecimals: balance?.decimals || 0
   })
+
+  const indexTokenImg = useMemo(() => {
+    return {
+      [Constants.Addresses[chain.id]?.IndexTokens?.WBTC]: BTC,
+      [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: ETH
+    }
+  }, [chain])
 
   const tokenOptions = useMemo(() => {
     return [{ label: "USDC", value: Constants.Addresses[chain?.id]?.StableCoins?.USDC, icon: USDC }]
@@ -212,12 +220,12 @@ const ShortOrderBox = () => {
   }, [isPlacingOrder, onPlaceOrder])
 
   const bodyPlaceOrderPopup = useMemo(() => {
-    const info = tokenOptions.find((i) => i.value === indexToken)
+    const indexImage = indexTokenImg[indexToken]
     return (
       <>
         <div className="flex justify-between">
           <div className="flex items-center gap-2">
-            <img src={info?.icon} alt="token" className="w-6 h-6" />
+            <img src={indexImage} alt="token" className="w-6 h-6" />
 
             <div className="flex items-center gap-2">
               <div className="text-sm font-bold">Place Order</div>
@@ -239,7 +247,7 @@ const ShortOrderBox = () => {
         </div>
       </>
     )
-  }, [indexPrice, indexToken, leverage, tokenOptions])
+  }, [indexPrice, indexToken, indexTokenImg, leverage])
 
   return (
     <>
@@ -252,7 +260,7 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="center" />}
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} duration={5000} position="bottom-right" />}
       {shouldShowPopupExecute && (
         <TransactionPopup
           body={

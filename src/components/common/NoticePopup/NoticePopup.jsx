@@ -13,9 +13,9 @@ const NoticePopup = ({ body, position = "center" }) => {
         "card shadow border absolute w-96 rounded p-2 flex flex-col gap-2 text-sm transition-opacity z-50",
         {
           "top-28 left-1/2 -translate-x-1/2": position === "center",
-          "bottom-0 right-0": position === "bottom-right",
-          "top-0 left-0": position === "top-left",
-          "bottom-0 left-0": position === "bottom-left"
+          "bottom-3 right-3": position === "bottom-right",
+          "top-3 left-3": position === "top-left",
+          "bottom-3 left-3": position === "bottom-left"
         }
       )}
     >
