@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useRef, useState } from "react"
 import cx from "classnames"
+import useScroll from "src/hooks/useScroll"
 
 // we must define header match with data
 const dataTest = [
@@ -42,7 +43,15 @@ const columnDefEx = [
   }
 ]
 
-const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = false, cellStyle = "" }) => {
+const TableCustom = ({
+  columnDef = columnDefEx,
+  data = dataTest,
+  isShadow = false,
+  cellStyle = "",
+  headerClassName
+}) => {
+  const ref = useRef()
+  console.log({ ref })
   return (
     <div
       className={cx({
@@ -50,10 +59,10 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
         shadow: isShadow
       })}
     >
-      <div className="w-full overflow-x-auto no-scrollbar">
-        <table className="w-full">
-          <thead>
-            <tr className="tracking-wide border-b text-slate-500">
+      <div className="w-full">
+        <table className="w-full min-w-full">
+          <thead className={cx("sticky top-0 border-b", headerClassName)}>
+            <tr className="tracking-wide text-slate-500">
               {columnDef.map((item) => (
                 <th
                   className={cx(
@@ -69,7 +78,7 @@ const TableCustom = ({ columnDef = columnDefEx, data = dataTest, isShadow = fals
               ))}
             </tr>
           </thead>
-          <tbody className="">
+          <tbody ref={ref}>
             {data.map((item) => (
               <tr className="text-center" key={item?.id}>
                 {columnDef.map((h) => {
