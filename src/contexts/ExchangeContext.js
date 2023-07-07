@@ -14,11 +14,17 @@ const pairToSymbolMap = {
 
 export function ExchangeContextProvider({ children }) {
   const [orders, setSavedOrders, clearLocalStorage] = useLocalStorage('orderId')
+  const [, , clearLocal] = useLocalStorage('confirm.info')
+
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [isClosingOrder, setIsClosingOrder] = useState(false)
   const [shouldRefreshPositions, setShouldRefreshPositions] = useState(false)
-  const [shouldShowPopupExecute, setShouldShowPopupExecute] = useState(false)
   const [shouldShowPlaceOrderPopup, setShouldShowPlaceOrderPopup] = useState(false)
+  const [shouldShowClosePopup, setShouldShowClosePopup] = useState(false)
+  const [executePopup, setShowPopupExecute] = useState({
+    type: 'open',
+    enable: false
+  })
 
   // index token
   const [indexToken, setIndexToken] = useState()
@@ -49,13 +55,20 @@ export function ExchangeContextProvider({ children }) {
       setShouldRefreshPositions(true)
       const orderId = log[0].args.orderId
       const listOrders = orders()
-      if (listOrders === Number(orderId)) {
+
+      if (listOrders.orderId === Number(orderId) && listOrders.type === 'open') {
         setShouldShowPlaceOrderPopup(false)
-        setShouldShowPopupExecute(true)
+        setShowPopupExecute({ enable: true, type: 'open' })
+      }
+
+      if (listOrders.orderId === Number(orderId) && listOrders.type === 'close') {
+        setShouldShowClosePopup(false)
+        setShowPopupExecute({ enable: true, type: 'close' })
+        clearLocal()
       }
 
       setTimeout(() => {
-        setShouldShowPopupExecute(false)
+        setShowPopupExecute({ enable: false, type: 'open' })
         clearLocalStorage()
       }, 3000)
     }
@@ -99,7 +112,7 @@ export function ExchangeContextProvider({ children }) {
       })
 
       const orderId = event.args?.orderId
-      setSavedOrders(Number(orderId))
+      setSavedOrders({ orderId: Number(orderId), type: 'open' })
     } catch (err) {
       console.error(err)
     }
@@ -129,8 +142,23 @@ export function ExchangeContextProvider({ children }) {
 
     setIsClosingOrder(true)
     const hash = await exchange.closeOrder(params)
-    await publicClient.waitForTransactionReceipt({ hash })
+    const receipt = await publicClient.waitForTransactionReceipt({ hash })
+    try {
+      const log = receipt.logs[0]
+      const event = decodeEventLog({
+        abi: parseAbi(["event OrderPlaced(uint256 indexed orderId)"]),
+        data: log.data,
+        topics: log.topics
+      })
+
+      const orderId = event.args?.orderId
+      setSavedOrders({ orderId: Number(orderId), type: 'close' })
+    } catch (err) {
+      console.error(err)
+    }
+
     setIsClosingOrder(false)
+    setShouldShowClosePopup(true)
   }
 
   return (
@@ -146,8 +174,9 @@ export function ExchangeContextProvider({ children }) {
         closeOrder,
         getPositions,
         shouldRefreshPositions,
-        shouldShowPopupExecute,
-        shouldShowPlaceOrderPopup
+        executePopup,
+        shouldShowPlaceOrderPopup,
+        shouldShowClosePopup
       }}
     >
       {children}
@@ -163,7 +192,8 @@ export function ExchangeContextProvider({ children }) {
  * @property {function} setPair - The function to set the pair.
  * @property {boolean} isPlacingOrder - A boolean indicating if an order is being placed.
  * @property {boolean} shouldRefreshPositions - A boolean indicating if the positions should be refreshed.
- * @property {boolean} shouldShowPopupExecute - A boolean indicating if the have order id.
+ * @property {boolean} shouldShowClosePopup  - A boolean indicating if the positions should be refreshed.
+ * @property {Object} executePopup
  * @property {boolean} shouldShowPlaceOrderPopup - A boolean indicating when place ordered.
  * @property {function} placeOrder - The function to place an order.
  * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.

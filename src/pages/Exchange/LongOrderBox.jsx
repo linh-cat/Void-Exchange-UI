@@ -11,7 +11,7 @@ import Button from "@components/Button/Button"
 import SwitchButton from "@components/SwitchButton/SwitchButton"
 import { Constants } from "@void-0x/void-sdk"
 
-import { BTC, CAKE, ETH } from "@img/token"
+import { BTC, ETH } from "@img/token"
 import InputWithToken from "@components/common/InputWithToken/InputWithToken"
 import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
@@ -20,7 +20,6 @@ import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
-import TextWithTooltip from "@components/TextWithTooltip/TextWithTooltip"
 import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
@@ -39,8 +38,7 @@ const LongOrderBox = () => {
 
   const { chain } = useNetwork()
   const { address } = useAccount()
-  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
-    useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
 
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.long")
 
@@ -193,7 +191,7 @@ const LongOrderBox = () => {
     )
   }, [payAmount, allowance, onDebounceApprove, isApproving, handleConfirmOrder, isPlacingOrder])
 
-  const showHeaderConfirmOrder = useMemo(() => {
+  const headerConfirmOrder = useMemo(() => {
     return (
       <div className="flex items-center gap-1">
         <h2>Confirm Make Order -</h2>
@@ -202,7 +200,7 @@ const LongOrderBox = () => {
     )
   }, [leverage])
 
-  const showBodyConfirmOrder = useMemo(() => {
+  const bodyConfirmOrder = useMemo(() => {
     const orderInfo = getLocal()
     return (
       <div className="flex flex-col gap-5">
@@ -243,7 +241,7 @@ const LongOrderBox = () => {
     )
   }, [getLocal, payAmount])
 
-  const showFooterConfirmOrder = useMemo(() => {
+  const footerConfirmOrder = useMemo(() => {
     return (
       <Button
         text="Place Order"
@@ -256,7 +254,7 @@ const LongOrderBox = () => {
     )
   }, [isPlacingOrder, onPlaceOrder])
 
-  const showBodyPlaceOrder = useMemo(() => {
+  const bodyPlaceOrderPopup = useMemo(() => {
     const info = tokenOptions.find((i) => i.value === indexToken)
     return (
       <>
@@ -288,8 +286,8 @@ const LongOrderBox = () => {
 
   return (
     <>
-      {shouldShowPlaceOrderPopup && <NoticePopup body={showBodyPlaceOrder} duration={5000} position="bottom-right" />}
-      {shouldShowPopupExecute && (
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} position="bottom-right" />}
+      {executePopup.enable && executePopup.type === "open" && (
         <TransactionPopup
           body={
             <div className="p-3">
@@ -306,9 +304,9 @@ const LongOrderBox = () => {
       <PlaceOrderModal
         open={orderConfirmModal}
         setOpen={setOrderConfirmModal}
-        header={showHeaderConfirmOrder}
-        body={showBodyConfirmOrder}
-        footer={showFooterConfirmOrder}
+        header={headerConfirmOrder}
+        body={bodyConfirmOrder}
+        footer={footerConfirmOrder}
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />

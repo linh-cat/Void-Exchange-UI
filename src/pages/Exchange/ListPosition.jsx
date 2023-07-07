@@ -12,6 +12,10 @@ import { formatValue, descaleValue, formatPercentage } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
+import NoticePopup from "@components/common/NoticePopup/NoticePopup"
+import Badge from "@components/common/Badge"
+import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
+import useLocalStorage from "src/hooks/useLocalStorage"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -25,7 +29,10 @@ const ListPosition = () => {
 
   const { address } = useAccount()
   const { chain } = useNetwork()
-  const { getPositions, closeOrder, isClosingOrder, shouldRefreshPositions } = useExchangeContext()
+
+  const [getLocal, setLocal] = useLocalStorage("confirm.info")
+  const { getPositions, closeOrder, isClosingOrder, shouldRefreshPositions, shouldShowClosePopup, executePopup } =
+    useExchangeContext()
   const { prices } = useTokenPriceFeed([
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
@@ -117,6 +124,7 @@ const ListPosition = () => {
   }, [positions, prices, chain])
 
   const handleConfirmOrder = (cell) => {
+    setLocal({ type: cell?.type, collateralValue: cell?.collateralValue, icon: cell?.icon, leverage: cell?.leverage })
     setSizeAmmount(cell?.raw?.size)
     setConfimInfo(cell)
     setIsCloseOrdered(true)
@@ -130,7 +138,7 @@ const ListPosition = () => {
       indexToken: position.indexToken,
       size: sizeAmount,
       // TODO: dynamic collateral delta
-      collateralDelta: sizeAmount == position.size ? position.collateralValue : BigInt(0),
+      collateralDelta: sizeAmount === position.size ? position.collateralValue : BigInt(0),
       side: position.isLong ? Side.LONG : Side.SHORT,
       price: prices[position.indexToken]
     })
@@ -158,12 +166,7 @@ const ListPosition = () => {
     [changeCollateralInfo, confirmInfo]
   )
 
-  const handleConfirmCollateral = (cell) => {
-    setChangeCollaterallInfo(cell)
-    setIsOpenedCollatoral(true)
-    setCollateralAmount(cell?.raw.collateralValue)
-  }
-
+  // confirm modal
   const headerConfirmModal = useMemo(() => {
     return confirmInfo ? (
       <div>
@@ -311,6 +314,13 @@ const ListPosition = () => {
     )
   }, [handleCloseOrder, isClosingOrder])
 
+  // collateral modal
+  const handleConfirmCollateral = (cell) => {
+    setChangeCollaterallInfo(cell)
+    setIsOpenedCollatoral(true)
+    setCollateralAmount(cell?.raw.collateralValue)
+  }
+
   const headerCollateralModal = useMemo(() => {
     return changeCollateralInfo ? (
       <div className="collateral-header">
@@ -398,6 +408,38 @@ const ListPosition = () => {
       <div></div>
     )
   }, [changeCollateralInfo, collateralAmount, calculatePosition])
+
+  // close popup
+  const bodyClosePopup = useMemo(() => {
+    const data = getLocal()
+
+    return (
+      <>
+        <div className="flex justify-between">
+          <div className="flex items-center gap-2">
+            <img src={data?.icon} alt="token" className="w-6 h-6" />
+
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-bold">Close Position</div>
+              <Badge text={data?.type} type={data?.type === "long" ? "long" : "short"} />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Type</div>
+          <div className="text-slate-500">Market</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Leverage</div>
+          <div className="text-slate-500">{data?.leverage}</div>
+        </div>
+        <div className="flex justify-between">
+          <div className="text-slate-500">Collateral</div>
+          <div className="text-slate-500">{data?.collateralValue}</div>
+        </div>
+      </>
+    )
+  }, [getLocal])
 
   const columnDef = [
     {
@@ -505,6 +547,20 @@ const ListPosition = () => {
 
   return (
     <div className="vh-20 overflow-y-auto no-scrollbar">
+      {shouldShowClosePopup && <NoticePopup body={bodyClosePopup} position="bottom-right" />}
+      {executePopup.enable && executePopup.type === "close" && (
+        <TransactionPopup
+          body={
+            <div className="p-3">
+              <h3 className="text-base">Order Executed</h3>
+              <p className="text-slate-500 text-sm mt-2">You have success the transaction</p>
+            </div>
+          }
+          position="bottom-right"
+          duration={3000}
+          isCancelIcon={true}
+        />
+      )}
       <CLosingModal
         open={isCloseOrdered}
         setOpen={setIsCloseOrdered}

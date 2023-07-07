@@ -34,8 +34,7 @@ const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [orderType, setOrderType] = useState(OrderType.MARKET)
 
-  const { indexToken, placeOrder, isPlacingOrder, shouldShowPopupExecute, shouldShowPlaceOrderPopup } =
-    useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.short")
   const { chain } = useNetwork()
   const { address } = useAccount()
@@ -294,10 +293,8 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      {shouldShowPlaceOrderPopup && (
-        <NoticePopup body={showBodyPlaceOrderSuccess} duration={5000} position="bottom-right" />
-      )}
-      {shouldShowPopupExecute && (
+      {shouldShowPlaceOrderPopup && <NoticePopup body={showBodyPlaceOrderSuccess} position="bottom-right" />}
+      {executePopup?.enable && executePopup.type === "open" && (
         <TransactionPopup
           body={
             <div className="p-3">
