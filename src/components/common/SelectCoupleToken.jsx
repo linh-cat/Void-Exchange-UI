@@ -22,6 +22,8 @@ const mappingIcon = {
   BTC: BTC,
   ETH: ETH
 }
+
+const sortIndex = ["BTC", "ETH"]
 const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
   const [values, setValues] = useState(defaultValue)
 
@@ -34,13 +36,15 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
     if (listPrice) {
       delete listPrice.LINK
 
-      return Object.keys(listPrice).map((item) => ({
-        label: mappingLabel?.[item],
-        value: mappingLabel?.[item],
-        icon: mappingIcon?.[item],
-        price: listPrice?.[item]?.priceChange,
-        dayChange: listPrice?.[item]?.priceChangePercent
-      }))
+      return Object.keys(listPrice)
+        .sort((a, b) => sortIndex.indexOf(a) - sortIndex.indexOf(b))
+        .map((item) => ({
+          label: mappingLabel?.[item],
+          value: mappingLabel?.[item],
+          icon: mappingIcon?.[item],
+          price: listPrice?.[item]?.priceChange,
+          dayChange: listPrice?.[item]?.priceChangePercent
+        }))
     }
     return []
   }, [listPrice])
