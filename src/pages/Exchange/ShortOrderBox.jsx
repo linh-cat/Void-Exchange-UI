@@ -77,6 +77,10 @@ const ShortOrderBox = () => {
         [Constants.Addresses[chain.id]?.IndexTokens?.WETH]: {
           src: ETH,
           label: "ETH"
+        },
+        [Constants.Addresses[chain.id]?.StableCoins?.USDC]: {
+          src: USDC,
+          label: "USDC"
         }
       }
     }
@@ -383,8 +387,8 @@ const ShortOrderBox = () => {
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
             <div className="flex items-center gap-1">
-              <img src={collateralInfo[indexToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
-              <span>{collateralInfo[indexToken]?.label}</span>
+              <img src={collateralInfo[selectedToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
+              <span>{collateralInfo[selectedToken]?.label}</span>
             </div>
           </div>
           <div className="collateral-value flex justify-between text-sm">
