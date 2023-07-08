@@ -427,15 +427,15 @@ const ListPosition = () => {
         </div>
         <div className="flex justify-between">
           <div className="text-slate-500">Type</div>
-          <div className="text-slate-500">Market</div>
+          <div className="">Market</div>
         </div>
         <div className="flex justify-between">
           <div className="text-slate-500">Leverage</div>
-          <div className="text-slate-500">{data?.leverage}</div>
+          <div className="">{data?.leverage}</div>
         </div>
         <div className="flex justify-between">
           <div className="text-slate-500">Collateral</div>
-          <div className="text-slate-500">{data?.collateralValue}</div>
+          <div className="">{data?.collateralValue}</div>
         </div>
       </>
     )
@@ -547,7 +547,7 @@ const ListPosition = () => {
 
   return (
     <div className="vh-20 overflow-y-auto no-scrollbar">
-      {shouldShowClosePopup && <NoticePopup body={bodyClosePopup} position="bottom-right" />}
+      {shouldShowClosePopup && <NoticePopup body={bodyClosePopup} position="bottom-right" type="error" />}
       {executePopup.enable && executePopup.type === "close" && (
         <TransactionPopup
           body={

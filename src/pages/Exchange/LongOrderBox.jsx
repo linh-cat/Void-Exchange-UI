@@ -286,7 +286,7 @@ const LongOrderBox = () => {
 
   return (
     <>
-      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} position="bottom-right" />}
+      {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} position="bottom-right" type="success" />}
       {executePopup.enable && executePopup.type === "open" && (
         <TransactionPopup
           body={
