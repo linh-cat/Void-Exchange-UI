@@ -106,8 +106,25 @@ body {
     background-color: rgba(181, 159, 31, 0.3);
 }
 
+.bg-default {
+    background-color: var(--text-default);
+}
+
+.text-default {
+    color: var(--text-default);
+}
+
+
+.text-success {
+    color: var(--main-long);
+}
+
 .text-pending {
     color: var(--main-yellow);
+}
+
+.text-error {
+    color: var(--main-short);
 }
 
 #bg .bg div {
@@ -569,14 +586,6 @@ button {
 
 .border-r {
     border-right: 1px solid rgba(163, 165, 196, 0.2);
-}
-
-.bg-default {
-    background-color: var(--text-default);
-}
-
-.text-default {
-    color: var(--text-default);
 }
 
 .active-tab {

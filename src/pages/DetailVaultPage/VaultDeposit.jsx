@@ -14,7 +14,7 @@ import useDebounce from "src/hooks/useDebounce"
 import { isEthereumAddress } from "src/types"
 import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
-import { FlashDefaultIcon } from "@icons/index"
+import { FlashDefaultIcon, FlashSuccessIcon } from "@icons/index"
 
 /**
  * SectionVaultDeposit.
@@ -116,11 +116,12 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-1">
                 <h2 className="text-base text-default">Liquidity</h2>
-                <img src={FlashDefaultIcon} alt="icon" className="w-5 h-5" />
+                <img src={FlashSuccessIcon} alt="icon" className="w-5 h-5" />
               </div>
               <p>You have deposit the vault successfully</p>
             </div>
           }
+          type="success"
           showLoadingLine={false}
         />
       )}

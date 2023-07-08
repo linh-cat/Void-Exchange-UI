@@ -17,6 +17,7 @@ import CoinbaseIcon from "./coinbase.svg"
 import GreenUpIcon from "./up.svg"
 import WalletIcon from "./ic_wallet_24.svg"
 import FlashDefaultIcon from "./FlashDefault.svg"
+import FlashSuccessIcon from './FlashDefaultSuccess.svg'
 
 export {
   LimitIcon,
@@ -37,5 +38,6 @@ export {
   CoinbaseIcon,
   GreenUpIcon,
   WalletIcon,
-  FlashDefaultIcon
+  FlashDefaultIcon,
+  FlashSuccessIcon
 }

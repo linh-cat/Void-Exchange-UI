@@ -20,7 +20,7 @@ import { Metamask, Void } from "@img/logo"
 import { MorphoBG } from "@img/bg"
 import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
-import { FlashDefaultIcon } from "@icons/index"
+import { FlashSuccessIcon } from "@icons/index"
 
 const tokens = [
   {
@@ -188,12 +188,13 @@ const FaucetPage = () => {
           body={
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-1">
-                <h2 className="text-base text-default">Faucet</h2>
-                <img src={FlashDefaultIcon} alt="icon" className="w-5 h-5" />
+                <h2 className="text-base text-success">Faucet</h2>
+                <img src={FlashSuccessIcon} alt="icon" className="w-5 h-5" />
               </div>
               <p>You have faucet the asset successfully</p>
             </div>
           }
+          type="success"
           showLoadingLine={false}
         />
       )}
