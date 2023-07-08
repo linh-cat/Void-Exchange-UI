@@ -13,8 +13,8 @@ const NoticePopup = ({ body, position = "center", type = "default", showLoadingL
 
   return (
     <div
-      className={cx("card shadow absolute w-96 rounded p-2 flex flex-col gap-2 text-sm transition-opacity z-50", {
-        "top-14 left-1/2 -translate-x-1/2": position === "center",
+      className={cx("card shadow fixed w-96 rounded p-2 flex flex-col gap-2 text-sm transition-opacity z-50", {
+        "top-20 left-1/2 -translate-x-1/2": position === "center",
         "bottom-3 right-3": position === "bottom-right",
         "top-3 left-3": position === "top-left",
         "bottom-3 left-3": position === "bottom-left",
