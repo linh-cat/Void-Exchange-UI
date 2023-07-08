@@ -5,34 +5,38 @@ import LoadingLine from "../LoadingLine/LoadingLine"
 
 import "./NoticePopup.css"
 
-const NoticePopup = ({ body, position = "center", type = "success" }) => {
+const NoticePopup = ({ body, position = "center", type = "default", showLoadingLine = true }) => {
   const [percent, setPercent] = useState(0)
   return (
     <div
       className={cx("card shadow absolute w-96 rounded p-2 flex flex-col gap-2 text-sm transition-opacity z-50", {
-        "top-28 left-1/2 -translate-x-1/2": position === "center",
+        "top-14 left-1/2 -translate-x-1/2": position === "center",
         "bottom-3 right-3": position === "bottom-right",
         "top-3 left-3": position === "top-left",
         "bottom-3 left-3": position === "bottom-left",
         "border-green": type === "success",
         "border-red": type === "error",
-        "border-yellow": type === "pending"
+        "border-yellow": type === "pending",
+        "border-default": type === "default"
       })}
     >
-      <div className="absolute right-2 top-3">
-        <div
-          className={cx({
-            "text-pending": type === "pending",
-            "green-up": type === "success",
-            "red-down": type === "error"
-          })}
-        >
-          {percent <= 100 ? "Pending" : "Executing"} ({percent <= 100 ? percent : "100"}%)
+      {showLoadingLine && (
+        <div className="absolute right-2 top-3">
+          <div
+            className={cx({
+              "text-pending": type === "pending",
+              "green-up": type === "success",
+              "red-down": type === "error",
+              "botder-default": type === "default"
+            })}
+          >
+            {percent <= 100 ? "Pending" : "Executing"} ({percent <= 100 ? percent : "100"}%)
+          </div>
         </div>
-      </div>
+      )}
 
       {body}
-      <LoadingLine loadingWidth={percent} setLoadingWidth={setPercent} type={type} />
+      {showLoadingLine && <LoadingLine loadingWidth={percent} setLoadingWidth={setPercent} type={type} />}
     </div>
   )
 }

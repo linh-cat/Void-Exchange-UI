@@ -297,7 +297,9 @@ const ShortOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      {shouldShowPlaceOrderPopup && <NoticePopup body={showBodyPlaceOrderSuccess} position="bottom-right" />}
+      {shouldShowPlaceOrderPopup && (
+        <NoticePopup body={showBodyPlaceOrderSuccess} position="bottom-right" type="success" />
+      )}
       {executePopup?.enable && executePopup.type === "open" && (
         <TransactionPopup
           body={

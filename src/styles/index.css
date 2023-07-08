@@ -25,7 +25,7 @@ body {
     --text-color-purple: #a78bfa;
     --main-card-color-secondary: #32435e;
     --bg-dropdown-list: #1b1c1f;
-    --arbitrum-blue: #28a0f0;
+    --text-default: #28a0f0;
     --border-radius-sm: 0.4rem;
     --font-sm: 1.4rem;
     --font-base: 1.5rem;
@@ -62,7 +62,7 @@ body {
 }
 
 .bg-hover:hover {
-    background-color: var(--arbitrum-blue);
+    background-color: var(--text-default);
     border-radius: 3px;
 }
 
@@ -346,11 +346,11 @@ body {
 }
 
 .link-color {
-    color: var(--arbitrum-blue);
+    color: var(--text-default);
 }
 
 .hover:hover {
-    color: var(--arbitrum-blue);
+    color: var(--text-default);
 }
 
 .btc-border {
@@ -449,7 +449,7 @@ body {
 }
 
 .active {
-    background: var(--arbitrum-blue);
+    background: var(--text-default);
     color: #ffffff;
 }
 
@@ -551,6 +551,10 @@ button {
     border: 1px solid rgba(163, 165, 196, 0.2);
 }
 
+.border-default {
+    border: 1px solid var(--text-default)
+}
+
 .border-t {
     border-top: 1px solid rgba(163, 165, 196, 0.2);
 }
@@ -567,14 +571,22 @@ button {
     border-right: 1px solid rgba(163, 165, 196, 0.2);
 }
 
+.bg-default {
+    background-color: var(--text-default);
+}
+
+.text-default {
+    color: var(--text-default);
+}
+
 .active-tab {
-    color: var(--arbitrum-blue);
-    border-bottom: 1px solid var(--arbitrum-blue);
+    color: var(--text-default);
+    border-bottom: 1px solid var(--text-default);
     background: rgba(127, 212, 130, 0.05);
 }
 
 .active-chain {
-    color: var(--arbitrum-blue);
+    color: var(--text-default);
 }
 
 a.plain {

@@ -48,7 +48,8 @@ const TableCustom = ({
   data = dataTest,
   isShadow = false,
   cellStyle = "",
-  headerClassName
+  headerClassName,
+  isBorderHeader = false
 }) => {
   const ref = useRef()
   console.log({ ref })
@@ -67,13 +68,13 @@ const TableCustom = ({
                 <th
                   className={cx(
                     {
-                      "py-1": true
+                      "py-1 ": true
                     },
                     item.headerClassName
                   )}
                   key={item?.field}
                 >
-                  <p className="font-normal border-b">{item?.headerName}</p>
+                  <p className={cx("font-normal", { "border-b": isBorderHeader })}>{item?.headerName}</p>
                 </th>
               ))}
             </tr>

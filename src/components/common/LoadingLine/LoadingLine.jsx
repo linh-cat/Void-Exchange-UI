@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import cx from "classnames"
 import "./LoadingLine.css"
 
-const LoadingLine = ({ loadingWidth, setLoadingWidth, type = "success" }) => {
+const LoadingLine = ({ loadingWidth, setLoadingWidth, type = "default" }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingWidth((prevWidth) => prevWidth + 3)
@@ -25,7 +25,8 @@ const LoadingLine = ({ loadingWidth, setLoadingWidth, type = "success" }) => {
         className={cx("rounded h-1", {
           "bg-green": type === "success",
           "bg-red": type === "error",
-          "bg-yellow": type === "pending"
+          "bg-yellow": type === "pending",
+          "bg-default": type === "default"
         })}
       />
     </div>

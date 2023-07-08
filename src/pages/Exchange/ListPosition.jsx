@@ -582,7 +582,7 @@ const ListPosition = () => {
           </div>
         }
       />
-      <TableCustom columnDef={columnDef} data={formattedPositions} cellStyle="p-3 text-xs" />
+      <TableCustom columnDef={columnDef} data={formattedPositions} cellStyle="p-3 text-xs" isBorderHeader={true} />
     </div>
   )
 }

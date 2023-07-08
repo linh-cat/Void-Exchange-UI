@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import { toast } from "react-hot-toast"
 import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import { isChainSupported } from "src/lib/chains"
@@ -8,6 +7,7 @@ import { isChainSupported } from "src/lib/chains"
 const useMintFaucet = ({ amount, selectedToken }) => {
   const [isMinting, setIsMinting] = useState(false)
   const [faucets, setFaucets] = useState(null)
+  const [shouldShowPopup, setShouldShowPopup] = useState(false)
 
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading } = useWalletClient()
@@ -38,10 +38,14 @@ const useMintFaucet = ({ amount, selectedToken }) => {
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsMinting(false)
-    toast.success("Successfully minted!")
+    setShouldShowPopup(true)
+
+    setTimeout(() => {
+      setShouldShowPopup(false)
+    }, 3000)
   }
 
-  return { isMinting, handleMint }
+  return { isMinting, handleMint, shouldShowPopup }
 }
 
 useMintFaucet.propTypes = {
