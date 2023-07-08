@@ -213,7 +213,7 @@ const ListPosition = () => {
             {[25, 50, 75, 100].map((i, idx) => (
               <div
                 className={cx("bg-slate-900 py-1 rounded cursor-pointer", {
-                  active: sizeAmount === calculatePosition(i, "size")
+                  "bg-default": sizeAmount === calculatePosition(i, "size")
                 })}
                 onClick={() => {
                   const amount = calculatePosition(i, "size")

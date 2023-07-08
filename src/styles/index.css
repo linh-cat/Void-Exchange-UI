@@ -590,3 +590,14 @@ input,
     transform: translateY(0);
     opacity: 1;
 }
+
+.leftToRight-effect {
+    transform: translateX(-200%);
+    opacity: 0;
+    transition: all 0.3s ease-in;
+}
+
+.leftToRight-effect.active {
+    transform: translateX(0);
+    opacity: 1;
+}

@@ -31,7 +31,7 @@ const TransactionPopup = ({ body, duration, onClose, position = "center", header
         "border-red text-error": type === "error",
         "border-green text-success": type === "success",
         "border-yellow text-pending": type === "warning",
-        "translateY-effect": true,
+        "leftToRight-effect": true,
         active: isVisible
       })}
     >
