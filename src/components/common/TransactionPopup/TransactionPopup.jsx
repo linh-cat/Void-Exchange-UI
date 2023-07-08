@@ -1,6 +1,6 @@
-import { CancelIcon } from "@icons/index"
 import React, { useEffect, useState } from "react"
 import cx from "classnames"
+import { CancelDefault } from "@icons/index"
 
 const TransactionPopup = ({ body, duration, onClose, position = "center", header, isCancelIcon, type = "success" }) => {
   const [showPopup, setShowPopup] = useState(true)
@@ -37,7 +37,7 @@ const TransactionPopup = ({ body, duration, onClose, position = "center", header
     >
       {isCancelIcon && (
         <div className="flex justify-end">
-          <img src={CancelIcon} className="w-4 h-4 cursor-pointer" alt="cancel icon" onClick={onClose} />
+          <img src={CancelDefault} className="w-4 h-4 cursor-pointer" alt="cancel icon" onClick={onClose} />
         </div>
       )}
       {header}

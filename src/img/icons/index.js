@@ -8,7 +8,7 @@ import BracketIcon from "./Bracket.svg"
 import CloudIcon from "./Cloud.svg"
 import ComputerIcon from "./Computer.svg"
 import CopyIcon from "./Copy.svg"
-import CancelIcon from "./Cancel.svg"
+import CancelDefault from "./Cancel.svg"
 import BaseIcon from "./base.png"
 import DBIcon from "./db.png"
 import SearchIcon from "./Search.svg"
@@ -19,6 +19,7 @@ import WalletIcon from "./ic_wallet_24.svg"
 import FlashDefaultIcon from "./FlashDefault.svg"
 import FlashSuccessIcon from "./FlashDefaultSuccess.svg"
 import ExclamationWarningIcon from "./ExclamationWarning.svg"
+import CancelCircle from "./CancelCircle.svg"
 
 export {
   LimitIcon,
@@ -31,7 +32,7 @@ export {
   ComputerIcon,
   CloudIcon,
   CopyIcon,
-  CancelIcon,
+  CancelDefault,
   BaseIcon,
   DBIcon,
   SearchIcon,
@@ -41,5 +42,6 @@ export {
   WalletIcon,
   FlashDefaultIcon,
   FlashSuccessIcon,
-  ExclamationWarningIcon
+  ExclamationWarningIcon,
+  CancelCircle
 }
