@@ -61,8 +61,8 @@ const TableCustom = ({
     >
       <div className="w-full">
         <table className="w-full min-w-full">
-          <thead className={cx("sticky top-0 border-b", headerClassName)}>
-            <tr className="tracking-wide text-slate-500">
+          <thead className={cx("sticky top-0", headerClassName)}>
+            <tr className="tracking-wide text-slate-500 sticky top-0">
               {columnDef.map((item) => (
                 <th
                   className={cx(
@@ -73,7 +73,7 @@ const TableCustom = ({
                   )}
                   key={item?.field}
                 >
-                  <p className="font-normal">{item?.headerName}</p>
+                  <p className="font-normal border-b">{item?.headerName}</p>
                 </th>
               ))}
             </tr>
