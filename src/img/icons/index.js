@@ -18,6 +18,7 @@ import GreenUpIcon from "./up.svg"
 import WalletIcon from "./ic_wallet_24.svg"
 import FlashDefaultIcon from "./FlashDefault.svg"
 import FlashSuccessIcon from "./FlashDefaultSuccess.svg"
+import ExclamationWarningIcon from "./ExclamationWarning.svg"
 
 export {
   LimitIcon,
@@ -39,5 +40,6 @@ export {
   GreenUpIcon,
   WalletIcon,
   FlashDefaultIcon,
-  FlashSuccessIcon
+  FlashSuccessIcon,
+  ExclamationWarningIcon
 }

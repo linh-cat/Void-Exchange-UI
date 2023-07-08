@@ -1,6 +1,7 @@
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 
 const useAddTokenToMetamask = () => {
+  const [showPopup, setShowPopup] = useState({ enable: false, type: "error" })
   const isMetaMask = window.ethereum.isMetaMask
   const addToken = useCallback(
     /*
@@ -21,15 +22,23 @@ const useAddTokenToMetamask = () => {
             }
           })
           .then(() => {
-            console.log("done")
-            // toast.success("Token added successfuly!")
+            setShowPopup({ enable: true, type: "success" })
+            setTimeout(() => {
+              setShowPopup({ enable: false, type: "success" })
+            }, 3000)
           })
-          .catch(() => console.error("Failed to add token!"))
+          .catch(() => {
+            setShowPopup({ enable: true, type: "pending" })
+            setTimeout(() => {
+              setShowPopup({ enable: false, type: "pending" })
+            }, 3000)
+          })
       }
     },
     [isMetaMask]
   )
-  return { addToken }
+
+  return { addToken, showPopup }
 }
 
 export default useAddTokenToMetamask

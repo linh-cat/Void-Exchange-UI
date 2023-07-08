@@ -20,7 +20,7 @@ import { Metamask, Void } from "@img/logo"
 import { MorphoBG } from "@img/bg"
 import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
-import { FlashSuccessIcon } from "@icons/index"
+import { ExclamationWarningIcon, FlashSuccessIcon } from "@icons/index"
 
 const tokens = [
   {
@@ -110,7 +110,7 @@ const FaucetPage = () => {
     setOpenModal(false)
   }
 
-  const { addToken } = useAddTokenToMetamask()
+  const { addToken, showPopup } = useAddTokenToMetamask()
 
   const getFaucetAddress = useCallback(
     (symbol) => {
@@ -164,7 +164,7 @@ const FaucetPage = () => {
             />
             <Button
               text="Add Token"
-              className="py-1 lg:py-2 inline-block w-1/3 border text-xs lg:text-sm truncate"
+              className="py-1 lg:py-2 inline-block w-1/3 border text-xs lg:text-sm truncate cursor-pointer"
               isDefault={false}
               onClick={() =>
                 addToken({
@@ -183,6 +183,37 @@ const FaucetPage = () => {
 
   return (
     <>
+      {showPopup?.enable && showPopup?.type === "success" && (
+        <NoticePopup
+          body={
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-1">
+                <h2 className="text-base text-success">Add To Metamask</h2>
+                <img src={FlashSuccessIcon} alt="icon" className="w-5 h-5" />
+              </div>
+              <p>You have add token in metamask successfully</p>
+            </div>
+          }
+          type="success"
+          showLoadingLine={false}
+        />
+      )}
+      {showPopup?.enable && showPopup?.type === "pending" && (
+        <NoticePopup
+          body={
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-1">
+                <h2 className="text-base text-pending">Add To Metamask</h2>
+                <img src={ExclamationWarningIcon} alt="icon" className="w-5 h-5" />
+              </div>
+              <p>Failed to add token!</p>
+            </div>
+          }
+          type="pending"
+          showLoadingLine={false}
+        />
+      )}
+
       {shouldShowPopup && (
         <NoticePopup
           body={
