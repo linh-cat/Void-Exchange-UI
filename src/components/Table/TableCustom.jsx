@@ -52,7 +52,6 @@ const TableCustom = ({
   isBorderHeader = false
 }) => {
   const ref = useRef()
-  console.log({ ref })
   return (
     <div
       className={cx({

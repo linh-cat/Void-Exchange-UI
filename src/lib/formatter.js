@@ -45,8 +45,10 @@ export const descaleValue = (value, decimals) => {
  *
  * @param {Number} num
  */ export const isInt = (num) => {
-  if (typeof num == "number" && !isNaN(num)) {
-    if (Number.isInteger(num)) {
+  if (!isNaN(num)) {
+    const parseNum = Number(num)
+
+    if (Number.isInteger(parseNum)) {
       return true
     } else {
       return false
@@ -62,5 +64,5 @@ export const descaleValue = (value, decimals) => {
  * @param {number} decimals
  */
 export const formatDecimals = (num, decimals = 2) => {
-  return num === "0" || isNaN(num) ? 0 : !isInt(num) ? parseFloat(num).toFixed(decimals) : num
+  return num === "0" || isNaN(num) ? 0 : isInt(num) ? num : parseFloat(num).toFixed(decimals)
 }
