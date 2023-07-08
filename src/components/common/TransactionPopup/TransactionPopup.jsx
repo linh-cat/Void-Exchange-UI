@@ -4,6 +4,7 @@ import cx from "classnames"
 
 const TransactionPopup = ({ body, duration, onClose, position = "center", header, isCancelIcon, type = "success" }) => {
   const [showPopup, setShowPopup] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,7 +14,9 @@ const TransactionPopup = ({ body, duration, onClose, position = "center", header
 
     return () => clearTimeout(timer)
   }, [onClose, duration])
-
+  useEffect(() => {
+    setIsVisible(true)
+  }, [])
   if (!showPopup) {
     return null // Do not render the popup if showPopup is false
   }
@@ -27,7 +30,9 @@ const TransactionPopup = ({ body, duration, onClose, position = "center", header
         "bottom-1 left-1": position === "bottom-left",
         "border-red text-error": type === "error",
         "border-green text-success": type === "success",
-        "border-yellow text-pending": type === "warning"
+        "border-yellow text-pending": type === "warning",
+        "translateY-effect": true,
+        active: isVisible
       })}
     >
       {isCancelIcon && (

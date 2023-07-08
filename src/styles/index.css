@@ -579,3 +579,14 @@ input,
 .fade-in.visible {
     opacity: 1;
 }
+
+.translateY-effect {
+    transform: translateY(200%);
+    opacity: 0;
+    transition: all 0.3s ease-in;
+}
+
+.translateY-effect.active {
+    transform: translateY(0);
+    opacity: 1;
+}

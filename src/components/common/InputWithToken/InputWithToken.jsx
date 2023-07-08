@@ -229,7 +229,7 @@ const InputWithToken = ({
         <div
           className={cx({
             "text-xs": true,
-            yellow: bgslide === "bg-yellow",
+            "text-pending": bgslide === "bg-yellow",
             "text-error": bgslide === "bg-red",
             "text-success": bgslide === "bg-green"
           })}
