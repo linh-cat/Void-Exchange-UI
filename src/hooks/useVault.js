@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react"
-import { toast } from "react-hot-toast"
 import { usePublicClient, useWalletClient, useNetwork } from "wagmi"
 import { Vault } from "@void-0x/void-sdk"
 import { isChainSupported } from "src/lib/chains"
 
 const useVault = (tokenAddress, vaultAddress) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [shouldShowPopup, setShouldShowPopup] = useState(false)
 
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading: isWalletLoading } = useWalletClient()
@@ -30,10 +30,13 @@ const useVault = (tokenAddress, vaultAddress) => {
     await publicClient.waitForTransactionReceipt({ hash })
 
     setIsLoading(false)
-    toast.success("Successfully deposited!")
+    setShouldShowPopup(true)
+    setTimeout(() => {
+      setShouldShowPopup(false)
+    }, 3000);
   }
 
-  return { isLoading, deposit }
+  return { isLoading, deposit, shouldShowPopup }
 }
 
 export default useVault
