@@ -1,12 +1,16 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import cx from "classnames"
 
 import LoadingLine from "../LoadingLine/LoadingLine"
 
-import "./NoticePopup.css"
-
 const NoticePopup = ({ body, position = "center", type = "default", showLoadingLine = true }) => {
   const [percent, setPercent] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    setIsVisible(true)
+  }, [])
+
   return (
     <div
       className={cx("card shadow absolute w-96 rounded p-2 flex flex-col gap-2 text-sm transition-opacity z-50", {
@@ -17,7 +21,9 @@ const NoticePopup = ({ body, position = "center", type = "default", showLoadingL
         "border-green": type === "success",
         "border-red": type === "error",
         "border-yellow": type === "pending",
-        "border-default": type === "default"
+        "border-default": type === "default",
+        "fade-in": true,
+        visible: isVisible
       })}
     >
       {showLoadingLine && (

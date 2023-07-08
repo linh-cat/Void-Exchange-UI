@@ -434,16 +434,14 @@ body {
 
 .text-title-section {
     display: inline-flex;
-    background-image: linear-gradient(
-        150deg,
-        #4f7d89,
-        #4f7d89 15%,
-        #2193a7 25%,
-        #189fd9,
-        #292986 50%,
-        #1e84df 80%,
-        #1e84df 100%
-    );
+    background-image: linear-gradient(150deg,
+            #4f7d89,
+            #4f7d89 15%,
+            #2193a7 25%,
+            #189fd9,
+            #292986 50%,
+            #1e84df 80%,
+            #1e84df 100%);
     font-weight: 600;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -570,4 +568,14 @@ input,
 
 .rotate180 {
     transform: rotate(180deg);
+}
+
+/* effect css */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.fade-in.visible {
+    opacity: 1;
 }
