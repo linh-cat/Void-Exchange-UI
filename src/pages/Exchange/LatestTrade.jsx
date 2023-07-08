@@ -19,7 +19,7 @@ const LatestTrade = () => {
         </thead>
         <tbody className="">
           <tr className="border-b">
-            <th scope="row" className="px-6 py-4 green-up">
+            <th scope="row" className="px-6 py-4 text-success">
               178.2
             </th>
             <td className="px-6 py-4">$2.7622</td>

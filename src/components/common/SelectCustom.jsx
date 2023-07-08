@@ -63,7 +63,7 @@ const SelectCustom = ({ options, label, tooltip, className, classNameInput, clas
 
           <img src={DownIcon} alt="down" className={openList ? "rotate180" : ""} />
         </div>
-        <div className={`${openList ? "open" : "close"}  dd-list round-b w-full h-full bg-input p-2 `}>
+        <div className={`${openList ? "open" : "close"}  dd-list round-b w-full h-full bg-dropdown p-2 `}>
           {options?.map((op, idx) => (
             <div key={idx}>
               <div

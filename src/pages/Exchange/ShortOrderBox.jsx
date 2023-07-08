@@ -196,7 +196,7 @@ const ShortOrderBox = () => {
     return (
       <div className="flex items-center gap-1">
         <h2>Confirm Make Order -</h2>
-        <div className="red-down">Short {orderInfo?.leverage}x</div>
+        <div className="text-error">Short {orderInfo?.leverage}x</div>
       </div>
     )
   }, [getLocal])

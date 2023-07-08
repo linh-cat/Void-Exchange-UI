@@ -157,7 +157,7 @@ const InputCustom = ({
         />
         {showMaxBtn && (
           <label
-            className="cursor-pointer border rounded px-1 py-1 text-xs bg-input"
+            className="cursor-pointer border rounded px-1 py-1 text-xs bg-dropdown"
             onClick={() => handleChange(balance?.formatted)}
           >
             Max

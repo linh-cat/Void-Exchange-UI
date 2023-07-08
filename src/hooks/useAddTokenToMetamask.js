@@ -21,7 +21,7 @@ const useAddTokenToMetamask = () => {
             }
           })
           .then(() => {
-            console.log('done')
+            console.log("done")
             // toast.success("Token added successfuly!")
           })
           .catch(() => console.error("Failed to add token!"))

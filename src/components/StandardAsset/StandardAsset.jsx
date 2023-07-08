@@ -54,8 +54,8 @@ const columnDef = [
             />
             <div
               className={cx({
-                "red-down": cell?.["24h"] < 0,
-                "green-up": cell?.["24h"] > 0
+                "text-error": cell?.["24h"] < 0,
+                "text-success": cell?.["24h"] > 0
               })}
             >
               {percentFormat}

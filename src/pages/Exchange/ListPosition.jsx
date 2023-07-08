@@ -174,7 +174,7 @@ const ListPosition = () => {
           <div>Close {confirmInfo?.token} Position -</div>
           <div
             className={cx(
-              { "green-up": confirmInfo?.type === "long", "red-down": confirmInfo?.type === "short" },
+              { "text-success": confirmInfo?.type === "long", "text-error": confirmInfo?.type === "short" },
               "capitalize"
             )}
           >
@@ -272,8 +272,8 @@ const ListPosition = () => {
             <div className="text-sm flex items-center gap-1">
               <div
                 className={cx({
-                  "green-up": confirmInfo?.isProfitable,
-                  "red-down": !confirmInfo?.isProfitable
+                  "text-success": confirmInfo?.isProfitable,
+                  "text-error": !confirmInfo?.isProfitable
                 })}
               >
                 {confirmInfo?.pnlRoe}
@@ -328,8 +328,8 @@ const ListPosition = () => {
           Change Collateral -{" "}
           <span
             className={cx({
-              "red-down": changeCollateralInfo?.type === "short",
-              "green-up": changeCollateralInfo?.type === "long"
+              "text-error": changeCollateralInfo?.type === "short",
+              "text-success": changeCollateralInfo?.type === "long"
             })}
           >
             {changeCollateralInfo?.type} {changeCollateralInfo?.token}
@@ -455,8 +455,8 @@ const ListPosition = () => {
               <label>{cell?.market}</label>
               <div
                 className={cx("text-xs", {
-                  "green-up": cell?.type === "long",
-                  "red-down": cell?.type === "short"
+                  "text-success": cell?.type === "long",
+                  "text-error": cell?.type === "short"
                 })}
               >
                 {cell?.type === "long" ? "Long" : "Short"} {cell?.leverage}
@@ -516,7 +516,7 @@ const ListPosition = () => {
 
         return (
           <div className="flex flex-col gap-1">
-            <h3 className={cx(cell.isProfitable ? "green-up" : "red-down")}>{cell?.pnlRoe}</h3>
+            <h3 className={cx(cell.isProfitable ? "text-success" : "text-error")}>{cell?.pnlRoe}</h3>
             <div className="text-slate-500 font-medium">{formatPercentage(percentPNL) || 0}</div>
           </div>
         )

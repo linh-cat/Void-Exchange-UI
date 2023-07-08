@@ -191,7 +191,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                   <div
                     className={cx({
                       "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                      "active-tab": tab === "deposit"
+                      "active-tab-default": tab === "deposit"
                     })}
                     onClick={() => onChangeTab("deposit")}
                   >
@@ -200,7 +200,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                   <div
                     className={cx({
                       "w-1/2 text-center py-2 text-sm cursor-pointer tracking-wider": true,
-                      "active-tab": tab === "withdraw"
+                      "active-tab-default": tab === "withdraw"
                     })}
                     onClick={() => onChangeTab("withdraw")}
                   >
@@ -306,17 +306,17 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                   <div className="flex justify-between">
                     <div>
                       <label className="text-xs text-slate-500">Estimated Profit Next Epoch</label>
-                      <div className="green-up">+21.04</div>
+                      <div className="text-success">+21.04</div>
                     </div>
                     <div>
                       <label className="text-xs text-slate-500">Estimated Loss</label>
-                      <div className="red-down">-320</div>
+                      <div className="text-error">-320</div>
                     </div>
                   </div>
                   <div className="flex justify-between">
                     <div>
                       <label className="text-xs text-slate-500">Total estimated unrealized P&L</label>
-                      <div className="green-up">+$4,222</div>
+                      <div className="text-success">+$4,222</div>
                     </div>
                   </div>
                 </div>

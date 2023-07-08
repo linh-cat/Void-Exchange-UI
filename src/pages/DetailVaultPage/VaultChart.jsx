@@ -32,9 +32,9 @@ const columnDef = [
     cellRenderer: () => {
       return (
         <div className="flex items-center justify-center gap-1">
-          <div className="cursor-pointer link-color dotted-underline">Deposit</div>
-          <div className="link-color">|</div>
-          <div className="cursor-pointer link-color dotted-underline">Withdraw</div>
+          <div className="cursor-pointer text-default dotted-underline">Deposit</div>
+          <div className="text-default">|</div>
+          <div className="cursor-pointer text-default dotted-underline">Withdraw</div>
         </div>
       )
     }
@@ -71,22 +71,22 @@ const VaultChart = () => {
             <Card className="liquidity p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Liquidity</label>
               <div className="">$11.06m</div>
-              <span className="text-xs green-up">+0.08</span>
+              <span className="text-xs text-success">+0.08</span>
             </Card>
             <Card className="volume p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Volume(24h)</label>
               <div>$13.82k</div>
-              <span className="red-down text-xs">-73.40%</span>
+              <span className="text-error text-xs">-73.40%</span>
             </Card>
             <Card className="fee p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Fee(24h)</label>
               <div>$41.27</div>
-              <span className="red-down text-xs">-73.04</span>
+              <span className="text-error text-xs">-73.04</span>
             </Card>
             <Card className="transaction p-3" hasShadow={true}>
               <label className="text-slate-500 text-xs">Transaction(24h)</label>
               <div>3</div>
-              <span className="red-down text-xs">-40%</span>
+              <span className="text-error text-xs">-40%</span>
             </Card>
           </div>
           <div className="relative">

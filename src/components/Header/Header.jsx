@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <div
       className={cx({
-        "blur-bg sticky": y > 0
+        "blur-bg sticky top-0 w-full": y > 0
       })}
     >
       <header

@@ -195,7 +195,7 @@ const LongOrderBox = () => {
     return (
       <div className="flex items-center gap-1">
         <h2>Confirm Make Order -</h2>
-        <div className="green-up">Long {leverage}x</div>
+        <div className="text-success">Long {leverage}x</div>
       </div>
     )
   }, [leverage])

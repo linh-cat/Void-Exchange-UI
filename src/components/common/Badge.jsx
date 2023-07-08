@@ -7,8 +7,8 @@ const Badge = ({ text, type = "default" }) => {
     <span
       className={cx("text-xs mr-2 px-2 py-0.5 rounded-md badge capitalize", {
         default: type === "default",
-        "short bg-errorLight red-down": type === "short",
-        "long bg-successLight green-up": type === "long"
+        "short bg-errorLight text-error": type === "short",
+        "long bg-successLight text-success": type === "long"
       })}
     >
       {text}

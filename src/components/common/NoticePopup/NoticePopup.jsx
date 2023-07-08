@@ -25,8 +25,8 @@ const NoticePopup = ({ body, position = "center", type = "default", showLoadingL
           <div
             className={cx({
               "text-pending": type === "pending",
-              "green-up": type === "success",
-              "red-down": type === "error",
+              "text-success": type === "success",
+              "text-error": type === "error",
               "botder-default": type === "default"
             })}
           >

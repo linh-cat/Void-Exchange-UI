@@ -32,7 +32,7 @@ const providers = [
   {
     value: "chainlink",
     label: "Chain Link",
-    effectActive: "active-chainlink",
+    effectActive: "text-defaultlink",
     icon: ChainLink
   },
   {
@@ -108,7 +108,7 @@ const MarketPage = () => {
                     <Tab
                       className={cx({
                         "py-3 px-5": true,
-                        "active-tab": priceFeedTab === 0
+                        "active-tab-default": priceFeedTab === 0
                       })}
                     >
                       Provider
@@ -116,7 +116,7 @@ const MarketPage = () => {
                     <Tab
                       className={cx({
                         "py-3 px-5": true,
-                        "active-tab": priceFeedTab === 1
+                        "active-tab-default": priceFeedTab === 1
                       })}
                     >
                       Customized Code
@@ -177,7 +177,7 @@ const MarketPage = () => {
                             cellRenderer: (cell) => {
                               return (
                                 <div
-                                  className="text-center link-color cursor-pointer py-3 px-2 text-sm"
+                                  className="text-center text-default cursor-pointer py-3 px-2 text-sm"
                                   onClick={() => setIsShowModal(true)}
                                 >
                                   {cell?.modal1}
@@ -191,7 +191,7 @@ const MarketPage = () => {
                             cellRenderer: (cell) => {
                               return (
                                 <div
-                                  className="text-center link-color cursor-pointer py-3 px-2 text-sm"
+                                  className="text-center text-default cursor-pointer py-3 px-2 text-sm"
                                   onClick={() => setIsShowModal(true)}
                                 >
                                   {cell?.modal2}
@@ -205,7 +205,7 @@ const MarketPage = () => {
                             cellRenderer: (cell) => {
                               return (
                                 <div
-                                  className="text-center link-color cursor-pointer py-3 px-2 text-sm"
+                                  className="text-center text-default cursor-pointer py-3 px-2 text-sm"
                                   onClick={() => setIsShowModal(true)}
                                 >
                                   {cell?.modal3}

@@ -72,8 +72,8 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk }) => {
           <div
             className={cx(
               {
-                "bg-successLight text-green green-up": risk === "low",
-                "bg-errorLight text-green red-down": risk === "high",
+                "bg-successLight text-green text-success": risk === "low",
+                "bg-errorLight text-green text-error": risk === "high",
                 "bg-pending text-pending": risk === "medium"
               },
               "py-1 px-2 rounded capitalize text-xs"

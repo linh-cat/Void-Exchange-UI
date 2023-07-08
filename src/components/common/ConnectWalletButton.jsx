@@ -116,7 +116,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     <span
                       className={cx({
                         "cursor-pointer px-3 h-12 flex items-center hover:bg-slate-800": true,
-                        "active-chain": c.id === currentChain.id
+                        "text-default": c.id === currentChain.id
                       })}
                       key={c.id}
                       onClick={() => switchNetwork(c.id)}
@@ -197,7 +197,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     </div>
                     <Button
                       text={<div>{truncate(address, 5)}</div>}
-                      className="border px-2 py-1 bg-input"
+                      className="border px-2 py-1 bg-dropdown"
                       isDefault={false}
                     />
                     <div>
@@ -243,7 +243,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     <div className="flex justify-between items-center">
                       <label className="text-slate-400">Connect with {connector?.name}</label>
                       <div>
-                        <div onClick={() => disconnect()} className="link-color cursor-pointer">
+                        <div onClick={() => disconnect()} className="text-default cursor-pointer">
                           Disconnect
                         </div>
                       </div>

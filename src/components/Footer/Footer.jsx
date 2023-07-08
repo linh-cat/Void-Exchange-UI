@@ -9,34 +9,34 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-4 pb-5">
           <div className="flex flex-col gap-2 justify-center items-center">
             <h3>Void Exchange</h3>
-            <Link className="text-slate-500 text-sm hover">App</Link>
-            <Link className="text-slate-500 text-sm hover">Trading</Link>
-            <Link className="text-slate-500 text-sm hover">Documentation</Link>
-            <Link className="text-slate-500 text-sm hover">Security</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">App</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Trading</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Documentation</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Security</Link>
           </div>
           <div className="flex flex-col gap-2 justify-center items-center">
             <h3>Void Exchange</h3>
-            <Link className="text-slate-500 text-sm hover">App</Link>
-            <Link className="text-slate-500 text-sm hover">Trading</Link>
-            <Link className="text-slate-500 text-sm hover">Documentation</Link>
-            <Link className="text-slate-500 text-sm hover">Security</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">App</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Trading</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Documentation</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Security</Link>
           </div>
           <div className="flex flex-col gap-2 justify-center items-center">
             <h3>Void Exchange</h3>
-            <Link className="text-slate-500 text-sm hover">App</Link>
-            <Link className="text-slate-500 text-sm hover">Trading</Link>
-            <Link className="text-slate-500 text-sm hover">Documentation</Link>
-            <Link className="text-slate-500 text-sm hover">Security</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">App</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Trading</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Documentation</Link>
+            <Link className="text-slate-500 text-sm hover-text-default">Security</Link>
           </div>
           <div className="flex flex-col gap-2 items-center">
             <h3>Governance</h3>
-            <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <Link className="text-slate-500 text-sm hover-text-default flex items-center gap-3">
               <img src={Github} alt="github" className="w-4 h-4" /> <div>Github</div>
             </Link>
-            <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <Link className="text-slate-500 text-sm hover-text-default flex items-center gap-3">
               <img src={Discord} alt="discord" className="w-4 h-4 bg-white rounded" /> <div>Discord</div>
             </Link>
-            <Link className="text-slate-500 text-sm hover flex items-center gap-3">
+            <Link className="text-slate-500 text-sm hover-text-default flex items-center gap-3">
               <img src={Twitter} alt="twitter" className="w-4 h-4 bg-white rounded" /> <div>Twitter</div>
             </Link>
           </div>

@@ -33,7 +33,7 @@ const useVault = (tokenAddress, vaultAddress) => {
     setShouldShowPopup(true)
     setTimeout(() => {
       setShouldShowPopup(false)
-    }, 3000);
+    }, 3000)
   }
 
   return { isLoading, deposit, shouldShowPopup }

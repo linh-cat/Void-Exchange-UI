@@ -206,7 +206,7 @@ const InputWithToken = ({
           </div>
           <div
             className={cx({
-              "border px-1 py-1 rounded bg-input cursor-pointer text-xs": true,
+              "border px-1 py-1 rounded bg-dropdown cursor-pointer text-xs": true,
               disabled: disabled
             })}
             onClick={() => onChangeInput(balance?.formatted)}
@@ -230,8 +230,8 @@ const InputWithToken = ({
           className={cx({
             "text-xs": true,
             yellow: bgslide === "bg-yellow",
-            "red-down": bgslide === "bg-red",
-            "green-up": bgslide === "bg-green"
+            "text-error": bgslide === "bg-red",
+            "text-success": bgslide === "bg-green"
           })}
         >
           {textContentInput}

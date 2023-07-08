@@ -13,8 +13,8 @@ const pairToSymbolMap = {
 }
 
 export function ExchangeContextProvider({ children }) {
-  const [orders, setSavedOrders, clearLocalStorage] = useLocalStorage('orderId')
-  const [, , clearLocal] = useLocalStorage('confirm.info')
+  const [orders, setSavedOrders, clearLocalStorage] = useLocalStorage("orderId")
+  const [, , clearLocal] = useLocalStorage("confirm.info")
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [isClosingOrder, setIsClosingOrder] = useState(false)
@@ -22,7 +22,7 @@ export function ExchangeContextProvider({ children }) {
   const [shouldShowPlaceOrderPopup, setShouldShowPlaceOrderPopup] = useState(false)
   const [shouldShowClosePopup, setShouldShowClosePopup] = useState(false)
   const [executePopup, setShowPopupExecute] = useState({
-    type: 'open',
+    type: "open",
     enable: false
   })
 
@@ -56,19 +56,19 @@ export function ExchangeContextProvider({ children }) {
       const orderId = log[0].args.orderId
       const listOrders = orders()
 
-      if (listOrders.orderId === Number(orderId) && listOrders.type === 'open') {
+      if (listOrders.orderId === Number(orderId) && listOrders.type === "open") {
         setShouldShowPlaceOrderPopup(false)
-        setShowPopupExecute({ enable: true, type: 'open' })
+        setShowPopupExecute({ enable: true, type: "open" })
       }
 
-      if (listOrders.orderId === Number(orderId) && listOrders.type === 'close') {
+      if (listOrders.orderId === Number(orderId) && listOrders.type === "close") {
         setShouldShowClosePopup(false)
-        setShowPopupExecute({ enable: true, type: 'close' })
+        setShowPopupExecute({ enable: true, type: "close" })
         clearLocal()
       }
 
       setTimeout(() => {
-        setShowPopupExecute({ enable: false, type: 'open' })
+        setShowPopupExecute({ enable: false, type: "open" })
         clearLocalStorage()
       }, 3000)
     }
@@ -112,7 +112,7 @@ export function ExchangeContextProvider({ children }) {
       })
 
       const orderId = event.args?.orderId
-      setSavedOrders({ orderId: Number(orderId), type: 'open' })
+      setSavedOrders({ orderId: Number(orderId), type: "open" })
     } catch (err) {
       console.error(err)
     }
@@ -152,7 +152,7 @@ export function ExchangeContextProvider({ children }) {
       })
 
       const orderId = event.args?.orderId
-      setSavedOrders({ orderId: Number(orderId), type: 'close' })
+      setSavedOrders({ orderId: Number(orderId), type: "close" })
     } catch (err) {
       console.error(err)
     }

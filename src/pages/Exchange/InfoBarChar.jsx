@@ -37,8 +37,8 @@ const InfoBarChar = () => {
         <div className="top-chart-price">
           <label
             className={cx("text-xl font-bold", {
-              "red-down": status === -1,
-              "green-up": status === 1
+              "text-error": status === -1,
+              "text-success": status === 1
             })}
           >
             {marketPrice && marketPrice}
@@ -61,8 +61,8 @@ const InfoBarChar = () => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">24h Change(%)</h3>
-          <div className="text-xs mt-auto flex items-center gap-1 green-up">
-            <span className={cx({ "red-down": Number(dataForMapping?.priceChangePercent) < 0 })}>
+          <div className="text-xs mt-auto flex items-center gap-1 text-success">
+            <span className={cx({ "text-error": Number(dataForMapping?.priceChangePercent) < 0 })}>
               {dataForMapping && formatPercentage(dataForMapping?.priceChangePercent)}
             </span>
             {dataForMapping && Number(dataForMapping?.priceChangePercent) > 0 && (
@@ -81,8 +81,8 @@ const InfoBarChar = () => {
           <div
             className={cx(
               {
-                "red-down": Number(dataForMapping?.priceChange) < 0,
-                "green-up": Number(dataForMapping?.priceChange) > 0
+                "text-error": Number(dataForMapping?.priceChange) < 0,
+                "text-success": Number(dataForMapping?.priceChange) > 0
               },
               "text-xs mt-auto "
             )}
@@ -120,7 +120,7 @@ const InfoBarChar = () => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Next Fund Rate</h3>
-          <div className="text-xs mt-auto red-down">-0.00013%</div>
+          <div className="text-xs mt-auto text-error">-0.00013%</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="h-3/5 w-1px bg-slate-700"></div>

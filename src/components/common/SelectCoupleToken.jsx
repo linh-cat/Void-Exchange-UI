@@ -109,16 +109,16 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
                 </th>
                 <td
                   className={cx("px-8 py-4", {
-                    "green-up": Number(item.dayChange) > 0,
-                    "red-down": Number(item.dayChange) < 0
+                    "text-success": Number(item.dayChange) > 0,
+                    "text-error": Number(item.dayChange) < 0
                   })}
                 >
                   {formatDollar(item.price)}
                 </td>
                 <td
                   className={cx("px-8 py-4", {
-                    "green-up": Number(item.dayChange) > 0,
-                    "red-down": Number(item.dayChange) < 0
+                    "text-success": Number(item.dayChange) > 0,
+                    "text-error": Number(item.dayChange) < 0
                   })}
                 >
                   {formatPercentage(item.dayChange)}

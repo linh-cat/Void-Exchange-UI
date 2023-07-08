@@ -18,7 +18,7 @@ const Banner = () => {
       <div className="boom-container">
         <div className="shape circle big white"></div>
         <div className="shape circle white"></div>
-        <div className="shape triangle big yellow"></div>
+        <div className="shape triangle big text-pending"></div>
         <div className="shape disc white"></div>
         <div className="shape triangle blue"></div>
       </div>
@@ -69,7 +69,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm border bg-errorLight rounded px-2">
                         <img src={DownIconRed} alt="down" className="" />
-                        <label className="red-down">-0.01</label>
+                        <label className="text-error">-0.01</label>
                       </div>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm rounded bg-successLight px-2">
                         <img src={DownIconGreen} alt="down" className="rotate-180" />
-                        <label className="green-up">-0.01</label>
+                        <label className="text-success">-0.01</label>
                       </div>
                     </div>
                   </div>
@@ -101,7 +101,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm rounded px-2 bg-successLight">
                         <img src={DownIconGreen} alt="down" className="rotate-180" />
-                        <label className="green-up">-0.01</label>
+                        <label className="text-success">-0.01</label>
                       </div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm rounded bg-errorLight px-2">
                         <img src={DownIconRed} alt="down" className="" />
-                        <label className="red-down">-0.01</label>
+                        <label className="text-error">-0.01</label>
                       </div>
                     </div>
                   </div>
@@ -133,7 +133,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
                         <img src={DownIconRed} alt="down" className="" />
-                        <label className="red-down">-0.01</label>
+                        <label className="text-error">-0.01</label>
                       </div>
                     </div>
                   </div>
@@ -149,7 +149,7 @@ const Banner = () => {
                       <div>$1</div>
                       <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
                         <img src={DownIconRed} alt="down" className="" />
-                        <label className="red-down">-0.01</label>
+                        <label className="text-error">-0.01</label>
                       </div>
                     </div>
                   </div>
