@@ -1,5 +1,4 @@
 import { useCallback } from "react"
-import { toast } from "react-hot-toast"
 
 const useAddTokenToMetamask = () => {
   const isMetaMask = window.ethereum.isMetaMask
@@ -22,9 +21,10 @@ const useAddTokenToMetamask = () => {
             }
           })
           .then(() => {
-            toast.success("Token added successfuly!")
+            console.log('done')
+            // toast.success("Token added successfuly!")
           })
-          .catch(() => toast.error("Failed to add token!"))
+          .catch(() => console.error("Failed to add token!"))
       }
     },
     [isMetaMask]

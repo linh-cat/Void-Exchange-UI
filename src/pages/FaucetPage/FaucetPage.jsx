@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react"
 
-import { toast } from "react-hot-toast"
 import { Faucet, Constants } from "@void-0x/void-sdk"
 import { useWalletClient, useNetwork, useContractReads } from "wagmi"
 import { formatUnits } from "viem"
@@ -116,7 +115,7 @@ const FaucetPage = () => {
   const getFaucetAddress = useCallback(
     (symbol) => {
       if (!chain || !chain.id) {
-        toast.error("Please connect to Metamask!")
+        console.error("Please connect metamask")
         return
       }
 
