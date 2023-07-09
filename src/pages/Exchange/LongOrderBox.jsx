@@ -17,7 +17,7 @@ import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
-import { formatValue } from "src/lib/formatter"
+import { formatDollar, formatValue } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import PlaceOrderModal from "./PlaceOrderModal"
@@ -109,18 +109,13 @@ const LongOrderBox = () => {
   }, [balance, indexPrice, leverage, payAmount])
 
   const collateralValue = useMemo(() => {
-    const value = getCollateralValue(
-      parseUnits(payAmount?.toString(), balance?.decimals),
-      indexPrice,
-      /* global BigInt */
-      BigInt(leverage)
-    )
+    const value = getCollateralValue(parseUnits(payAmount?.toString(), balance?.decimals), indexPrice)
     const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[selectedToken]
     const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
 
     const destinationValue = value ? formatValue(value, valueDecimals) : "0.0"
     return destinationValue
-  }, [balance?.decimals, chain?.id, indexPrice, leverage, payAmount, selectedToken])
+  }, [balance?.decimals, chain?.id, indexPrice, payAmount, selectedToken])
 
   useEffect(() => {
     if (!collateralModal) {
@@ -248,7 +243,7 @@ const LongOrderBox = () => {
             <div>{orderInfo?.leverage}x</div>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <h3 className="text-slate-500 dotted-underline">Position</h3>
+            <h3 className="text-slate-500 dotted-underline">Position Size</h3>
             <div>{orderInfo?.positionSize}</div>
           </div>
         </div>
@@ -408,8 +403,9 @@ const LongOrderBox = () => {
             <span>{collateralValue}</span>
           </div>
           <div className="flex justify-between items-center">
-            <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
-            <div className="text-sm">{positionSize}</div>
+            <h3 className="text-sm text-slate-500 dotted-underline">Position Size</h3>
+
+            <div className="text-sm">{positionSize > 0 ? formatDollar(positionSize) : "-"}</div>
           </div>
 
           <div className="collateral-leverage flex justify-between text-sm">

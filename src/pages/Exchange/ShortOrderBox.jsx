@@ -17,7 +17,7 @@ import useAllowance from "src/hooks/useAllowance"
 import useDebounce from "src/hooks/useDebounce"
 import useTokenPriceFeed, { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
-import { formatValue } from "src/lib/formatter"
+import { formatDollar, formatValue } from "src/lib/formatter"
 import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
@@ -69,18 +69,13 @@ const ShortOrderBox = () => {
   }, [balance, selectedToken, prices, leverage, payAmount])
 
   const collateralValue = useMemo(() => {
-    const value = getCollateralValue(
-      parseUnits(payAmount?.toString(), balance?.decimals),
-      indexPrice,
-      /* global BigInt */
-      BigInt(leverage)
-    )
+    const value = getCollateralValue(parseUnits(payAmount?.toString(), balance?.decimals), indexPrice)
     const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[selectedToken]
     const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
 
     const destinationValue = value ? formatValue(value, valueDecimals) : "0.0"
     return destinationValue
-  }, [balance?.decimals, chain?.id, indexPrice, leverage, payAmount, selectedToken])
+  }, [balance?.decimals, chain?.id, indexPrice, payAmount, selectedToken])
 
   const collateralInfo = useMemo(() => {
     if (chain) {
@@ -417,8 +412,8 @@ const ShortOrderBox = () => {
             <span>{collateralValue}</span>
           </div>
           <div className="collateral-value flex justify-between text-sm">
-            <label className="text-slate-500 dotted-underline">Position</label>
-            <div className="">{positionSize}</div>
+            <label className="text-slate-500 dotted-underline">Position Size</label>
+            <div className="">{positionSize > 0 ? formatDollar(positionSize) : "-"}</div>
           </div>
           <div className="collateral-leverage flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>

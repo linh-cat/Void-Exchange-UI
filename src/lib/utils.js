@@ -1,12 +1,11 @@
 /**
  * @param {BigInt} purchaseAmount
- * @param {BigInt} price
- * @param {BigInt} leverage
+ * @param {BigInt} currentPrice
 */
 
-export const getCollateralValue = (purchaseAmount, price, leverage) => {
-    if (purchaseAmount && leverage && price) {
-        return purchaseAmount * leverage * price
+export const getCollateralValue = (purchaseAmount, currentPrice) => {
+    if (purchaseAmount && currentPrice) {
+        return purchaseAmount * currentPrice
     }
     return 0n
 }
