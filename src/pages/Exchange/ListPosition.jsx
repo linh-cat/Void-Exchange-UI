@@ -332,11 +332,14 @@ const ListPosition = () => {
             {changeCollateralInfo?.type} {changeCollateralInfo?.token}
           </span>
         </label>
-        <div className="colateral-tab font-medium mt-3 bg-slate-900">
-          <button className={cx({ active: collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
+        <div className="colateral-tab font-medium mt-3 bg-slate-900 overflow-hidden">
+          <button className={cx({ "bg-default": collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
             Add
           </button>
-          <button className={cx({ active: collateralTab === "remove" })} onClick={() => setCollateralTab("remove")}>
+          <button
+            className={cx({ "bg-default": collateralTab === "remove" })}
+            onClick={() => setCollateralTab("remove")}
+          >
             Remove
           </button>
         </div>
