@@ -84,7 +84,6 @@ const ListPosition = () => {
         Constants.ORACLE_PRICE_DECIMALS
       )
       const collateralValue = formatValue(position.collateralValue, valueDecimals)
-
       const rawValue = {
         ...position,
         pnl,
@@ -263,9 +262,7 @@ const ListPosition = () => {
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Collateral</h5>
-            <div className="text-sm">
-              <div>{confirmInfo?.collateralValue}</div>
-            </div>
+            <div className="text-sm">{confirmInfo?.collateralValue}</div>
           </div>
           <div className="flex text-sm items-center justify-between">
             <h5 className="text-slate-500">Pnl & Roe</h5>
@@ -367,7 +364,7 @@ const ListPosition = () => {
               <button
                 className={cx({
                   "bg-slate-800 w-1/4 py-1": true,
-                  active: collateralAmount === calculatePosition(c, "collateral")
+                  "bg-default": collateralAmount === calculatePosition(c, "collateral")
                 })}
                 key={idx}
                 onClick={() => {

@@ -23,6 +23,7 @@ import TransactionPopup from "@components/common/TransactionPopup/TransactionPop
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import useLocalStorage from "src/hooks/useLocalStorage"
+import { getCollateralValue } from "src/lib/utils"
 
 const ShortOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
@@ -66,6 +67,20 @@ const ShortOrderBox = () => {
     }
     return 0
   }, [balance, selectedToken, prices, leverage, payAmount])
+
+  const collateralValue = useMemo(() => {
+    const value = getCollateralValue(
+      parseUnits(payAmount?.toString(), balance?.decimals),
+      indexPrice,
+      /* global BigInt */
+      BigInt(leverage)
+    )
+    const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[selectedToken]
+    const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
+
+    const destinationValue = value ? formatValue(value, valueDecimals) : "0.0"
+    return destinationValue
+  }, [balance?.decimals, chain?.id, indexPrice, leverage, payAmount, selectedToken])
 
   const collateralInfo = useMemo(() => {
     if (chain) {
@@ -388,14 +403,18 @@ const ShortOrderBox = () => {
           </div>
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
-            <div className="flex items-center gap-1">
-              <img src={collateralInfo[selectedToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
-              <span>{collateralInfo[selectedToken]?.label}</span>
-            </div>
+            {collateralInfo[selectedToken] ? (
+              <div className="flex items-center gap-1">
+                <img src={collateralInfo[selectedToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
+                <span>{collateralInfo[selectedToken]?.label}</span>
+              </div>
+            ) : (
+              "-"
+            )}
           </div>
           <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
-            <span>-</span>
+            <span>{collateralValue}</span>
           </div>
           <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Position</label>

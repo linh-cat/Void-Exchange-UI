@@ -23,6 +23,7 @@ import Badge from "@components/common/Badge"
 import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
+import { getCollateralValue } from "src/lib/utils"
 
 const LongOrderBox = () => {
   // UI state
@@ -106,6 +107,20 @@ const LongOrderBox = () => {
     }
     return 0
   }, [balance, indexPrice, leverage, payAmount])
+
+  const collateralValue = useMemo(() => {
+    const value = getCollateralValue(
+      parseUnits(payAmount?.toString(), balance?.decimals),
+      indexPrice,
+      /* global BigInt */
+      BigInt(leverage)
+    )
+    const tokenDecimals = Constants.Addresses[chain?.id]?.TokenDecimals?.[selectedToken]
+    const valueDecimals = tokenDecimals + Constants.ORACLE_PRICE_DECIMALS
+
+    const destinationValue = value ? formatValue(value, valueDecimals) : "0.0"
+    return destinationValue
+  }, [balance?.decimals, chain?.id, indexPrice, leverage, payAmount, selectedToken])
 
   useEffect(() => {
     if (!collateralModal) {
@@ -379,16 +394,18 @@ const LongOrderBox = () => {
           </div>
           <div className="collateral-asset flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Asset</label>
-            <div className="flex items-center gap-1">
-              <img src={collateralInfo[selectedToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
-              <span>{collateralInfo[selectedToken]?.label}</span>
-            </div>
+            {collateralInfo[selectedToken] ? (
+              <div className="flex items-center gap-1">
+                <img src={collateralInfo[selectedToken]?.src} className="rounded-full w-5 h-5" alt="icon" />
+                <span>{collateralInfo[selectedToken]?.label}</span>
+              </div>
+            ) : (
+              "-"
+            )}
           </div>
           <div className="collateral-value flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Collateral Value</label>
-            <div className="">
-              <span>-</span>
-            </div>
+            <span>{collateralValue}</span>
           </div>
           <div className="flex justify-between items-center">
             <h3 className="text-sm text-slate-500 dotted-underline">Position</h3>
@@ -398,7 +415,7 @@ const LongOrderBox = () => {
           <div className="collateral-leverage flex justify-between text-sm">
             <label className="text-slate-500 dotted-underline">Leverage</label>
             <div className="">
-              <span>{leverage} x</span>
+              <span>{leverage}x</span>
             </div>
           </div>
 
