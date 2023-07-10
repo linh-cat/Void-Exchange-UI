@@ -54,7 +54,7 @@ const ListPosition = () => {
       return formatValue(balance?.value * price, valueDecimals)
     }
   }, [balance, price])
-
+  console.log({ collateralAmount })
   const tokenValueInUSD = useMemo(() => {
     if (collateralAmount && price && collateralTab === "add") {
       const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
@@ -340,7 +340,6 @@ const ListPosition = () => {
   const handleConfirmCollateral = (cell) => {
     setChangeCollaterallInfo(cell)
     setIsOpenedCollatoral(true)
-    setCollateralAmount(cell?.raw.collateralValue)
   }
 
   const headerCollateralModal = useMemo(() => {
