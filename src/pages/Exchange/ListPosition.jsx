@@ -608,7 +608,13 @@ const ListPosition = () => {
           </div>
         }
       />
-      <TableCustom columnDef={columnDef} data={formattedPositions} cellStyle="p-3 text-xs" isBorderHeader={true} />
+      <TableCustom
+        columnDef={columnDef}
+        data={formattedPositions}
+        cellStyle="p-3 text-xs"
+        isBorderHeader={false}
+        // headerClassName="sticky top-0"
+      />
     </div>
   )
 }

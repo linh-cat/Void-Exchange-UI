@@ -47,7 +47,8 @@ const TableCustom = ({
   data = dataTest,
   isShadow = false,
   cellStyle = "",
-  isBorderHeader
+  isBorderHeader,
+  headerClassName
 }) => {
   return (
     <div
@@ -59,17 +60,9 @@ const TableCustom = ({
       <div className="w-full overflow-x-auto no-scrollbar">
         <table className="w-full">
           <thead>
-            <tr className="tracking-wide border-b text-slate-500">
+            <tr className={cx("tracking-wide border-b text-slate-500")}>
               {columnDef.map((item) => (
-                <th
-                  className={cx(
-                    {
-                      "py-1 ": true
-                    },
-                    item.headerClassName
-                  )}
-                  key={item?.field}
-                >
+                <th className={cx("py-1", item.headerClassName, headerClassName)} key={item?.field}>
                   <p className={cx("font-normal", { "border-b": isBorderHeader })}>{item?.headerName}</p>
                 </th>
               ))}
