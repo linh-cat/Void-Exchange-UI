@@ -16,7 +16,6 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
-import { parseUnits } from "viem"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -54,13 +53,13 @@ const ListPosition = () => {
       return formatValue(balance?.value * price, valueDecimals)
     }
   }, [balance, price])
-  console.log({ collateralAmount })
+
   const tokenValueInUSD = useMemo(() => {
     if (collateralAmount && price && collateralTab === "add") {
       const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
       return formatValue(collateralAmount * price, valueDecimals)
     } else {
-      return 0
+      return "$0.00"
     }
   }, [balance, collateralAmount, collateralTab, price])
 
@@ -357,10 +356,22 @@ const ListPosition = () => {
           </span>
         </label>
         <div className="colateral-tab font-medium mt-3 bg-slate-900 overflow-hidden">
-          <button className={cx({ "bg-default": collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
+          <button
+            className={cx({ "bg-default": collateralTab === "add" })}
+            onClick={() => {
+              setCollateralTab("add")
+              setCollateralAmount(0n)
+            }}
+          >
             Add
           </button>
-          <button className={cx({ "bg-red": collateralTab === "remove" })} onClick={() => setCollateralTab("remove")}>
+          <button
+            className={cx({ "bg-red": collateralTab === "remove" })}
+            onClick={() => {
+              setCollateralTab("remove")
+              setCollateralAmount(0n)
+            }}
+          >
             Remove
           </button>
         </div>
@@ -371,6 +382,8 @@ const ListPosition = () => {
   }, [changeCollateralInfo, collateralTab])
 
   const bodyCollateralModal = useMemo(() => {
+    {
+    }
     return changeCollateralInfo ? (
       <div className="collateral-content mt-3">
         {/* input */}
