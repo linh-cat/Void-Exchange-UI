@@ -320,7 +320,7 @@ const LongOrderBox = () => {
         disabled={isPlacingOrder}
       />
       <CollateralModal openModal={collateralModal} setOpenModal={setCollateralModal} />
-      <div className="order-box flex flex-col gap-3">
+      <div className="order-box flex flex-col gap-3 ">
         <div className="grid grid-cols-2 gap-2">
           <div className="">
             <SelectCustom

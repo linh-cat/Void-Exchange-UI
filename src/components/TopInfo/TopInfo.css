@@ -21,3 +21,10 @@
 .data-from {
     background: var(--text-color-purple);
 }
+
+/* responsive */
+@media (max-width: 768px) {
+    .top-info {
+        height: auto !important;
+    }
+}

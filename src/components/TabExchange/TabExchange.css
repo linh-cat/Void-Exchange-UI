@@ -1,14 +1,13 @@
 .order-tab {
     display: flex;
     flex-direction: column;
-    height: 60px;
 }
 
 .order-tab .label {
     text-transform: uppercase;
 }
 
-.tab-content {
+/* .tab-content {
     height: 75vh;
 }
 
@@ -16,7 +15,7 @@
     .tab-content {
         height: 83vh;
     }
-}
+} */
 
 .main-tab .tab-item {
     display: flex;

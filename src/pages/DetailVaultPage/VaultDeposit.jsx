@@ -243,7 +243,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                           disabled={isApproving || isDepositing}
                         />
                       </div>
-                      <div className="ballance flex items-center gap-2">
+                      <div className="balance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
                         <div>{formatDecimals(balance?.formatted, 4)}</div>
                       </div>
@@ -277,7 +277,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
                           disabled={isApproving || isDepositing}
                         />
                       </div>
-                      <div className="ballance flex items-center gap-2">
+                      <div className="balance flex items-center gap-2">
                         <label className="text-sm">Balance:</label>
                         <div>{formatDecimals(balance?.formatted, 4)}</div>
                       </div>

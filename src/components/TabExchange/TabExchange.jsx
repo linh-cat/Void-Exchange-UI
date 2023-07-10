@@ -44,8 +44,8 @@ const TabExchange = ({ defaultValue }) => {
   }, [activeTab])
 
   return (
-    <div key={activeTab} className="w-full h-full border-l border-b border-gray-700">
-      <div className="order-tab">
+    <>
+      <div className="order-tab vh-7">
         <ul className="grid grid-flow-col text-center main-tab border-b border-gray-700 mt-auto h-full">
           {tabData.map((item, idx) => {
             return (
@@ -64,8 +64,8 @@ const TabExchange = ({ defaultValue }) => {
         </ul>
       </div>
 
-      <div className="tab-content p-3">{tabContent}</div>
-    </div>
+      <div className="tab-content p-3 vh-83 overflow-y-auto no-scrollbar">{tabContent}</div>
+    </>
   )
 }
 

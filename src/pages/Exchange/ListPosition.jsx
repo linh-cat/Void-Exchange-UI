@@ -2,13 +2,13 @@ import React, { useState, useEffect, useMemo, useCallback } from "react"
 import TableCustom from "@components/Table/TableCustom"
 import Button from "@components/Button/Button"
 
-import { useAccount, useNetwork } from "wagmi"
+import { useAccount, useBalance, useNetwork } from "wagmi"
 import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 
 import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
-import { formatValue, descaleValue, formatPercentage } from "src/lib/formatter"
+import { formatValue, descaleValue, formatPercentage, formatDecimals } from "src/lib/formatter"
 import cx from "classnames"
 import CLosingModal from "./CLosingModal"
 import CollateralPopup from "./CollateralPopup"
@@ -29,6 +29,14 @@ const ListPosition = () => {
 
   const { address } = useAccount()
   const { chain } = useNetwork()
+
+  const { data: balance } = useBalance({
+    address: address,
+    token: changeCollateralInfo?.raw?.collateralToken,
+    watch: true,
+    staleTime: 2_000
+  })
+  console.log({ changeCollateralInfo, balance })
 
   const [getLocal, setLocal] = useLocalStorage("confirm.info")
   const { getPositions, closeOrder, isClosingOrder, shouldRefreshPositions, shouldShowClosePopup, executePopup } =
@@ -306,7 +314,13 @@ const ListPosition = () => {
   const footerConfirmModal = useMemo(() => {
     return (
       <div>
-        <Button text="Close" onClick={handleCloseOrder} disabled={isClosingOrder} isLoading={isClosingOrder} />
+        <Button
+          text="Close"
+          onClick={handleCloseOrder}
+          disabled={isClosingOrder}
+          isLoading={isClosingOrder}
+          isDefault={false}
+        />
       </div>
     )
   }, [handleCloseOrder, isClosingOrder])
@@ -336,10 +350,7 @@ const ListPosition = () => {
           <button className={cx({ "bg-default": collateralTab === "add" })} onClick={() => setCollateralTab("add")}>
             Add
           </button>
-          <button
-            className={cx({ "bg-default": collateralTab === "remove" })}
-            onClick={() => setCollateralTab("remove")}
-          >
+          <button className={cx({ "bg-red": collateralTab === "remove" })} onClick={() => setCollateralTab("remove")}>
             Remove
           </button>
         </div>
@@ -356,10 +367,18 @@ const ListPosition = () => {
         <div className="collateral-input p-3 flex flex-col gap-y-3 border">
           <div className="top flex justify-between">
             <label className="text-slate-500">Add</label>
-            <div className="text-slate-500">Max: {changeCollateralInfo?.collateralValue}</div>
+            <div className="text-slate-500">
+              Max:{" "}
+              {collateralTab === "remove"
+                ? changeCollateralInfo?.collateralValue
+                : formatDecimals(balance?.formatted, 4)}
+            </div>
           </div>
           <div className="middle flex justify-between">
-            <div>{formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals)}</div>
+            {/* <div>{formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals)}</div> */}
+            <div>
+              <input type="number" placeholder="0.0" />
+            </div>
             <div>{changeCollateralInfo?.token}</div>
           </div>
           <div className="bottom flex justify-between gap-3">
@@ -367,7 +386,8 @@ const ListPosition = () => {
               <button
                 className={cx({
                   "bg-slate-800 w-1/4 py-1": true,
-                  "bg-default": collateralAmount === calculatePosition(c, "collateral")
+                  "bg-red": collateralAmount === calculatePosition(c, "collateral") && collateralTab === "remove",
+                  "bg-default": collateralAmount === calculatePosition(c, "collateral") && collateralTab === "add"
                 })}
                 key={idx}
                 onClick={() => {
@@ -387,8 +407,10 @@ const ListPosition = () => {
             <span className="">{changeCollateralInfo?.size}</span>
           </div>
           <div className="flex justify-between">
-            <label className="text-slate-500">Collateral</label>
-            <span className="">{changeCollateralInfo?.collateralValue}</span>
+            <label className="text-slate-500">Collateral Value ({changeCollateralInfo?.token})</label>
+            <span>
+              {collateralTab === "remove" ? formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals) : 0}
+            </span>
           </div>
           <div className="flex justify-between">
             <label className="text-slate-500">Leverage</label>
@@ -407,7 +429,7 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [changeCollateralInfo, collateralAmount, calculatePosition])
+  }, [changeCollateralInfo, collateralTab, balance?.formatted, collateralAmount, calculatePosition])
 
   // close popup
   const bodyClosePopup = useMemo(() => {
@@ -445,7 +467,7 @@ const ListPosition = () => {
     {
       field: "market",
       headerName: "Market",
-      headerClassName: "text-xs text-left",
+      headerClassName: "text-xs text-left pl-3",
       classname: "text-left",
       cellRenderer: (cell) => {
         return (
@@ -578,7 +600,11 @@ const ListPosition = () => {
         body={bodyCollateralModal}
         footer={
           <div className="collateral-footer mt-3">
-            {collateralTab === "add" ? <Button text="Add Collateral" /> : <Button text="Remove Collateral" />}
+            {collateralTab === "add" ? (
+              <Button text="Add Collateral" isDefault={false} className="bg-default" />
+            ) : (
+              <Button text="Remove Collateral" isDefault={false} className="bg-red" />
+            )}
           </div>
         }
       />

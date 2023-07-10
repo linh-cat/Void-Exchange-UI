@@ -70,11 +70,9 @@ const FullApp = () => {
         <Route
           path="trade"
           element={
-            <div className="vh-full-screen">
-              <ExchangeContextProvider>
-                <Exchange />
-              </ExchangeContextProvider>
-            </div>
+            <ExchangeContextProvider>
+              <Exchange />
+            </ExchangeContextProvider>
           }
         />
         <Route path="document" element={<DocumentPage />} />

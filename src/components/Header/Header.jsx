@@ -42,13 +42,16 @@ const Header = () => {
 
   return (
     <div
-      className={cx({
-        "blur-bg sticky top-0 w-full": y > 0
-      })}
+      className={cx(
+        {
+          "blur-bg sticky top-0 w-full ": y > 0
+        },
+        "vh-7"
+      )}
     >
       <header
         className={cx({
-          "header flex justify-between items-center w-full z-50 relative lg:text-sm xl:text-base px-5 2xl:px-10 3xl:px-28 py-1": true,
+          "header flex justify-between items-center w-full h-full z-50 relative lg:text-sm xl:text-base px-5 2xl:px-10 3xl:px-28 py-1": true,
           "border-b": location.pathname === "/trade" ? true : false
         })}
         ref={refOutside}

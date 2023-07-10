@@ -29,7 +29,7 @@ const InfoBarChar = () => {
   }, [data, pair])
 
   return (
-    <div className="top-chart w-full flex flex-col gap-3 2xl:gap-0 lg:flex-row lg:items-center py-3">
+    <div className="top-chart w-full flex flex-col gap-3 2xl:gap-0 lg:flex-row lg:items-center vh-7">
       <div className="h-full flex justify-between items-center px-3 lg:gap-3">
         <div>
           <SelectCoupleToken />

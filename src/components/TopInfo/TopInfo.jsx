@@ -22,7 +22,7 @@ const TopInfo = () => {
   }, [])
 
   return (
-    <div className="w-full top-info text-sm flex sm:justify-center items-center py-1 px-2 md:px-0 gap-5 overflow-x-auto no-scrollbar relative sm:overflow-visible">
+    <div className="w-full top-info text-sm flex sm:justify-center items-center py-1 px-2 md:px-0 gap-5 overflow-x-auto no-scrollbar relative sm:overflow-visible vh-3">
       <div className="relative flex gap-2 cursor-pointer flex-col md:flex-row market">
         <label>Market</label>
         <div className="flex items-center gap-2 mt-auto">

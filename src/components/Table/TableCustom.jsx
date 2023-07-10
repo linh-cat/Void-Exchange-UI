@@ -60,9 +60,9 @@ const TableCustom = ({
       })}
     >
       <div className="w-full">
-        <table className="w-full min-w-full">
-          <thead className={cx("sticky top-0", headerClassName)}>
-            <tr className="tracking-wide text-slate-500 sticky top-0">
+        <table className="w-full min-w-full overflow-x-auto no-scrollbar">
+          <thead className={cx("", headerClassName)}>
+            <tr className="tracking-wide text-slate-500">
               {columnDef.map((item) => (
                 <th
                   className={cx(

@@ -45,16 +45,16 @@ const ProfilePage = () => {
             </div>
 
             <div className="flex items-center gap-10 bg-none">
-              <div className="ballance-wallet flex flex-col gap-3">
-                <label className="text-slate-500 text-lg">Wallet Ballance</label>
+              <div className="balance-wallet flex flex-col gap-3">
+                <label className="text-slate-500 text-lg">Wallet balance</label>
                 <div className="flex items-center gap-2">
                   <img src={DogeBG} className="h5 w-5" alt="otoken" />
                   <span className="text-lg font-medium">0.00</span>
                 </div>
                 <Button text="Deposit Crypto" isDefault={false} className={"border py-2"} />
               </div>
-              <div className="ballance-exchange flex flex-col gap-3">
-                <label className="text-slate-500 text-lg">Exchange Ballance</label>
+              <div className="balance-exchange flex flex-col gap-3">
+                <label className="text-slate-500 text-lg">Exchange balance</label>
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-lg">$0.00</span>
                 </div>
