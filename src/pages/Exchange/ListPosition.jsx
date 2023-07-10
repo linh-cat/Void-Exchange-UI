@@ -5,7 +5,7 @@ import Button from "@components/Button/Button"
 import { useAccount, useBalance, useNetwork } from "wagmi"
 import { Position, Constants, OrderType, Side } from "@void-0x/void-sdk"
 
-import useTokenPriceFeed from "src/hooks/useTokenPriceFeed"
+import useTokenPriceFeed, { useTokenPrice } from "src/hooks/useTokenPriceFeed"
 import { useExchangeContext } from "src/contexts/ExchangeContext"
 import { AddressToSymbolMap, Tokens } from "src/lib/tokens"
 import { formatValue, descaleValue, formatPercentage, formatDecimals } from "src/lib/formatter"
@@ -16,6 +16,7 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
+import { parseUnits } from "viem"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -36,7 +37,6 @@ const ListPosition = () => {
     watch: true,
     staleTime: 2_000
   })
-  console.log({ changeCollateralInfo, balance })
 
   const [getLocal, setLocal] = useLocalStorage("confirm.info")
   const { getPositions, closeOrder, isClosingOrder, shouldRefreshPositions, shouldShowClosePopup, executePopup } =
@@ -45,6 +45,24 @@ const ListPosition = () => {
     Constants.Addresses[chain?.id]?.IndexTokens?.WBTC,
     Constants.Addresses[chain?.id]?.IndexTokens?.WETH
   ])
+
+  const price = useTokenPrice(changeCollateralInfo?.raw?.collateralToken)
+
+  const tokenMaxValueInUSD = useMemo(() => {
+    if (balance?.value && price) {
+      const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
+      return formatValue(balance?.value * price, valueDecimals)
+    }
+  }, [balance, price])
+
+  const tokenValueInUSD = useMemo(() => {
+    if (collateralAmount && price && collateralTab === "add") {
+      const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
+      return formatValue(collateralAmount * price, valueDecimals)
+    } else {
+      return 0
+    }
+  }, [balance, collateralAmount, collateralTab, price])
 
   useEffect(() => {
     const get = async () => {
@@ -130,6 +148,21 @@ const ListPosition = () => {
     return formatteds
   }, [positions, prices, chain])
 
+  const calculatePosition = useCallback(
+    (percent, field, valueToCal) => {
+      switch (field) {
+        case "size":
+          const rawSizePosition = confirmInfo?.raw
+          return (rawSizePosition?.size * BigInt(percent)) / BigInt(100)
+        case "collateral":
+          return (valueToCal * BigInt(percent)) / BigInt(100)
+        default:
+          break
+      }
+    },
+    [confirmInfo]
+  )
+
   const handleConfirmOrder = (cell) => {
     setLocal({ type: cell?.type, collateralValue: cell?.collateralValue, icon: cell?.icon, leverage: cell?.leverage })
     setSizeAmmount(cell?.raw?.size)
@@ -156,22 +189,6 @@ const ListPosition = () => {
       setSizeAmmount()
     }
   }, [closeOrder, confirmInfo?.raw, isClosingOrder, prices, sizeAmount])
-
-  const calculatePosition = useCallback(
-    (percent, field) => {
-      switch (field) {
-        case "size":
-          const rawSizePosition = confirmInfo?.raw
-          return (rawSizePosition?.size * BigInt(percent)) / BigInt(100)
-        case "collateral":
-          const rawCollateralPosition = changeCollateralInfo?.raw
-          return (rawCollateralPosition?.collateralValue * BigInt(percent)) / BigInt(100)
-        default:
-          break
-      }
-    },
-    [changeCollateralInfo, confirmInfo]
-  )
 
   // confirm modal
   const headerConfirmModal = useMemo(() => {
@@ -314,13 +331,7 @@ const ListPosition = () => {
   const footerConfirmModal = useMemo(() => {
     return (
       <div>
-        <Button
-          text="Close"
-          onClick={handleCloseOrder}
-          disabled={isClosingOrder}
-          isLoading={isClosingOrder}
-          isDefault={false}
-        />
+        <Button text="Close" onClick={handleCloseOrder} disabled={isClosingOrder} isLoading={isClosingOrder} />
       </div>
     )
   }, [handleCloseOrder, isClosingOrder])
@@ -368,10 +379,7 @@ const ListPosition = () => {
           <div className="top flex justify-between">
             <label className="text-slate-500">Add</label>
             <div className="text-slate-500">
-              Max:{" "}
-              {collateralTab === "remove"
-                ? changeCollateralInfo?.collateralValue
-                : formatDecimals(balance?.formatted, 4)}
+              Max: {collateralTab === "remove" ? changeCollateralInfo?.collateralValue : tokenMaxValueInUSD}
             </div>
           </div>
           <div className="middle flex justify-between">
@@ -386,13 +394,23 @@ const ListPosition = () => {
               <button
                 className={cx({
                   "bg-slate-800 w-1/4 py-1": true,
-                  "bg-red": collateralAmount === calculatePosition(c, "collateral") && collateralTab === "remove",
-                  "bg-default": collateralAmount === calculatePosition(c, "collateral") && collateralTab === "add"
+                  "bg-red":
+                    collateralAmount ===
+                      calculatePosition(c, "collateral", changeCollateralInfo?.raw?.collateralValue) &&
+                    collateralTab === "remove",
+                  "bg-default":
+                    collateralAmount === calculatePosition(c, "collateral", balance?.value) && collateralTab === "add"
                 })}
                 key={idx}
                 onClick={() => {
-                  const collateral = calculatePosition(c, "collateral")
-                  setCollateralAmount(collateral)
+                  if (collateralTab === "remove") {
+                    const collateral = calculatePosition(c, "collateral", changeCollateralInfo?.raw?.collateralValue)
+                    setCollateralAmount(collateral)
+                  }
+                  if (collateralTab === "add") {
+                    const collateral = calculatePosition(c, "collateral", balance?.value)
+                    setCollateralAmount(collateral)
+                  }
                 }}
               >
                 {c} %
@@ -409,7 +427,9 @@ const ListPosition = () => {
           <div className="flex justify-between">
             <label className="text-slate-500">Collateral Value ({changeCollateralInfo?.token})</label>
             <span>
-              {collateralTab === "remove" ? formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals) : 0}
+              {collateralTab === "remove"
+                ? formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals)
+                : tokenValueInUSD}
             </span>
           </div>
           <div className="flex justify-between">
@@ -429,7 +449,15 @@ const ListPosition = () => {
     ) : (
       <div></div>
     )
-  }, [changeCollateralInfo, collateralTab, balance?.formatted, collateralAmount, calculatePosition])
+  }, [
+    changeCollateralInfo,
+    collateralTab,
+    tokenMaxValueInUSD,
+    collateralAmount,
+    tokenValueInUSD,
+    calculatePosition,
+    balance?.value
+  ])
 
   // close popup
   const bodyClosePopup = useMemo(() => {
@@ -568,7 +596,7 @@ const ListPosition = () => {
   ]
 
   return (
-    <div className="vh-20 overflow-y-auto no-scrollbar">
+    <div className="vh-20 w-full overflow-y-auto no-scrollbar">
       {shouldShowClosePopup && <NoticePopup body={bodyClosePopup} position="bottom-right" type="error" />}
       {executePopup.enable && executePopup.type === "close" && (
         <TransactionPopup
@@ -601,9 +629,9 @@ const ListPosition = () => {
         footer={
           <div className="collateral-footer mt-3">
             {collateralTab === "add" ? (
-              <Button text="Add Collateral" isDefault={false} className="bg-default" />
+              <Button text="Add Collateral" isDefault={false} className="bg-default cursor-pointer" />
             ) : (
-              <Button text="Remove Collateral" isDefault={false} className="bg-red" />
+              <Button text="Remove Collateral" isDefault={false} className="bg-red cursor-pointer" />
             )}
           </div>
         }

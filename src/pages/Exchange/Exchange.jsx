@@ -20,7 +20,7 @@ const Exchange = () => {
 
   const renderListSections = () => {
     return (
-      <div className={cx("p-3")}>
+      <div className={cx("w-full")}>
         <Tab
           optionLabels={optionLabels}
           options={LIST_SECTIONS}
