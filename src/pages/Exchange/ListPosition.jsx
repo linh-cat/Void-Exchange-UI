@@ -429,7 +429,7 @@ const ListPosition = () => {
                     setCollateralAmount(collateral * price)
                   }}
                 >
-                  Max: ${formatDecimals(balance?.formatted, 4)} ~ {tokenMaxValueInUSD}
+                  Max: {formatDecimals(balance?.formatted, 4)} ~ {tokenMaxValueInUSD}
                 </div>
               )}
               {collateralTab === "remove" && (
@@ -518,12 +518,14 @@ const ListPosition = () => {
   }, [
     changeCollateralInfo,
     collateralTab,
-    balance,
+    balance?.formatted,
+    balance?.value,
     tokenMaxValueInUSD,
     onChangeCollateral,
     collateralValueTabRemove,
     collateralValueTabAdd,
     calculatePosition,
+    price,
     collateralAmount
   ])
 
