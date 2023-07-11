@@ -16,6 +16,7 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
+import { parseUnits } from "viem"
 
 const ListPosition = () => {
   const [isOpenedCollatoral, setIsOpenedCollatoral] = useState(false)
@@ -54,14 +55,23 @@ const ListPosition = () => {
     }
   }, [balance, price])
 
-  const tokenValueInUSD = useMemo(() => {
-    if (collateralAmount && price && collateralTab === "add") {
+  const collateralValueTabAdd = useMemo(() => {
+    if (collateralAmount && collateralTab === "add") {
       const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
-      return formatValue(collateralAmount * price, valueDecimals)
+      return formatValue(collateralAmount, valueDecimals)
     } else {
       return "$0.00"
     }
-  }, [balance, collateralAmount, collateralTab, price])
+  }, [balance, collateralAmount, collateralTab])
+
+  const collateralValueTabRemove = useMemo(() => {
+    if (collateralAmount && collateralTab === "remove") {
+      const valueDecimals = balance.decimals + Constants.ORACLE_PRICE_DECIMALS
+      return formatValue(collateralAmount, valueDecimals)
+    } else {
+      return "$0.00"
+    }
+  }, [balance, collateralAmount, collateralTab])
 
   useEffect(() => {
     const get = async () => {
@@ -160,6 +170,29 @@ const ListPosition = () => {
       }
     },
     [confirmInfo]
+  )
+  const onChangeCollateral = useCallback(
+    (e) => {
+      switch (collateralTab) {
+        case "add":
+          if (Number(e.target.value) <= Number(balance?.formatted)) {
+            const collateral = parseUnits(e.target.value, balance?.decimals) * price
+            setCollateralAmount(collateral)
+          } else {
+            const maxCollateral = calculatePosition(100, "collateral", balance?.value) * price
+            setCollateralAmount(maxCollateral)
+          }
+          break
+        case "remove":
+          const collateral = parseUnits(e.target.value, balance?.decimals) * price
+          setCollateralAmount(collateral)
+          break
+        default:
+          setCollateralAmount(0n)
+          break
+      }
+    },
+    [collateralTab, balance?.formatted, balance?.decimals, balance?.value, price, calculatePosition]
   )
 
   const handleConfirmOrder = (cell) => {
@@ -382,22 +415,43 @@ const ListPosition = () => {
   }, [changeCollateralInfo, collateralTab])
 
   const bodyCollateralModal = useMemo(() => {
-    {
-    }
     return changeCollateralInfo ? (
       <div className="collateral-content mt-3">
         {/* input */}
         <div className="collateral-input p-3 flex flex-col gap-y-3 border">
           <div className="top flex justify-between">
             <label className="text-slate-500">Add</label>
-            <div className="text-slate-500">
-              Max: {collateralTab === "remove" ? changeCollateralInfo?.collateralValue : tokenMaxValueInUSD}
+            <div className="text-slate-500 dotted-underline cursor-pointer">
+              {collateralTab === "add" && (
+                <div
+                  onClick={() => {
+                    const collateral = calculatePosition(100, "collateral", balance?.value)
+                    setCollateralAmount(collateral * price)
+                  }}
+                >
+                  Max: ${formatDecimals(balance?.formatted, 4)} ~ {tokenMaxValueInUSD}
+                </div>
+              )}
+              {collateralTab === "remove" && (
+                <div
+                  onClick={() => {
+                    const collateral = calculatePosition(100, "collateral", changeCollateralInfo?.raw?.collateralValue)
+                    setCollateralAmount(collateral)
+                  }}
+                >
+                  Max: {changeCollateralInfo?.collateralValue}
+                </div>
+              )}
             </div>
           </div>
           <div className="middle flex justify-between">
-            {/* <div>{formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals)}</div> */}
             <div>
-              <input type="number" placeholder="0.0" />
+              <input
+                type="number"
+                placeholder="0.0"
+                onChange={onChangeCollateral}
+                disabled={collateralTab === "remove"}
+              />
             </div>
             <div>{changeCollateralInfo?.token}</div>
           </div>
@@ -411,7 +465,8 @@ const ListPosition = () => {
                       calculatePosition(c, "collateral", changeCollateralInfo?.raw?.collateralValue) &&
                     collateralTab === "remove",
                   "bg-default":
-                    collateralAmount === calculatePosition(c, "collateral", balance?.value) && collateralTab === "add"
+                    collateralAmount === calculatePosition(c, "collateral", balance?.value) * price &&
+                    collateralTab === "add"
                 })}
                 key={idx}
                 onClick={() => {
@@ -421,7 +476,7 @@ const ListPosition = () => {
                   }
                   if (collateralTab === "add") {
                     const collateral = calculatePosition(c, "collateral", balance?.value)
-                    setCollateralAmount(collateral)
+                    setCollateralAmount(collateral * price)
                   }
                 }}
               >
@@ -439,9 +494,8 @@ const ListPosition = () => {
           <div className="flex justify-between">
             <label className="text-slate-500">Collateral Value ({changeCollateralInfo?.token})</label>
             <span>
-              {collateralTab === "remove"
-                ? formatValue(collateralAmount, changeCollateralInfo?.raw.valueDecimals)
-                : tokenValueInUSD}
+              {collateralTab === "remove" && collateralValueTabRemove}
+              {collateralTab === "add" && collateralValueTabAdd}
             </span>
           </div>
           <div className="flex justify-between">
@@ -464,11 +518,13 @@ const ListPosition = () => {
   }, [
     changeCollateralInfo,
     collateralTab,
+    balance,
     tokenMaxValueInUSD,
-    collateralAmount,
-    tokenValueInUSD,
+    onChangeCollateral,
+    collateralValueTabRemove,
+    collateralValueTabAdd,
     calculatePosition,
-    balance?.value
+    collateralAmount
   ])
 
   // close popup
