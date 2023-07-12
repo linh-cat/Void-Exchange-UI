@@ -244,7 +244,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                     </div>
                   </div>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-0 z-10 w-96 rounded text-base shadow border card">
+                <Popover.Panel className="absolute right-0 z-10 w-96 rounded shadow border card text-sm">
                   <div className="px-3 py-2 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <label className="text-lg">Account</label>
