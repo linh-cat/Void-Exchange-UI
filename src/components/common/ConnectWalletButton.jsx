@@ -55,14 +55,9 @@ const ConnectWalletButton = ({ imgSrc }) => {
   }
   const refOutside = useOutsideDetect(handleClickOutside)
 
-  const headerConnectModal = (
-    <div>
-      <h3>Connect Your Wallet</h3>
-      <span class="text-sm text-slate-500">Select your wallet from these supported options.</span>
-    </div>
-  )
+  const headerConnectModal = <div>Connect Wallet</div>
   const bodyConnectModal = (
-    <div className="flex flex-wrap gap-3 p-3 bg-slate-950 rounded ">
+    <div className="flex flex-col gap-3">
       {connectors.map((connector) => {
         const textBtn = !connector.ready ? " (unsupported)" : connector.name
         return (
@@ -73,7 +68,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
               setConnectModal(false)
             }}
             isDefault={false}
-            className="p-3 cursor-pointer bg-slate-900"
+            className="border p-3"
             icon={<img src={connectorIcon[connector.id]} alt="icon" className="h-4 w-4" />}
             key={connector.id}
           />
@@ -93,14 +88,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
 
   return (
     <div>
-      <Modal
-        open={connectModal}
-        setOpen={setConnectModal}
-        header={headerConnectModal}
-        body={bodyConnectModal}
-        isBorder={false}
-        className="bg-slate-900"
-      />
+      <Modal open={connectModal} setOpen={setConnectModal} header={headerConnectModal} body={bodyConnectModal} />
       {(() => {
         if (!isConnected) {
           return (

@@ -1,9 +1,8 @@
 import React from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment } from "react"
-import cx from "classnames"
 
-const Modal = ({ open, setOpen, body, footer, header, disabled, className, isBorder = true }) => {
+const Modal = ({ open, setOpen, body, footer, header, disabled }) => {
   const closeModal = () => {
     setOpen(false)
   }
@@ -35,13 +34,7 @@ const Modal = ({ open, setOpen, body, footer, header, disabled, className, isBor
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel
-                  className={cx(
-                    "w-full max-w-md transform overflow-hidden rounded p-6 align-middle shadow-xl transition-all",
-                    { card: !className, border: isBorder },
-                    className
-                  )}
-                >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded border p-6 align-middle shadow-xl transition-all card">
                   <div className="text-left">{header}</div>
                   <div className="mt-2">{body}</div>
                   <div className="mt-4">{footer}</div>
