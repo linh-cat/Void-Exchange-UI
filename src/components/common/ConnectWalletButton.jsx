@@ -159,7 +159,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
             <>
               <Popover className="relative" ref={refOutside}>
                 <Popover.Button
-                  className="flex justify-center items-center border h-11 px-2 rounded gap-4"
+                  className="flex justify-center items-center border h-11 px-2 rounded gap-4 focus:outline-none"
                   onClick={toggleMenu}
                 >
                   <div className="flex items-center gap-2">
@@ -202,7 +202,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
               </Popover>
 
               <Popover className="relative">
-                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4">
+                <Popover.Button className="flex justify-center items-center border h-11 px-2 rounded gap-4  focus:outline-none">
                   <div className="flex items-center gap-3">
                     <div>
                       {formatDecimals(balance?.formatted, 2)} {balance?.symbol}
