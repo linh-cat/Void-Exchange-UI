@@ -253,7 +253,7 @@ const ConnectWalletButton = ({ imgSrc }) => {
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <label className="text-slate-400">Connect with {connector?.name}</label>
+                      <label className="text-slate-400">Connected to {connector?.name}</label>
                       <div>
                         <div onClick={() => disconnect()} className="text-default cursor-pointer">
                           Disconnect
