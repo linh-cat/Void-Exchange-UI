@@ -20,7 +20,7 @@ const Modal = ({ open, setOpen, body, footer, header, disabled }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-30 pointer-events-none" />
+            <div className="fixed inset-0 bg-black bg-opacity-70 pointer-events-none" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
