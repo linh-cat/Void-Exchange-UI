@@ -42,7 +42,7 @@ const SelectCoupleToken = ({ defaultValue = "BTC/USD" }) => {
           label: mappingLabel?.[item],
           value: mappingLabel?.[item],
           icon: mappingIcon?.[item],
-          price: listPrice?.[item]?.priceChange,
+          price: listPrice?.[item]?.lastPrice,
           dayChange: listPrice?.[item]?.priceChangePercent
         }))
     }
