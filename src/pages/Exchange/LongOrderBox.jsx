@@ -38,7 +38,7 @@ const LongOrderBox = () => {
   const [orderType, setOrderType] = useState(OrderType.MARKET)
 
   const { chain } = useNetwork()
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
   const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
 
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.long")
@@ -359,7 +359,7 @@ const LongOrderBox = () => {
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
-            disabled={isApproving || isPlacingOrder}
+            disabled={isApproving || isPlacingOrder || !isConnected}
           />
         </div>
         <div className="border rounded px-2 pt-2 pb-7">

@@ -38,7 +38,7 @@ const ShortOrderBox = () => {
   const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.short")
   const { chain } = useNetwork()
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
   const { data: balance } = useBalance({
     address: address,
     token: selectedToken,
@@ -364,7 +364,7 @@ const ShortOrderBox = () => {
             }}
             onChangeInput={(val) => setPayAmount(val)}
             inputValue={payAmount}
-            disabled={isApproving || isPlacingOrder}
+            disabled={isApproving || isPlacingOrder || !isConnected}
           />
         </div>
         <div className="border px-2 pt-2 pb-7">
