@@ -23,9 +23,9 @@ const DocumentPage = () => {
             <div className="p-7 flex flex-col gap-5">
               <div className="flex items-center gap-3">
                 <img src={ComputerIcon} alt="computer" className="w-10 h-10" />
-                <h5 className="font-medium">What is Lighters?</h5>
+                <h5 className="font-medium">Void Exchange foundation</h5>
               </div>
-              <div className="text-slate-500 text-sm">Learn about Lighers and how it work?</div>
+              <div className="text-slate-500 text-sm">Learn about Void Exchange and how it work?</div>
             </div>
           </Card>
           <Card hasShadow={true} className={"cursor-pointer"}>
