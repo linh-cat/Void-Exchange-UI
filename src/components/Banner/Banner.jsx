@@ -1,14 +1,31 @@
+/* global BigInt */
 import React from "react"
-import "./Banner.css"
 import { useNavigate } from "react-router-dom"
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
 import { DownIconGreen, DownIconRed } from "@icons/index"
 import { BaseIcon } from "@img/icons"
-import { BTC, DOGE, ETH, MATIC, POLYGON, SOLANA } from "@img/token"
+import { BTC, DOGE, ETH, MATIC, PEPE, POLYGON, SOLANA } from "@img/token"
+import usePriceList from "src/hooks/usePriceList"
+import { formatDollar, formatPercentage } from "src/lib/formatter"
+import cx from "classnames"
+
+import "./Banner.css"
+
+const tokenImages = {
+  BTC: BTC,
+  DOGE: DOGE,
+  ETH: ETH,
+  MATIC: MATIC,
+  POLYGON: POLYGON,
+  SOL: SOLANA,
+  PEPE: PEPE
+}
 
 const Banner = () => {
   const navigate = useNavigate()
+  const { data } = usePriceList()
+
   return (
     <section className="banner-db animation-container">
       {/* <div class="lightning-container">
@@ -58,102 +75,45 @@ const Banner = () => {
             <h3 className="text-slate-500">24h Most Volume</h3>
             <div className="overflow-x-auto no-scrollbar">
               <div className="flex justify-between items-center ">
-                <div className="item flex justify-center items-center gap-3">
-                  <div className="flex justify-center items-center">
-                    <img src={BTC} alt="BTC" className="w-10 h-10 border rounded-full" />
-                  </div>
+                {data &&
+                  data.map((item) => (
+                    <div className="item flex justify-center items-center gap-3" key={item?.label}>
+                      <div className="flex justify-center items-center">
+                        <img
+                          src={tokenImages[item?.symbol]}
+                          alt={item?.symbol}
+                          className="w-10 h-10 border rounded-full"
+                        />
+                      </div>
 
-                  <div className="text-sm">
-                    <label className="">WBTC</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm border bg-errorLight rounded px-2">
-                        <img src={DownIconRed} alt="down" className="" />
-                        <label className="text-error">-0.01</label>
+                      <div className="text-sm">
+                        <label className="">{item?.symbol}</label>
+                        <div className="flex items-center gap-3 mt-1">
+                          <div>{formatDollar(item?.price)}</div>
+                          <div
+                            className={cx("flex items-center gap-1 text-sm border rounded px-2", {
+                              "bg-errorLight": item?.volumeChange24h < 0,
+                              "bg-successLight": item?.volumeChange24h >= 0
+                            })}
+                          >
+                            {item?.volumeChange24h < 0 ? (
+                              <img src={DownIconRed} alt="down" className="" />
+                            ) : (
+                              <img src={DownIconGreen} alt="up" className="rotate-180" />
+                            )}
+                            <label
+                              className={cx({
+                                "text-error": item?.volumeChange24h < 0,
+                                "text-success": item?.volumeChange24h >= 0
+                              })}
+                            >
+                              {formatPercentage(item?.percentChange24h)}
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="item flex justify-center items-center gap-3">
-                  <div className=" flex justify-center items-center">
-                    <img src={ETH} alt="eth" className="w-10 h-10 border rounded-full" />
-                  </div>
-
-                  <div className="text-sm ">
-                    <label className="">WETH</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm rounded bg-successLight px-2">
-                        <img src={DownIconGreen} alt="down" className="rotate-180" />
-                        <label className="text-success">-0.01</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item flex justify-center items-center gap-3">
-                  <div className=" flex justify-center items-center">
-                    <img src={POLYGON} alt="polygon" className="w-10 h-10 border rounded-full" />
-                  </div>
-
-                  <div className="text-sm ">
-                    <label className="">MATIC</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm rounded px-2 bg-successLight">
-                        <img src={DownIconGreen} alt="down" className="rotate-180" />
-                        <label className="text-success">-0.01</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item flex justify-center items-center gap-3">
-                  <div className=" flex justify-center items-center">
-                    <img src={MATIC} alt="matic" className="w-10 h-10 border rounded-full" />
-                  </div>
-
-                  <div className="text-sm ">
-                    <label className="">WBTC</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm rounded bg-errorLight px-2">
-                        <img src={DownIconRed} alt="down" className="" />
-                        <label className="text-error">-0.01</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item flex justify-center items-center gap-3">
-                  <div className=" flex justify-center items-center">
-                    <img src={SOLANA} alt="BTC" className="w-10 h-10 border rounded-full" />
-                  </div>
-
-                  <div className="text-sm ">
-                    <label className="">SOL</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
-                        <img src={DownIconRed} alt="down" className="" />
-                        <label className="text-error">-0.01</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item flex justify-center items-center gap-3">
-                  <div className=" flex justify-center items-center">
-                    <img src={DOGE} alt="BTC" className="w-10 h-10 border rounded-full" />
-                  </div>
-
-                  <div className="text-sm ">
-                    <label className="">Doge</label>
-                    <div className="flex items-center gap-3 mt-1">
-                      <div>$1</div>
-                      <div className="flex items-center gap-1 text-sm  rounded bg-errorLight px-2">
-                        <img src={DownIconRed} alt="down" className="" />
-                        <label className="text-error">-0.01</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  ))}
               </div>
             </div>
           </div>
