@@ -21,6 +21,7 @@ import { MorphoBG } from "@img/bg"
 import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import { ExclamationWarningIcon, FlashSuccessIcon } from "@icons/index"
+import ErrorModal from "@components/ErrorModal/ErrorModal"
 
 const tokens = [
   {
@@ -104,7 +105,7 @@ const FaucetPage = () => {
     showModal()
   }
 
-  const { isMinting, handleMint, shouldShowPopup } = useMintFaucet({ amount, selectedToken })
+  const { isMinting, handleMint, shouldShowPopup, showErrorModal } = useMintFaucet({ amount, selectedToken })
   const onMint = async () => {
     await handleMint()
     setOpenModal(false)
@@ -123,7 +124,6 @@ const FaucetPage = () => {
     },
     [chain]
   )
-
   const columnDef = [
     {
       field: "asset",
@@ -145,7 +145,9 @@ const FaucetPage = () => {
     {
       headerName: "Wallet Balance",
       cellRenderer: (token) => {
-        return formatDecimals(formatUnits(balances[token.symbol], token.decimals), 4)
+        return balances && balances[token.symbol] && token
+          ? formatDecimals(formatUnits(balances[token.symbol], token.decimals), 4)
+          : 0
       },
       className: "text-xs lg:text-sm",
       headerClassName: "text-sm py-3"
@@ -183,6 +185,18 @@ const FaucetPage = () => {
 
   return (
     <>
+      {showErrorModal?.show && (
+        <ErrorModal
+          title={showErrorModal.message.name}
+          shortMessage={showErrorModal.message.shortMessage}
+          contentMessage={showErrorModal.message.message}
+        />
+      )}
+      {/* <ErrorModal
+        title="Transaction Error"
+        shortMessage="User denied transaction"
+        contentMessage="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      /> */}
       {showPopup?.enable && showPopup?.type === "success" && (
         <NoticePopup
           body={

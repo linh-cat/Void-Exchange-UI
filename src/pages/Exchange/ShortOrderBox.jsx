@@ -24,6 +24,7 @@ import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import Badge from "@components/common/Badge"
 import useLocalStorage from "src/hooks/useLocalStorage"
 import { getCollateralValue } from "src/lib/utils"
+import ErrorModal from "@components/ErrorModal/ErrorModal"
 
 const ShortOrderBox = () => {
   const [collateralModal, setCollateralModal] = useState(false)
@@ -35,7 +36,8 @@ const ShortOrderBox = () => {
   const [leverage, setLeverage] = useState(10)
   const [orderType, setOrderType] = useState(OrderType.MARKET)
 
-  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup, showErrorModal } =
+    useExchangeContext()
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.short")
   const { chain } = useNetwork()
   const { address, isConnected } = useAccount()
@@ -298,6 +300,13 @@ const ShortOrderBox = () => {
 
   return (
     <>
+      {showErrorModal?.show && (
+        <ErrorModal
+          title={showErrorModal.message.name}
+          shortMessage={showErrorModal.message.shortMessage}
+          contentMessage={showErrorModal.message.message}
+        />
+      )}
       <PlaceOrderModal
         open={orderConfirmModal}
         setOpen={setOrderConfirmModal}

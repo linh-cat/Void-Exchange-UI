@@ -8,6 +8,8 @@ const useMintFaucet = ({ amount, selectedToken }) => {
   const [isMinting, setIsMinting] = useState(false)
   const [faucets, setFaucets] = useState(null)
   const [shouldShowPopup, setShouldShowPopup] = useState(false)
+  const [showErrorModal, setShowErrorModal] = useState({ show: false, message: null })
+
 
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading } = useWalletClient()
@@ -33,19 +35,28 @@ const useMintFaucet = ({ amount, selectedToken }) => {
       return
     }
 
-    setIsMinting(true)
-    const hash = await faucet.mint(amount)
-    await publicClient.waitForTransactionReceipt({ hash })
+    try {
+      setIsMinting(true)
+      const hash = await faucet.mint(amount)
+      await publicClient.waitForTransactionReceipt({ hash })
 
-    setIsMinting(false)
-    setShouldShowPopup(true)
+      setIsMinting(false)
+      setShouldShowPopup(true)
 
-    setTimeout(() => {
-      setShouldShowPopup(false)
-    }, 3000)
+      setTimeout(() => {
+        setShouldShowPopup(false)
+      }, 3000)
+    } catch (error) {
+      setShowErrorModal({ show: true, message: error })
+      setTimeout(() => {
+        setShowErrorModal({ show: false, message: '' })
+        setIsMinting(false)
+        setShouldShowPopup(false)
+      }, 3000)
+    }
   }
 
-  return { isMinting, handleMint, shouldShowPopup }
+  return { isMinting, handleMint, shouldShowPopup, showErrorModal }
 }
 
 useMintFaucet.propTypes = {

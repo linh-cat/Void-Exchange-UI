@@ -24,6 +24,7 @@ import PlaceOrderModal from "./PlaceOrderModal"
 import TransactionPopup from "@components/common/TransactionPopup/TransactionPopup"
 import useLocalStorage from "src/hooks/useLocalStorage"
 import { getCollateralValue } from "src/lib/utils"
+import ErrorModal from "@components/ErrorModal/ErrorModal"
 
 const LongOrderBox = () => {
   // UI state
@@ -39,7 +40,8 @@ const LongOrderBox = () => {
 
   const { chain } = useNetwork()
   const { address, isConnected } = useAccount()
-  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup } = useExchangeContext()
+  const { indexToken, placeOrder, isPlacingOrder, executePopup, shouldShowPlaceOrderPopup, showErrorModal } =
+    useExchangeContext()
 
   const [getLocal, setLocal, removeLocal] = useLocalStorage("orderinfor.long")
 
@@ -296,6 +298,13 @@ const LongOrderBox = () => {
 
   return (
     <>
+      {showErrorModal?.show && (
+        <ErrorModal
+          title={showErrorModal.message.name}
+          shortMessage={showErrorModal.message.shortMessage}
+          contentMessage={showErrorModal.message.message}
+        />
+      )}
       {shouldShowPlaceOrderPopup && <NoticePopup body={bodyPlaceOrderPopup} position="bottom-right" type="success" />}
       {executePopup.enable && executePopup.type === "open" && (
         <TransactionPopup

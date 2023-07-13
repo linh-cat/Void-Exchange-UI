@@ -15,6 +15,7 @@ import { isEthereumAddress } from "src/types"
 import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import { FlashSuccessIcon } from "@icons/index"
+import ErrorModal from "@components/ErrorModal/ErrorModal"
 
 /**
  * SectionVaultDeposit.
@@ -43,7 +44,7 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
     tokenDecimals: balance?.decimals || 0
   })
 
-  const { deposit, isLoading: isDepositing, shouldShowPopup } = useVault(tokenAddress, vaultAddress)
+  const { deposit, isLoading: isDepositing, shouldShowPopup, showErrorModal } = useVault(tokenAddress, vaultAddress)
 
   const onChangeAmount = (val) => {
     if (Number(balance?.formatted) < Number(val)) {
@@ -110,6 +111,13 @@ const VaultDeposit = ({ tokenAddress, vaultAddress, vaultId }) => {
 
   return (
     <>
+      {showErrorModal?.show && (
+        <ErrorModal
+          title={showErrorModal.message.name}
+          shortMessage={showErrorModal.message.shortMessage}
+          contentMessage={showErrorModal.message.message}
+        />
+      )}
       {shouldShowPopup && (
         <NoticePopup
           body={

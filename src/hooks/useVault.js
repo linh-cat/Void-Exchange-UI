@@ -6,6 +6,7 @@ import { isChainSupported } from "src/lib/chains"
 const useVault = (tokenAddress, vaultAddress) => {
   const [isLoading, setIsLoading] = useState(false)
   const [shouldShowPopup, setShouldShowPopup] = useState(false)
+  const [showErrorModal, setShowErrorModal] = useState({ show: false, message: null })
 
   const publicClient = usePublicClient()
   const { data: walletClient, isLoading: isWalletLoading } = useWalletClient()
@@ -22,21 +23,29 @@ const useVault = (tokenAddress, vaultAddress) => {
       return
     }
 
-    setIsLoading(true)
+    try {
+      setIsLoading(true)
 
-    const hash = await selectedVault.deposit(amount, receiver, {
-      simulate: true // static call before making real transaction
-    })
-    await publicClient.waitForTransactionReceipt({ hash })
+      const hash = await selectedVault.deposit(amount, receiver, {
+        simulate: true // static call before making real transaction
+      })
+      await publicClient.waitForTransactionReceipt({ hash })
 
-    setIsLoading(false)
-    setShouldShowPopup(true)
-    setTimeout(() => {
-      setShouldShowPopup(false)
-    }, 3000)
+      setIsLoading(false)
+      setShouldShowPopup(true)
+      setTimeout(() => {
+        setShouldShowPopup(false)
+      }, 3000)
+    } catch (error) {
+      setShowErrorModal({ show: true, message: error })
+      setTimeout(() => {
+        setShowErrorModal({ show: false, message: null })
+        setIsLoading(false)
+      }, 3000)
+    }
   }
 
-  return { isLoading, deposit, shouldShowPopup }
+  return { isLoading, deposit, shouldShowPopup, showErrorModal }
 }
 
 export default useVault

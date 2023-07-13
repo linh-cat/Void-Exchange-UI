@@ -21,6 +21,7 @@ export function ExchangeContextProvider({ children }) {
   const [shouldRefreshPositions, setShouldRefreshPositions] = useState(false)
   const [shouldShowPlaceOrderPopup, setShouldShowPlaceOrderPopup] = useState(false)
   const [shouldShowClosePopup, setShouldShowClosePopup] = useState(false)
+  const [showErrorModal, setShowErrorModal] = useState({ show: false, message: null })
   const [executePopup, setShowPopupExecute] = useState({
     type: "open",
     enable: false
@@ -99,10 +100,11 @@ export function ExchangeContextProvider({ children }) {
     if (!exchange) {
       return
     }
-    setIsPlacingOrder(true)
-    const hash = await exchange.placeOrder(params)
-    const receipt = await publicClient.waitForTransactionReceipt({ hash })
+
     try {
+      setIsPlacingOrder(true)
+      const hash = await exchange.placeOrder(params)
+      const receipt = await publicClient.waitForTransactionReceipt({ hash })
       const log = receipt.logs[2]
 
       const event = decodeEventLog({
@@ -113,13 +115,19 @@ export function ExchangeContextProvider({ children }) {
 
       const orderId = event.args?.orderId
       setSavedOrders({ orderId: Number(orderId), type: "open" })
-    } catch (err) {
-      console.error(err)
-    }
 
-    setIsPlacingOrder(false)
-    setShouldShowPlaceOrderPopup(true)
+      setIsPlacingOrder(false)
+      setShouldShowPlaceOrderPopup(true)
+    } catch (error) {
+      setShowErrorModal({ show: true, message: error })
+      setTimeout(() => {
+        setShowErrorModal({ show: false, message: null })
+        setIsPlacingOrder(false)
+        clearLocalStorage()
+      }, 3000)
+    }
   }
+
   const getPositions = async (address) => {
     if (!exchange) {
       return []
@@ -140,10 +148,10 @@ export function ExchangeContextProvider({ children }) {
       return
     }
 
-    setIsClosingOrder(true)
-    const hash = await exchange.closeOrder(params)
-    const receipt = await publicClient.waitForTransactionReceipt({ hash })
     try {
+      setIsClosingOrder(true)
+      const hash = await exchange.closeOrder(params)
+      const receipt = await publicClient.waitForTransactionReceipt({ hash })
       const log = receipt.logs[0]
       const event = decodeEventLog({
         abi: parseAbi(["event OrderPlaced(uint256 indexed orderId)"]),
@@ -153,12 +161,15 @@ export function ExchangeContextProvider({ children }) {
 
       const orderId = event.args?.orderId
       setSavedOrders({ orderId: Number(orderId), type: "close" })
-    } catch (err) {
-      console.error(err)
+      setIsClosingOrder(false)
+      setShouldShowClosePopup(true)
+    } catch (error) {
+      setShowErrorModal({ show: true, message: error })
+      setTimeout(() => {
+        setShowErrorModal({ show: false, message: null })
+        clearLocal()
+      }, 3000)
     }
-
-    setIsClosingOrder(false)
-    setShouldShowClosePopup(true)
   }
 
   return (
@@ -176,7 +187,8 @@ export function ExchangeContextProvider({ children }) {
         shouldRefreshPositions,
         executePopup,
         shouldShowPlaceOrderPopup,
-        shouldShowClosePopup
+        shouldShowClosePopup,
+        showErrorModal
       }}
     >
       {children}
@@ -194,6 +206,7 @@ export function ExchangeContextProvider({ children }) {
  * @property {boolean} shouldRefreshPositions - A boolean indicating if the positions should be refreshed.
  * @property {boolean} shouldShowClosePopup  - A boolean indicating if the positions should be refreshed.
  * @property {Object} executePopup
+ * @property {Object} showErrorModal - User reject transaction
  * @property {boolean} shouldShowPlaceOrderPopup - A boolean indicating when place ordered.
  * @property {function} placeOrder - The function to place an order.
  * @property {boolean} isClosingOrder - A boolean indicating if an order is being closed.
