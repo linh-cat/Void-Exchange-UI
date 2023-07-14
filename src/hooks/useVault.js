@@ -35,13 +35,13 @@ const useVault = (tokenAddress, vaultAddress) => {
       setShouldShowPopup(true)
       setTimeout(() => {
         setShouldShowPopup(false)
-      }, 3000)
+      }, 5000)
     } catch (error) {
       setShowErrorModal({ show: true, message: error })
       setTimeout(() => {
         setShowErrorModal({ show: false, message: null })
         setIsLoading(false)
-      }, 3000)
+      }, 5000)
     }
   }
 

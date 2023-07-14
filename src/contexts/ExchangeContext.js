@@ -71,7 +71,7 @@ export function ExchangeContextProvider({ children }) {
       setTimeout(() => {
         setShowPopupExecute({ enable: false, type: "open" })
         clearLocalStorage()
-      }, 3000)
+      }, 5000)
     }
   })
 
@@ -124,7 +124,7 @@ export function ExchangeContextProvider({ children }) {
         setShowErrorModal({ show: false, message: null })
         setIsPlacingOrder(false)
         clearLocalStorage()
-      }, 3000)
+      }, 5000)
     }
   }
 
@@ -168,7 +168,7 @@ export function ExchangeContextProvider({ children }) {
       setTimeout(() => {
         setShowErrorModal({ show: false, message: null })
         clearLocal()
-      }, 3000)
+      }, 5000)
     }
   }
 

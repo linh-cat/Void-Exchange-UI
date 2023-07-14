@@ -45,14 +45,14 @@ const useMintFaucet = ({ amount, selectedToken }) => {
 
       setTimeout(() => {
         setShouldShowPopup(false)
-      }, 3000)
+      }, 5000)
     } catch (error) {
       setShowErrorModal({ show: true, message: error })
       setTimeout(() => {
         setShowErrorModal({ show: false, message: '' })
         setIsMinting(false)
         setShouldShowPopup(false)
-      }, 3000)
+      }, 5000)
     }
   }
 

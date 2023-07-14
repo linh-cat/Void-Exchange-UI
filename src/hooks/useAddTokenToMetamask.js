@@ -25,13 +25,13 @@ const useAddTokenToMetamask = () => {
             setShowPopup({ enable: true, type: "success" })
             setTimeout(() => {
               setShowPopup({ enable: false, type: "success" })
-            }, 3000)
+            }, 5000)
           })
           .catch(() => {
             setShowPopup({ enable: true, type: "pending" })
             setTimeout(() => {
               setShowPopup({ enable: false, type: "pending" })
-            }, 3000)
+            }, 5000)
           })
       }
     },
