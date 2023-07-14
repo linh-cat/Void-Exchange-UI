@@ -91,7 +91,7 @@ const Banner = () => {
                         <div className="flex items-center gap-3 mt-1">
                           <div>{formatDollar(item?.price)}</div>
                           <div
-                            className={cx("flex items-center gap-1 text-sm rounded-full px-2", {
+                            className={cx("flex items-center gap-1 text-xs rounded-full py-0.5 px-2", {
                               "bg-errorLight": item?.volumeChange24h < 0,
                               "bg-successLight": item?.volumeChange24h >= 0
                             })}
