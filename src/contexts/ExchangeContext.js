@@ -167,6 +167,7 @@ export function ExchangeContextProvider({ children }) {
       setShowErrorModal({ show: true, message: error })
       setTimeout(() => {
         setShowErrorModal({ show: false, message: null })
+        setIsClosingOrder(false)
         clearLocal()
       }, 5000)
     }
