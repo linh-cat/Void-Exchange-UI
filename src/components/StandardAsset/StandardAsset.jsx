@@ -5,7 +5,7 @@ import TableCustom from "@components/Table/TableCustom"
 import cx from "classnames"
 import { BTC, DOGE, ETH, MATIC, PEPE, POLYGON, SOLANA } from "@img/token"
 import usePriceList from "src/hooks/usePriceList"
-import { formatDollar, formatPercentage } from "src/lib/formatter"
+import { formatDollar, formatDollarDecimals, formatPercentage } from "src/lib/formatter"
 
 const tokenImages = {
   BTC: BTC,
@@ -15,6 +15,15 @@ const tokenImages = {
   POLYGON: POLYGON,
   SOL: SOLANA,
   PEPE: PEPE
+}
+const decimalFormats = {
+  BTC: 2,
+  DOGE: 2,
+  ETH: 2,
+  MATIC: 2,
+  POLYGON: 2,
+  SOL: 2,
+  PEPE: 10
 }
 
 const columnDef = [
@@ -41,15 +50,12 @@ const columnDef = [
     field: "price",
     headerName: "Price",
     formatter: (cell) => {
-      return formatDollar(cell?.price)
+      return formatDollarDecimals(cell?.price, decimalFormats[cell?.symbol])
     }
   },
   {
     field: "percentChange1h",
     headerName: "1h Change",
-    formatter: (cell) => {
-      return formatDollar(cell?.percentChange1h)
-    },
     cellRenderer: (cell) => {
       return (
         <div className={cx({ "text-success": cell?.percentChange1h > 0, "text-error": cell?.percentChange1h < 0 })}>
@@ -89,7 +95,7 @@ const columnDef = [
     field: "volumeChange24h",
     headerName: "24h Volume",
     formatter: (cell) => {
-      return formatDollar(cell?.volumeChange24h)
+      return formatDollarDecimals(cell?.volumeChange24h, decimalFormats[cell?.symbol])
     }
   }
 ]
@@ -111,6 +117,7 @@ const StandardAsset = () => {
     }
     return []
   }, [data])
+
   console.log({ dataForTable })
   return (
     <div className="px-20 2xl:p-0">

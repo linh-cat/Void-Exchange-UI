@@ -1,15 +1,38 @@
 /* global BigInt */
-export const numberFormatter = new Intl.NumberFormat("en-US", {
+const defaultOptions = {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 2,
   minimumFractionDigits: 2,
   roundingIncrement: 5
-})
+}
+
+export const numberFormatter = new Intl.NumberFormat("en-US", defaultOptions)
 
 export const formatPercentage = (value) => {
   if (!value) return "0"
   return `${parseFloat(value).toFixed(2)}%`
+}
+
+/**
+ * format value with decimal
+ *
+ * @param {value} Number
+ * @param {decimals} Number
+ */
+
+export const formatDollarDecimals = (value, decimals) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals,
+    roundingIncrement: 5
+  })
+  if (value !== 0) {
+    return formatter.format(value)
+  }
+  return '$0'
 }
 
 /**
@@ -28,7 +51,10 @@ export const formatValue = (value, decimals, withDollarSign = true) => {
 }
 
 export const formatDollar = (value) => {
-  return numberFormatter.format(value)
+  if (value !== 0) {
+    return numberFormatter.format(value)
+  }
+  return '$0'
 }
 
 /**
