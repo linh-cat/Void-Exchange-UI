@@ -118,7 +118,6 @@ const StandardAsset = () => {
     return []
   }, [data])
 
-  console.log({ dataForTable })
   return (
     <div className="px-20 2xl:p-0">
       <Card className="standard-asset mt-10 container mx-auto max-w-7xl px-5 p-5" hasShadow={true}>
