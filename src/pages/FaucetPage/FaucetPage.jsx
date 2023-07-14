@@ -49,7 +49,7 @@ const tokens = [
 
 const FaucetPage = () => {
   const [openModal, setOpenModal] = useState(false)
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState()
   const [selectedToken, setSelectedToken] = useState(null)
   const [balances, setBalances] = useState({
     WBTC: 0,
@@ -109,6 +109,7 @@ const FaucetPage = () => {
   const onMint = async () => {
     await handleMint()
     setOpenModal(false)
+    setAmount()
   }
 
   const { addToken, showPopup } = useAddTokenToMetamask()
@@ -124,6 +125,7 @@ const FaucetPage = () => {
     },
     [chain]
   )
+
   const columnDef = [
     {
       field: "asset",
@@ -272,6 +274,7 @@ const FaucetPage = () => {
                       Max
                     </div>
                   }
+                  type="number"
                   value={amount}
                   onChange={(val) => setAmount(val)}
                   disabled={isMinting}

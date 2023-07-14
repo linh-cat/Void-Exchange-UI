@@ -13,7 +13,7 @@ const decimalCount = (numb) => {
   if (converted.includes(".")) {
     return converted.split(".")[1].length
   }
-  return 0
+  return ""
 }
 
 const InputCustom = ({
@@ -40,7 +40,6 @@ const InputCustom = ({
   disabled,
   getTokenAsset
 }) => {
-  const DECIMAL_REGEX = RegExp("^[0-9]*[.]{1}[0-9]*$")
   const [selectedToken, setSelectedToken] = useState(defaultToken)
 
   const { address } = useAccount()
@@ -62,12 +61,8 @@ const InputCustom = ({
 
   const handleChange = (val) => {
     if (type === "number") {
-      if (isNaN(Number(val))) {
-        return onChange("0")
-      }
-
-      if (Number(val) < 0) {
-        return onChange("0")
+      if (Number(val) < 0 || Number(val) === 0) {
+        return onChange("")
       }
 
       if (val < min) {
@@ -78,24 +73,9 @@ const InputCustom = ({
         return onChange(max)
       }
 
-      if (Number(val) !== 0) {
-        // if it is integer, remove leading zeros
-        if (!DECIMAL_REGEX.test(val)) {
-          val = Number(val).toString()
-        }
-      }
-
       if (decimalCount(val) > 8) {
         val = Number(val).toFixed(8).toString()
       }
-      // else {
-      //   // remain input box w single zero, but keep zero when have decimal
-      //   val = val.replace(/^[0]+/g, "0")
-      //   // if it is no value
-      //   if (val.length === 0) {
-      //     val = "0"
-      //   }
-      // }
 
       if (showBalance) {
         if (Number(val) > Number(balance?.formatted)) {
