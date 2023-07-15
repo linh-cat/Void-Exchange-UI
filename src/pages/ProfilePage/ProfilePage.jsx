@@ -5,7 +5,11 @@ import Footer from "@components/Footer/Footer"
 
 import { Void } from "@img/logo"
 import { CopyIcon } from "@icons/index"
-import { ApeBG, DogeBG } from "@img/bg"
+import { ApeBG } from "@img/bg"
+import { useAccount, useBalance } from "wagmi"
+import { truncate } from "src/lib/utils"
+import { formatDecimals } from "src/lib/formatter"
+import { ETH } from "@img/token"
 
 const columnDef = [
   {
@@ -28,6 +32,9 @@ const columnDef = [
 ]
 
 const ProfilePage = () => {
+  const { address, isConnected } = useAccount()
+  const { data: balance } = useBalance({ address })
+
   return (
     <div className="flex flex-col gap-20">
       <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 px-10 2xl:px-0 ">
@@ -37,8 +44,8 @@ const ProfilePage = () => {
             <div className="flex flex-col items-center w-full xl:w-96 bg-none">
               <img className="w-20 h-20 rounded-full" src={ApeBG} alt="Extra large avatar" />
               <div className="address text-slate-500">
-                0xe6e6ee66e....5d01232{" "}
-                <span className="inline-block cursor-pointer">
+                {isConnected ? truncate(address, 7) : ""}
+                <span className="inline-block cursor-pointer ml-1">
                   <img src={CopyIcon} className="w-5 h-5" alt="copy" />
                 </span>
               </div>
@@ -48,12 +55,14 @@ const ProfilePage = () => {
               <div className="balance-wallet flex flex-col gap-3">
                 <label className="text-slate-500 text-lg">Wallet balance</label>
                 <div className="flex items-center gap-2">
-                  <img src={DogeBG} className="h5 w-5" alt="otoken" />
-                  <span className="text-lg font-medium">0.00</span>
+                  <img src={ETH} className="h5 w-5" alt="token" />
+                  <span className="text-lg font-medium">
+                    {formatDecimals(balance?.formatted, 2)} {balance?.symbol}
+                  </span>
                 </div>
                 <Button text="Deposit Crypto" isDefault={false} className={"border py-2"} />
               </div>
-              <div className="balance-exchange flex flex-col gap-3">
+              {/* <div className="balance-exchange flex flex-col gap-3">
                 <label className="text-slate-500 text-lg">Exchange balance</label>
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-lg">$0.00</span>
@@ -66,7 +75,7 @@ const ProfilePage = () => {
                   <span className="font-medium text-lg">0%</span>
                 </div>
                 <Button text="Stake" isDefault={false} className={"border py-2"} />
-              </div>
+              </div> */}
             </div>
           </div>
         </Card>

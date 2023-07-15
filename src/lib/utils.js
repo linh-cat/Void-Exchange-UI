@@ -9,3 +9,15 @@ export const getCollateralValue = (purchaseAmount, currentPrice) => {
     }
     return 0n
 }
+
+/**
+ * @param {String} string
+ * @param {Number} limit
+*/
+
+export const truncate = (string, limit) => {
+    if (string.length <= limit) {
+        return string
+    }
+    return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
+}

@@ -14,13 +14,8 @@ import { CheckIcon } from "@heroicons/react/24/solid"
 import Spinner from "@components/Spinner/Spinner"
 import useOutsideDetect from "src/hooks/useOutsideDetect"
 import { formatDecimals } from "src/lib/formatter"
+import { truncate } from "src/lib/utils"
 
-const truncate = (string, limit) => {
-  if (string.length <= limit) {
-    return string
-  }
-  return string.slice(0, limit) + "..." + string.slice(string.length - 4, string.length)
-}
 const listChainNotSupport = {
   1: "Ethereum"
 }
