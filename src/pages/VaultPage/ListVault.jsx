@@ -15,6 +15,7 @@ const ListVault = () => {
           backedByIcon={item?.backedByIcon}
           risk={item.risk}
           badge={item.badge}
+          disabled={item.disabled}
         />
       ))}
     </div>

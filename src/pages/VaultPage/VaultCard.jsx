@@ -11,7 +11,7 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge }) => {
+const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, disabled }) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -19,7 +19,9 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge }) 
 
   return (
     <div
-      className={`vault-card flex flex-col w-full border rounded-lg cursor-pointer overflow-hidden ${hoverBg}`}
+      className={cx("vault-card flex flex-col w-full border rounded-lg cursor-pointer overflow-hidden", hoverBg, {
+        disabled: disabled
+      })}
       onClick={handleClick}
     >
       <div className={`vault-card-top w-full h-1/3 bg-slate-600 relative p-5 ${bg}`}>

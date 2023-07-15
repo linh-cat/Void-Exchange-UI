@@ -27,7 +27,8 @@ export const vaultLists = [
     icon: PEPE,
     risk: "medium",
     badge: ['upcomming'],
-    backedByIcon: USDC
+    backedByIcon: USDC,
+    disabled: true,
   },
   {
     id: 4,
@@ -47,6 +48,7 @@ export const vaultLists = [
     icon: DOGE,
     risk: "low",
     badge: ['upcomming'],
-    backedByIcon: USDC
+    backedByIcon: USDC,
+    disabled: true,
   }
 ]
