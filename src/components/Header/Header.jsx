@@ -62,7 +62,7 @@ const Header = () => {
           <div className="w-40 cursor-pointer" onClick={() => navigate("/")}>
             <img src={VoidExchangeLogo} alt="Logo" className="h-auto object-cover w-full" />
           </div>
-          <div className={cx("navbar", { show: isShow })}>
+          <nav className={cx("navbar", { show: isShow })}>
             <ul className="xl:flex items-center gap-1 xl:gap-5 2xl:gap-8 3xl:gap-12">
               <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
@@ -72,11 +72,12 @@ const Header = () => {
                   className={cx("item", {
                     border: false,
                     "active-link font-medium": location.pathname === item.link,
-                    hidden: item.hidden
+                    hidden: item.hidden,
+                    disabled: item.disabled
                   })}
                   key={idx}
                 >
-                  <Link to={item.link} onClick={showMenu} className={cx({ disabled: item.disabled })}>
+                  <Link to={item.link} onClick={showMenu}>
                     <span>{item.title}</span>
                     {item.bagde && <Badge text={item.bagde} />}
                   </Link>
@@ -84,7 +85,7 @@ const Header = () => {
               ))}
               {width <= 1024 && <ConnectWalletButton imgSrc={WalletIcon} />}
             </ul>
-          </div>
+          </nav>
         </div>
 
         <div className="flex">
