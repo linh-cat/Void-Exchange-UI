@@ -8,6 +8,7 @@ export const vaultLists = [
     hoverBg: "bg-hover-eth",
     risk: "medium",
     badge: ["void 1"],
+    dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 10, 12, 100] },
     icon: ETH
   },
   {
@@ -17,6 +18,7 @@ export const vaultLists = [
     hoverBg: "bg-hover-btc",
     risk: "low",
     badge: ["void 1"],
+    dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 20, 90, 100] },
     icon: BTC
   },
   {
@@ -28,6 +30,7 @@ export const vaultLists = [
     risk: "high",
     badge: ["upcomming"],
     backedByIcon: USDC,
+    dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [30, 20, 10, 100] },
     disabled: true
   },
   {
@@ -38,6 +41,7 @@ export const vaultLists = [
     icon: USDC,
     risk: "low",
     badge: ["void 1"],
+    dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [10, 100, 10, 100] },
     backedByIcon: USDC
   },
   {
@@ -49,6 +53,7 @@ export const vaultLists = [
     risk: "high",
     badge: ["upcomming"],
     backedByIcon: USDC,
+    dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 30, 2, 80] },
     disabled: true
   }
 ]

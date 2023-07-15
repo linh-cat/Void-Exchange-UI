@@ -2,7 +2,6 @@ export const navbar = [
     {
         title: 'Earn',
         link: '/vault/list',
-
     },
     {
         title: 'Dashboard',

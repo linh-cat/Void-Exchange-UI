@@ -11,7 +11,7 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, disabled }) => {
+const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, disabled, dataLineChart }) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -56,11 +56,11 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, di
               showYaxis={false}
               showLegend={false}
               chartData={{
-                labels: ["Jun", "Jul", "Aug", "Sep"],
+                labels: dataLineChart.label,
                 datasets: [
                   {
                     id: 1,
-                    data: [1, 50, 2, 100],
+                    data: dataLineChart.dataSet,
                     tension: 0.4,
                     backgroundColor: "#16BE76",
                     borderColor: "#16BE76",

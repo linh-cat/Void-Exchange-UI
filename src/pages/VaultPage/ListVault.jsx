@@ -16,6 +16,7 @@ const ListVault = () => {
           risk={item.risk}
           badge={item.badge}
           disabled={item.disabled}
+          dataLineChart={item.dataLineChart}
         />
       ))}
     </div>
