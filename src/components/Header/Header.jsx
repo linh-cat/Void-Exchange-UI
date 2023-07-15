@@ -11,6 +11,8 @@ import VoidExchangeLogo from "@img/logo/void_exchange_logo.svg"
 
 import "./Header.css"
 import { WalletIcon } from "@icons/index"
+import { navbar } from "./config"
+import Badge from "@components/common/Badge"
 
 const Header = () => {
   const location = useLocation()
@@ -65,76 +67,21 @@ const Header = () => {
               <li className="bg-transparent font-semibold text-sm text-teal-300 hover:text-white py-1 px-4 border border-blue-500 rounded">
                 Testnet
               </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/vault/list"
-                })}
-              >
-                <Link to={`/vault/list`} onClick={showMenu}>
-                  Earn
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/"
-                })}
-              >
-                <Link to={`/`} onClick={showMenu}>
-                  Dashboard
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/document"
-                })}
-              >
-                <Link to={`/document`} onClick={showMenu}>
-                  Docs
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/profile"
-                })}
-              >
-                <Link to={`/profile`} onClick={showMenu}>
-                  Profile
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/faucet"
-                })}
-              >
-                <Link to={`/faucet`} onClick={showMenu}>
-                  Faucet
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/staking"
-                })}
-              >
-                <Link to={`/staking`} onClick={showMenu}>
-                  Staking
-                </Link>
-              </li>
-              <li
-                className={cx("item", {
-                  border: false,
-                  "active-link font-medium": location.pathname === "/market"
-                })}
-              >
-                <Link to={`/market`} onClick={showMenu}>
-                  Market
-                </Link>
-              </li>
+              {navbar.map((item, idx) => (
+                <li
+                  className={cx("item", {
+                    border: false,
+                    "active-link font-medium": location.pathname === item.link,
+                    hidden: item.hidden
+                  })}
+                  key={idx}
+                >
+                  <Link to={item.link} onClick={showMenu}>
+                    <span>{item.title}</span>
+                    {item.bagde && <Badge text={item.bagde} />}
+                  </Link>
+                </li>
+              ))}
               {width <= 1024 && <ConnectWalletButton imgSrc={WalletIcon} />}
             </ul>
           </div>
