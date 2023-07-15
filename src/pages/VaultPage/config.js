@@ -7,8 +7,8 @@ export const vaultLists = [
     bg: "bg-eth",
     hoverBg: "bg-hover-eth",
     risk: "medium",
-    badge: ["void 1"],
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 10, 12, 100] },
+    badge: ["ETH void"],
     icon: ETH
   },
   {
@@ -17,8 +17,8 @@ export const vaultLists = [
     bg: "bg-btc",
     hoverBg: "bg-hover-btc",
     risk: "low",
-    badge: ["void 1"],
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 20, 90, 100] },
+    badge: ["BTC void"],
     icon: BTC
   },
   {
@@ -40,8 +40,8 @@ export const vaultLists = [
     hoverBg: "bg-hover-usdc",
     icon: USDC,
     risk: "low",
-    badge: ["void 1"],
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [10, 100, 10, 100] },
+    badge: ["USDC void"],
     backedByIcon: USDC
   },
   {

@@ -1,5 +1,6 @@
 import Button from "@components/Button/Button"
 import Card from "@components/Card/Card"
+import Countdown from "@components/CountDown/Countdown"
 import { ArrowRight } from "@icons/index"
 import { Void } from "@img/logo"
 import { ETH } from "@img/token"
@@ -67,7 +68,8 @@ const VaultStrategy = () => {
             </div>
             <div>
               <h3 className={cx("text-slate-500 text-sm", {})}>ENDS</h3>
-              <div className="text-sm ">17D 15H 13M</div>
+              {/* <div className="text-sm ">17D 15H 13M</div> */}
+              <Countdown />
             </div>
           </div>
         </div>
