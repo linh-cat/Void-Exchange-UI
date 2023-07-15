@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-const Countdown = ({ time = "2023-07-17T00:00:00Z" }) => {
+const Countdown = ({ time = "2023-07-17T00:00:00Z", className }) => {
   const targetDate = new Date(time) // Replace with your target date
   const [remainingTime, setRemainingTime] = useState()
 
@@ -41,7 +41,7 @@ const Countdown = ({ time = "2023-07-17T00:00:00Z" }) => {
   }
 
   return (
-    <div>
+    <div className={className}>
       {remainingTime?.days}:{remainingTime?.hours}:{remainingTime?.minutes}:{remainingTime?.seconds}
     </div>
   )
