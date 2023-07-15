@@ -76,7 +76,7 @@ const Header = () => {
                   })}
                   key={idx}
                 >
-                  <Link to={item.link} onClick={showMenu}>
+                  <Link to={item.link} onClick={showMenu} className={cx({ disabled: item.disabled })}>
                     <span>{item.title}</span>
                     {item.bagde && <Badge text={item.bagde} />}
                   </Link>
