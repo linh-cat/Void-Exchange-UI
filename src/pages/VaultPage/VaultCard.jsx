@@ -11,7 +11,7 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk }) => {
+const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge }) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -24,7 +24,11 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk }) => {
     >
       <div className={`vault-card-top w-full h-1/3 bg-slate-600 relative p-5 ${bg}`}>
         <div className="vault-card-header">
-          <button className="btn font-medium px-2 py-2 rounded-sm uppercase text-xs tracking-wider">Void 1</button>
+          {badge.map((b, idx) => (
+            <button className="btn font-medium px-2 py-2 rounded-sm uppercase text-xs tracking-wider" key={idx}>
+              {b}
+            </button>
+          ))}
         </div>
         <img src={icon} alt={icon} className="w-12 h-12 absolute left-5 -bottom-6" />
       </div>
