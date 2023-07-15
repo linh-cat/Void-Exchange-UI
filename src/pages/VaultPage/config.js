@@ -7,7 +7,7 @@ export const vaultLists = [
     bg: "bg-eth",
     hoverBg: "bg-hover-eth",
     risk: "medium",
-    badge: ["void 1"],
+    badge: ["ETH void"],
     icon: ETH
   },
   {
@@ -16,7 +16,7 @@ export const vaultLists = [
     bg: "bg-btc",
     hoverBg: "bg-hover-btc",
     risk: "low",
-    badge: ["void 1"],
+    badge: ["BTC void"],
     icon: BTC
   },
   {
@@ -37,7 +37,7 @@ export const vaultLists = [
     hoverBg: "bg-hover-usdc",
     icon: USDC,
     risk: "low",
-    badge: ["void 1"],
+    badge: ["USDC void"],
     backedByIcon: USDC
   },
   {
