@@ -29,6 +29,5 @@ export const navbar = [
         title: 'Market',
         link: '/market',
         bagde: 'upcoming',
-        disabled: true
     },
 ]
