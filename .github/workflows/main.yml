@@ -1,20 +1,21 @@
 name: void-app-cd
 on:
-        push:
-                branches: [master]
+  push:
+    branches: [master]
 
 jobs:
-        build:
-                runs-on: ubuntu-latest
-                steps:
-                        - name: deploy using ssh
-                          uses: appleboy/ssh-action@master
-                          with:
-                                  host: ${{ secrets.REMOTE_HOST }}
-                                  username: ${{ secrets.REMOTE_USER }}
-                                  key: ${{ secrets.SSH_PRIVATE_KEY }}
-                                  port: ${{ secrets.REMOTE_PORT }}
-                                  script: |
-                                          cd ~/void-app
-                                          npm run build
-                                          sudo cp -r build/* /var/www/void-exchange
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.REMOTE_PORT }}
+          script: |
+            cd ~/void-app
+            git pull origin master
+            npm run build
+            sudo cp -r build/* /var/www/void-exchange
