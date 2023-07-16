@@ -74,15 +74,15 @@ const Banner = () => {
           <div className="flex flex-col gap-5">
             <h3 className="text-slate-500">24h Most Volume</h3>
             <div className="overflow-x-auto no-scrollbar">
-              <div className="flex justify-between items-center ">
+              <div className="flex justify-between items-center gap-5">
                 {data &&
                   data.map((item) => (
                     <div className="item flex justify-center items-center gap-3" key={item?.label}>
-                      <div className="flex justify-center items-center">
+                      <div className="flex justify-center items-center w-10 h-10">
                         <img
                           src={tokenImages[item?.symbol]}
                           alt={item?.symbol}
-                          className="w-10 h-10 border rounded-full"
+                          className="w-full h-full border rounded-full"
                         />
                       </div>
 

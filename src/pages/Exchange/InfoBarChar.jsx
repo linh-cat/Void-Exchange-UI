@@ -129,7 +129,7 @@ const InfoBarChar = () => {
         <div className="flex flex-col gap-1">
           <h3 className="text-xs text-slate-500">Countdown</h3>
           <div className="text-xs mt-auto">
-            <Countdown time="2023-07-31T00:00:00Z" />
+            <Countdown time="2023-07-16T20:59:59Z" />
           </div>
         </div>
       </div>
