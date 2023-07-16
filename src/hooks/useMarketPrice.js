@@ -37,7 +37,7 @@ const useMarketPrice = () => {
     if (lastMessage) {
       try {
         const data = JSON.parse(lastMessage?.data)
-        if (Number(formatUnits(data.p, 18)) !== Number(currentPrice)) {
+        if (data && data.p && Number(formatUnits(data.p, 18)) !== Number(currentPrice)) {
           setPriceChange(Number(formatUnits(data.p, 18)) - Number(currentPrice))
           setPreviousPrice(Number(currentPrice))
           setCurrentPrice(formatUnits(data.p, 18))
