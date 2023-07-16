@@ -21,6 +21,7 @@ import DocumentPage from "./pages/DocumentPage/DocumentPage"
 import MarketPage from "./pages/MarketPage/MarketPage"
 import { ExchangeContextProvider } from "src/contexts/ExchangeContext"
 import BgApp from "@components/BgApp/BgApp"
+import SEO from "@components/common/SEO"
 
 const baseGoerliExtended = {
   ...baseGoerli,
@@ -92,7 +93,9 @@ const FullApp = () => {
 function App() {
   return (
     <WagmiConfig config={config}>
-      <FullApp />
+      <SEO>
+        <FullApp />
+      </SEO>
     </WagmiConfig>
   )
 }
