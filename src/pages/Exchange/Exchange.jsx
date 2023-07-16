@@ -10,6 +10,8 @@ import ListPosition from "./ListPosition"
 import TabExchange from "../../components/TabExchange/TabExchange"
 import "./Exchange.css"
 import InfoBarChar from "./InfoBarChar"
+import SEO from "@components/common/SEO"
+import { getPageTitle } from "src/lib/utils"
 
 const Exchange = () => {
   const [tabSection, setTabSection] = useState(LIST_SECTIONS[0])
@@ -36,7 +38,7 @@ const Exchange = () => {
   }
 
   return (
-    <>
+    <SEO title={getPageTitle("Trading")}>
       <TopInfo />
       <div className="exchange w-full xl:grid-flow-col xl:grid xl:grid-cols-5 vh-90 border overflow-y-auto no-scrollbar">
         {/* left side chart and infor bar */}
@@ -78,7 +80,7 @@ const Exchange = () => {
           <TabExchange defaultValue={0} />
         </div>
       </div>
-    </>
+    </SEO>
   )
 }
 

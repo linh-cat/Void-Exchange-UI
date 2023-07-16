@@ -15,6 +15,8 @@ import Editor from "@monaco-editor/react"
 import { Tab } from "@headlessui/react"
 import { Binance, Bybit, ChainLink, Coinbase, Kucoin, OKX, Void } from "@img/logo"
 import Footer from "@components/Footer/Footer"
+import SEO from "@components/common/SEO"
+import { getPageTitle } from "src/lib/utils"
 
 const providers = [
   {
@@ -69,7 +71,7 @@ const MarketPage = () => {
   const bodyModal = <div>x + y + z</div>
 
   return (
-    <>
+    <SEO title={getPageTitle("Market")}>
       <Modal
         header={headerModal}
         body={bodyModal}
@@ -259,7 +261,7 @@ const MarketPage = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </SEO>
   )
 }
 

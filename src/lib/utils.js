@@ -27,5 +27,5 @@ export const truncate = (string, limit) => {
 */
 export function getPageTitle(data) {
     return `${data} | Decentralized
-    Perpetual Exchange | GMX`;
+    Perpetual Exchange | Void Exchange`;
 }

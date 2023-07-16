@@ -22,6 +22,8 @@ import { formatDecimals } from "src/lib/formatter"
 import NoticePopup from "@components/common/NoticePopup/NoticePopup"
 import { ExclamationWarningIcon, FlashSuccessIcon } from "@icons/index"
 import ErrorModal from "@components/ErrorModal/ErrorModal"
+import SEO from "@components/common/SEO"
+import { getPageTitle } from "src/lib/utils"
 
 const tokens = [
   {
@@ -186,7 +188,7 @@ const FaucetPage = () => {
   ]
 
   return (
-    <>
+    <SEO title={getPageTitle("Faucet")}>
       {showErrorModal?.show && (
         <ErrorModal
           title={showErrorModal.message.name}
@@ -317,7 +319,7 @@ const FaucetPage = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </SEO>
   )
 }
 
