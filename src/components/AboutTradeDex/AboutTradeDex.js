@@ -3,7 +3,7 @@ import { SelfGovernedMarket, TradeDexBG, VaultBG } from "@img/bg"
 
 const AboutTradeDex = () => {
     return (
-        <div className='relative flex flex-col gap-20 container mx-auto max-w-7xl'>
+        <div className='relative flex flex-col gap-40 container mx-auto max-w-7xl'>
             <div className="top text-center flex flex-col gap-3">
                 <p className="text-slate-500 uppercase font-medium text-sm tracking-wider">Now Live</p>
                 <h3 className="font-medium text-2xl">Start Trading</h3>
