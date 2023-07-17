@@ -119,8 +119,8 @@ const StandardAsset = () => {
   }, [data])
 
   return (
-    <div className="px-20 2xl:p-0">
-      <Card className="standard-asset mt-10 container mx-auto max-w-7xl px-5 p-5" hasShadow={true}>
+    <div className="px-10 2xl:p-0">
+      <Card className="mt-10 container mx-auto max-w-7xl px-5 p-5" hasShadow={true}>
         <h3 className="font-medium text-lg">Standard Assets</h3>
         <TableCustom columnDef={columnDef} data={dataForTable} cellStyle="px-3 py-4 border-b" />
       </Card>

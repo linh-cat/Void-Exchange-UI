@@ -14,7 +14,11 @@ const DocumentPage = () => {
       <div className="flex flex-col gap-20">
         <div className="container mx-auto max-w-7xl py-10 flex flex-col gap-5 px-10 2xl:px-0">
           <h2 className="font-medium text-4xl">Developers</h2>
-          <Link className="bg-banner relative shadow border rounded vh-40 hover:border-slate-500" target="blank" to="/">
+          <Link
+            className="bg-banner relative shadow border rounded vh-40"
+            target="blank"
+            to="https://docs.void.exchange/"
+          >
             <div className="absolute top-1/2 left-0 flex flex-col gap-3 px-6">
               <h3 className="font-medium text-2xl tracking-wider">Documentation</h3>
               <div className="text-lg tracking-wider">
