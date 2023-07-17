@@ -32,7 +32,7 @@ const AboutTradeDex = () => {
                 </div>
                 <div className="text-center lg:text-left">
                     <h2 className='text-5xl font-extrabold break-words leading-snug'>Earn trading fees from Liquidity Vaults</h2>
-                    <p className='mt-5 text-slate-500 break-words w-10/12 leading-7'>Maximize your earnings by depositing your liquidity tokens into our Liquidity Vaults. Risk is isolated for each vault. Start earning confidently.</p>
+                    <p className='mt-5 text-slate-500 break-words w-full lg:w-10/12 leading-7'>Maximize your earnings by depositing your liquidity tokens into our Liquidity Vaults. Risk is isolated for each vault. Start earning confidently.</p>
                 </div>
             </section>
             <section className='grid grid-cols-1 lg:grid-cols-2 gap-5 items-center'>
