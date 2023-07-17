@@ -53,6 +53,7 @@ export function ExchangeContextProvider({ children }) {
     abi: Exchange.getABI(),
     eventName: "OrderExecuted",
     listener(log) {
+      console.log("useContractEvent OrderExecuted", log)
       setShouldRefreshPositions(true)
       const orderId = log[0].args.orderId
       const listOrders = orders()
