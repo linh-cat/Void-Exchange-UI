@@ -78,13 +78,11 @@ const Banner = () => {
                 {data &&
                   data.map((item) => (
                     <div className="item flex justify-center items-center gap-3" key={item?.label}>
-                      <div className="flex justify-center items-center min-w-max h-10 ml-10 xl:ml-0">
-                        <img
-                          src={tokenImages[item?.symbol]}
-                          alt={item?.symbol}
-                          className="w-full h-full border rounded-full"
-                        />
-                      </div>
+                      <img
+                        src={tokenImages[item?.symbol]}
+                        alt={item?.symbol}
+                        className="w-10 h-10 border rounded-full inline-block ml-10 2xl:ml-0"
+                      />
 
                       <div className="text-sm">
                         <label className="">{item?.symbol}</label>
