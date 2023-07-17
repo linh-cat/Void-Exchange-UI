@@ -41,7 +41,7 @@ const { chains, publicClient } = configureChains(
       rpc: (chain) => {
         if (chain.id === baseGoerli.id) {
           return {
-            http: "https://goerli.base.org",
+            http: "https://base-goerli.blockpi.network/v1/rpc/public",
             webSocket: "wss://base-goerli.blastapi.io/7732b118-e54f-46ca-a10b-d226670d03dc"
           }
         }

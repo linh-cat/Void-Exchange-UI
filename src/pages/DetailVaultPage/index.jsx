@@ -21,17 +21,23 @@ const Index = () => {
       case "1":
         return {
           tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.WETH,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WETH
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WETH,
+          description:
+            "WETH Vault holds funds that is backing ETH/USD Market. WETH is an ERC-20 token on the EVM blockchain that is pegged to Ether (ETH). The revenue is coming from trading fees and loss of traders. Additionally, liquidity providers will receive escrowed VOID token. When you deposit WBTC to the vault, you will get a converted amount of vWETH that is representing your shares in the vault. Revenue is distributed every 7 days."
         }
       case "2":
         return {
           tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.WBTC,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WBTC
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.WBTC,
+          description:
+            "WBTC Vault holds funds that is backing WBTC/USD Market. WBTC is an ERC-20 token on the EVM blockchain that is pegged to Bitcoin (BTC). The revenue is coming from trading fees and loss of traders. Additionally, liquidity providers will receive escrowed VOID token. When you deposit WBTC to the vault, you will get a converted amount of vWBTC that is representing your shares in the vault. Revenue is distributed every 7 days."
         }
       case "4":
         return {
           tokenAddress: Constants?.Addresses[chain?.id]?.Faucet?.USDC,
-          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.USDC
+          vaultAddress: Constants?.Addresses[chain?.id]?.Vaults?.USDC,
+          description:
+            "USDC Vault holds funds that is backing short positions of all markets. The revenue is coming from trading fees and loss of traders. Additionally, liquidity providers will receive escrowed VOID token. When you deposit USDC to the vault, you will get a converted amount of vUSDC that is representing your shares in the vault. Revenue is distributed every 7 days."
         }
       default:
         break
@@ -50,7 +56,7 @@ const Index = () => {
         title={vaultItemInfo?.title}
         id={vaultItemInfo?.id}
       />
-      <VaultStrategy />
+      <VaultStrategy description={vaultInfo?.description} />
       <VaultDeposit tokenAddress={vaultInfo?.tokenAddress} vaultAddress={vaultInfo?.vaultAddress} vaultId={vaultId} />
       <VaultChart />
     </div>
