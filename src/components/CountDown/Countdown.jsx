@@ -26,7 +26,7 @@ const Countdown = ({ time = "2023-07-16T00:00:00Z", className }) => {
     }
 
     const totalSeconds = Math.floor(timeDifference / 1000)
-    const hours = Math.floor((totalSeconds / (60 * 60)) % 24)
+    const hours = Math.floor(totalSeconds / (60 * 60))
     const minutes = Math.floor((totalSeconds / 60) % 60)
     const seconds = Math.floor(totalSeconds % 60)
 
