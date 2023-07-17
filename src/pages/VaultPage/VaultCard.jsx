@@ -11,7 +11,19 @@ import "./VaultCard.css"
 
 Chart.register(CategoryScale)
 
-const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, disabled, dataLineChart }) => {
+const VaultCard = ({
+  title,
+  bg,
+  hoverBg,
+  icon,
+  id,
+  backedByIcon,
+  risk,
+  badge,
+  disabled,
+  dataLineChart,
+  information
+}) => {
   const navigate = useNavigate()
   function handleClick() {
     navigate(`/vault/${id}`)
@@ -42,11 +54,10 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, di
             <img src={backedByIcon ?? icon} alt="icon" className="w-5 h-5" />
           </div>
         </div>
-
         <div className="flex justify-between items-center ">
           <div className="flex flex-col gap-2 project-yeild ">
             <h3 className="text-xs text-slate-500">Total Yield (APY)</h3>
-            <p className="font-medium text-2xl">57.39%</p>
+            <p className="font-medium text-2xl">{information?.totalYield}</p>
           </div>
 
           <div className="w-20">
@@ -92,11 +103,11 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, di
         <div className="weekly-strike flex justify-between">
           <div className="flex flex-col gap-2">
             <h3 className="text-xs text-slate-500">Utilization</h3>
-            <p className="text-sm">40%</p>
+            <p className="text-sm">{information.utilization}</p>
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="text-xs text-slate-500">Total deposits</h3>
-            <p className="text-sm">4,155.41 ETH</p>
+            <p className="text-sm">{information.totalDeposit}</p>
           </div>
         </div>
         <div className="relative">
@@ -106,11 +117,11 @@ const VaultCard = ({ title, bg, hoverBg, icon, id, backedByIcon, risk, badge, di
         <div className="deposit-cap flex justify-between">
           <div className="flex flex-col gap-2">
             <h3 className="text-xs text-slate-500">Open Interest</h3>
-            <p className="text-sm">$3,259,618.00</p>
+            <p className="text-sm">{information.openInterest}</p>
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="text-xs text-slate-500">Total Reserve</h3>
-            <p className="text-sm">$8,256,721.00</p>
+            <p className="text-sm">{information.totalReserve}</p>
           </div>
         </div>
       </div>

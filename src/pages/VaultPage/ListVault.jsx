@@ -17,6 +17,8 @@ const ListVault = () => {
           badge={item.badge}
           disabled={item.disabled}
           dataLineChart={item.dataLineChart}
+          information={item.information}
+          key={item.id}
         />
       ))}
     </div>

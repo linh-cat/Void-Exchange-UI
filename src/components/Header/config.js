@@ -6,6 +6,12 @@ export const navbar = [
     {
         title: 'Dashboard',
         link: '/',
+        hidden: true
+    },
+    {
+        title: 'Whitepaper',
+        link: '/',
+        target: 'blank'
     },
     {
         title: 'Docs',

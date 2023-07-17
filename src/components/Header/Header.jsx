@@ -77,7 +77,7 @@ const Header = () => {
                   })}
                   key={idx}
                 >
-                  <Link to={item.link} onClick={showMenu}>
+                  <Link to={item.link} onClick={showMenu} target={item.target}>
                     <span>{item.title}</span>
                     {item.bagde && <Badge text={item.bagde} />}
                   </Link>

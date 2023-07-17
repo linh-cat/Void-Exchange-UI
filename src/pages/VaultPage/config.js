@@ -9,7 +9,14 @@ export const vaultLists = [
     risk: "medium",
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 10, 12, 100] },
     badge: ["ETH void"],
-    icon: ETH
+    icon: ETH,
+    information: {
+      totalYield: '50,39%',
+      utilization: '40%',
+      totalDeposit: '4,155.41',
+      totalReserve: '4,155.41 ETH',
+      openInterest: '$3,259,618.00',
+    }
   },
   {
     id: 2,
@@ -19,7 +26,14 @@ export const vaultLists = [
     risk: "low",
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 20, 90, 100] },
     badge: ["BTC void"],
-    icon: BTC
+    icon: BTC,
+    information: {
+      totalYield: '50,39%',
+      utilization: '40%',
+      totalDeposit: '4,155.41',
+      totalReserve: '4,155.41 ETH',
+      openInterest: '$3,259,618.00',
+    }
   },
   {
     id: 3,
@@ -31,7 +45,14 @@ export const vaultLists = [
     badge: ["upcomming"],
     backedByIcon: USDC,
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [30, 20, 10, 100] },
-    disabled: true
+    disabled: true,
+    information: {
+      totalYield: '50,39%',
+      utilization: '40%',
+      totalDeposit: '4,155.41',
+      totalReserve: '4,155.41 ETH',
+      openInterest: '$3,259,618.00',
+    }
   },
   {
     id: 4,
@@ -42,7 +63,14 @@ export const vaultLists = [
     risk: "low",
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [10, 100, 10, 100] },
     badge: ["USDC void"],
-    backedByIcon: USDC
+    backedByIcon: USDC,
+    information: {
+      totalYield: '50,39%',
+      utilization: '40%',
+      totalDeposit: '4,155.41',
+      totalReserve: '4,155.41 ETH',
+      openInterest: '$3,259,618.00',
+    }
   },
   {
     id: 5,
@@ -54,6 +82,13 @@ export const vaultLists = [
     badge: ["upcomming"],
     backedByIcon: USDC,
     dataLineChart: { label: ["Jun", "Jul", "Aug", "Sep"], dataSet: [1, 30, 2, 80] },
-    disabled: true
+    disabled: true,
+    information: {
+      totalYield: '100%',
+      utilization: '100%',
+      totalDeposit: '4,155.41',
+      totalReserve: '4,155.41 ETH',
+      openInterest: '$3,259,618.00',
+    }
   }
 ]
