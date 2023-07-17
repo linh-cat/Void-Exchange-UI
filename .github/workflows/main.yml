@@ -17,5 +17,6 @@ jobs:
           script: |
             cd ~/void-app
             git pull origin master
+            npm install
             npm run build
             sudo cp -r build/* /var/www/void-exchange
